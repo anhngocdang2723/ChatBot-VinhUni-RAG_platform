@@ -159,8 +159,8 @@ const Settings = () => {
   return (
     <Layout>
       <PageHeader>
-        <Title>Settings</Title>
-        <Subtitle>Configure your API connection</Subtitle>
+        <Title>Cài đặt</Title>
+        <Subtitle>Cấu hình kết nối API</Subtitle>
       </PageHeader>
       
       <Card>
@@ -169,11 +169,11 @@ const Settings = () => {
             {isConnected ? <FiCheck /> : <FiX />}
           </StatusIcon>
           <StatusText>
-            <h3>API Connection: {isConnected ? 'Connected' : 'Disconnected'}</h3>
+            <h3>Kết nối API: {isConnected ? 'Đã kết nối' : 'Mất kết nối'}</h3>
             <p>
               {isConnected 
-                ? 'Your API connection is working correctly.' 
-                : 'Please check your API URL and credentials.'}
+                ? 'Kết nối API hoạt động chính xác.' 
+                : 'Vui lòng kiểm tra URL và thông tin xác thực của bạn.'}
             </p>
           </StatusText>
           <button 
@@ -182,15 +182,15 @@ const Settings = () => {
             disabled={isLoading || isSaving}
           >
             <FiRefreshCw className={isLoading ? 'spinning' : ''} /> 
-            Test Connection
+            Kiểm tra kết nối
           </button>
         </StatusContainer>
         
-        <h2>API Configuration</h2>
+        <h2>Cấu hình API</h2>
         
         <Form onSubmit={handleSubmit}>
           <FormGroup>
-            <Label htmlFor="apiUrl">API URL</Label>
+            <Label htmlFor="apiUrl">URL API</Label>
             <input
               type="url"
               id="apiUrl"
@@ -200,25 +200,25 @@ const Settings = () => {
               placeholder="http://localhost:8000/api"
               required
               pattern="https?://.+"
-              title="Please enter a valid URL starting with http:// or https://"
+              title="Vui lòng nhập URL hợp lệ bắt đầu với http:// hoặc https://"
             />
             <HelpText>
-              The base URL for your RAG Chatbot API (e.g., http://localhost:8000/api)
+              Định dạng URL của API RAG Chatbot (ví dụ: http://localhost:8000/api)
             </HelpText>
           </FormGroup>
           
           <FormGroup>
-            <Label htmlFor="apiKey">API Key (if required)</Label>
+            <Label htmlFor="apiKey">API Key (nếu cần)</Label>
             <input
               type="password"
               id="apiKey"
               name="apiKey"
               value={formValues.apiKey}
               onChange={handleChange}
-              placeholder="Enter your API key"
+              placeholder="Nhập khóa API của bạn"
             />
             <HelpText>
-              Leave blank if your API doesn't require authentication
+              Để trống nếu API không yêu cầu xác thực
             </HelpText>
           </FormGroup>
           
@@ -229,18 +229,18 @@ const Settings = () => {
               disabled={isLoading || isSaving}
             >
               <FiSave /> 
-              {isSaving ? 'Saving...' : 'Save Configuration'}
+              {isSaving ? 'Đang lưu...' : 'Lưu cấu hình'}
             </button>
           </ButtonGroup>
         </Form>
       </Card>
       
       <Card>
-        <h2>About</h2>
+        <h2>Giới thiệu</h2>
         <p>RAG Chatbot Interface v1.0.0</p>
         <p className="mt-md">
-          This application provides a user interface for interacting with your RAG Chatbot API.
-          Upload documents, manage collections, and query your documents using natural language.
+          Ứng dụng này cung cấp giao diện người dùng để tương tác với API RAG Chatbot của bạn.
+          Tải lên tài liệu, quản lý tập tài liệu và truy vấn tài liệu bằng ngôn ngữ tự nhiên.
         </p>
       </Card>
     </Layout>

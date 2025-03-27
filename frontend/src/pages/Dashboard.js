@@ -186,19 +186,19 @@ const Dashboard = () => {
   return (
     <Layout>
       <PageHeader>
-        <Title>Dashboard</Title>
-        <Subtitle>Overview of your RAG Chatbot system</Subtitle>
+        <Title>Bảng điều khiển</Title>
+        <Subtitle>Tổng quan hệ thống RAG Chatbot của bạn</Subtitle>
       </PageHeader>
       
       <ActionButtons>
         <Link to="/chat">
-          <FiMessageSquare /> New Chat
+          <FiMessageSquare /> Đoạn chat mới
         </Link>
         <Link to="/documents">
-          <FiFileText /> Manage Documents
+          <FiFileText /> Quản lý tài liệu
         </Link>
         <Link to="/settings">
-          <FiSettings /> Settings
+          <FiSettings /> Cài đặt
         </Link>
       </ActionButtons>
       
@@ -214,10 +214,10 @@ const Dashboard = () => {
                 <StatIcon color="var(--primary-color)">
                   <FiDatabase />
                 </StatIcon>
-                <StatTitle>COLLECTIONS</StatTitle>
+                <StatTitle>Tập tài liệu đang có</StatTitle>
               </StatHeader>
               <StatValue>{stats.collections}</StatValue>
-              <StatFooter>Total document collections</StatFooter>
+              <StatFooter>Tổng số tập tài liệu</StatFooter>
             </StatCard>
             
             <StatCard>
@@ -225,10 +225,10 @@ const Dashboard = () => {
                 <StatIcon color="var(--secondary-color)">
                   <FiFileText />
                 </StatIcon>
-                <StatTitle>DOCUMENTS</StatTitle>
+                <StatTitle>Tài liệu index hiện có</StatTitle>
               </StatHeader>
               <StatValue>{stats.documents}</StatValue>
-              <StatFooter>Total documents indexed</StatFooter>
+              <StatFooter>Tổng số tài liệu đã index</StatFooter>
             </StatCard>
             
             <StatCard>
@@ -236,28 +236,28 @@ const Dashboard = () => {
                 <StatIcon color="var(--accent-color)">
                   <FiMessageSquare />
                 </StatIcon>
-                <StatTitle>TYPES</StatTitle>
+                <StatTitle>Loại tài liệu sử dụng</StatTitle>
               </StatHeader>
               <StatValue>{Object.keys(stats.documentTypes).length}</StatValue>
-              <StatFooter>Different document types</StatFooter>
+              <StatFooter>Loại tài liệu khác nhau</StatFooter>
             </StatCard>
           </StatsGrid>
           
           <RecentUploadsSection>
             <SectionTitle>
-              <FiFileText /> Recent Uploads
+              <FiFileText /> Tài liệu gần đây
             </SectionTitle>
             
             {stats.recentUploads && stats.recentUploads.length > 0 ? (
               <div>
                 {/* Recent uploads list would go here */}
-                <p>List of recent uploads...</p>
+                <p>Danh sách tài liệu gần đây...</p>
               </div>
             ) : (
               <EmptyState>
-                <p>No recent document uploads</p>
+                <p>Không có tài liệu gần đây</p>
                 <Link to="/documents" className="button mt-md">
-                  Upload Documents
+                  Tải lên tài liệu
                 </Link>
               </EmptyState>
             )}

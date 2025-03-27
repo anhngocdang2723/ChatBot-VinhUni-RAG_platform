@@ -41,29 +41,57 @@ class RAGPromptManager:
     
     def _create_prompt(self, query: str, documents: List[Dict[str, Any]]) -> str:
         """
-        Create a prompt for the LLM using the query and retrieved documents.
-        
+        Create an advanced prompt in English for the LLM using the query and retrieved documents,
+        specifying it's a chatbot for Vinh University, and instructing it to provide a 
+        concise, accurate answer in Vietnamese based ONLY on the context.
+
         Args:
-            query: User's question
+            query: User's question (will be included in the prompt)
             documents: List of retrieved documents with text and metadata
         """
-        # Start with system context
-        prompt = "Bạn là một trợ lý AI thông minh. Hãy trả lời câu hỏi dựa trên các tài liệu được cung cấp.\n\n"
-        
-        # Add retrieved documents as context
-        prompt += "Dựa trên các tài liệu sau:\n"
-        for i, doc in enumerate(documents, 1):
-            # Add metadata if available
-            metadata = doc.get("metadata", {})
-            source = metadata.get("source_collection", metadata.get("collection_name", "unknown"))
-            doc_type = metadata.get("document_type", "unknown")
-            
-            prompt += f"\nTài liệu {i} (Nguồn: {source}, Loại: {doc_type}):\n{doc['text']}\n"
-            
-        # Add the query
-        prompt += f"\nCâu hỏi: {query}\n"
-        prompt += "\nTrả lời chi tiết và chính xác dựa trên thông tin từ các tài liệu trên:"
-        
+
+        # --- English Prompt Construction ---
+
+        # System Role and Core Instruction - NOW INCLUDES VINH UNIVERSITY CONTEXT
+        prompt = "You are a specialized AI assistant for Vinh University. Your primary role is to provide accurate and concise answers to questions specifically related to Vinh University, based *strictly* on the provided context documents (likely originating from Vinh University's knowledge base). Do not add information not present in these documents. Avoid interpretation beyond the text. Your final answer *must* be in Vietnamese."
+
+        # Context Section
+        prompt += "\n\n<context>"
+        prompt += "\nBased on the following documents (relevant to Vinh University):" # Added context hint
+        if not documents:
+            prompt += "\nNo documents provided."
+        else:
+            for i, doc in enumerate(documents, 1):
+                metadata = doc.get("metadata", {})
+                # Prioritize more specific source identifiers if available
+                source_info = metadata.get("source_id", metadata.get("source_collection", metadata.get("collection_name", "unknown")))
+                doc_type = metadata.get("document_type", "unknown")
+
+                prompt += f"\n\nDocument {i} (Source: {source_info}, Type: {doc_type}):"
+                prompt += f"\n```\n{doc['text']}\n```" # Using triple backticks for better block separation
+
+        prompt += "\n</context>"
+
+        # Query Section
+        prompt += "\n\n<query>"
+        prompt += f"\nUser Question (likely about Vinh University): {query}" # Added context hint
+        prompt += "\n</query>"
+
+        # Final Instruction and Output Formatting
+        prompt += "\n\n<instructions>"
+        prompt += "\n1. Analyze the provided documents within the <context> section, considering they relate to Vinh University."
+        prompt += "\n2. Identify the information directly relevant to answering the User Question in the <query> section."
+        prompt += "\n3. Synthesize a concise and accurate answer based *only* on the relevant information found within the documents."
+        prompt += "\n4. If the documents do not contain the answer, state clearly in Vietnamese that the information is not available in the provided context (e.g., 'Thông tin này không có trong tài liệu được cung cấp liên quan đến Trường Đại học Vinh.')." # Slightly more specific refusal
+        prompt += "\n5. Do *not* use any prior knowledge or external information unrelated to the provided documents."
+        prompt += "\n6. Do *not* provide lengthy explanations or interpretations unless explicitly asked by the query."
+        prompt += "\n7. Ensure the final output is *only* the answer in Vietnamese."
+        prompt += "\n</instructions>"
+
+        # Answer Placeholder
+        prompt += "\n\nVietnamese Answer:"
+        # The LLM response should start directly after this line.
+
         return prompt
         
     def _call_openai(self, prompt: str, temperature: float, max_tokens: int) -> str:

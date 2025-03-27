@@ -19,13 +19,20 @@ const Sidebar = styled.aside`
 `;
 
 const Logo = styled.div`
-  font-size: 1.5rem;
-  font-weight: bold;
+  font-size: 1.75rem;
+  font-weight: 800;
   margin-bottom: var(--spacing-xl);
   color: var(--white);
   display: flex;
   align-items: center;
   gap: var(--spacing-sm);
+  letter-spacing: -0.5px;
+  
+  span {
+    background: linear-gradient(120deg, var(--primary-light), var(--accent-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
 `;
 
 const NavList = styled.ul`
@@ -33,6 +40,11 @@ const NavList = styled.ul`
   padding: 0;
   margin: 0;
   flex: 1;
+  
+  /* Add some spacing between nav sections */
+  & > * + * {
+    margin-top: var(--spacing-xs);
+  }
 `;
 
 const NavItem = styled.li`
@@ -47,15 +59,22 @@ const NavLink = styled(Link)`
   background-color: ${props => props.active ? 'var(--primary-dark)' : 'transparent'};
   border-radius: var(--radius-md);
   text-decoration: none;
-  transition: all 0.2s;
+  transition: all 0.3s ease;
+  font-weight: 500;
   
   &:hover {
     background-color: ${props => props.active ? 'var(--primary-dark)' : 'rgba(255, 255, 255, 0.1)'};
+    transform: translateX(4px);
     text-decoration: none;
   }
   
   svg {
     margin-right: var(--spacing-sm);
+    transition: transform 0.2s ease;
+  }
+  
+  &:hover svg {
+    transform: scale(1.1);
   }
 `;
 
@@ -112,39 +131,39 @@ const Layout = ({ children }) => {
     <LayoutContainer>
       <Sidebar>
         <Logo>
-          <span>RAG Chatbot</span>
+          <span>Chatbot VinhUni RAG</span>
         </Logo>
         
         <NavList>
           <NavItem>
             <NavLink to="/" active={isActive('/')}>
               <FiHome />
-              Dashboard
+              Trang chủ
             </NavLink>
           </NavItem>
           <NavItem>
             <NavLink to="/chat" active={isActive('/chat')}>
               <FiMessageSquare />
-              Chat Interface
+              Trò chuyện
             </NavLink>
           </NavItem>
           <NavItem>
             <NavLink to="/documents" active={isActive('/documents')}>
               <FiFolder />
-              Document Manager
+              Quản lý tài liệu
             </NavLink>
           </NavItem>
           <NavItem>
             <NavLink to="/settings" active={isActive('/settings')}>
               <FiSettings />
-              Settings
+              Cài đặt
             </NavLink>
           </NavItem>
         </NavList>
         
         <StatusIndicator>
           <StatusDot connected={isConnected} />
-          <span>API: {isConnected ? 'Connected' : 'Disconnected'}</span>
+          <span>API: {isConnected ? 'Đã kết nối' : 'Mất kết nối'}</span>
         </StatusIndicator>
         
         <ApiLink href={apiUrl} target="_blank" rel="noopener noreferrer">

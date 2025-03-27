@@ -6,24 +6,24 @@
 }
 
 :root {
-  /* Color palette */
-  --primary-color: #2563eb;
-  --primary-dark: #1d4ed8;
-  --primary-light: #60a5fa;
+  /* Color palette - Updated with more vibrant colors */
+  --primary-color: #4f46e5;
+  --primary-dark: #4338ca;
+  --primary-light: #818cf8;
   --secondary-color: #10b981;
-  --accent-color: #6366f1;
+  --accent-color: #f472b6;
   --warning-color: #f59e0b;
   --error-color: #ef4444;
   --success-color: #22c55e;
   
-  /* Neutrals */
+  /* Neutrals - Enhanced contrast */
   --white: #ffffff;
-  --light-gray: #f9fafb;
-  --mid-gray: #e5e7eb;
-  --gray: #9ca3af;
-  --dark-gray: #4b5563;
-  --almost-black: #1f2937;
-  --black: #111827;
+  --light-gray: #f8fafc;
+  --mid-gray: #e2e8f0;
+  --gray: #94a3b8;
+  --dark-gray: #475569;
+  --almost-black: #1e293b;
+  --black: #0f172a;
   
   /* Typography */
   --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
@@ -38,16 +38,17 @@
   --spacing-xxl: 3rem;
   
   /* Border radius */
-  --radius-sm: 0.25rem;
-  --radius-md: 0.375rem;
-  --radius-lg: 0.5rem;
-  --radius-xl: 0.75rem;
+  --radius-sm: 0.375rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
   --radius-full: 9999px;
   
   /* Shadows */
-  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
 }
 
 html, body {
@@ -79,15 +80,47 @@ button, .button {
   background-color: var(--primary-color);
   color: var(--white);
   border: none;
-  border-radius: var(--radius-md);
-  padding: var(--spacing-sm) var(--spacing-md);
-  font-weight: 500;
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-sm) var(--spacing-lg);
+  font-weight: 600;
   cursor: pointer;
   transition: all 0.2s ease;
+  position: relative;
+  overflow: hidden;
+  
+  &::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 5px;
+    height: 5px;
+    background: rgba(255, 255, 255, 0.5);
+    opacity: 0;
+    border-radius: 100%;
+    transform: scale(1, 1) translate(-50%);
+    transform-origin: 50% 50%;
+  }
+  
+  &:hover {
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-md);
+  }
+  
+  &:active::after {
+    animation: ripple 0.6s ease-out;
+  }
 }
 
-button:hover, .button:hover {
-  background-color: var(--primary-dark);
+@keyframes ripple {
+  0% {
+    transform: scale(0, 0);
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(20, 20);
+    opacity: 0;
+  }
 }
 
 button:disabled, .button:disabled {
@@ -115,17 +148,24 @@ button:disabled, .button:disabled {
 
 input, select, textarea {
   width: 100%;
-  padding: var(--spacing-sm);
-  border: 1px solid var(--mid-gray);
-  border-radius: var(--radius-md);
+  padding: var(--spacing-sm) var(--spacing-md);
+  border: 2px solid var(--mid-gray);
+  border-radius: var(--radius-lg);
   font-family: var(--font-sans);
   font-size: 1rem;
-}
-
-input:focus, select:focus, textarea:focus {
-  outline: none;
-  border-color: var(--primary-light);
-  box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.3);
+  transition: all 0.2s ease;
+  background-color: var(--light-gray);
+  
+  &:hover {
+    border-color: var(--gray);
+  }
+  
+  &:focus {
+    outline: none;
+    border-color: var(--primary-light);
+    box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.1);
+    background-color: var(--white);
+  }
 }
 
 .container {
@@ -136,9 +176,16 @@ input:focus, select:focus, textarea:focus {
 
 .card {
   background-color: var(--white);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-md);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-lg);
   padding: var(--spacing-lg);
+  border: 1px solid var(--mid-gray);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-xl);
+  }
 }
 
 .flex {

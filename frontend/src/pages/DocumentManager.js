@@ -492,8 +492,8 @@ const DocumentManager = () => {
     <Layout>
       <PageHeader>
         <div>
-          <Title>Document Manager</Title>
-          <Subtitle>Upload and manage your documents</Subtitle>
+          <Title>Quản lý tài liệu</Title>
+          <Subtitle>Tải lên và quản lý tài liệu của bạn</Subtitle>
         </div>
         
         <button 
@@ -510,13 +510,13 @@ const DocumentManager = () => {
           active={activeTab === 'collections'} 
           onClick={() => setActiveTab('collections')}
         >
-          Collections
+          Tập tài liệu (collections)
         </Tab>
         <Tab 
           active={activeTab === 'upload'} 
           onClick={() => setActiveTab('upload')}
         >
-          Upload Document
+          Tải lên tài liệu
         </Tab>
       </TabsContainer>
       
@@ -526,7 +526,7 @@ const DocumentManager = () => {
             <SearchContainer>
               <input 
                 type="text" 
-                placeholder="Search collections..." 
+                placeholder="Tìm kiếm tập tài liệu..." 
                 onChange={(e) => debouncedSearch(e.target.value)}
               />
               <button className="button-secondary">
@@ -536,7 +536,7 @@ const DocumentManager = () => {
             
             <ActionButtons>
               <button onClick={() => setActiveTab('upload')}>
-                <FiUpload /> Upload
+                <FiUpload /> Tải lên tài liệu
               </button>
             </ActionButtons>
           </ActionBar>
@@ -575,9 +575,9 @@ const DocumentManager = () => {
             </CollectionsGrid>
           ) : (
             <EmptyState>
-              <p>No collections found. Upload a document to create your first collection.</p>
+              <p>Không tìm thấy tập tài liệu. Tải lên tài liệu để tạo tập tài liệu đầu tiên.</p>
               <button className="mt-md" onClick={() => setActiveTab('upload')}>
-                <FiUpload /> Upload Document
+                <FiUpload /> Tải lên tài liệu
               </button>
             </EmptyState>
           )}
@@ -586,11 +586,11 @@ const DocumentManager = () => {
       
       {activeTab === 'upload' && (
         <Card>
-          <h2>Upload Document</h2>
+          <h2>Tải lên tài liệu</h2>
           
           <UploadForm onSubmit={handleUpload}>
             <FormGroup>
-              <Label htmlFor="file-upload">Select File</Label>
+              <Label htmlFor="file-upload">Chọn tài liệu</Label>
               <UploadArea onClick={() => document.getElementById('file-upload').click()}>
                 <input 
                   type="file" 
@@ -610,8 +610,8 @@ const DocumentManager = () => {
                     </SelectedFile>
                   ) : (
                     <>
-                      <p>Drag and drop a file here, or click to select</p>
-                      <p className="mt-sm">Supported formats: PDF, DOCX, TXT, MD, CSV</p>
+                      <p>Kéo và thả tài liệu vào đây, hoặc nhấp để chọn</p>
+                      <p className="mt-sm">Định dạng hỗ trợ: PDF, DOCX, TXT, MD, CSV</p>
                     </>
                   )}
                 </UploadText>
@@ -619,22 +619,22 @@ const DocumentManager = () => {
             </FormGroup>
             
             <FormGroup>
-              <Label htmlFor="collection-name">Collection Name (optional)</Label>
+              <Label htmlFor="collection-name">Tên tập tài liệu (tùy chọn)</Label>
               <input 
                 type="text"
                 id="collection-name"
                 name="collectionName"
-                placeholder="Leave empty to generate automatically"
+                placeholder="Để trống để tạo tự động"
                 value={uploadConfig.collectionName}
                 onChange={handleUploadConfigChange}
               />
             </FormGroup>
             
             <FormGroup>
-              <Label>Chunking Configuration</Label>
+              <Label>Cấu hình chia nhỏ (chunking)</Label>
               <div className="flex gap-md">
                 <div>
-                  <Label htmlFor="chunk-size">Chunk Size</Label>
+                  <Label htmlFor="chunk-size">Kích thước chia nhỏ</Label>
                   <input 
                     type="number"
                     id="chunk-size"
@@ -646,7 +646,7 @@ const DocumentManager = () => {
                   />
                 </div>
                 <div>
-                  <Label htmlFor="chunk-overlap">Chunk Overlap</Label>
+                  <Label htmlFor="chunk-overlap">Kích thước chồng lắp (chunk overlap)</Label>
                   <input 
                     type="number"
                     id="chunk-overlap"
@@ -668,7 +668,7 @@ const DocumentManager = () => {
                     active={uploadStep === 'sending'}
                   >
                     {uploadStep === 'sending' ? <FiRefreshCw /> : <FiCheck />}
-                    Sending
+                    Gửi tài liệu
                   </StatusStep>
                   <StatusStep 
                     completed={uploadStep === 'created'} 
@@ -676,14 +676,14 @@ const DocumentManager = () => {
                   >
                     {uploadStep === 'processing' ? <FiRefreshCw /> : 
                      uploadStep === 'created' ? <FiCheck /> : null}
-                    Processing
+                    Xử lý tài liệu
                   </StatusStep>
                   <StatusStep 
                     completed={uploadStep === 'created'} 
                     active={false}
                   >
                     {uploadStep === 'created' ? <FiCheck /> : null}
-                    Created
+                    Tạo tập tài liệu
                   </StatusStep>
                 </StatusSteps>
                 
@@ -704,7 +704,7 @@ const DocumentManager = () => {
                 type="submit" 
                 disabled={!selectedFile || isLoading || uploadStatus?.status === 'processing'}
               >
-                <FiUpload /> Upload Document
+                <FiUpload /> Tải lên tài liệu
               </button>
             </div>
           </UploadForm>

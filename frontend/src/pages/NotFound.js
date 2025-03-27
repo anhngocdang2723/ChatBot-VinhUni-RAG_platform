@@ -30,10 +30,10 @@ const NotFoundPage = () => {
     <NotFoundContainer>
       <NotFoundTitle>404</NotFoundTitle>
       <NotFoundMessage>
-        Oops! The page you're looking for doesn't exist.
+        Oops! Trang bạn đang tìm kiếm không tồn tại.
       </NotFoundMessage>
       <Link to="/" className="button">
-        Go to Dashboard
+        Đi đến Trang chủ
       </Link>
     </NotFoundContainer>
   );

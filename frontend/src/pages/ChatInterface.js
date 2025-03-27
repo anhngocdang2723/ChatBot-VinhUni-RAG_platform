@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { FiSend, FiSettings, FiSearch, FiCornerDownRight, FiLink, FiFile, FiChevronDown, FiChevronUp, FiBookmark } from 'react-icons/fi';
 import Layout from '../components/Layout';
 import { useApi } from '../context/ApiContext';
+import { checkSpecialQuery } from '../utils/specialQueries';
 
 const PageHeader = styled.div`
   margin-bottom: var(--spacing-lg);
@@ -164,17 +165,119 @@ const SettingsContent = styled.div`
   padding-bottom: var(--spacing-sm);
 `;
 
+const CollectionsHeader = styled.div`
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-md);
+  background-color: var(--white);
+  border-bottom: 1px solid var(--light-gray);
+  position: sticky;
+  top: 0;
+  z-index: 1;
+
+  svg {
+    color: var(--primary-color);
+    font-size: 1.2rem;
+  }
+
+  span {
+    font-weight: 500;
+    color: var(--dark-gray);
+  }
+`;
+
 const CollectionsList = styled.div`
-  margin-top: var(--spacing-md);
+  background: var(--white);
+  border: 1px solid var(--light-gray);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  height: calc(100vh - 400px);
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+`;
+
+const CollectionsScroll = styled.div`
+  flex: 1;
+  overflow-y: auto;
+  padding: 8px;
+  width: 100%;
+
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: var(--mid-gray);
+    border-radius: 3px;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background: var(--dark-gray);
+  }
 `;
 
 const CollectionItem = styled.div`
+  position: relative;
+  margin: 4px;
+
+  label {
+    display: flex;
+    align-items: center;
+    padding: 8px 12px;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    background: var(--light-gray);
+    min-height: 36px;
+    width: 100%;
+    gap: 8px;
+    
+    &:hover {
+      background: var(--mid-gray);
+    }
+  }
+
+  input[type="checkbox"] {
+    margin: 0;
+    cursor: pointer;
+    flex-shrink: 0;
+    width: 16px;
+    height: 16px;
+  }
+
+  .collection-name {
+    flex: 1;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    color: var(--almost-black);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    word-break: break-all;
+  }
+`;
+
+const NoCollections = styled.div`
   display: flex;
+  flex-direction: column;
   align-items: center;
-  padding: var(--spacing-xs) 0;
+  justify-content: center;
+  padding: var(--spacing-xl);
+  color: var(--gray);
+  text-align: center;
+  height: 100%;
   
-  input {
-    margin-right: var(--spacing-sm);
+  svg {
+    font-size: 2rem;
+    margin-bottom: var(--spacing-md);
   }
 `;
 
@@ -200,13 +303,19 @@ const ChatInterface = () => {
     topK: 15,
     topN: 5,
     temperature: 0.1,
-    maxTokens: 500,
+    maxTokens: 1000,
   });
   
   const messagesEndRef = useRef(null);
   
   useEffect(() => {
     fetchCollections();
+    // Add initial greeting message
+    setMessages([{
+      type: 'bot',
+      content: 'Xin chào! Tôi là trợ lý AI của Trường Đại học Vinh. Tôi có thể giúp bạn trả lời các câu hỏi về trường. Hãy đặt câu hỏi của bạn, tôi sẽ tìm kiếm thông tin trong tài liệu của trường để trả lời bạn một cách chính xác nhất.',
+      sources: []
+    }]);
   }, []);
   
   useEffect(() => {
@@ -236,6 +345,20 @@ const ChatInterface = () => {
     setMessages(prev => [...prev, userMessage]);
     setInput('');
 
+    // Check for special queries first
+    const specialQueryCheck = checkSpecialQuery(input);
+    if (specialQueryCheck.isSpecial) {
+      const botMessage = {
+        type: 'bot',
+        content: specialQueryCheck.response,
+        sources: []
+      };
+      setMessages(prev => [...prev, botMessage]);
+      scrollToBottom();
+      return;
+    }
+
+    // If not a special query, proceed with RAG system
     // Prepare query data
     const queryData = {
       query: input,
@@ -263,7 +386,7 @@ const ChatInterface = () => {
     } else {
       const errorMessage = {
         type: 'bot',
-        content: 'Sorry, I encountered an error processing your request.',
+        content: 'Rất tiếc, đã xảy ra lỗi khi xử lý yêu cầu của bạn.',
         sources: []
       };
       setMessages(prev => [...prev, errorMessage]);
@@ -294,8 +417,8 @@ const ChatInterface = () => {
   return (
     <Layout>
       <PageHeader>
-        <Title>Chat Interface</Title>
-        <Subtitle>Ask questions about your documents</Subtitle>
+        <Title>Giao diện trò chuyện Chatbot</Title>
+        <Subtitle>Đặt câu hỏi với tài liệu liên quan</Subtitle>
       </PageHeader>
       
       <ChatContainer>
@@ -303,7 +426,7 @@ const ChatInterface = () => {
           <SettingsPanel>
             <SettingTitle onClick={() => setShowAdvanced(!showAdvanced)}>
               <div>
-                <FiSettings /> Advanced Settings
+                <FiSettings /> Cấu hình nâng cao
               </div>
               {showAdvanced ? <FiChevronUp /> : <FiChevronDown />}
             </SettingTitle>
@@ -311,33 +434,33 @@ const ChatInterface = () => {
             {showAdvanced && (
               <SettingsContent>
                 <div className="mb-sm">
-                  <label htmlFor="topK">Top K (retrieval)</label>
+                  <label htmlFor="topK">Chọn K tài liệu (retrieval)</label>
                   <input
                     type="number"
                     id="topK"
                     name="topK"
                     min="1"
-                    max="100"
+                    max="300"
                     value={querySettings.topK}
                     onChange={handleSettingChange}
                   />
                 </div>
                 
                 <div className="mb-sm">
-                  <label htmlFor="topN">Top N (reranking)</label>
+                  <label htmlFor="topN">Chọn N tài liệu (reranking)</label>
                   <input
                     type="number"
                     id="topN"
                     name="topN"
                     min="1"
-                    max="50"
+                    max="100"
                     value={querySettings.topN}
                     onChange={handleSettingChange}
                   />
                 </div>
                 
                 <div className="mb-sm">
-                  <label htmlFor="temperature">Temperature</label>
+                  <label htmlFor="temperature">Độ ngẫu nhiên (temperature)</label>
                   <input
                     type="number"
                     id="temperature"
@@ -351,7 +474,7 @@ const ChatInterface = () => {
                 </div>
                 
                 <div className="mb-sm">
-                  <label htmlFor="maxTokens">Max Tokens</label>
+                  <label htmlFor="maxTokens">Số lượng từ (max_tokens)</label>
                   <input
                     type="number"
                     id="maxTokens"
@@ -368,27 +491,34 @@ const ChatInterface = () => {
           </SettingsPanel>
           
           <div>
-            <div className="mb-sm">
-              <FiBookmark /> Collections to search
-            </div>
-            
-            {collections.length > 0 ? (
-              <CollectionsList>
-                {collections.map(collection => (
-                  <CollectionItem key={collection.name}>
-                    <input
-                      type="checkbox"
-                      id={`collection-${collection.name}`}
-                      checked={selectedCollections.includes(collection.name)}
-                      onChange={() => handleCollectionSelect(collection.name)}
-                    />
-                    <label htmlFor={`collection-${collection.name}`}>{collection.name}</label>
-                  </CollectionItem>
-                ))}
-              </CollectionsList>
-            ) : (
-              <div>No collections available</div>
-            )}
+            <CollectionsList>
+              <CollectionsHeader>
+                <FiBookmark />
+                <span>Tập tài liệu tìm kiếm</span>
+              </CollectionsHeader>
+              
+              {collections.length > 0 ? (
+                <CollectionsScroll>
+                  {collections.map(collection => (
+                    <CollectionItem key={collection.name}>
+                      <label>
+                        <input
+                          type="checkbox"
+                          checked={selectedCollections.includes(collection.name)}
+                          onChange={() => handleCollectionSelect(collection.name)}
+                        />
+                        <span className="collection-name">{collection.name}</span>
+                      </label>
+                    </CollectionItem>
+                  ))}
+                </CollectionsScroll>
+              ) : (
+                <NoCollections>
+                  <FiBookmark />
+                  <div>Không có Collection nào sẵn sàng</div>
+                </NoCollections>
+              )}
+            </CollectionsList>
           </div>
         </Sidebar>
         
@@ -432,8 +562,8 @@ const ChatInterface = () => {
             ) : (
               <EmptyState>
                 <FiSearch size={48} style={{ marginBottom: 'var(--spacing-md)' }} />
-                <h3>Ask a question about your documents</h3>
-                <p>I'll search through your document collections and provide answers.</p>
+                <h3>Đặt câu hỏi về tài liệu của bạn</h3>
+                <p>Tôi sẽ tìm kiếm trong bộ sưu tập tài liệu của bạn và cung cấp câu trả lời.</p>
               </EmptyState>
             )}
             <div ref={messagesEndRef} />
@@ -443,7 +573,7 @@ const ChatInterface = () => {
             <ChatInputForm onSubmit={handleSubmit}>
               <ChatInput
                 type="text"
-                placeholder="Ask a question..."
+                placeholder="Đặt câu hỏi..."
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 disabled={isLoading}
