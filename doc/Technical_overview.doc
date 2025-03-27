@@ -1,0 +1,191 @@
+---
+
+# **Student Support Chatbot - Technical Overview**  
+
+## **Problem Statement**  
+The goal is to develop a chatbot that assists students by answering academic and administrative queries. The chatbot extracts knowledge from official university documents and, when necessary, fetches supplementary information from the internet. To ensure high response accuracy, the system employs a **retrieval-augmented generation (RAG)** approach, which integrates:  
+- **Vector-based semantic search** for retrieving relevant information.  
+- **Reranking mechanisms** to prioritize the most useful search results.  
+- **Large Language Models (LLMs)** for generating human-like responses.  
+
+---  
+
+## **Technical Pipeline Breakdown**  
+
+### **1. Data Ingestion and Preprocessing**  
+The chatbot processes various document formats to extract relevant content.  
+
+#### **Supported File Types**  
+- **Textual Documents**: `.pdf`, `.docx`, `.pptx`, `.xlsx`, `.csv`, `.html`, etc.  
+- **Structured Data**: Tables, forms, and structured text in documents.  
+
+#### **Processing Steps**  
+1. **Document Loading**:  
+   - Extract raw text, tables, and images from documents.  
+   - Example: PDFs are processed using `PyMuPDF` or `pdfplumber`.  
+2. **Data Cleaning**:  
+   - Remove unnecessary symbols, whitespace, special characters, and line breaks.  
+   - Normalize text encoding to ensure consistency.  
+3. **Table Interpretation**:  
+   - Convert tabular data into natural language descriptions.  
+   - Utilize an **LLM model** to detect errors in tables, suggest fixes, and pinpoint their locations.  
+4. **Text Chunking**:  
+   - Split long documents into smaller, logically coherent segments.  
+   - Methods: Sentence-based chunking, paragraph segmentation, or fixed-length chunking.  
+
+### **2. Vectorization and Indexing**  
+After preprocessing, the extracted content is transformed into **vector embeddings** for fast and accurate retrieval.  
+
+#### **Data Representation**  
+- Each text chunk is structured as a **document node** with metadata:  
+  ```json
+  {
+    "doc_id": "12345",
+    "type": "policy_document",
+    "page_content": "Students must submit assignments before the deadline.",
+    "metadata": {
+      "source": "academic_policy.pdf",
+      "page": 5
+    }
+  }
+  ```
+- Metadata enhances retrieval by providing context, such as **source, page number, and document type**.  
+
+#### **Embedding Generation**  
+- Convert text chunks into **high-dimensional vector representations**.  
+- Embedding models:  
+  - **Vietnamese-SBERT** (for Vietnamese queries).  
+  - **BGE (Bi-encoder models)** for improved retrieval precision.  
+
+#### **Vector Database**  
+- Store embeddings in a **vector database** for semantic search.  
+- Choices:  
+  - **Qdrant** (final implementation).  
+  - **FAISS** (used for initial testing).  
+
+---
+
+### **3. Question Processing**  
+When a user submits a query, the chatbot processes it through multiple stages:  
+
+#### **Step 1: Query Embedding Generation**  
+- Convert the input question into an **embedding vector**.  
+- Example:  
+  ```python
+  query_embedding = embedding_model.encode("What are the university's scholarship policies?")
+  ```
+
+#### **Step 2: Vector Search for Relevant Chunks**  
+- Perform **k-nearest neighbor (k-NN) search** to find the most relevant document chunks.  
+- Example query:  
+  ```sql
+  SELECT * FROM vector_db 
+  WHERE cosine_similarity(query_embedding, document_embedding) > 0.75
+  LIMIT 5;
+  ```
+
+#### **Step 3: Reranking**  
+- If multiple document chunks are retrieved, a **reranker model** assigns priority scores.  
+- This ensures that the **most relevant chunk** is selected.  
+- Model used: **BGE (Bi-encoder model)**.  
+
+---
+
+### **4. Response Generation (LLM-based Answering)**  
+Once the chatbot has retrieved the most relevant information, it formulates an answer using an **LLM**.  
+
+#### **Context Retrieval for LLM**  
+- The chatbot **injects retrieved document chunks** into the LLM’s prompt.  
+- Example prompt construction:  
+  ```python
+  prompt = f"""
+  You are an academic support chatbot. Answer the following question based on the retrieved context.
+  
+  Context:
+  {retrieved_text}
+
+  Question:
+  {user_query}
+
+  Answer:
+  """
+  ```
+
+#### **Answer Generation**  
+- The LLM generates a **human-like response** based on the prompt.  
+- Example using OpenAI API:  
+  ```python
+  response = openai.ChatCompletion.create(
+      model="gpt-4",
+      messages=[{"role": "system", "content": prompt}]
+  )
+  ```
+
+#### **Fallback Mechanism (Web Search API)**  
+- If **retrieved document confidence is low**, the chatbot queries an external **web search API** for additional information.  
+- Example API: Google Search API, Bing API.  
+
+---
+
+### **5. User Interaction and Feedback**  
+The chatbot is designed to **improve over time** using user feedback.  
+
+#### **Response Delivery**  
+- The chatbot delivers the **generated answer** in a conversational format.  
+
+#### **User Feedback Collection**  
+- Users can rate responses with a **thumbs-up/down** or a **star rating**.  
+- Example:  
+  ```json
+  {
+    "user_id": "5678",
+    "query": "How do I apply for a scholarship?",
+    "response": "You can apply by submitting the required documents before the deadline...",
+    "rating": 4.5
+  }
+  ```
+
+#### **Conversation History Storage (SQL Database)**  
+- **Purpose**: Store past queries to refine future responses.  
+- **Stored Data**:  
+  - User queries.  
+  - Responses generated.  
+  - User ratings and feedback.  
+- **Example Database Schema (PostgreSQL)**:  
+  ```sql
+  CREATE TABLE chat_history (
+      id SERIAL PRIMARY KEY,
+      user_id VARCHAR(255),
+      query TEXT,
+      response TEXT,
+      rating FLOAT,
+      timestamp TIMESTAMP DEFAULT NOW()
+  );
+  ```
+
+---
+
+## **Key Technologies Used**  
+
+| Component | Technology |  
+|-----------|-------------|  
+| **Data Processing** | LangChain, Underthesea, NLTK |  
+| **Embedding Models** | Vietnamese-SBERT, BGE |  
+| **Vector Database** | Qdrant (FAISS for testing) |  
+| **LLM Backend** | OpenAI GPT, DeepSeek, or similar models |  
+| **Reranking** | BGE (Bi-encoder models) |  
+| **Web Search API** | Google/Bing Search API |  
+| **Database** | PostgreSQL (for chat history storage) |  
+
+---
+
+## **Final Thoughts**  
+This **RAG-based chatbot** architecture ensures **high accuracy, contextual relevance, and adaptability** to student inquiries. By integrating **vector search, reranking, and LLM-based response generation**, the chatbot can:  
+- Retrieve **context-aware** information efficiently.  
+- Generate **human-like** responses tailored to student needs.  
+- Improve over time through **feedback loops** and historical analysis.  
+
+**Future Enhancements:**  
+- Implement **rate limiting & access control** to prevent spam.  
+- Optimize **LLM prompts** for better contextual understanding.  
+- Deploy chatbot via **web and mobile interfaces** for accessibility.  
