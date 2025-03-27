@@ -45,4 +45,5 @@ node_modules/
 #data
 data/
 
-
+#git
+.gitignore
