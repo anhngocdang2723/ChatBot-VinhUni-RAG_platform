@@ -4,6 +4,7 @@ from qdrant_client import QdrantClient
 from qdrant_client.http.models import Filter, FieldCondition, MatchValue, MatchAny, Range
 import logging
 import time
+import torch
 
 # Configure logger
 logger = logging.getLogger(__name__)
@@ -26,13 +27,19 @@ class Retriever:
     ):
         self.verbose = verbose
         
+        # Check if CUDA is available
+        self.device = "cuda" if torch.cuda.is_available() else "cpu"
+        logger.info(f"Using device: {self.device}")
+        
         # Initialize query embedding model
         logger.info("Loading query embedding model: dangvantuan/vietnamese-embedding")
         self.query_encoder = SentenceTransformer('dangvantuan/vietnamese-embedding')
+        self.query_encoder.to(self.device)
         
         # Initialize reranking model
         logger.info("Loading reranking model: cross-encoder/mmarco-mMiniLMv2-L12-H384-v1")
         self.reranker = CrossEncoder('cross-encoder/mmarco-mMiniLMv2-L12-H384-v1', max_length=512)
+        self.reranker.to(self.device)
         
         # Initialize Qdrant client
         try:

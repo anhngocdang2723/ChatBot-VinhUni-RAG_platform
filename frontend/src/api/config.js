@@ -1,6 +1,7 @@
 // API Configuration
 export const API_CONFIG = {
-    BASE_URL: process.env.REACT_APP_API_URL || 'http://localhost:8000/api',
+    // BASE_URL: process.env.REACT_APP_API_URL || 'http://localhost:8000/api', ### BACKEND GỐC
+    BASE_URL: process.env.REACT_APP_API_URL || 'https://bb59-2405-4802-4988-de10-85df-6076-7ece-9730.ngrok-free.app/api',
     TIMEOUT: 60000, // 60 seconds
     RETRY_ATTEMPTS: 3,
     RETRY_DELAY: 10000, // 10 seconds

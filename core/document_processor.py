@@ -229,6 +229,61 @@ class TabularDataProcessor:
             logger.error(f"Error extracting tables from Word document: {str(e)}")
             return []
 
+    def _chunk_dataframe(self, df: pd.DataFrame) -> List[List[Dict[str, Any]]]:
+        """
+        Chunk a DataFrame into smaller chunks based on the chunking strategy.
+        
+        Args:
+            df: DataFrame to chunk
+            
+        Returns:
+            List of lists of dictionaries, where each inner list represents a chunk
+        """
+        try:
+            if self.chunking_strategy == ChunkingStrategy.NO_CHUNK:
+                # Return all records as one chunk
+                return [df.to_dict('records')]
+            
+            elif self.chunking_strategy == ChunkingStrategy.FIXED_SIZE:
+                # Split into fixed-size chunks
+                chunks = []
+                for i in range(0, len(df), self.chunk_size):
+                    chunk_df = df.iloc[i:i + self.chunk_size]
+                    chunks.append(chunk_df.to_dict('records'))
+                return chunks
+            
+            else:  # SMART_CHUNK
+                # Use smart chunking based on data characteristics
+                chunks = []
+                current_chunk = []
+                current_size = 0
+                
+                for _, row in df.iterrows():
+                    record = row.to_dict()
+                    record_size = len(str(record))
+                    
+                    if current_size + record_size > self.max_chunk_size and current_chunk:
+                        chunks.append(current_chunk)
+                        current_chunk = []
+                        current_size = 0
+                    
+                    current_chunk.append(record)
+                    current_size += record_size
+                
+                if current_chunk:
+                    chunks.append(current_chunk)
+                
+                return chunks
+                
+        except Exception as e:
+            logger.error(f"Error chunking DataFrame: {str(e)}")
+            # Fallback to fixed-size chunking
+            chunks = []
+            for i in range(0, len(df), self.chunk_size):
+                chunk_df = df.iloc[i:i + self.chunk_size]
+                chunks.append(chunk_df.to_dict('records'))
+            return chunks
+
 class DocumentProcessor:
     """
     Handles document processing for various file types, including:

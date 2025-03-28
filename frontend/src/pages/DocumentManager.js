@@ -1,10 +1,22 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import styled from 'styled-components';
 import { FiUpload, FiTrash2, FiEdit, FiSearch, FiFilter, FiFolder, FiRefreshCw, FiFileText, FiCheck, FiX } from 'react-icons/fi';
-import Layout from '../components/Layout';
+import AdminLayout from '../components/AdminLayout';
 import { useApi } from '../context/ApiContext';
 import { toast } from 'react-toastify';
 import debounce from 'lodash/debounce';
+
+const PageContainer = styled.div`
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  padding: var(--spacing-lg);
+`;
+
+const PageTitle = styled.h2`
+  color: var(--almost-black);
+  margin-bottom: var(--spacing-lg);
+`;
 
 const PageHeader = styled.div`
   display: flex;
@@ -489,228 +501,231 @@ const DocumentManager = () => {
   );
 
   return (
-    <Layout>
-      <PageHeader>
-        <div>
-          <Title>Quản lý tài liệu</Title>
-          <Subtitle>Tải lên và quản lý tài liệu của bạn</Subtitle>
-        </div>
+    <AdminLayout>
+      <PageContainer>
+        <PageTitle>Document Management</PageTitle>
+        <PageHeader>
+          <div>
+            <Title>Quản lý tài liệu</Title>
+            <Subtitle>Tải lên và quản lý tài liệu của bạn</Subtitle>
+          </div>
+          
+          <button 
+            onClick={fetchCollections} 
+            disabled={isLoading || isRefreshing}
+          >
+            <FiRefreshCw className={isRefreshing ? 'spinning' : ''} /> 
+            {isRefreshing ? 'Refreshing...' : 'Refresh'}
+          </button>
+        </PageHeader>
         
-        <button 
-          onClick={fetchCollections} 
-          disabled={isLoading || isRefreshing}
-        >
-          <FiRefreshCw className={isRefreshing ? 'spinning' : ''} /> 
-          {isRefreshing ? 'Refreshing...' : 'Refresh'}
-        </button>
-      </PageHeader>
-      
-      <TabsContainer>
-        <Tab 
-          active={activeTab === 'collections'} 
-          onClick={() => setActiveTab('collections')}
-        >
-          Tập tài liệu (collections)
-        </Tab>
-        <Tab 
-          active={activeTab === 'upload'} 
-          onClick={() => setActiveTab('upload')}
-        >
-          Tải lên tài liệu
-        </Tab>
-      </TabsContainer>
-      
-      {activeTab === 'collections' && (
-        <>
-          <ActionBar>
-            <SearchContainer>
-              <input 
-                type="text" 
-                placeholder="Tìm kiếm tập tài liệu..." 
-                onChange={(e) => debouncedSearch(e.target.value)}
-              />
-              <button className="button-secondary">
-                <FiSearch />
-              </button>
-            </SearchContainer>
-            
-            <ActionButtons>
-              <button onClick={() => setActiveTab('upload')}>
-                <FiUpload /> Tải lên tài liệu
-              </button>
-            </ActionButtons>
-          </ActionBar>
-          
-          {isLoading ? (
-            <div className="spinner" />
-          ) : filteredCollections.length > 0 ? (
-            <CollectionsGrid>
-              {filteredCollections.map(collection => (
-                <CollectionCard key={collection.name}>
-                  <CollectionHeader>
-                    <CollectionIcon>
-                      <FiFolder />
-                    </CollectionIcon>
-                    <CollectionActions>
-                      <button className="button-secondary">
-                        <FiEdit />
-                      </button>
-                      <button 
-                        className="button-danger"
-                        onClick={() => handleDeleteCollection(collection.name)}
-                      >
-                        <FiTrash2 />
-                      </button>
-                    </CollectionActions>
-                  </CollectionHeader>
-                  
-                  <CollectionTitle>{collection.name}</CollectionTitle>
-                  
-                  <CollectionStats>
-                    <div>{collection.vectors_count} vectors</div>
-                    <div>{collection.document_count} documents</div>
-                  </CollectionStats>
-                </CollectionCard>
-              ))}
-            </CollectionsGrid>
-          ) : (
-            <EmptyState>
-              <p>Không tìm thấy tập tài liệu. Tải lên tài liệu để tạo tập tài liệu đầu tiên.</p>
-              <button className="mt-md" onClick={() => setActiveTab('upload')}>
-                <FiUpload /> Tải lên tài liệu
-              </button>
-            </EmptyState>
-          )}
-        </>
-      )}
-      
-      {activeTab === 'upload' && (
-        <Card>
-          <h2>Tải lên tài liệu</h2>
-          
-          <UploadForm onSubmit={handleUpload}>
-            <FormGroup>
-              <Label htmlFor="file-upload">Chọn tài liệu</Label>
-              <UploadArea onClick={() => document.getElementById('file-upload').click()}>
+        <TabsContainer>
+          <Tab 
+            active={activeTab === 'collections'} 
+            onClick={() => setActiveTab('collections')}
+          >
+            Tập tài liệu (collections)
+          </Tab>
+          <Tab 
+            active={activeTab === 'upload'} 
+            onClick={() => setActiveTab('upload')}
+          >
+            Tải lên tài liệu
+          </Tab>
+        </TabsContainer>
+        
+        {activeTab === 'collections' && (
+          <>
+            <ActionBar>
+              <SearchContainer>
                 <input 
-                  type="file" 
-                  id="file-upload" 
-                  onChange={handleFileChange}
-                  accept=".pdf,.docx,.txt,.md,.csv"
+                  type="text" 
+                  placeholder="Tìm kiếm tập tài liệu..." 
+                  onChange={(e) => debouncedSearch(e.target.value)}
                 />
-                
-                <UploadIcon>
-                  <FiUpload />
-                </UploadIcon>
-                
-                <UploadText>
-                  {selectedFile ? (
-                    <SelectedFile>
-                      <FiFileText /> {selectedFile.name} ({(selectedFile.size / 1024).toFixed(2)} KB)
-                    </SelectedFile>
-                  ) : (
-                    <>
-                      <p>Kéo và thả tài liệu vào đây, hoặc nhấp để chọn</p>
-                      <p className="mt-sm">Định dạng hỗ trợ: PDF, DOCX, TXT, MD, CSV</p>
-                    </>
-                  )}
-                </UploadText>
-              </UploadArea>
-            </FormGroup>
+                <button className="button-secondary">
+                  <FiSearch />
+                </button>
+              </SearchContainer>
+              
+              <ActionButtons>
+                <button onClick={() => setActiveTab('upload')}>
+                  <FiUpload /> Tải lên tài liệu
+                </button>
+              </ActionButtons>
+            </ActionBar>
             
-            <FormGroup>
-              <Label htmlFor="collection-name">Tên tập tài liệu (tùy chọn)</Label>
-              <input 
-                type="text"
-                id="collection-name"
-                name="collectionName"
-                placeholder="Để trống để tạo tự động"
-                value={uploadConfig.collectionName}
-                onChange={handleUploadConfigChange}
-              />
-            </FormGroup>
-            
-            <FormGroup>
-              <Label>Cấu hình chia nhỏ (chunking)</Label>
-              <div className="flex gap-md">
-                <div>
-                  <Label htmlFor="chunk-size">Kích thước chia nhỏ</Label>
-                  <input 
-                    type="number"
-                    id="chunk-size"
-                    name="chunkSize"
-                    value={uploadConfig.chunkSize}
-                    onChange={handleUploadConfigChange}
-                    min="100"
-                    max="10000"
-                  />
-                </div>
-                <div>
-                  <Label htmlFor="chunk-overlap">Kích thước chồng lắp (chunk overlap)</Label>
-                  <input 
-                    type="number"
-                    id="chunk-overlap"
-                    name="chunkOverlap"
-                    value={uploadConfig.chunkOverlap}
-                    onChange={handleUploadConfigChange}
-                    min="0"
-                    max="5000"
-                  />
-                </div>
-              </div>
-            </FormGroup>
-            
-            {uploadStatus && (
-              <UploadProgress>
-                <StatusSteps>
-                  <StatusStep 
-                    completed={uploadStep === 'processing' || uploadStep === 'created'} 
-                    active={uploadStep === 'sending'}
-                  >
-                    {uploadStep === 'sending' ? <FiRefreshCw /> : <FiCheck />}
-                    Gửi tài liệu
-                  </StatusStep>
-                  <StatusStep 
-                    completed={uploadStep === 'created'} 
-                    active={uploadStep === 'processing'}
-                  >
-                    {uploadStep === 'processing' ? <FiRefreshCw /> : 
-                     uploadStep === 'created' ? <FiCheck /> : null}
-                    Xử lý tài liệu
-                  </StatusStep>
-                  <StatusStep 
-                    completed={uploadStep === 'created'} 
-                    active={false}
-                  >
-                    {uploadStep === 'created' ? <FiCheck /> : null}
-                    Tạo tập tài liệu
-                  </StatusStep>
-                </StatusSteps>
-                
-                <ProgressBar>
-                  <ProgressFill progress={uploadProgress} />
-                </ProgressBar>
-                <StatusMessage status={uploadStatus.status}>
-                  {uploadStatus.status === 'success' ? <FiCheck /> : 
-                   uploadStatus.status === 'error' ? <FiX /> : 
-                   <FiRefreshCw className="spinning" />}
-                  {uploadStatus.message}
-                </StatusMessage>
-              </UploadProgress>
+            {isLoading ? (
+              <div className="spinner" />
+            ) : filteredCollections.length > 0 ? (
+              <CollectionsGrid>
+                {filteredCollections.map(collection => (
+                  <CollectionCard key={collection.name}>
+                    <CollectionHeader>
+                      <CollectionIcon>
+                        <FiFolder />
+                      </CollectionIcon>
+                      <CollectionActions>
+                        <button className="button-secondary">
+                          <FiEdit />
+                        </button>
+                        <button 
+                          className="button-danger"
+                          onClick={() => handleDeleteCollection(collection.name)}
+                        >
+                          <FiTrash2 />
+                        </button>
+                      </CollectionActions>
+                    </CollectionHeader>
+                    
+                    <CollectionTitle>{collection.name}</CollectionTitle>
+                    
+                    <CollectionStats>
+                      <div>{collection.vectors_count} vectors</div>
+                      <div>{collection.document_count} documents</div>
+                    </CollectionStats>
+                  </CollectionCard>
+                ))}
+              </CollectionsGrid>
+            ) : (
+              <EmptyState>
+                <p>Không tìm thấy tập tài liệu. Tải lên tài liệu để tạo tập tài liệu đầu tiên.</p>
+                <button className="mt-md" onClick={() => setActiveTab('upload')}>
+                  <FiUpload /> Tải lên tài liệu
+                </button>
+              </EmptyState>
             )}
+          </>
+        )}
+        
+        {activeTab === 'upload' && (
+          <Card>
+            <h2>Tải lên tài liệu</h2>
             
-            <div>
-              <button 
-                type="submit" 
-                disabled={!selectedFile || isLoading || uploadStatus?.status === 'processing'}
-              >
-                <FiUpload /> Tải lên tài liệu
-              </button>
-            </div>
-          </UploadForm>
-        </Card>
-      )}
-    </Layout>
+            <UploadForm onSubmit={handleUpload}>
+              <FormGroup>
+                <Label htmlFor="file-upload">Chọn tài liệu</Label>
+                <UploadArea onClick={() => document.getElementById('file-upload').click()}>
+                  <input 
+                    type="file" 
+                    id="file-upload" 
+                    onChange={handleFileChange}
+                    accept=".pdf,.docx,.txt,.md,.csv"
+                  />
+                  
+                  <UploadIcon>
+                    <FiUpload />
+                  </UploadIcon>
+                  
+                  <UploadText>
+                    {selectedFile ? (
+                      <SelectedFile>
+                        <FiFileText /> {selectedFile.name} ({(selectedFile.size / 1024).toFixed(2)} KB)
+                      </SelectedFile>
+                    ) : (
+                      <>
+                        <p>Kéo và thả tài liệu vào đây, hoặc nhấp để chọn</p>
+                        <p className="mt-sm">Định dạng hỗ trợ: PDF, DOCX, TXT, MD, CSV</p>
+                      </>
+                    )}
+                  </UploadText>
+                </UploadArea>
+              </FormGroup>
+              
+              <FormGroup>
+                <Label htmlFor="collection-name">Tên tập tài liệu (tùy chọn)</Label>
+                <input 
+                  type="text"
+                  id="collection-name"
+                  name="collectionName"
+                  placeholder="Để trống để tạo tự động"
+                  value={uploadConfig.collectionName}
+                  onChange={handleUploadConfigChange}
+                />
+              </FormGroup>
+              
+              <FormGroup>
+                <Label>Cấu hình chia nhỏ (chunking)</Label>
+                <div className="flex gap-md">
+                  <div>
+                    <Label htmlFor="chunk-size">Kích thước chia nhỏ</Label>
+                    <input 
+                      type="number"
+                      id="chunk-size"
+                      name="chunkSize"
+                      value={uploadConfig.chunkSize}
+                      onChange={handleUploadConfigChange}
+                      min="100"
+                      max="10000"
+                    />
+                  </div>
+                  <div>
+                    <Label htmlFor="chunk-overlap">Kích thước chồng lắp (chunk overlap)</Label>
+                    <input 
+                      type="number"
+                      id="chunk-overlap"
+                      name="chunkOverlap"
+                      value={uploadConfig.chunkOverlap}
+                      onChange={handleUploadConfigChange}
+                      min="0"
+                      max="5000"
+                    />
+                  </div>
+                </div>
+              </FormGroup>
+              
+              {uploadStatus && (
+                <UploadProgress>
+                  <StatusSteps>
+                    <StatusStep 
+                      completed={uploadStep === 'processing' || uploadStep === 'created'} 
+                      active={uploadStep === 'sending'}
+                    >
+                      {uploadStep === 'sending' ? <FiRefreshCw /> : <FiCheck />}
+                      Gửi tài liệu
+                    </StatusStep>
+                    <StatusStep 
+                      completed={uploadStep === 'created'} 
+                      active={uploadStep === 'processing'}
+                    >
+                      {uploadStep === 'processing' ? <FiRefreshCw /> : 
+                       uploadStep === 'created' ? <FiCheck /> : null}
+                      Xử lý tài liệu
+                    </StatusStep>
+                    <StatusStep 
+                      completed={uploadStep === 'created'} 
+                      active={false}
+                    >
+                      {uploadStep === 'created' ? <FiCheck /> : null}
+                      Tạo tập tài liệu
+                    </StatusStep>
+                  </StatusSteps>
+                  
+                  <ProgressBar>
+                    <ProgressFill progress={uploadProgress} />
+                  </ProgressBar>
+                  <StatusMessage status={uploadStatus.status}>
+                    {uploadStatus.status === 'success' ? <FiCheck /> : 
+                     uploadStatus.status === 'error' ? <FiX /> : 
+                     <FiRefreshCw className="spinning" />}
+                    {uploadStatus.message}
+                  </StatusMessage>
+                </UploadProgress>
+              )}
+              
+              <div>
+                <button 
+                  type="submit" 
+                  disabled={!selectedFile || isLoading || uploadStatus?.status === 'processing'}
+                >
+                  <FiUpload /> Tải lên tài liệu
+                </button>
+              </div>
+            </UploadForm>
+          </Card>
+        )}
+      </PageContainer>
+    </AdminLayout>
   );
 };
 

@@ -54,6 +54,7 @@ class VectorStore:
         verbose: bool = False
     ):
         self.verbose = verbose
+        self.current_collection = None  # Initialize current collection
         
         # Initialize document embedding model
         logger.info("Loading document embedding model: dangvantuan/vietnamese-embedding")
@@ -72,6 +73,50 @@ class VectorStore:
         except Exception as e:
             logger.error(f"Failed to connect to Qdrant: {str(e)}")
             raise
+
+    def _sanitize_field_name(self, field_name: str) -> str:
+        """Sanitize field name to be compatible with Qdrant's JSON path."""
+        # Replace Vietnamese characters with their ASCII equivalents
+        vietnamese_chars = {
+            'á': 'a', 'à': 'a', 'ả': 'a', 'ã': 'a', 'ạ': 'a',
+            'ă': 'a', 'ắ': 'a', 'ằ': 'a', 'ẳ': 'a', 'ẵ': 'a', 'ặ': 'a',
+            'â': 'a', 'ấ': 'a', 'ầ': 'a', 'ẩ': 'a', 'ẫ': 'a', 'ậ': 'a',
+            'é': 'e', 'è': 'e', 'ẻ': 'e', 'ẽ': 'e', 'ẹ': 'e',
+            'ê': 'e', 'ế': 'e', 'ề': 'e', 'ể': 'e', 'ễ': 'e', 'ệ': 'e',
+            'í': 'i', 'ì': 'i', 'ỉ': 'i', 'ĩ': 'i', 'ị': 'i',
+            'ó': 'o', 'ò': 'o', 'ỏ': 'o', 'õ': 'o', 'ọ': 'o',
+            'ô': 'o', 'ố': 'o', 'ồ': 'o', 'ổ': 'o', 'ỗ': 'o', 'ộ': 'o',
+            'ơ': 'o', 'ớ': 'o', 'ờ': 'o', 'ở': 'o', 'ỡ': 'o', 'ợ': 'o',
+            'ú': 'u', 'ù': 'u', 'ủ': 'u', 'ũ': 'u', 'ụ': 'u',
+            'ư': 'u', 'ứ': 'u', 'ừ': 'u', 'ử': 'u', 'ữ': 'u', 'ự': 'u',
+            'ý': 'y', 'ỳ': 'y', 'ỷ': 'y', 'ỹ': 'y', 'ỵ': 'y',
+            'đ': 'd',
+            'Á': 'A', 'À': 'A', 'Ả': 'A', 'Ã': 'A', 'Ạ': 'A',
+            'Ă': 'A', 'Ắ': 'A', 'Ằ': 'A', 'Ẳ': 'A', 'Ẵ': 'A', 'Ặ': 'A',
+            'Â': 'A', 'Ấ': 'A', 'Ầ': 'A', 'Ẩ': 'A', 'Ẫ': 'A', 'Ậ': 'A',
+            'É': 'E', 'È': 'E', 'Ẻ': 'E', 'Ẽ': 'E', 'Ẹ': 'E',
+            'Ê': 'E', 'Ế': 'E', 'Ề': 'E', 'Ể': 'E', 'Ễ': 'E', 'Ệ': 'E',
+            'Í': 'I', 'Ì': 'I', 'Ỉ': 'I', 'Ĩ': 'I', 'Ị': 'I',
+            'Ó': 'O', 'Ò': 'O', 'Ỏ': 'O', 'Õ': 'O', 'Ọ': 'O',
+            'Ô': 'O', 'Ố': 'O', 'Ồ': 'O', 'Ổ': 'O', 'Ỗ': 'O', 'Ộ': 'O',
+            'Ơ': 'O', 'Ớ': 'O', 'Ờ': 'O', 'Ở': 'O', 'Ỡ': 'O', 'Ợ': 'O',
+            'Ú': 'U', 'Ù': 'U', 'Ủ': 'U', 'Ũ': 'U', 'Ụ': 'U',
+            'Ư': 'U', 'Ứ': 'U', 'Ừ': 'U', 'Ử': 'U', 'Ữ': 'U', 'Ự': 'U',
+            'Ý': 'Y', 'Ỳ': 'Y', 'Ỷ': 'Y', 'Ỹ': 'Y', 'Ỵ': 'Y',
+            'Đ': 'D'
+        }
+        
+        # Replace Vietnamese characters
+        for char, replacement in vietnamese_chars.items():
+            field_name = field_name.replace(char, replacement)
+            
+        # Replace spaces and special characters with underscores
+        field_name = ''.join(c if c.isalnum() else '_' for c in field_name)
+        
+        # Remove consecutive underscores
+        field_name = '_'.join(filter(None, field_name.split('_')))
+        
+        return field_name.lower()
 
     def _infer_field_type(self, value: Any) -> str:
         """Infer field type from value."""
@@ -144,7 +189,9 @@ class VectorStore:
         try:
             for field_name, field_info in field_mappings.items():
                 field_type = field_info["type"]
-                field_path = f"payload.metadata.{field_info['path']}"
+                # Sanitize field name for JSON path
+                sanitized_field = self._sanitize_field_name(field_name)
+                field_path = f"payload.metadata.record_fields.{sanitized_field}"
                 
                 try:
                     # Create payload index based on field type
@@ -209,7 +256,9 @@ class VectorStore:
                     except:
                         pass
                 
-                record_fields[field_name] = field_value
+                # Use sanitized field name for storage
+                sanitized_field = self._sanitize_field_name(field_name)
+                record_fields[sanitized_field] = field_value
         
         return record_fields
 
@@ -245,8 +294,10 @@ class VectorStore:
                 logger.warning(f"Metadata list length ({len(metadata_list)}) doesn't match texts length ({total_docs})")
                 return False
             
-            # Setup collection with standard field mappings
-            self.setup_collection(collection_name)
+            # Switch to collection and set up indexes
+            if not self.switch_collection(collection_name):
+                logger.error(f"Failed to switch to collection: {collection_name}")
+                return False
             
             # Process in batches
             start_time = time.time()
@@ -268,13 +319,22 @@ class VectorStore:
                 for j, (text, embedding, metadata) in enumerate(
                     zip(batch_texts, batch_embeddings, batch_metadata)
                 ):
+                    # Ensure metadata is a dictionary
+                    if not isinstance(metadata, dict):
+                        metadata = {"id": f"doc_{i+j}", "timestamp": datetime.now().isoformat()}
+                    
+                    # Ensure id exists
                     if "id" not in metadata:
                         metadata["id"] = f"doc_{i+j}"
                     
                     # Extract and structure record fields for tabular data
                     if metadata.get("content_type") == "table_record":
-                        record_fields = self._extract_record_fields(text)
-                        metadata["record_fields"] = record_fields
+                        try:
+                            record_fields = self._extract_record_fields(text)
+                            metadata["record_fields"] = record_fields
+                        except Exception as e:
+                            logger.warning(f"Failed to extract record fields: {str(e)}")
+                            metadata["record_fields"] = {}
                     
                     point = models.PointStruct(
                         id=i+j,
@@ -286,11 +346,15 @@ class VectorStore:
                     )
                     points.append(point)
                 
-                # Store vectors with payload
-                self.client.upsert(
-                    collection_name=collection_name,
-                    points=points
-                )
+                try:
+                    # Store vectors with payload
+                    self.client.upsert(
+                        collection_name=self.current_collection,
+                        points=points
+                    )
+                except Exception as e:
+                    logger.error(f"Failed to store batch: {str(e)}")
+                    return False
                 
                 if self.verbose:
                     progress = batch_end / total_docs * 100
@@ -322,8 +386,14 @@ class VectorStore:
             search_filter: Optional metadata filter
         """
         try:
+            # Switch to collection if needed
+            if collection_name != self.current_collection:
+                if not self.switch_collection(collection_name):
+                    logger.error(f"Failed to switch to collection: {collection_name}")
+                    return []
+            
             results = self.client.search(
-                collection_name=collection_name,
+                collection_name=self.current_collection,
                 query_vector=query_vector.tolist(),
                 limit=limit,
                 score_threshold=score_threshold,
@@ -341,4 +411,41 @@ class VectorStore:
             return [{"name": collection.name} for collection in collections_list]
         except Exception as e:
             logger.error(f"Failed to list collections: {str(e)}")
-            return [] 
+            return []
+
+    def switch_collection(self, collection_name: str) -> bool:
+        """
+        Switch to a different collection. Creates the collection if it doesn't exist.
+        Args:
+            collection_name: Name of the collection to switch to
+        Returns:
+            bool: True if successful, False otherwise
+        """
+        try:
+            # Check if collection exists
+            collections = self.client.get_collections().collections
+            collection_exists = any(c.name == collection_name for c in collections)
+            
+            if not collection_exists:
+                logger.info(f"Collection {collection_name} does not exist, creating it...")
+                # Create collection if it doesn't exist
+                self.client.create_collection(
+                    collection_name=collection_name,
+                    vectors_config={
+                        "size": self.doc_embedding_dim,
+                        "distance": "Cosine"
+                    }
+                )
+                logger.info(f"Created new collection: {collection_name}")
+                
+                # Set up standard payload indexes
+                self.setup_payload_indexes(collection_name, self.STANDARD_FIELD_MAPPINGS)
+            
+            # Store current collection name
+            self.current_collection = collection_name
+            logger.info(f"Switched to collection: {collection_name}")
+            return True
+            
+        except Exception as e:
+            logger.error(f"Failed to switch collection: {str(e)}")
+            return False 

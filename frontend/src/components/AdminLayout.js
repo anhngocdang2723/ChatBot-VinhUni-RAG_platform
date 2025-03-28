@@ -1,7 +1,7 @@
 import React from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import { FiHome, FiMessageSquare, FiFolder, FiSettings, FiExternalLink } from 'react-icons/fi';
+import { FiHome, FiFolder, FiSettings, FiExternalLink, FiLogOut } from 'react-icons/fi';
 import { useApi } from '../context/ApiContext';
 
 const LayoutContainer = styled.div`
@@ -41,7 +41,6 @@ const NavList = styled.ul`
   margin: 0;
   flex: 1;
   
-  /* Add some spacing between nav sections */
   & > * + * {
     margin-top: var(--spacing-xs);
   }
@@ -82,6 +81,7 @@ const Content = styled.main`
   flex: 1;
   padding: var(--spacing-lg);
   overflow-y: auto;
+  background-color: var(--light-gray);
 `;
 
 const StatusIndicator = styled.div`
@@ -119,56 +119,92 @@ const ApiLink = styled.a`
   }
 `;
 
-const Layout = ({ children }) => {
+const LogoutButton = styled.button`
+  display: flex;
+  align-items: center;
+  padding: var(--spacing-sm) var(--spacing-md);
+  color: var(--gray);
+  background: transparent;
+  border: none;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 500;
+  width: 100%;
+  text-align: left;
+  margin-top: var(--spacing-md);
+  
+  &:hover {
+    color: var(--white);
+    background-color: rgba(255, 255, 255, 0.1);
+    transform: translateX(4px);
+  }
+  
+  svg {
+    margin-right: var(--spacing-sm);
+    transition: transform 0.2s ease;
+  }
+  
+  &:hover svg {
+    transform: scale(1.1);
+  }
+`;
+
+const AdminLayout = ({ children }) => {
   const location = useLocation();
+  const navigate = useNavigate();
   const { isConnected, apiUrl } = useApi();
   
   const isActive = (path) => {
     return location.pathname === path;
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem('userRole');
+    navigate('/');
   };
   
   return (
     <LayoutContainer>
       <Sidebar>
         <Logo>
-          <span>Chatbot VinhUni RAG</span>
+          <span>Admin Dashboard</span>
         </Logo>
         
         <NavList>
           <NavItem>
-            <NavLink to="/" active={isActive('/')}>
+            <NavLink to="/admin" active={isActive('/admin')}>
               <FiHome />
-              Trang chủ
+              Dashboard
             </NavLink>
           </NavItem>
           <NavItem>
-            <NavLink to="/chat" active={isActive('/chat')}>
-              <FiMessageSquare />
-              Trò chuyện
-            </NavLink>
-          </NavItem>
-          {/* <NavItem>
-            <NavLink to="/documents" active={isActive('/documents')}>
+            <NavLink to="/admin/documents" active={isActive('/admin/documents')}>
               <FiFolder />
-              Quản lý tài liệu
+              Document Management
             </NavLink>
-          </NavItem> */}
+          </NavItem>
           <NavItem>
-            <NavLink to="/settings" active={isActive('/settings')}>
+            <NavLink to="/admin/settings" active={isActive('/admin/settings')}>
               <FiSettings />
-              Cài đặt
+              Settings
             </NavLink>
           </NavItem>
         </NavList>
         
         <StatusIndicator>
           <StatusDot connected={isConnected} />
-          <span>API: {isConnected ? 'Đã kết nối' : 'Mất kết nối'}</span>
+          <span>API: {isConnected ? 'Connected' : 'Disconnected'}</span>
         </StatusIndicator>
         
         <ApiLink href={apiUrl} target="_blank" rel="noopener noreferrer">
           {apiUrl} <FiExternalLink />
         </ApiLink>
+
+        <LogoutButton onClick={handleLogout}>
+          <FiLogOut />
+          Logout
+        </LogoutButton>
       </Sidebar>
       
       <Content>
@@ -178,4 +214,4 @@ const Layout = ({ children }) => {
   );
 };
 
-export default Layout; 
+export default AdminLayout; 

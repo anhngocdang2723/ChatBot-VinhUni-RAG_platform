@@ -6,7 +6,7 @@ const SPECIAL_QUERIES = {
       /bot này là gì/i,
       /đây là chatbot gì/i,
       /giới thiệu về chatbot/i,
-      /bạn là gì/i,
+      /bạn là (gì|ai)/i,
       /cho mình hỏi về chatbot/i
     ],
     response: "\ud83e\udd16 Xin chào! Tôi là chatbot RAG (Retrieval-Augmented Generation) được phát triển dành riêng cho Trường Đại học Vinh. \n\n\ud83d\udcda Tôi giúp bạn tìm kiếm thông tin về quy chế, quy định, thông báo và các tài liệu quan trọng của trường.\n\n\ud83d\udd0d Hãy đặt câu hỏi, tôi sẽ cố gắng cung cấp câu trả lời chính xác nhất!"
@@ -15,7 +15,7 @@ const SPECIAL_QUERIES = {
   // Thông tin về người phát triển chatbot
   ABOUT_CREATOR: {
     patterns: [
-      /ai (tạo|phát triển|làm|viết) ra/i,
+      /ai (tạo|phát triển|làm|viết) ra bạn/i,
       /ai là người (tạo|phát triển|làm|viết)/i,
       /chatbot này do ai/i,
       /người (tạo|phát triển|làm|viết)/i

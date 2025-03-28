@@ -22,7 +22,10 @@ app = FastAPI(
 # Add CORS middleware
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # Allow all origins in development
+    allow_origins=[
+        "https://6b91-2405-4802-4988-de10-85df-6076-7ece-9730.ngrok-free.app",  # Frontend ngrok URL
+        "http://localhost:3000",  # Local development
+    ],
     allow_credentials=True,
     allow_methods=["*"],  # Allow all methods
     allow_headers=["*"],  # Allow all headers
@@ -41,6 +44,10 @@ app.include_router(document_manager.router, prefix="/api/manage", tags=["managem
 @app.get("/api/health")
 async def health_check():
     return {"status": "ok"}
+
+@app.get("/api")
+async def root():
+    return {"message": "API ready now"}
 
 @app.get("/")
 async def root():

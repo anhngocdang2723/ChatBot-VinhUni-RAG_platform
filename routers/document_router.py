@@ -123,7 +123,7 @@ async def upload_document(
             logger.error(f"Failed to create/switch to collection: {collection_name}")
             raise HTTPException(status_code=500, detail=f"Failed to create collection: {collection_name}")
             
-        current_collection = vector_store.collection_name
+        current_collection = vector_store.current_collection
         
         # Initialize document processor
         document_processor = DocumentProcessor(
@@ -258,7 +258,7 @@ async def process_and_store_document(
         file_extension = os.path.splitext(original_filename)[1].lower()
         document_type = file_extension.lstrip(".")
         creation_time = datetime.now().isoformat()
-        collection_name = vector_store.collection_name
+        collection_name = vector_store.current_collection
         
         # Add enhanced metadata to each chunk
         for i, metadata in enumerate(metadata_list):
@@ -280,6 +280,7 @@ async def process_and_store_document(
         
         # Store the chunks in the vector database
         success = vector_store.store_documents(
+            collection_name=collection_name,
             texts=chunks,
             metadata_list=metadata_list
         )
