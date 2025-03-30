@@ -1,32 +1,21 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { ApiProvider } from './context/ApiContext';
-
-// Pages
+import ProtectedRoute from './components/ProtectedRoute';
 import Login from './pages/Login';
 import AdminDashboard from './pages/AdminDashboard';
 import UserDashboard from './pages/UserDashboard';
 import DocumentManager from './pages/DocumentManager';
 import Settings from './pages/Settings';
 import NotFound from './pages/NotFound';
+import ChatInterface from './pages/ChatInterface';
+import Help from './pages/Help';
 
 // Global styles
 import './index.css';
-
-// Protected Route Component
-const ProtectedRoute = ({ children, allowedRoles }) => {
-  // In a real application, you would check the user's role from your auth context
-  const userRole = localStorage.getItem('userRole') || 'user';
-  
-  if (!allowedRoles.includes(userRole)) {
-    return <Navigate to="/" replace />;
-  }
-  
-  return children;
-};
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -63,12 +52,28 @@ root.render(
             }
           />
           
-          {/* User routes - simplified to only chat */}
+          {/* User routes */}
           <Route
             path="/user"
             element={
               <ProtectedRoute allowedRoles={['user', 'admin']}>
                 <UserDashboard />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/user/chat"
+            element={
+              <ProtectedRoute allowedRoles={['user', 'admin']}>
+                <ChatInterface />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/user/help"
+            element={
+              <ProtectedRoute allowedRoles={['user', 'admin']}>
+                <Help />
               </ProtectedRoute>
             }
           />

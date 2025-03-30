@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import AdminLayout from '../components/AdminLayout';
 import styled from 'styled-components';
+import { useApi } from '../context/ApiContext';
+import { FiLoader } from 'react-icons/fi';
 
 const DashboardContainer = styled.div`
   padding: var(--spacing-lg);
@@ -36,31 +38,93 @@ const StatValue = styled.div`
   font-size: 2rem;
   font-weight: 700;
   color: var(--almost-black);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+`;
+
+const LoadingSpinner = styled(FiLoader)`
+  animation: spin 1s linear infinite;
+  @keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+`;
+
+const ErrorMessage = styled.div`
+  color: var(--error-color);
+  padding: var(--spacing-md);
+  background: rgba(255, 0, 0, 0.1);
+  border-radius: var(--radius-md);
+  margin-top: var(--spacing-md);
 `;
 
 const AdminDashboard = () => {
   const navigate = useNavigate();
+  const { apiUrl } = useApi();
+  const [stats, setStats] = useState({
+    totalDocuments: 0,
+    activeUsers: 0,
+    totalConversations: 0,
+    systemStatus: 'Active'
+  });
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchDashboardStats = async () => {
+      try {
+        const response = await fetch(`${apiUrl}/admin/stats`);
+        if (!response.ok) {
+          throw new Error('Failed to fetch dashboard statistics');
+        }
+        const data = await response.json();
+        setStats(data);
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchDashboardStats();
+  }, [apiUrl]);
 
   return (
     <AdminLayout>
       <DashboardContainer>
-        <h2>Welcome to the Admin Dashboard</h2>
+        <h2>Chào mừng đến với trang quản trị Chatbot</h2>
+        
+        {error && (
+          <ErrorMessage>
+            Error: {error}
+          </ErrorMessage>
+        )}
+
         <StatsGrid>
           <StatCard>
-            <StatTitle>Total Documents</StatTitle>
-            <StatValue>0</StatValue>
+            <StatTitle>Tổng số tài liệu</StatTitle>
+            <StatValue>
+              {loading ? <LoadingSpinner /> : stats.totalDocuments}
+            </StatValue>
           </StatCard>
           <StatCard>
-            <StatTitle>Active Users</StatTitle>
-            <StatValue>0</StatValue>
+            <StatTitle>Số người đang hoạt động</StatTitle>
+            <StatValue>
+              {loading ? <LoadingSpinner /> : stats.activeUsers}
+            </StatValue>
           </StatCard>
           <StatCard>
-            <StatTitle>Total Conversations</StatTitle>
-            <StatValue>0</StatValue>
+            <StatTitle>Tổng số cuộc trò chuyệns</StatTitle>
+            <StatValue>
+              {loading ? <LoadingSpinner /> : stats.totalConversations}
+            </StatValue>
           </StatCard>
           <StatCard>
-            <StatTitle>System Status</StatTitle>
-            <StatValue>Active</StatValue>
+            <StatTitle>Trạng thái hệ thống</StatTitle>
+            <StatValue>
+              {loading ? <LoadingSpinner /> : stats.systemStatus}
+            </StatValue>
           </StatCard>
         </StatsGrid>
       </DashboardContainer>

@@ -10,7 +10,8 @@ class Settings(BaseSettings):
     
     # LLM settings
     LLM_PROVIDER: str = "deepseek"  # or "grok"
-    LLM_API_KEY: str
+    DEEPSEEK_API_KEY: str
+    GROK_API_KEY: str
     
     # Application settings
     VERBOSE: bool = False

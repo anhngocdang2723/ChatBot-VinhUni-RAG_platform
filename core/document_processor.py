@@ -165,6 +165,11 @@ class TabularDataProcessor:
                     chunks = self._chunk_dataframe(df)
                     
                     for chunk_idx, chunk_records in enumerate(chunks):
+                        # Create a description from the chunk records
+                        description = ""
+                        for record in chunk_records:
+                            description += self._record_to_flat_text(record) + "\n"
+                        
                         table_data = {
                             "type": "pdf_table",
                             "page_number": page_num + 1,
@@ -173,14 +178,42 @@ class TabularDataProcessor:
                             "headers": list(df.columns),
                             "records": chunk_records,
                             "row_count": len(chunk_records),
-                            "column_count": len(df.columns)
+                            "column_count": len(df.columns),
+                            "description": description.strip()  # Always include description
                         }
                         tables.append(table_data)
+            
+            # If no tables were found, create a single entry with the PDF text
+            if not tables:
+                try:
+                    doc = fitz.open(file_path)
+                    text = ""
+                    for page_num in range(len(doc)):
+                        page = doc.load_page(page_num)
+                        text += page.get_text() + "\n\n"
+                    doc.close()
+                    
+                    # Create a single table entry with the text content
+                    table_data = {
+                        "type": "pdf_text",
+                        "page_number": 1,
+                        "chunk_index": 0,
+                        "total_chunks": 1,
+                        "headers": [],
+                        "records": [],
+                        "row_count": 0,
+                        "column_count": 0,
+                        "description": text.strip()
+                    }
+                    tables.append(table_data)
+                except Exception as e:
+                    logger.warning(f"Failed to extract text from PDF: {str(e)}")
             
             return tables
             
         except Exception as e:
             logger.error(f"Error extracting tables from PDF: {str(e)}")
+            # Return empty list instead of None
             return []
     
     def process_docx_tables(self, file_path: str) -> List[Dict[str, Any]]:
@@ -366,6 +399,10 @@ class DocumentProcessor:
                 
                 # Each table record becomes a separate content piece
                 for table in tables:
+                    # Ensure description exists and is properly formatted
+                    if "description" not in table:
+                        table["description"] = str(table.get("records", []))
+                    
                     # Only store the description as content
                     content.append(table["description"])
                     
@@ -387,6 +424,10 @@ class DocumentProcessor:
                 
                 # Add table records first
                 for table in tables:
+                    # Ensure description exists and is properly formatted
+                    if "description" not in table:
+                        table["description"] = str(table.get("records", []))
+                    
                     # Only store the description as content
                     content.append(table["description"])
                     

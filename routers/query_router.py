@@ -5,6 +5,7 @@ from core.retriever import Retriever
 from core.llm_interface import RAGPromptManager, create_llm_provider
 from core.dependencies import get_retriever, get_prompt_manager, get_vector_store
 from core.vector_store import VectorStore
+import logging
 
 router = APIRouter()
 
@@ -15,6 +16,7 @@ class QueryInput(BaseModel):
     temperature: float = 0.1
     max_tokens: int = 500
     collection_names: Optional[List[str]] = None
+    model: Optional[str] = None
 
 class CollectionQueryInput(BaseModel):
     query: str
@@ -71,12 +73,17 @@ async def query_rag(
             sources=[]
         )
     
+    # Log the model parameter
+    logger = logging.getLogger(__name__)
+    logger.info(f"Received model parameter: {query_input.model}")
+    
     # Generate answer using LLM
     result = prompt_manager.generate_answer(
         query=query_input.query,
         documents=documents,
         temperature=query_input.temperature,
-        max_tokens=query_input.max_tokens
+        max_tokens=query_input.max_tokens,
+        model=query_input.model
     )
     
     # Enhance source information
@@ -128,7 +135,6 @@ async def list_available_collections(
     vector_store: VectorStore = Depends(get_vector_store)
 ) -> List[CollectionSummary]:
     """List all available collections for querying with document counts."""
-    import logging
     logger = logging.getLogger(__name__)
     
     try:
@@ -289,7 +295,6 @@ async def list_raw_collections(
     Get raw list of collections without additional processing or metadata.
     This is a simpler endpoint that just returns what Qdrant reports.
     """
-    import logging
     logger = logging.getLogger(__name__)
     
     try:

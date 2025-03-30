@@ -168,26 +168,26 @@ const AdminLayout = ({ children }) => {
     <LayoutContainer>
       <Sidebar>
         <Logo>
-          <span>Admin Dashboard</span>
+          <span>Chatbot VinhUni RAG</span>
         </Logo>
         
         <NavList>
           <NavItem>
             <NavLink to="/admin" active={isActive('/admin')}>
               <FiHome />
-              Dashboard
+              Trang chủ
             </NavLink>
           </NavItem>
           <NavItem>
             <NavLink to="/admin/documents" active={isActive('/admin/documents')}>
               <FiFolder />
-              Document Management
+              Quản lý tài liệu
             </NavLink>
           </NavItem>
           <NavItem>
             <NavLink to="/admin/settings" active={isActive('/admin/settings')}>
               <FiSettings />
-              Settings
+              Cài đặt hệ thống
             </NavLink>
           </NavItem>
         </NavList>

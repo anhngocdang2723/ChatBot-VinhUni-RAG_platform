@@ -24,9 +24,14 @@ def get_retriever() -> Retriever:
 
 @lru_cache()
 def get_prompt_manager() -> RAGPromptManager:
+    settings = get_settings()
+    
+    # Select the appropriate API key based on the provider
+    api_key = settings.DEEPSEEK_API_KEY if settings.LLM_PROVIDER.lower() == "deepseek" else settings.GROK_API_KEY
+    
     llm_provider = create_llm_provider(
         provider_name=settings.LLM_PROVIDER,
-        api_key=settings.LLM_API_KEY
+        api_key=api_key
     )
     return RAGPromptManager(llm_provider)
 

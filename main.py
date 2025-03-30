@@ -23,6 +23,7 @@ app = FastAPI(
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
+        "https://e789-2405-4802-4988-de10-85df-6076-7ece-9730.ngrok-free.app/",
         "https://chat-bot-vinh-uni-rag-platform.vercel.app",
         "https://chat-bot-vinh-uni-rag-platform-git-main-ngoc-anh-dangs-projects.vercel.app/",
         "http://localhost:3000",  # Local development

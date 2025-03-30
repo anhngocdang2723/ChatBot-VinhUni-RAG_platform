@@ -148,11 +148,12 @@ class VectorStore:
             }
         return field_mappings
 
-    def setup_collection(self, collection_name: str) -> bool:
+    def setup_collection(self, collection_name: str, display_name: Optional[str] = None) -> bool:
         """
         Set up a new collection with standard payload indexes.
         Args:
             collection_name: Name of the collection to create
+            display_name: Optional Vietnamese display name for the collection
         """
         try:
             # Create collection if not exists
@@ -169,6 +170,15 @@ class VectorStore:
                     }
                 )
                 logger.info(f"Created new collection: {collection_name}")
+                
+                # Store collection metadata if display name is provided
+                if display_name:
+                    self.client.update_collection(
+                        collection_name=collection_name,
+                        collection_metadata={
+                            "display_name": display_name
+                        }
+                    )
             
             # Set up standard payload indexes
             self.setup_payload_indexes(collection_name, self.STANDARD_FIELD_MAPPINGS)
@@ -267,7 +277,8 @@ class VectorStore:
         collection_name: str,
         texts: List[str],
         metadata_list: Optional[List[Dict[str, Any]]] = None,
-        batch_size: int = 32
+        batch_size: int = 4,  # Further reduced batch size
+        max_retries: int = 3  # Maximum number of retries for failed batches
     ) -> bool:
         """
         Store documents in the vector database using standard field mappings.
@@ -275,7 +286,8 @@ class VectorStore:
             collection_name: Name of the collection to store documents in
             texts: List of text documents
             metadata_list: Optional metadata for each document
-            batch_size: Batch size for processing
+            batch_size: Batch size for processing (default: 4)
+            max_retries: Maximum number of retries for failed batches (default: 3)
         """
         try:
             if not texts:
@@ -301,68 +313,108 @@ class VectorStore:
             
             # Process in batches
             start_time = time.time()
+            failed_batches = []
+            
             for i in range(0, total_docs, batch_size):
                 batch_end = min(i + batch_size, total_docs)
                 batch_texts = texts[i:batch_end]
                 batch_metadata = metadata_list[i:batch_end]
                 
-                # Generate embeddings
-                batch_embeddings = self.doc_encoder.encode(
-                    batch_texts,
-                    batch_size=batch_size,
-                    show_progress_bar=self.verbose,
-                    convert_to_numpy=True
-                )
+                # Preprocess texts to handle potential issues
+                processed_texts = []
+                for text in batch_texts:
+                    # Remove any non-printable characters
+                    text = ''.join(char for char in text if char.isprintable())
+                    # Limit text length to prevent CUDA issues
+                    if len(text) > 256:  # Further reduced text length
+                        text = text[:256]
+                    processed_texts.append(text)
                 
-                # Prepare points with proper payload structure
-                points = []
-                for j, (text, embedding, metadata) in enumerate(
-                    zip(batch_texts, batch_embeddings, batch_metadata)
-                ):
-                    # Ensure metadata is a dictionary
-                    if not isinstance(metadata, dict):
-                        metadata = {"id": f"doc_{i+j}", "timestamp": datetime.now().isoformat()}
-                    
-                    # Ensure id exists
-                    if "id" not in metadata:
-                        metadata["id"] = f"doc_{i+j}"
-                    
-                    # Extract and structure record fields for tabular data
-                    if metadata.get("content_type") == "table_record":
-                        try:
-                            record_fields = self._extract_record_fields(text)
-                            metadata["record_fields"] = record_fields
-                        except Exception as e:
-                            logger.warning(f"Failed to extract record fields: {str(e)}")
-                            metadata["record_fields"] = {}
-                    
-                    point = models.PointStruct(
-                        id=i+j,
-                        vector=embedding.tolist(),
-                        payload={
-                            "text": text,
-                            "metadata": metadata
-                        }
-                    )
-                    points.append(point)
+                success = False
+                retry_count = 0
+                use_cpu = False
                 
-                try:
-                    # Store vectors with payload
-                    self.client.upsert(
-                        collection_name=self.current_collection,
-                        points=points
-                    )
-                except Exception as e:
-                    logger.error(f"Failed to store batch: {str(e)}")
-                    return False
+                while not success and retry_count < max_retries:
+                    try:
+                        # Generate embeddings with error handling
+                        batch_embeddings = self.doc_encoder.encode(
+                            processed_texts,
+                            batch_size=2,  # Even smaller batch size for encoding
+                            show_progress_bar=self.verbose,
+                            convert_to_numpy=True,
+                            normalize_embeddings=True,
+                            device='cpu' if use_cpu else None  # Use CPU if previous attempts failed
+                        )
+                        
+                        # Prepare points with proper payload structure
+                        points = []
+                        for j, (text, embedding, metadata) in enumerate(
+                            zip(batch_texts, batch_embeddings, batch_metadata)
+                        ):
+                            # Ensure metadata is a dictionary
+                            if not isinstance(metadata, dict):
+                                metadata = {"id": f"doc_{i+j}", "timestamp": datetime.now().isoformat()}
+                            
+                            # Ensure id exists
+                            if "id" not in metadata:
+                                metadata["id"] = f"doc_{i+j}"
+                            
+                            # Extract and structure record fields for tabular data
+                            if metadata.get("content_type") == "table_record":
+                                try:
+                                    record_fields = self._extract_record_fields(text)
+                                    metadata["record_fields"] = record_fields
+                                except Exception as e:
+                                    logger.warning(f"Failed to extract record fields: {str(e)}")
+                                    metadata["record_fields"] = {}
+                            
+                            point = models.PointStruct(
+                                id=i+j,
+                                vector=embedding.tolist(),
+                                payload={
+                                    "text": text,
+                                    "metadata": metadata
+                                }
+                            )
+                            points.append(point)
+                        
+                        # Store vectors with payload
+                        self.client.upsert(
+                            collection_name=self.current_collection,
+                            points=points
+                        )
+                        
+                        success = True
+                        
+                    except Exception as e:
+                        retry_count += 1
+                        if retry_count < max_retries:
+                            logger.warning(f"Batch {i}-{batch_end} failed (attempt {retry_count}/{max_retries}): {str(e)}")
+                            # Try CPU on second retry
+                            if retry_count == 2:
+                                use_cpu = True
+                                logger.info(f"Switching to CPU for batch {i}-{batch_end}")
+                            # Add a small delay before retrying
+                            time.sleep(1)
+                        else:
+                            logger.error(f"Batch {i}-{batch_end} failed after {max_retries} attempts: {str(e)}")
+                            failed_batches.append((i, batch_end))
                 
                 if self.verbose:
                     progress = batch_end / total_docs * 100
                     logger.info(f"Progress: {progress:.1f}% ({batch_end}/{total_docs})")
             
             elapsed = time.time() - start_time
-            logger.info(f"Stored {total_docs} documents in {elapsed:.2f} seconds")
-            return True
+            
+            # Report final status
+            if failed_batches:
+                logger.warning(f"Failed to process {len(failed_batches)} batches after {elapsed:.2f} seconds")
+                for start, end in failed_batches:
+                    logger.warning(f"Failed batch: documents {start}-{end}")
+            else:
+                logger.info(f"Successfully stored all {total_docs} documents in {elapsed:.2f} seconds")
+            
+            return len(failed_batches) == 0
             
         except Exception as e:
             logger.error(f"Failed to store documents: {str(e)}")
@@ -405,19 +457,33 @@ class VectorStore:
             return []
 
     def list_collections(self) -> List[Dict[str, Any]]:
-        """List all collections with their names only."""
+        """List all collections with their names and display names."""
         try:
             collections_list = self.client.get_collections().collections
-            return [{"name": collection.name} for collection in collections_list]
+            collections_info = []
+            for collection in collections_list:
+                # Get collection metadata
+                try:
+                    metadata = self.client.get_collection(collection.name).metadata
+                    display_name = metadata.get("display_name", collection.name)
+                except:
+                    display_name = collection.name
+                
+                collections_info.append({
+                    "name": collection.name,
+                    "display_name": display_name
+                })
+            return collections_info
         except Exception as e:
             logger.error(f"Failed to list collections: {str(e)}")
             return []
 
-    def switch_collection(self, collection_name: str) -> bool:
+    def switch_collection(self, collection_name: str, display_name: Optional[str] = None) -> bool:
         """
         Switch to a different collection. Creates the collection if it doesn't exist.
         Args:
             collection_name: Name of the collection to switch to
+            display_name: Optional Vietnamese display name for the collection
         Returns:
             bool: True if successful, False otherwise
         """
@@ -440,6 +506,15 @@ class VectorStore:
                 
                 # Set up standard payload indexes
                 self.setup_payload_indexes(collection_name, self.STANDARD_FIELD_MAPPINGS)
+                
+                # Store collection metadata if display name is provided
+                if display_name:
+                    self.client.update_collection(
+                        collection_name=collection_name,
+                        collection_metadata={
+                            "display_name": display_name
+                        }
+                    )
             
             # Store current collection name
             self.current_collection = collection_name
@@ -448,4 +523,18 @@ class VectorStore:
             
         except Exception as e:
             logger.error(f"Failed to switch collection: {str(e)}")
-            return False 
+            return False
+
+    def get_collection_display_name(self, collection_name: str) -> str:
+        """
+        Get the display name of a collection.
+        Args:
+            collection_name: Name of the collection
+        Returns:
+            str: Display name if available, otherwise collection name
+        """
+        try:
+            metadata = self.client.get_collection(collection_name).metadata
+            return metadata.get("display_name", collection_name)
+        except:
+            return collection_name 

@@ -114,9 +114,9 @@ const Login = () => {
   return (
     <LoginContainer>
       <LoginForm onSubmit={handleSubmit}>
-        <FormTitle>Welcome Back</FormTitle>
+        <FormTitle>Chào mừng</FormTitle>
         <FormGroup>
-          <Label htmlFor="username">Username</Label>
+          <Label htmlFor="username">Tên đăng nhập</Label>
           <Input
             type="text"
             id="username"
@@ -128,7 +128,7 @@ const Login = () => {
           />
         </FormGroup>
         <FormGroup>
-          <Label htmlFor="password">Password</Label>
+          <Label htmlFor="password">Mật khẩu</Label>
           <Input
             type="password"
             id="password"
@@ -140,7 +140,7 @@ const Login = () => {
           />
         </FormGroup>
         {error && <ErrorMessage>{error}</ErrorMessage>}
-        <SubmitButton type="submit">Login</SubmitButton>
+        <SubmitButton type="submit">Đăng nhập</SubmitButton>
       </LoginForm>
     </LoginContainer>
   );

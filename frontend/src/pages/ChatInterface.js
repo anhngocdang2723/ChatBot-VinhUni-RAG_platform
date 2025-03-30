@@ -1,27 +1,38 @@
 import React, { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
-import { FiSend, FiSettings, FiSearch, FiCornerDownRight, FiLink, FiFile, FiChevronDown, FiChevronUp, FiBookmark } from 'react-icons/fi';
-import Layout from '../components/Layout';
+import { FiSend, FiSettings, FiSearch, FiCornerDownRight, FiFile, FiChevronDown, FiChevronUp, FiBookmark } from 'react-icons/fi';
+import UserLayout from '../components/UserLayout';
 import { useApi } from '../context/ApiContext';
 import { checkSpecialQuery } from '../utils/specialQueries';
+import ReactMarkdown from 'react-markdown';
+
+const PageContainer = styled.div`
+  padding: var(--spacing-lg);
+  height: calc(100vh - 32px);
+  display: flex;
+  flex-direction: column;
+`;
 
 const PageHeader = styled.div`
   margin-bottom: var(--spacing-lg);
 `;
 
 const Title = styled.h1`
-  font-size: 2rem;
+  font-size: 1.75rem;
   margin-bottom: var(--spacing-sm);
+  color: var(--almost-black);
 `;
 
 const Subtitle = styled.p`
-  color: var(--dark-gray);
+  color: var(--gray);
+  font-size: 0.875rem;
 `;
 
 const ChatContainer = styled.div`
   display: flex;
-  height: calc(100vh - 220px);
-  min-height: 500px;
+  flex: 1;
+  gap: var(--spacing-lg);
+  min-height: 0; // Important for flex overflow
 `;
 
 const MainChat = styled.div`
@@ -32,28 +43,40 @@ const MainChat = styled.div`
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-md);
   overflow: hidden;
+  min-width: 0; // Important for flex overflow
 `;
 
 const Sidebar = styled.div`
-  width: 300px;
-  margin-right: var(--spacing-lg);
-  background-color: var(--white);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-md);
-  padding: var(--spacing-md);
-  overflow-y: auto;
+  width: 280px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
 `;
 
 const ChatMessages = styled.div`
   flex: 1;
   padding: var(--spacing-lg);
   overflow-y: auto;
+  background-color: var(--background-color);
+
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: var(--mid-gray);
+    border-radius: 3px;
+  }
 `;
 
 const ChatInputContainer = styled.div`
-  border-top: 1px solid var(--mid-gray);
   padding: var(--spacing-md);
   background-color: var(--white);
+  border-top: 1px solid var(--light-gray);
 `;
 
 const ChatInputForm = styled.form`
@@ -64,23 +87,55 @@ const ChatInputForm = styled.form`
 const ChatInput = styled.input`
   flex: 1;
   padding: var(--spacing-md);
-  border: 1px solid var(--mid-gray);
+  border: 1px solid var(--light-gray);
   border-radius: var(--radius-full);
   font-size: 1rem;
+  transition: all 0.2s ease;
   
   &:focus {
+    outline: none;
     border-color: var(--primary-color);
+    box-shadow: 0 0 0 2px var(--primary-light);
+  }
+
+  &::placeholder {
+    color: var(--gray);
   }
 `;
 
 const SendButton = styled.button`
-  border-radius: var(--radius-full);
-  width: 40px;
-  height: 40px;
-  padding: 0;
-  display: flex;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  padding: 0;
+  line-height: 1;
+
+  &:hover {
+    background-color: var(--primary-dark);
+    transform: scale(1.05);
+  }
+
+  &:disabled {
+    background-color: var(--gray);
+    cursor: not-allowed;
+    transform: none;
+    opacity: 0.7;
+  }
+
+  svg {
+    fill: currentColor;
+    stroke: currentColor;
+    width: 20px;
+    height: 20px;
+  }
 `;
 
 const Message = styled.div`
@@ -93,7 +148,7 @@ const UserMessage = styled(Message)`
   align-items: flex-end;
   
   .message-content {
-    background-color: var(--primary-light);
+    background-color: var(--primary-color);
     color: var(--white);
     border-radius: var(--radius-lg) var(--radius-lg) 0 var(--radius-lg);
   }
@@ -111,8 +166,50 @@ const BotMessage = styled(Message)`
 
 const MessageContent = styled.div`
   padding: var(--spacing-md) var(--spacing-lg);
-  max-width: 80%;
+  max-width: 70%;
   line-height: 1.5;
+
+  .markdown-content {
+    h1, h2, h3, h4, h5, h6 {
+      margin: 1em 0 0.5em 0;
+      font-weight: 600;
+    }
+
+    p {
+      margin: 0.5em 0;
+    }
+
+    ul, ol {
+      margin: 0.5em 0;
+      padding-left: 1.5em;
+    }
+
+    li {
+      margin: 0.25em 0;
+    }
+
+    code {
+      background: var(--light-gray);
+      padding: 0.2em 0.4em;
+      border-radius: 3px;
+      font-size: 0.9em;
+    }
+
+    pre {
+      background: var(--light-gray);
+      padding: var(--spacing-md);
+      border-radius: var(--radius-md);
+      overflow-x: auto;
+      margin: 0.5em 0;
+    }
+
+    blockquote {
+      border-left: 4px solid var(--primary-color);
+      margin: 0.5em 0;
+      padding-left: var(--spacing-md);
+      color: var(--gray);
+    }
+  }
 `;
 
 const MessageSources = styled.div`
@@ -128,12 +225,14 @@ const SourceItem = styled.div`
   align-items: flex-start;
   padding: var(--spacing-xs) var(--spacing-sm);
   border-radius: var(--radius-md);
-  background-color: rgba(0, 0, 0, 0.05);
+  background-color: var(--white);
   gap: var(--spacing-xs);
+  border: 1px solid var(--light-gray);
   
   svg {
     margin-top: 3px;
     flex-shrink: 0;
+    color: var(--primary-color);
   }
 `;
 
@@ -148,148 +247,179 @@ const SourceText = styled.span`
   -webkit-box-orient: vertical;
 `;
 
-const SettingsPanel = styled.div`
-  margin-bottom: var(--spacing-lg);
+const SidebarCard = styled.div`
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  overflow: hidden;
 `;
 
-const SettingTitle = styled.div`
+const CardHeader = styled.div`
+  padding: var(--spacing-md);
+  border-bottom: 1px solid var(--light-gray);
   font-weight: 500;
   display: flex;
+  align-items: center;
   justify-content: space-between;
-  align-items: center;
+  color: var(--almost-black);
   cursor: pointer;
-  margin-bottom: var(--spacing-sm);
+  user-select: none;
+  transition: background-color 0.2s ease;
+
+  &:hover {
+    background-color: var(--light-gray);
+  }
+
+  .header-content {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+
+    svg {
+      color: var(--primary-color);
+    }
+  }
+
+  .toggle-icon {
+    color: var(--gray);
+    transition: transform 0.3s ease;
+    
+    &.expanded {
+      transform: rotate(180deg);
+    }
+  }
 `;
 
-const SettingsContent = styled.div`
-  padding-bottom: var(--spacing-sm);
-`;
-
-const CollectionsHeader = styled.div`
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-sm);
+const CardContent = styled.div`
   padding: var(--spacing-md);
-  background-color: var(--white);
-  border-bottom: 1px solid var(--light-gray);
-  position: sticky;
-  top: 0;
-  z-index: 1;
-
-  svg {
-    color: var(--primary-color);
-    font-size: 1.2rem;
-  }
-
-  span {
-    font-weight: 500;
-    color: var(--dark-gray);
+  transition: all 0.3s ease;
+  max-height: ${props => props.isExpanded ? '500px' : '0'};
+  overflow: hidden;
+  opacity: ${props => props.isExpanded ? '1' : '0'};
+  
+  /* Thêm padding cho container của các collection items */
+  > div {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xs);
   }
 `;
 
-const CollectionsList = styled.div`
-  background: var(--white);
-  border: 1px solid var(--light-gray);
-  border-radius: var(--radius-md);
-  overflow: hidden;
-  height: calc(100vh - 400px);
+const SettingsForm = styled.div`
   display: flex;
   flex-direction: column;
-  width: 100%;
-`;
-
-const CollectionsScroll = styled.div`
-  flex: 1;
-  overflow-y: auto;
-  padding: 8px;
-  width: 100%;
-
-  &::-webkit-scrollbar {
-    width: 6px;
-  }
-
-  &::-webkit-scrollbar-track {
-    background: transparent;
-  }
-
-  &::-webkit-scrollbar-thumb {
-    background: var(--mid-gray);
-    border-radius: 3px;
-  }
-
-  &::-webkit-scrollbar-thumb:hover {
-    background: var(--dark-gray);
-  }
-`;
-
-const CollectionItem = styled.div`
-  position: relative;
-  margin: 4px;
+  gap: var(--spacing-sm);
 
   label {
     display: flex;
-    align-items: center;
-    padding: 8px 12px;
+    flex-direction: column;
+    gap: 4px;
+    font-size: 0.875rem;
+    color: var(--dark-gray);
+  }
+
+  input, select {
+    padding: 8px;
+    border: 1px solid var(--light-gray);
     border-radius: var(--radius-sm);
-    cursor: pointer;
-    transition: all 0.2s ease;
-    background: var(--light-gray);
-    min-height: 36px;
-    width: 100%;
-    gap: 8px;
-    
-    &:hover {
-      background: var(--mid-gray);
+    font-size: 0.875rem;
+
+    &:focus {
+      outline: none;
+      border-color: var(--primary-color);
     }
+  }
+`;
+
+const CollectionItem = styled.label`
+  display: grid;
+  grid-template-columns: 24px 1fr;
+  padding: 8px var(--spacing-sm);
+  cursor: pointer;
+  border-radius: var(--radius-sm);
+  transition: all 0.2s ease;
+  width: 100%;
+
+  &:hover {
+    background-color: var(--light-gray);
   }
 
   input[type="checkbox"] {
     margin: 0;
     cursor: pointer;
-    flex-shrink: 0;
     width: 16px;
     height: 16px;
   }
 
-  .collection-name {
-    flex: 1;
-    font-size: 0.9rem;
-    line-height: 1.5;
-    color: var(--almost-black);
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    word-break: break-all;
-  }
-`;
-
-const NoCollections = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: var(--spacing-xl);
-  color: var(--gray);
-  text-align: center;
-  height: 100%;
-  
-  svg {
-    font-size: 2rem;
-    margin-bottom: var(--spacing-md);
+  span {
+    font-size: 0.875rem;
+    color: var(--dark-gray);
+    line-height: 1.4;
+    word-break: break-word;
   }
 `;
 
 const EmptyState = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
   height: 100%;
   color: var(--gray);
   text-align: center;
   padding: var(--spacing-xl);
+
+  svg {
+    font-size: 3rem;
+    margin-bottom: var(--spacing-md);
+    color: var(--primary-light);
+  }
+
+  h3 {
+    margin-bottom: var(--spacing-sm);
+    color: var(--almost-black);
+  }
+
+  p {
+    color: var(--gray);
+    font-size: 0.875rem;
+  }
+`;
+
+const SourcesContainer = styled.div`
+  margin-top: var(--spacing-md);
+`;
+
+const SourcesHeader = styled.div`
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  color: var(--gray);
+  cursor: pointer;
+  padding: var(--spacing-xs) 0;
+  
+  &:hover {
+    color: var(--dark-gray);
+  }
+
+  svg {
+    transition: transform 0.2s ease;
+    
+    &.expanded {
+      transform: rotate(180deg);
+    }
+  }
+`;
+
+const SourcesList = styled.div`
+  margin-top: var(--spacing-sm);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+  transition: all 0.3s ease;
+  max-height: ${props => props.isExpanded ? '500px' : '0'};
+  overflow: hidden;
+  opacity: ${props => props.isExpanded ? '1' : '0'};
 `;
 
 const ChatInterface = () => {
@@ -304,7 +434,10 @@ const ChatInterface = () => {
     topN: 5,
     temperature: 0.1,
     maxTokens: 1000,
+    model: 'deepseek',
   });
+  const [isSettingsExpanded, setIsSettingsExpanded] = useState(false);
+  const [expandedSources, setExpandedSources] = useState({});
   
   const messagesEndRef = useRef(null);
   
@@ -323,12 +456,16 @@ const ChatInterface = () => {
   }, [messages]);
   
   const fetchCollections = async () => {
-    const fetchedCollections = await getCollections();
-    setCollections(fetchedCollections || []);
-    
-    // Pre-select all collections
-    if (fetchedCollections && fetchedCollections.length > 0) {
-      setSelectedCollections(fetchedCollections.map(c => c.name));
+    try {
+      const fetchedCollections = await getCollections();
+      setCollections(fetchedCollections || []);
+      if (Array.isArray(fetchedCollections) && fetchedCollections.length > 0) {
+        setSelectedCollections(fetchedCollections.map(c => c.name));
+      }
+    } catch (error) {
+      console.error('Error fetching collections:', error);
+      setCollections([]);
+      setSelectedCollections([]);
     }
   };
   
@@ -340,12 +477,10 @@ const ChatInterface = () => {
     e.preventDefault();
     if (!input.trim()) return;
 
-    // Add user message
     const userMessage = { type: 'user', content: input };
     setMessages(prev => [...prev, userMessage]);
     setInput('');
 
-    // Check for special queries first
     const specialQueryCheck = checkSpecialQuery(input);
     if (specialQueryCheck.isSpecial) {
       const botMessage = {
@@ -358,22 +493,21 @@ const ChatInterface = () => {
       return;
     }
 
-    // If not a special query, proceed with RAG system
-    // Prepare query data
     const queryData = {
       query: input,
       top_k: querySettings.topK,
       top_n: querySettings.topN,
       temperature: querySettings.temperature,
-      max_tokens: querySettings.maxTokens
+      max_tokens: querySettings.maxTokens,
+      model: querySettings.model
     };
 
-    // Only add collection_names if there are selected collections
+    console.log('Selected model:', querySettings.model); // Debug log
+
     if (selectedCollections && selectedCollections.length > 0) {
       queryData.collection_names = selectedCollections;
     }
 
-    // Get response from API
     const response = await queryRag(queryData);
     
     if (response) {
@@ -392,7 +526,6 @@ const ChatInterface = () => {
       setMessages(prev => [...prev, errorMessage]);
     }
 
-    // Scroll to bottom
     scrollToBottom();
   };
   
@@ -410,182 +543,204 @@ const ChatInterface = () => {
     const { name, value } = e.target;
     setQuerySettings(prev => ({
       ...prev,
-      [name]: value,
+      [name]: name === 'model' ? value : Number(value),
+    }));
+  };
+  
+  const toggleSources = (messageIndex) => {
+    setExpandedSources(prev => ({
+      ...prev,
+      [messageIndex]: !prev[messageIndex]
     }));
   };
   
   return (
-    <Layout>
-      <PageHeader>
-        <Title>Giao diện trò chuyện Chatbot</Title>
-        <Subtitle>Đặt câu hỏi với tài liệu liên quan</Subtitle>
-      </PageHeader>
-      
-      <ChatContainer>
-        <Sidebar>
-          <SettingsPanel>
-            <SettingTitle onClick={() => setShowAdvanced(!showAdvanced)}>
-              <div>
-                <FiSettings /> Cấu hình nâng cao
-              </div>
-              {showAdvanced ? <FiChevronUp /> : <FiChevronDown />}
-            </SettingTitle>
-            
-            {showAdvanced && (
-              <SettingsContent>
-                <div className="mb-sm">
-                  <label htmlFor="topK">Chọn K tài liệu (retrieval)</label>
-                  <input
-                    type="number"
-                    id="topK"
-                    name="topK"
-                    min="1"
-                    max="300"
-                    value={querySettings.topK}
-                    onChange={handleSettingChange}
-                  />
-                </div>
-                
-                <div className="mb-sm">
-                  <label htmlFor="topN">Chọn N tài liệu (reranking)</label>
-                  <input
-                    type="number"
-                    id="topN"
-                    name="topN"
-                    min="1"
-                    max="100"
-                    value={querySettings.topN}
-                    onChange={handleSettingChange}
-                  />
-                </div>
-                
-                <div className="mb-sm">
-                  <label htmlFor="temperature">Độ ngẫu nhiên (temperature)</label>
-                  <input
-                    type="number"
-                    id="temperature"
-                    name="temperature"
-                    min="0"
-                    max="1"
-                    step="0.1"
-                    value={querySettings.temperature}
-                    onChange={handleSettingChange}
-                  />
-                </div>
-                
-                <div className="mb-sm">
-                  <label htmlFor="maxTokens">Số lượng từ (max_tokens)</label>
-                  <input
-                    type="number"
-                    id="maxTokens"
-                    name="maxTokens"
-                    min="100"
-                    max="2000"
-                    step="50"
-                    value={querySettings.maxTokens}
-                    onChange={handleSettingChange}
-                  />
-                </div>
-              </SettingsContent>
-            )}
-          </SettingsPanel>
-          
-          <div>
-            <CollectionsList>
-              <CollectionsHeader>
-                <FiBookmark />
-                <span>Tập tài liệu tìm kiếm</span>
-              </CollectionsHeader>
-              
-              {collections.length > 0 ? (
-                <CollectionsScroll>
-                  {collections.map(collection => (
-                    <CollectionItem key={collection.name}>
-                      <label>
-                        <input
-                          type="checkbox"
-                          checked={selectedCollections.includes(collection.name)}
-                          onChange={() => handleCollectionSelect(collection.name)}
-                        />
-                        <span className="collection-name">{collection.name}</span>
-                      </label>
-                    </CollectionItem>
-                  ))}
-                </CollectionsScroll>
-              ) : (
-                <NoCollections>
-                  <FiBookmark />
-                  <div>Không có Collection nào sẵn sàng</div>
-                </NoCollections>
-              )}
-            </CollectionsList>
-          </div>
-        </Sidebar>
+    <UserLayout>
+      <PageContainer>
+        <PageHeader>
+          <Title>Giao diện trò chuyện Chatbot</Title>
+          <Subtitle>Đặt câu hỏi với tài liệu liên quan</Subtitle>
+        </PageHeader>
         
-        <MainChat>
-          <ChatMessages>
-            {messages.length > 0 ? (
-              messages.map((message, index) => {
-                if (message.type === 'user') {
-                  return (
-                    <UserMessage key={index}>
-                      <MessageContent className="message-content">
-                        {message.content}
-                      </MessageContent>
-                    </UserMessage>
-                  );
-                } else {
-                  return (
-                    <BotMessage key={index}>
-                      <MessageContent className="message-content">
-                        {message.content}
-                        
-                        {message.sources && message.sources.length > 0 && (
-                          <MessageSources>
-                            <div><FiCornerDownRight /> Sources:</div>
-                            {message.sources.slice(0, 3).map((source, idx) => (
-                              <SourceItem key={idx}>
-                                <FiFile />
-                                <div>
-                                  <div>{source.metadata?.original_filename || 'Document'}</div>
-                                  <SourceText>{source.text}</SourceText>
-                                </div>
-                              </SourceItem>
-                            ))}
-                          </MessageSources>
-                        )}
-                      </MessageContent>
-                    </BotMessage>
-                  );
-                }
-              })
-            ) : (
-              <EmptyState>
-                <FiSearch size={48} style={{ marginBottom: 'var(--spacing-md)' }} />
-                <h3>Đặt câu hỏi về tài liệu của bạn</h3>
-                <p>Tôi sẽ tìm kiếm trong bộ sưu tập tài liệu của bạn và cung cấp câu trả lời.</p>
-              </EmptyState>
-            )}
-            <div ref={messagesEndRef} />
-          </ChatMessages>
+        <ChatContainer>
+          <Sidebar>
+            <SidebarCard>
+              <CardHeader onClick={() => setIsSettingsExpanded(!isSettingsExpanded)}>
+                <div className="header-content">
+                  <FiSettings />
+                  <span>Cấu hình nâng cao</span>
+                </div>
+                <FiChevronDown className={`toggle-icon ${isSettingsExpanded ? 'expanded' : ''}`} />
+              </CardHeader>
+              <CardContent isExpanded={isSettingsExpanded}>
+                <SettingsForm>
+                  <label>
+                    Mô hình AI
+                    <select
+                      name="model"
+                      value={querySettings.model}
+                      onChange={handleSettingChange}
+                    >
+                      <option value="deepseek">Deepseek</option>
+                      <option value="grok">Grok</option>
+                    </select>
+                  </label>
+                  
+                  <label>
+                    Số lượng tài liệu lấy về (retrieval)
+                    <input
+                      type="number"
+                      name="topK"
+                      min="1"
+                      max="300"
+                      value={querySettings.topK}
+                      onChange={handleSettingChange}
+                    />
+                  </label>
+                  
+                  <label>
+                    Số lượng tài liệu xếp hạng lại (reranking)
+                    <input
+                      type="number"
+                      name="topN"
+                      min="1"
+                      max="100"
+                      value={querySettings.topN}
+                      onChange={handleSettingChange}
+                    />
+                  </label>
+                  
+                  <label style={{ display: "none" }}>
+                    Độ ngẫu nhiên (temperature)
+                    <input
+                      type="number"
+                      name="temperature"
+                      min="0"
+                      max="1"
+                      step="0.1"
+                      value={querySettings.temperature}
+                      onChange={handleSettingChange}
+                    />
+                  </label>
+                  
+                  <label>
+                    Giới hạn số từ đầu ra (max_tokens)
+                    <input
+                      type="number"
+                      name="maxTokens"
+                      min="100"
+                      max="2000"
+                      step="50"
+                      value={querySettings.maxTokens}
+                      onChange={handleSettingChange}
+                    />
+                  </label>
+                </SettingsForm>
+              </CardContent>
+            </SidebarCard>
+            
+            <SidebarCard>
+              <CardHeader>
+                <div className="header-content">
+                  <FiBookmark />
+                  <span>Nguồn tài liệu truy vấn</span>
+                </div>
+              </CardHeader>
+              <CardContent isExpanded={true}>
+                {collections.length > 0 ? (
+                  collections.map(collection => (
+                    <CollectionItem key={collection.name}>
+                      <input
+                        type="checkbox"
+                        checked={selectedCollections.includes(collection.name)}
+                        onChange={() => handleCollectionSelect(collection.name)}
+                      />
+                      <span>{collection.name}</span>
+                    </CollectionItem>
+                  ))
+                ) : (
+                  <div style={{ textAlign: 'center', color: 'var(--gray)', padding: 'var(--spacing-md)' }}>
+                    Không có Collection nào sẵn sàng
+                  </div>
+                )}
+              </CardContent>
+            </SidebarCard>
+          </Sidebar>
           
-          <ChatInputContainer>
-            <ChatInputForm onSubmit={handleSubmit}>
-              <ChatInput
-                type="text"
-                placeholder="Đặt câu hỏi..."
-                value={input}
-                onChange={(e) => setInput(e.target.value)}
-                disabled={isLoading}
-              />
-              <SendButton type="submit" disabled={isLoading || !input.trim()}>
-                <FiSend />
-              </SendButton>
-            </ChatInputForm>
-          </ChatInputContainer>
-        </MainChat>
-      </ChatContainer>
-    </Layout>
+          <MainChat>
+            <ChatMessages>
+              {messages.length > 0 ? (
+                messages.map((message, index) => {
+                  if (message.type === 'user') {
+                    return (
+                      <UserMessage key={index}>
+                        <MessageContent className="message-content">
+                          {message.content}
+                        </MessageContent>
+                      </UserMessage>
+                    );
+                  } else {
+                    return (
+                      <BotMessage key={index}>
+                        <MessageContent className="message-content">
+                          <div className="markdown-content">
+                            <ReactMarkdown>{message.content}</ReactMarkdown>
+                          </div>
+                          
+                          {message.sources && message.sources.length > 0 && (
+                            <SourcesContainer>
+                              <SourcesHeader onClick={() => toggleSources(index)}>
+                                <FiChevronDown className={expandedSources[index] ? 'expanded' : ''} />
+                                <span>Nguồn tham khảo ({message.sources.length})</span>
+                              </SourcesHeader>
+                              <SourcesList isExpanded={expandedSources[index]}>
+                                {message.sources.map((source, idx) => (
+                                  <SourceItem key={idx}>
+                                    <FiFile />
+                                    <div>
+                                      <div style={{ fontSize: '0.8rem', fontWeight: '500', marginBottom: '2px' }}>
+                                        {source.metadata?.original_filename || 'Tài liệu'}
+                                      </div>
+                                      <SourceText>{source.text}</SourceText>
+                                    </div>
+                                  </SourceItem>
+                                ))}
+                              </SourcesList>
+                            </SourcesContainer>
+                          )}
+                        </MessageContent>
+                      </BotMessage>
+                    );
+                  }
+                })
+              ) : (
+                <EmptyState>
+                  <FiSearch />
+                  <h3>Đặt câu hỏi về tài liệu của bạn</h3>
+                  <p>Tôi sẽ tìm kiếm trong bộ sưu tập tài liệu của bạn và cung cấp câu trả lời.</p>
+                </EmptyState>
+              )}
+              <div ref={messagesEndRef} />
+            </ChatMessages>
+            
+            <ChatInputContainer>
+              <ChatInputForm onSubmit={handleSubmit}>
+                <ChatInput
+                  type="text"
+                  placeholder="Đặt câu hỏi..."
+                  value={input}
+                  onChange={(e) => setInput(e.target.value)}
+                  disabled={isLoading}
+                />
+                <SendButton type="submit" disabled={isLoading || !input.trim()}>
+                  <FiSend size={20} />
+                </SendButton>
+              </ChatInputForm>
+            </ChatInputContainer>
+          </MainChat>
+        </ChatContainer>
+      </PageContainer>
+    </UserLayout>
   );
 };
 

@@ -503,7 +503,7 @@ const DocumentManager = () => {
   return (
     <AdminLayout>
       <PageContainer>
-        <PageTitle>Document Management</PageTitle>
+        <PageTitle>Trang quản lý tài liệu của quản trị viên</PageTitle>
         <PageHeader>
           <div>
             <Title>Quản lý tài liệu</Title>
