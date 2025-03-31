@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Link, useLocation } from 'react-router-dom';
-import { FiHome, FiMessageSquare, FiHelpCircle, FiExternalLink } from 'react-icons/fi';
+import { FiHome, FiMessageSquare, FiHelpCircle, FiExternalLink, FiMenu, FiX } from 'react-icons/fi';
 import { useApi } from '../context/ApiContext';
 
 const LayoutContainer = styled.div`
@@ -18,6 +18,48 @@ const Sidebar = styled.aside`
   padding: var(--spacing-md);
   display: flex;
   flex-direction: column;
+  position: fixed;
+  height: 100vh;
+  z-index: 1000;
+  transition: transform 0.3s ease;
+  
+  @media (max-width: 768px) {
+    transform: translateX(${props => props.isOpen ? '0' : '-100%'});
+    width: 100%;
+  }
+`;
+
+const MobileMenuButton = styled.button`
+  display: none;
+  position: fixed;
+  top: var(--spacing-md);
+  left: var(--spacing-md);
+  z-index: 1001;
+  background: var(--almost-black);
+  color: var(--white);
+  border: none;
+  padding: var(--spacing-sm);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  
+  @media (max-width: 768px) {
+    display: block;
+  }
+`;
+
+const Overlay = styled.div`
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+  
+  @media (max-width: 768px) {
+    display: ${props => props.isOpen ? 'block' : 'none'};
+  }
 `;
 
 const Logo = styled.div`
@@ -85,6 +127,11 @@ const Content = styled.main`
   height: 100vh;
   overflow-y: auto;
   background-color: var(--background-color);
+  margin-left: 240px;
+  
+  @media (max-width: 768px) {
+    margin-left: 0;
+  }
 `;
 
 const StatusIndicator = styled.div`
@@ -132,33 +179,44 @@ const ApiLink = styled.a`
 const UserLayout = ({ children }) => {
   const location = useLocation();
   const { isConnected, apiUrl } = useApi();
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   
   const isActive = (path) => {
     return location.pathname === path;
   };
   
+  const toggleSidebar = () => {
+    setIsSidebarOpen(!isSidebarOpen);
+  };
+  
   return (
     <LayoutContainer>
-      <Sidebar>
+      <MobileMenuButton onClick={toggleSidebar}>
+        {isSidebarOpen ? <FiX /> : <FiMenu />}
+      </MobileMenuButton>
+      
+      <Overlay isOpen={isSidebarOpen} onClick={toggleSidebar} />
+      
+      <Sidebar isOpen={isSidebarOpen}>
         <Logo>
           <span>Chatbot VinhUni RAG</span>
         </Logo>
         
         <NavList>
           <NavItem>
-            <NavLink to="/user" active={isActive('/user')}>
+            <NavLink to="/user" active={isActive('/user')} onClick={toggleSidebar}>
               <FiHome />
               Trang chủ
             </NavLink>
           </NavItem>
           <NavItem>
-            <NavLink to="/user/chat" active={isActive('/user/chat')}>
+            <NavLink to="/user/chat" active={isActive('/user/chat')} onClick={toggleSidebar}>
               <FiMessageSquare />
               Trò chuyện
             </NavLink>
           </NavItem>
           <NavItem>
-            <NavLink to="/user/help" active={isActive('/user/help')}>
+            <NavLink to="/user/help" active={isActive('/user/help')} onClick={toggleSidebar}>
               <FiHelpCircle />
               Hướng dẫn
             </NavLink>

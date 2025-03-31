@@ -3,6 +3,7 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  -webkit-tap-highlight-color: transparent;
 }
 
 :root {
@@ -58,10 +59,12 @@ html, body {
   color: var(--almost-black);
   background-color: var(--light-gray);
   scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 
 body {
   min-height: 100vh;
+  position: relative;
 }
 
 a {
@@ -87,6 +90,7 @@ button, .button {
   transition: all 0.2s ease;
   position: relative;
   overflow: hidden;
+  touch-action: manipulation;
   
   &::after {
     content: '';
@@ -109,6 +113,11 @@ button, .button {
   
   &:active::after {
     animation: ripple 0.6s ease-out;
+  }
+  
+  @media (max-width: 768px) {
+    padding: var(--spacing-xs) var(--spacing-md);
+    font-size: 0.875rem;
   }
 }
 
@@ -155,6 +164,7 @@ input, select, textarea {
   font-size: 1rem;
   transition: all 0.2s ease;
   background-color: var(--light-gray);
+  touch-action: manipulation;
   
   &:hover {
     border-color: var(--gray);
@@ -166,12 +176,21 @@ input, select, textarea {
     box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.1);
     background-color: var(--white);
   }
+  
+  @media (max-width: 768px) {
+    font-size: 0.875rem;
+    padding: var(--spacing-xs) var(--spacing-sm);
+  }
 }
 
 .container {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 var(--spacing-md);
+  
+  @media (max-width: 768px) {
+    padding: 0 var(--spacing-sm);
+  }
 }
 
 .card {
@@ -185,6 +204,11 @@ input, select, textarea {
   &:hover {
     transform: translateY(-2px);
     box-shadow: var(--shadow-xl);
+  }
+  
+  @media (max-width: 768px) {
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-md);
   }
 }
 
@@ -228,15 +252,10 @@ input, select, textarea {
   display: grid;
   grid-template-columns: repeat(12, 1fr);
   gap: var(--spacing-md);
-}
-
-@media (max-width: 768px) {
-  html {
-    font-size: 14px;
-  }
   
-  .container {
-    padding: 0 var(--spacing-sm);
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-sm);
   }
 }
 
@@ -248,11 +267,28 @@ input, select, textarea {
   width: 24px;
   height: 24px;
   animation: spin 1s linear infinite;
+  
+  @media (max-width: 768px) {
+    width: 20px;
+    height: 20px;
+    border-width: 2px;
+  }
 }
 
 @keyframes spin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.hide-scrollbar {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
 }
 
 /* Login Styles */

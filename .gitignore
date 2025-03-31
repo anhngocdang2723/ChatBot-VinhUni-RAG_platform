@@ -45,6 +45,7 @@ node_modules/
 
 #data
 data/
+report/
 
 #git
 .gitignore

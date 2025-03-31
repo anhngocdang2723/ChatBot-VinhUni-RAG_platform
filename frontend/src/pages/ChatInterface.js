@@ -11,16 +11,29 @@ const PageContainer = styled.div`
   height: calc(100vh - 32px);
   display: flex;
   flex-direction: column;
+  
+  @media (max-width: 768px) {
+    padding: var(--spacing-md);
+    height: calc(100vh - 16px);
+  }
 `;
 
 const PageHeader = styled.div`
   margin-bottom: var(--spacing-lg);
+  
+  @media (max-width: 768px) {
+    margin-bottom: var(--spacing-md);
+  }
 `;
 
 const Title = styled.h1`
   font-size: 1.75rem;
   margin-bottom: var(--spacing-sm);
   color: var(--almost-black);
+  
+  @media (max-width: 768px) {
+    font-size: 1.5rem;
+  }
 `;
 
 const Subtitle = styled.p`
@@ -32,7 +45,12 @@ const ChatContainer = styled.div`
   display: flex;
   flex: 1;
   gap: var(--spacing-lg);
-  min-height: 0; // Important for flex overflow
+  min-height: 0;
+  position: relative;
+  
+  @media (max-width: 768px) {
+    gap: 0;
+  }
 `;
 
 const MainChat = styled.div`
@@ -43,7 +61,11 @@ const MainChat = styled.div`
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-md);
   overflow: hidden;
-  min-width: 0; // Important for flex overflow
+  min-width: 0;
+  
+  @media (max-width: 768px) {
+    border-radius: var(--radius-md);
+  }
 `;
 
 const Sidebar = styled.div`
@@ -51,6 +73,59 @@ const Sidebar = styled.div`
   display: flex;
   flex-direction: column;
   gap: var(--spacing-md);
+  
+  @media (max-width: 768px) {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    max-width: 320px;
+    background: var(--white);
+    padding: var(--spacing-md);
+    transform: translateX(${props => props.isOpen ? '0' : '100%'});
+    transition: transform 0.3s ease;
+    z-index: 1000;
+    box-shadow: var(--shadow-lg);
+  }
+`;
+
+const MobileSidebarToggle = styled.button`
+  display: none;
+  position: fixed;
+  top: var(--spacing-lg);
+  right: var(--spacing-lg);
+  z-index: 1001;
+  background: var(--primary-color);
+  color: var(--white);
+  border: none;
+  padding: var(--spacing-sm);
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  box-shadow: var(--shadow-lg);
+  width: 48px;
+  height: 48px;
+  align-items: center;
+  justify-content: center;
+  
+  @media (max-width: 768px) {
+    display: flex;
+  }
+`;
+
+const SidebarOverlay = styled.div`
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+  
+  @media (max-width: 768px) {
+    display: ${props => props.isOpen ? 'block' : 'none'};
+  }
 `;
 
 const ChatMessages = styled.div`
@@ -71,17 +146,29 @@ const ChatMessages = styled.div`
     background: var(--mid-gray);
     border-radius: 3px;
   }
+  
+  @media (max-width: 768px) {
+    padding: var(--spacing-md);
+  }
 `;
 
 const ChatInputContainer = styled.div`
   padding: var(--spacing-md);
   background-color: var(--white);
   border-top: 1px solid var(--light-gray);
+  
+  @media (max-width: 768px) {
+    padding: var(--spacing-sm);
+  }
 `;
 
 const ChatInputForm = styled.form`
   display: flex;
   gap: var(--spacing-sm);
+  
+  @media (max-width: 768px) {
+    gap: var(--spacing-xs);
+  }
 `;
 
 const ChatInput = styled.input`
@@ -100,6 +187,11 @@ const ChatInput = styled.input`
 
   &::placeholder {
     color: var(--gray);
+  }
+  
+  @media (max-width: 768px) {
+    padding: var(--spacing-sm) var(--spacing-md);
+    font-size: 0.875rem;
   }
 `;
 
@@ -168,20 +260,37 @@ const MessageContent = styled.div`
   padding: var(--spacing-md) var(--spacing-lg);
   max-width: 70%;
   line-height: 1.5;
+  
+  @media (max-width: 768px) {
+    max-width: 85%;
+    padding: var(--spacing-sm) var(--spacing-md);
+  }
 
   .markdown-content {
     h1, h2, h3, h4, h5, h6 {
       margin: 1em 0 0.5em 0;
       font-weight: 600;
+      
+      @media (max-width: 768px) {
+        font-size: 0.9em;
+      }
     }
 
     p {
       margin: 0.5em 0;
+      
+      @media (max-width: 768px) {
+        font-size: 0.9em;
+      }
     }
 
     ul, ol {
       margin: 0.5em 0;
       padding-left: 1.5em;
+      
+      @media (max-width: 768px) {
+        font-size: 0.9em;
+      }
     }
 
     li {
@@ -193,6 +302,10 @@ const MessageContent = styled.div`
       padding: 0.2em 0.4em;
       border-radius: 3px;
       font-size: 0.9em;
+      
+      @media (max-width: 768px) {
+        font-size: 0.8em;
+      }
     }
 
     pre {
@@ -201,6 +314,11 @@ const MessageContent = styled.div`
       border-radius: var(--radius-md);
       overflow-x: auto;
       margin: 0.5em 0;
+      
+      @media (max-width: 768px) {
+        padding: var(--spacing-sm);
+        font-size: 0.8em;
+      }
     }
 
     blockquote {
@@ -208,6 +326,10 @@ const MessageContent = styled.div`
       margin: 0.5em 0;
       padding-left: var(--spacing-md);
       color: var(--gray);
+      
+      @media (max-width: 768px) {
+        font-size: 0.9em;
+      }
     }
   }
 `;
@@ -248,10 +370,16 @@ const SourceText = styled.span`
 `;
 
 const SidebarCard = styled.div`
-  background: var(--white);
+  background-color: var(--white);
   border-radius: var(--radius-lg);
+  padding: var(--spacing-md);
   box-shadow: var(--shadow-md);
-  overflow: hidden;
+  
+  @media (max-width: 768px) {
+    min-width: 200px;
+    flex-shrink: 0;
+    border-radius: var(--radius-md);
+  }
 `;
 
 const CardHeader = styled.div`
@@ -438,6 +566,7 @@ const ChatInterface = () => {
   });
   const [isSettingsExpanded, setIsSettingsExpanded] = useState(false);
   const [expandedSources, setExpandedSources] = useState({});
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   
   const messagesEndRef = useRef(null);
   
@@ -554,6 +683,10 @@ const ChatInterface = () => {
     }));
   };
   
+  const toggleSidebar = () => {
+    setIsSidebarOpen(!isSidebarOpen);
+  };
+  
   return (
     <UserLayout>
       <PageContainer>
@@ -563,7 +696,81 @@ const ChatInterface = () => {
         </PageHeader>
         
         <ChatContainer>
-          <Sidebar>
+          <SidebarOverlay isOpen={isSidebarOpen} onClick={toggleSidebar} />
+          
+          <MainChat>
+            <ChatMessages>
+              {messages.length > 0 ? (
+                messages.map((message, index) => {
+                  if (message.type === 'user') {
+                    return (
+                      <UserMessage key={index}>
+                        <MessageContent className="message-content">
+                          {message.content}
+                        </MessageContent>
+                      </UserMessage>
+                    );
+                  } else {
+                    return (
+                      <BotMessage key={index}>
+                        <MessageContent className="message-content">
+                          <div className="markdown-content">
+                            <ReactMarkdown>{message.content}</ReactMarkdown>
+                          </div>
+                          
+                          {message.sources && message.sources.length > 0 && (
+                            <SourcesContainer>
+                              <SourcesHeader onClick={() => toggleSources(index)}>
+                                <FiChevronDown className={expandedSources[index] ? 'expanded' : ''} />
+                                <span>Nguồn tham khảo ({message.sources.length})</span>
+                              </SourcesHeader>
+                              <SourcesList isExpanded={expandedSources[index]}>
+                                {message.sources.map((source, idx) => (
+                                  <SourceItem key={idx}>
+                                    <FiFile />
+                                    <div>
+                                      <div style={{ fontSize: '0.8rem', fontWeight: '500', marginBottom: '2px' }}>
+                                        {source.metadata?.original_filename || 'Tài liệu'}
+                                      </div>
+                                      <SourceText>{source.text}</SourceText>
+                                    </div>
+                                  </SourceItem>
+                                ))}
+                              </SourcesList>
+                            </SourcesContainer>
+                          )}
+                        </MessageContent>
+                      </BotMessage>
+                    );
+                  }
+                })
+              ) : (
+                <EmptyState>
+                  <FiSearch />
+                  <h3>Đặt câu hỏi về tài liệu của bạn</h3>
+                  <p>Tôi sẽ tìm kiếm trong bộ sưu tập tài liệu của bạn và cung cấp câu trả lời.</p>
+                </EmptyState>
+              )}
+              <div ref={messagesEndRef} />
+            </ChatMessages>
+            
+            <ChatInputContainer>
+              <ChatInputForm onSubmit={handleSubmit}>
+                <ChatInput
+                  type="text"
+                  placeholder="Đặt câu hỏi..."
+                  value={input}
+                  onChange={(e) => setInput(e.target.value)}
+                  disabled={isLoading}
+                />
+                <SendButton type="submit" disabled={isLoading || !input.trim()}>
+                  <FiSend size={20} />
+                </SendButton>
+              </ChatInputForm>
+            </ChatInputContainer>
+          </MainChat>
+          
+          <Sidebar isOpen={isSidebarOpen}>
             <SidebarCard>
               <CardHeader onClick={() => setIsSettingsExpanded(!isSettingsExpanded)}>
                 <div className="header-content">
@@ -667,77 +874,9 @@ const ChatInterface = () => {
             </SidebarCard>
           </Sidebar>
           
-          <MainChat>
-            <ChatMessages>
-              {messages.length > 0 ? (
-                messages.map((message, index) => {
-                  if (message.type === 'user') {
-                    return (
-                      <UserMessage key={index}>
-                        <MessageContent className="message-content">
-                          {message.content}
-                        </MessageContent>
-                      </UserMessage>
-                    );
-                  } else {
-                    return (
-                      <BotMessage key={index}>
-                        <MessageContent className="message-content">
-                          <div className="markdown-content">
-                            <ReactMarkdown>{message.content}</ReactMarkdown>
-                          </div>
-                          
-                          {message.sources && message.sources.length > 0 && (
-                            <SourcesContainer>
-                              <SourcesHeader onClick={() => toggleSources(index)}>
-                                <FiChevronDown className={expandedSources[index] ? 'expanded' : ''} />
-                                <span>Nguồn tham khảo ({message.sources.length})</span>
-                              </SourcesHeader>
-                              <SourcesList isExpanded={expandedSources[index]}>
-                                {message.sources.map((source, idx) => (
-                                  <SourceItem key={idx}>
-                                    <FiFile />
-                                    <div>
-                                      <div style={{ fontSize: '0.8rem', fontWeight: '500', marginBottom: '2px' }}>
-                                        {source.metadata?.original_filename || 'Tài liệu'}
-                                      </div>
-                                      <SourceText>{source.text}</SourceText>
-                                    </div>
-                                  </SourceItem>
-                                ))}
-                              </SourcesList>
-                            </SourcesContainer>
-                          )}
-                        </MessageContent>
-                      </BotMessage>
-                    );
-                  }
-                })
-              ) : (
-                <EmptyState>
-                  <FiSearch />
-                  <h3>Đặt câu hỏi về tài liệu của bạn</h3>
-                  <p>Tôi sẽ tìm kiếm trong bộ sưu tập tài liệu của bạn và cung cấp câu trả lời.</p>
-                </EmptyState>
-              )}
-              <div ref={messagesEndRef} />
-            </ChatMessages>
-            
-            <ChatInputContainer>
-              <ChatInputForm onSubmit={handleSubmit}>
-                <ChatInput
-                  type="text"
-                  placeholder="Đặt câu hỏi..."
-                  value={input}
-                  onChange={(e) => setInput(e.target.value)}
-                  disabled={isLoading}
-                />
-                <SendButton type="submit" disabled={isLoading || !input.trim()}>
-                  <FiSend size={20} />
-                </SendButton>
-              </ChatInputForm>
-            </ChatInputContainer>
-          </MainChat>
+          <MobileSidebarToggle onClick={toggleSidebar}>
+            <FiSettings size={24} />
+          </MobileSidebarToggle>
         </ChatContainer>
       </PageContainer>
     </UserLayout>
