@@ -23,6 +23,7 @@ const PageHeader = styled.div`
   
   @media (max-width: 768px) {
     margin-bottom: var(--spacing-md);
+    padding-top: calc(var(--spacing-lg) + 36px);
   }
 `;
 
@@ -62,9 +63,11 @@ const MainChat = styled.div`
   box-shadow: var(--shadow-md);
   overflow: hidden;
   min-width: 0;
+  margin-bottom: 0px;
   
   @media (max-width: 768px) {
     border-radius: var(--radius-md);
+    margin-bottom: 40px;
   }
 `;
 
