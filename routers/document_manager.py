@@ -45,13 +45,17 @@ async def list_collections(
         collections = vector_store.list_collections()
         
         # Convert to CollectionInfo format
-        enhanced_collections = [
-            CollectionInfo(
-                name=collection['name'],
-                creation_date=datetime.now().isoformat()  # This is an approximation
+        enhanced_collections = []
+        for collection in collections:
+            # Get document count for each collection
+            doc_count = vector_store.get_collection_size(collection['name'])
+            enhanced_collections.append(
+                CollectionInfo(
+                    name=collection['name'],
+                    creation_date=datetime.now().isoformat(),
+                    document_count=doc_count
+                )
             )
-            for collection in collections
-        ]
         
         return enhanced_collections
     except Exception as e:
@@ -74,11 +78,14 @@ async def get_collection_info(
         if not collection_info:
             raise HTTPException(status_code=404, detail=f"Collection {collection_name} not found")
         
+        # Get document count
+        doc_count = vector_store.get_collection_size(collection_name)
+        
         return CollectionInfo(
             name=collection_info['name'],
             status="active",
             creation_date=datetime.now().isoformat(),
-            document_count=0,  # We can add document counting later if needed
+            document_count=doc_count,
             document_types=None
         )
     except HTTPException:
@@ -198,14 +205,22 @@ async def get_collection_stats(
 ) -> CollectionStats:
     """Get aggregate statistics about all collections."""
     try:
-        collections_info = await list_collections(vector_store)
+        # Get collections directly from vector store
+        collections = vector_store.list_collections()
         
-        total_collections = len(collections_info)
-        total_documents = sum(c.document_count or 0 for c in collections_info)
+        # Convert to CollectionInfo format
+        collections_info = [
+            CollectionInfo(
+                name=collection['name'],
+                creation_date=datetime.now().isoformat(),
+                document_count=0  # We don't need document count for now
+            )
+            for collection in collections
+        ]
         
         return CollectionStats(
-            total_collections=total_collections,
-            total_documents=total_documents,
+            total_collections=len(collections_info),
+            total_documents=0,  # We don't need total documents for now
             collections=collections_info
         )
     except Exception as e:

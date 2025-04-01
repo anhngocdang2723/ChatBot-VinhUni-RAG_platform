@@ -110,7 +110,7 @@ const UserDashboard = () => {
             <FeatureIcon>
               <FiMessageSquare />
             </FeatureIcon>
-            <FeatureTitle>Những cuộc trò chuyện tự nhiên</FeatureTitle>
+            <FeatureTitle>Cuộc trò chuyện tự nhiên</FeatureTitle>
             <FeatureDescription>
               Tương tác tự nhiên với chatbot bằng ngôn ngữ hàng ngày. Nhận được phản hồi rõ ràng, chính xác cho các câu hỏi của bạn.
             </FeatureDescription>

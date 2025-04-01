@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { Link, useLocation } from 'react-router-dom';
-import { FiHome, FiMessageSquare, FiHelpCircle, FiExternalLink, FiMenu, FiX } from 'react-icons/fi';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { FiHome, FiMessageSquare, FiHelpCircle, FiExternalLink, FiMenu, FiX, FiLogOut } from 'react-icons/fi';
 import { useApi } from '../context/ApiContext';
 
 const LayoutContainer = styled.div`
@@ -176,8 +176,40 @@ const ApiLink = styled.a`
   }
 `;
 
+const LogoutButton = styled.button`
+  display: flex;
+  align-items: center;
+  padding: var(--spacing-sm) var(--spacing-md);
+  color: var(--gray);
+  background: transparent;
+  border: none;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 500;
+  width: 100%;
+  text-align: left;
+  margin-top: var(--spacing-md);
+  
+  &:hover {
+    color: var(--white);
+    background-color: rgba(255, 255, 255, 0.1);
+    transform: translateX(4px);
+  }
+  
+  svg {
+    margin-right: var(--spacing-sm);
+    transition: transform 0.2s ease;
+  }
+  
+  &:hover svg {
+    transform: scale(1.1);
+  }
+`;
+
 const UserLayout = ({ children }) => {
   const location = useLocation();
+  const navigate = useNavigate();
   const { isConnected, apiUrl } = useApi();
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   
@@ -189,6 +221,11 @@ const UserLayout = ({ children }) => {
     setIsSidebarOpen(!isSidebarOpen);
   };
   
+  const handleLogout = () => {
+    localStorage.removeItem('userRole');
+    navigate('/');
+  };
+
   return (
     <LayoutContainer>
       <MobileMenuButton onClick={toggleSidebar}>
@@ -212,13 +249,13 @@ const UserLayout = ({ children }) => {
           <NavItem>
             <NavLink to="/user/chat" active={isActive('/user/chat')} onClick={toggleSidebar}>
               <FiMessageSquare />
-              Trò chuyện
+              Bắt đầu trò chuyện
             </NavLink>
           </NavItem>
           <NavItem>
             <NavLink to="/user/help" active={isActive('/user/help')} onClick={toggleSidebar}>
               <FiHelpCircle />
-              Hướng dẫn
+              Hướng dẫn sử dụng
             </NavLink>
           </NavItem>
         </NavList>
@@ -226,6 +263,11 @@ const UserLayout = ({ children }) => {
         <ApiLink href={apiUrl} target="_blank" rel="noopener noreferrer">
           {apiUrl} <FiExternalLink />
         </ApiLink>
+
+        <LogoutButton onClick={handleLogout}>
+          <FiLogOut />
+          Logout
+        </LogoutButton>
       </Sidebar>
       
       <Content>

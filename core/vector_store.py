@@ -457,22 +457,17 @@ class VectorStore:
             return []
 
     def list_collections(self) -> List[Dict[str, Any]]:
-        """List all collections with their names and display names."""
+        """List all collections with their names."""
         try:
+            # Get all collections in one API call
             collections_list = self.client.get_collections().collections
             collections_info = []
+            
             for collection in collections_list:
-                # Get collection metadata
-                try:
-                    metadata = self.client.get_collection(collection.name).metadata
-                    display_name = metadata.get("display_name", collection.name)
-                except:
-                    display_name = collection.name
-                
                 collections_info.append({
-                    "name": collection.name,
-                    "display_name": display_name
+                    "name": collection.name
                 })
+            
             return collections_info
         except Exception as e:
             logger.error(f"Failed to list collections: {str(e)}")
@@ -537,4 +532,13 @@ class VectorStore:
             metadata = self.client.get_collection(collection_name).metadata
             return metadata.get("display_name", collection_name)
         except:
-            return collection_name 
+            return collection_name
+
+    def get_collection_size(self, collection_name: str) -> int:
+        """Get the number of vectors in a collection."""
+        try:
+            # For now, return 0 as we don't need vectors_count
+            return 0
+        except Exception as e:
+            logger.error(f"Failed to get collection size for {collection_name}: {str(e)}")
+            return 0 

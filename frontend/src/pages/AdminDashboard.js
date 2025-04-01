@@ -64,8 +64,8 @@ const AdminDashboard = () => {
   const { apiUrl } = useApi();
   const [stats, setStats] = useState({
     totalDocuments: 0,
-    activeUsers: 0,
-    totalConversations: 0,
+    totalCollections: 0,
+    collections: [],
     systemStatus: 'Active'
   });
   const [loading, setLoading] = useState(true);
@@ -74,12 +74,17 @@ const AdminDashboard = () => {
   useEffect(() => {
     const fetchDashboardStats = async () => {
       try {
-        const response = await fetch(`${apiUrl}/admin/stats`);
+        const response = await fetch(`${apiUrl}/manage/stats`);
         if (!response.ok) {
           throw new Error('Failed to fetch dashboard statistics');
         }
         const data = await response.json();
-        setStats(data);
+        setStats({
+          totalDocuments: data.total_documents,
+          totalCollections: data.total_collections,
+          collections: data.collections,
+          systemStatus: 'Active'
+        });
       } catch (err) {
         setError(err.message);
       } finally {
@@ -109,15 +114,15 @@ const AdminDashboard = () => {
             </StatValue>
           </StatCard>
           <StatCard>
-            <StatTitle>Số người đang hoạt động</StatTitle>
+            <StatTitle>Tổng số bộ sưu tập</StatTitle>
             <StatValue>
-              {loading ? <LoadingSpinner /> : stats.activeUsers}
+              {loading ? <LoadingSpinner /> : stats.totalCollections}
             </StatValue>
           </StatCard>
           <StatCard>
-            <StatTitle>Tổng số cuộc trò chuyệns</StatTitle>
+            <StatTitle>Số bộ sưu tập hoạt động</StatTitle>
             <StatValue>
-              {loading ? <LoadingSpinner /> : stats.totalConversations}
+              {loading ? <LoadingSpinner /> : stats.collections.length}
             </StatValue>
           </StatCard>
           <StatCard>

@@ -377,6 +377,8 @@ const SidebarCard = styled.div`
   border-radius: var(--radius-lg);
   padding: var(--spacing-md);
   box-shadow: var(--shadow-md);
+  display: flex;
+  flex-direction: column;
   
   @media (max-width: 768px) {
     min-width: 200px;
@@ -427,12 +429,27 @@ const CardContent = styled.div`
   max-height: ${props => props.isExpanded ? '500px' : '0'};
   overflow: hidden;
   opacity: ${props => props.isExpanded ? '1' : '0'};
+`;
+
+const CollectionsContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+  max-height: 400px;
+  overflow-y: auto;
+  padding-right: var(--spacing-xs);
   
-  /* Thêm padding cho container của các collection items */
-  > div {
-    display: flex;
-    flex-direction: column;
-    gap: var(--spacing-xs);
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: var(--mid-gray);
+    border-radius: 3px;
   }
 `;
 
@@ -517,6 +534,33 @@ const EmptyState = styled.div`
   }
 `;
 
+const LoadingIndicator = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-md);
+  gap: var(--spacing-sm);
+  
+  .loading-spinner {
+    width: 24px;
+    height: 24px;
+    border: 3px solid var(--light-gray);
+    border-top: 3px solid var(--primary-color);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+  }
+  
+  .loading-text {
+    color: var(--gray);
+    font-size: 0.875rem;
+  }
+
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+`;
+
 const SourcesContainer = styled.div`
   margin-top: var(--spacing-md);
 `;
@@ -590,9 +634,19 @@ const ChatInterface = () => {
   const fetchCollections = async () => {
     try {
       const fetchedCollections = await getCollections();
-      setCollections(fetchedCollections || []);
-      if (Array.isArray(fetchedCollections) && fetchedCollections.length > 0) {
-        setSelectedCollections(fetchedCollections.map(c => c.name));
+      if (Array.isArray(fetchedCollections)) {
+        // Sort collections by name
+        const sortedCollections = fetchedCollections.sort((a, b) => 
+          (a.display_name || a.name).localeCompare(b.display_name || b.name)
+        );
+        setCollections(sortedCollections);
+        
+        // Select all collections by default
+        setSelectedCollections(sortedCollections.map(c => c.name));
+      } else {
+        console.error('Invalid collections data:', fetchedCollections);
+        setCollections([]);
+        setSelectedCollections([]);
       }
     } catch (error) {
       console.error('Error fetching collections:', error);
@@ -610,7 +664,13 @@ const ChatInterface = () => {
     if (!input.trim()) return;
 
     const userMessage = { type: 'user', content: input };
-    setMessages(prev => [...prev, userMessage]);
+    const loadingMessage = {
+      type: 'bot',
+      content: 'loading',
+      sources: []
+    };
+    
+    setMessages(prev => [...prev, userMessage, loadingMessage]);
     setInput('');
 
     const specialQueryCheck = checkSpecialQuery(input);
@@ -620,7 +680,7 @@ const ChatInterface = () => {
         content: specialQueryCheck.response,
         sources: []
       };
-      setMessages(prev => [...prev, botMessage]);
+      setMessages(prev => prev.slice(0, -1).concat(botMessage));
       scrollToBottom();
       return;
     }
@@ -648,14 +708,14 @@ const ChatInterface = () => {
         content: response.answer,
         sources: response.sources
       };
-      setMessages(prev => [...prev, botMessage]);
+      setMessages(prev => prev.slice(0, -1).concat(botMessage));
     } else {
       const errorMessage = {
         type: 'bot',
         content: 'Rất tiếc, đã xảy ra lỗi khi xử lý yêu cầu của bạn.',
         sources: []
       };
-      setMessages(prev => [...prev, errorMessage]);
+      setMessages(prev => prev.slice(0, -1).concat(errorMessage));
     }
 
     scrollToBottom();
@@ -712,6 +772,17 @@ const ChatInterface = () => {
                           {message.content}
                         </MessageContent>
                       </UserMessage>
+                    );
+                  } else if (message.content === 'loading') {
+                    return (
+                      <BotMessage key={index}>
+                        <MessageContent className="message-content">
+                          <LoadingIndicator>
+                            <div className="loading-spinner" />
+                            <span className="loading-text">Đang xử lý câu hỏi của bạn...</span>
+                          </LoadingIndicator>
+                        </MessageContent>
+                      </BotMessage>
                     );
                   } else {
                     return (
@@ -858,16 +929,18 @@ const ChatInterface = () => {
               </CardHeader>
               <CardContent isExpanded={true}>
                 {collections.length > 0 ? (
-                  collections.map(collection => (
-                    <CollectionItem key={collection.name}>
-                      <input
-                        type="checkbox"
-                        checked={selectedCollections.includes(collection.name)}
-                        onChange={() => handleCollectionSelect(collection.name)}
-                      />
-                      <span>{collection.name}</span>
-                    </CollectionItem>
-                  ))
+                  <CollectionsContainer>
+                    {collections.map(collection => (
+                      <CollectionItem key={collection.name}>
+                        <input
+                          type="checkbox"
+                          checked={selectedCollections.includes(collection.name)}
+                          onChange={() => handleCollectionSelect(collection.name)}
+                        />
+                        <span>{collection.display_name || collection.name}</span>
+                      </CollectionItem>
+                    ))}
+                  </CollectionsContainer>
                 ) : (
                   <div style={{ textAlign: 'center', color: 'var(--gray)', padding: 'var(--spacing-md)' }}>
                     Không có Collection nào sẵn sàng
