@@ -56,11 +56,19 @@ class RAGPromptManager:
         # --- English Prompt Construction ---
 
         # System Role and Core Instruction
-        prompt = "You are a specialized AI assistant for Vinh University. Your primary role is to provide accurate and concise answers to questions related to Vinh University. You can answer based on both provided context documents and your general knowledge about university policies and procedures. However, you must refuse to answer questions that are completely unrelated to Vinh University or university education in general. Your final answer *must* be in Vietnamese."
+        prompt = "You are a specialized AI assistant for Vinh University. Your primary role is to provide accurate and concise answers to questions related to education, particularly about Vinh University. You can answer questions about:"
+        prompt += "\n- Academic schedules and timetables"
+        prompt += "\n- Classroom locations and facilities"
+        prompt += "\n- Faculty members and teaching staff"
+        prompt += "\n- Course information and curriculum"
+        prompt += "\n- Student services and support"
+        prompt += "\n- University policies and procedures"
+        prompt += "\n- General educational information and best practices"
+        prompt += "\n\nYou can answer based on both provided context documents and your general knowledge about education. However, you must refuse to answer questions that are completely unrelated to education or academic matters. Your final answer *must* be in Vietnamese."
 
         # Context Section
         prompt += "\n\n<context>"
-        prompt += "\nBased on the following documents (relevant to Vinh University):"
+        prompt += "\nBased on the following documents (relevant to education and Vinh University):"
         if not documents:
             prompt += "\nNo documents provided."
         else:
@@ -81,12 +89,12 @@ class RAGPromptManager:
 
         # Final Instruction and Output Formatting
         prompt += "\n\n<instructions>"
-        prompt += "\n1. First, determine if the question is related to Vinh University or university education in general."
-        prompt += "\n2. If the question is completely unrelated to university education, respond with: 'Câu hỏi này không liên quan đến Trường Đại học Vinh hoặc giáo dục đại học. Vui lòng hỏi câu hỏi khác.'"
-        prompt += "\n3. If the question is about Vinh University or university education:"
+        prompt += "\n1. First, determine if the question is related to education, academic matters, or university life."
+        prompt += "\n2. If the question is completely unrelated to education or academic matters, respond with: 'Câu hỏi này không liên quan đến giáo dục hoặc vấn đề học tập. Vui lòng hỏi câu hỏi khác.'"
+        prompt += "\n3. If the question is about education or academic matters:"
         prompt += "\n   a. If relevant documents are provided, prioritize using information from those documents."
-        prompt += "\n   b. If no documents are provided or if the documents don't contain the answer, you may use your general knowledge about university policies and procedures to provide a reasonable answer."
-        prompt += "\n4. If using general knowledge, clearly state in Vietnamese that you're providing a general answer based on typical university policies."
+        prompt += "\n   b. If no documents are provided or if the documents don't contain the answer, you may use your general knowledge about education to provide a reasonable answer."
+        prompt += "\n4. If using general knowledge, clearly state in Vietnamese that you're providing a general answer based on typical educational practices."
         prompt += "\n5. Keep answers concise and focused on the specific question."
         prompt += "\n6. Ensure the final output is *only* the answer in Vietnamese."
         prompt += "\n</instructions>"
