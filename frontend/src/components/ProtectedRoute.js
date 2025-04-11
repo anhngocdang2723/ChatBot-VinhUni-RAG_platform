@@ -1,14 +1,18 @@
 import React from 'react';
 import { Navigate } from 'react-router-dom';
 
-const ProtectedRoute = ({ children, allowedRoles }) => {
-  // In a real application, you would check the user's role from your auth context
-  const userRole = localStorage.getItem('userRole') || 'user';
-  
-  if (!allowedRoles.includes(userRole)) {
+const ProtectedRoute = ({ children, allowedRoles, allowedPortal }) => {
+  const userRole = localStorage.getItem('userRole');
+  const portal = localStorage.getItem('portal');
+
+  if (!userRole || !portal) {
     return <Navigate to="/" replace />;
   }
-  
+
+  if (!allowedRoles.includes(userRole) || portal !== allowedPortal) {
+    return <Navigate to="/" replace />;
+  }
+
   return children;
 };
 

@@ -4,6 +4,8 @@
   "private": true,
   "dependencies": {
     "axios": "^1.4.0",
+    "katex": "^0.16.22",
+    "mathjax": "^3.2.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hot-toast": "^2.5.2",
@@ -11,7 +13,10 @@
     "react-markdown": "^10.1.0",
     "react-query": "^3.39.3",
     "react-router-dom": "^6.15.0",
+    "react-syntax-highlighter": "^15.6.1",
     "react-toastify": "^8.2.0",
+    "rehype-katex": "^7.0.1",
+    "remark-math": "^6.0.0",
     "styled-components": "^6.0.7"
   },
   "scripts": {

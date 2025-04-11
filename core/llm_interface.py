@@ -3,6 +3,7 @@ import logging
 import json
 import requests
 import os
+import base64
 from openai import OpenAI
 from requests.exceptions import RequestException
 
@@ -41,7 +42,60 @@ class RAGPromptManager:
             self.api_url = None
         else:
             raise ValueError(f"Unsupported provider: {provider['provider']}")
-    
+
+    def _encode_image(self, image_data: str) -> str:
+        """
+        Encode image data to base64 string.
+        
+        Args:
+            image_data: Base64 string of the image
+            
+        Returns:
+            Base64 encoded string with proper format
+        """
+        logger.info(f"Encoding image data. Length: {len(image_data)}")
+        # If image_data is already a base64 string without prefix
+        if not image_data.startswith('data:image'):
+            encoded = f"data:image/jpeg;base64,{image_data}"
+            logger.info("Added data:image/jpeg;base64 prefix to image data")
+            return encoded
+        logger.info("Image data already has proper format")
+        return image_data
+
+    def _create_image_prompt(self, query: str, image_data: str) -> List[Dict[str, Any]]:
+        """
+        Create a prompt for image analysis.
+        
+        Args:
+            query: User's question about the image
+            image_data: Base64 encoded image data
+            
+        Returns:
+            List of message dictionaries for the API
+        """
+        logger.info("Creating image prompt")
+        encoded_image = self._encode_image(image_data)
+        logger.info(f"Image prompt created with query: {query}")
+        
+        return [
+            {
+                "role": "user",
+                "content": [
+                    {
+                        "type": "image_url",
+                        "image_url": {
+                            "url": encoded_image,
+                            "detail": "high"
+                        }
+                    },
+                    {
+                        "type": "text",
+                        "text": query
+                    }
+                ]
+            }
+        ]
+
     def _create_prompt(self, query: str, documents: List[Dict[str, Any]]) -> str:
         """
         Create an advanced prompt in English for the LLM using the query and retrieved documents,
@@ -64,7 +118,10 @@ class RAGPromptManager:
         prompt += "\n- Student services and support"
         prompt += "\n- University policies and procedures"
         prompt += "\n- General educational information and best practices"
-        prompt += "\n\nYou can answer based on both provided context documents and your general knowledge about education. However, you must refuse to answer questions that are completely unrelated to education or academic matters. Your final answer *must* be in Vietnamese."
+        prompt += "\n- Analysis of educational materials, diagrams, charts, and other visual content"
+        prompt += "\n- Explanation of mathematical formulas, scientific concepts, and technical diagrams"
+        prompt += "\n- Interpretation of graphs, tables, and data visualizations"
+        prompt += "\n\nYou can answer based on both provided context documents, your general knowledge about education, and any visual content provided. Your final answer *must* be in Vietnamese."
 
         # Context Section
         prompt += "\n\n<context>"
@@ -89,11 +146,16 @@ class RAGPromptManager:
 
         # Final Instruction and Output Formatting
         prompt += "\n\n<instructions>"
-        prompt += "\n1. First, determine if the question is related to education, academic matters, or university life."
+        prompt += "\n1. First, determine if the question is related to education, academic matters, university life, or educational content analysis."
         prompt += "\n2. If the question is completely unrelated to education or academic matters, respond with: 'Câu hỏi này không liên quan đến giáo dục hoặc vấn đề học tập. Vui lòng hỏi câu hỏi khác.'"
-        prompt += "\n3. If the question is about education or academic matters:"
+        prompt += "\n3. If the question is about education, academic matters, or educational content analysis:"
         prompt += "\n   a. If relevant documents are provided, prioritize using information from those documents."
         prompt += "\n   b. If no documents are provided or if the documents don't contain the answer, you may use your general knowledge about education to provide a reasonable answer."
+        prompt += "\n   c. If the question involves visual content (images, diagrams, etc.):"
+        prompt += "\n      - Analyze the visual elements and their educational significance"
+        prompt += "\n      - Explain how the visual content relates to the course material"
+        prompt += "\n      - Provide clear and detailed explanations of any technical or academic concepts shown"
+        prompt += "\n      - Use appropriate educational terminology while keeping explanations accessible"
         prompt += "\n4. If using general knowledge, clearly state in Vietnamese that you're providing a general answer based on typical educational practices."
         prompt += "\n5. Keep answers concise and focused on the specific question."
         prompt += "\n6. Ensure the final output is *only* the answer in Vietnamese."
@@ -104,64 +166,6 @@ class RAGPromptManager:
         # The LLM response should start directly after this line.
 
         return prompt
-        
-    def _call_openai(self, prompt: str, temperature: float, max_tokens: int) -> str:
-        """Call OpenAI API"""
-        response = self.client.chat.completions.create(
-            model="gpt-3.5-turbo",
-            messages=[
-                {
-                    "role": "system",
-                    "content": "Bạn là một trợ lý AI thông minh, nhiệm vụ của bạn là trả lời câu hỏi dựa trên các tài liệu được cung cấp một cách chính xác và đầy đủ."
-                },
-                {
-                    "role": "user",
-                    "content": prompt
-                }
-            ],
-            temperature=temperature,
-            max_tokens=max_tokens
-        )
-        return response.choices[0].message.content
-
-    def _call_deepseek(self, prompt: str, temperature: float, max_tokens: int) -> str:
-        """Call Deepseek API"""
-        response = self.client.chat.completions.create(
-            model="deepseek-chat",
-            messages=[
-                {
-                    "role": "system",
-                    "content": "Bạn là một trợ lý AI thông minh, nhiệm vụ của bạn là trả lời câu hỏi dựa trên các tài liệu được cung cấp một cách chính xác và đầy đủ. Luôn trả lời bằng tiếng Việt."
-                },
-                {
-                    "role": "user",
-                    "content": prompt
-                }
-            ],
-            temperature=temperature,
-            max_tokens=max_tokens,
-            stream=False
-        )
-        return response.choices[0].message.content
-
-    def _call_grok(self, prompt: str, temperature: float, max_tokens: int) -> str:
-        """Call Grok API"""
-        response = self.client.chat.completions.create(
-            model="grok-2-latest",
-            messages=[
-                {
-                    "role": "system",
-                    "content": "Bạn là một trợ lý AI thông minh, nhiệm vụ của bạn là trả lời câu hỏi dựa trên các tài liệu được cung cấp một cách chính xác và đầy đủ. Luôn trả lời bằng tiếng Việt."
-                },
-                {
-                    "role": "user",
-                    "content": prompt
-                }
-            ],
-            temperature=temperature,
-            max_tokens=max_tokens
-        )
-        return response.choices[0].message.content
 
     def generate_answer(
         self,
@@ -169,10 +173,11 @@ class RAGPromptManager:
         documents: List[Dict[str, Any]],
         temperature: float = 0.1,
         max_tokens: int = 500,
-        model: str = None
+        model: str = None,
+        image_data: Optional[str] = None
     ) -> Dict[str, Any]:
         """
-        Generate an answer using the LLM based on retrieved documents.
+        Generate an answer using the LLM based on retrieved documents and/or image.
         
         Args:
             query: User's question
@@ -180,14 +185,12 @@ class RAGPromptManager:
             temperature: LLM temperature parameter
             max_tokens: Maximum tokens in response
             model: Model to use (overrides provider's default model)
+            image_data: Optional base64 encoded image data
             
         Returns:
             Dictionary containing the answer and source information
         """
         try:
-            # Create the prompt
-            prompt = self._create_prompt(query, documents)
-            
             # Use provided model or default based on provider
             current_provider = model.lower() if model else self.provider_name
             logger.info(f"Using provider: {current_provider} (requested model: {model}, default provider: {self.provider_name})")
@@ -200,8 +203,36 @@ class RAGPromptManager:
             else:  # grok
                 client = OpenAI(api_key=os.getenv("GROK_API_KEY"), base_url="https://api.x.ai/v1")
             
+            # Handle image analysis if image_data is provided
+            if image_data:
+                logger.info("Image data detected, processing image analysis request")
+                if current_provider != "grok-2-vision-latest":
+                    logger.error("Image analysis requested but provider is not Grok")
+                    raise ValueError("Image analysis is only supported with Grok provider")
+                
+                messages = self._create_image_prompt(query, image_data)
+                logger.info(f"Sending image analysis request to Grok with model: grok-2-vision-latest")
+                response = client.chat.completions.create(
+                    model="grok-2-vision-latest",
+                    messages=messages,
+                    temperature=temperature,
+                    max_tokens=max_tokens
+                )
+                answer = response.choices[0].message.content
+                logger.info("Image analysis completed successfully")
+                return {
+                    "answer": answer,
+                    "sources": []
+                }
+            
+            # Handle text-based query
+            logger.info("Processing text-based query")
+            prompt = self._create_prompt(query, documents)
+            logger.info(f"Created prompt with query: {query}")
+            
             # Call appropriate API based on provider
             if current_provider == "openai":
+                logger.info("Using OpenAI API")
                 response = client.chat.completions.create(
                     model="gpt-3.5-turbo",
                     messages=[
@@ -219,6 +250,7 @@ class RAGPromptManager:
                 )
                 answer = response.choices[0].message.content
             elif current_provider == "deepseek":
+                logger.info("Using Deepseek API")
                 response = client.chat.completions.create(
                     model="deepseek-chat",
                     messages=[
@@ -237,8 +269,9 @@ class RAGPromptManager:
                 )
                 answer = response.choices[0].message.content
             else:  # grok
+                logger.info("Using Grok API")
                 response = client.chat.completions.create(
-                    model="grok-2-latest",
+                    model="grok-3-beta", #Stable version: grok-2-latest #Image Understanding: grok-2-vision-latest #New version: grok-3-beta
                     messages=[
                         {
                             "role": "system",
@@ -267,6 +300,7 @@ class RAGPromptManager:
                 }
                 sources.append(source)
             
+            logger.info("Text-based query processing completed successfully")
             return {
                 "answer": answer,
                 "sources": sources

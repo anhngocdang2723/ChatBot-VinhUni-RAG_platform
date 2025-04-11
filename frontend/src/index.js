@@ -11,11 +11,14 @@ import UserDashboard from './pages/UserDashboard';
 import DocumentManager from './pages/DocumentManager';
 import Settings from './pages/Settings';
 import NotFound from './pages/NotFound';
-import ChatInterface from './pages/ChatInterface';
+import GeneralChatInterface from './pages/GeneralChatInterface';
 import Help from './pages/Help';
-
-// Global styles
+import StudentDashboard from './pages/StudentDashboard';
+import CoursePage from './pages/CoursePage';
 import './index.css';
+
+// Placeholder component for Lecturer dashboard
+const LecturerDashboard = () => <div>Lecturer Dashboard (Coming Soon)</div>;
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -30,7 +33,7 @@ root.render(
           <Route
             path="/admin"
             element={
-              <ProtectedRoute allowedRoles={['admin']}>
+              <ProtectedRoute allowedRoles={['admin']} allowedPortal="portal">
                 <AdminDashboard />
               </ProtectedRoute>
             }
@@ -38,7 +41,7 @@ root.render(
           <Route
             path="/admin/documents"
             element={
-              <ProtectedRoute allowedRoles={['admin']}>
+              <ProtectedRoute allowedRoles={['admin']} allowedPortal="portal">
                 <DocumentManager />
               </ProtectedRoute>
             }
@@ -46,7 +49,7 @@ root.render(
           <Route
             path="/admin/settings"
             element={
-              <ProtectedRoute allowedRoles={['admin']}>
+              <ProtectedRoute allowedRoles={['admin']} allowedPortal="portal">
                 <Settings />
               </ProtectedRoute>
             }
@@ -56,7 +59,7 @@ root.render(
           <Route
             path="/user"
             element={
-              <ProtectedRoute allowedRoles={['user', 'admin']}>
+              <ProtectedRoute allowedRoles={['user', 'admin']} allowedPortal="portal">
                 <UserDashboard />
               </ProtectedRoute>
             }
@@ -64,16 +67,42 @@ root.render(
           <Route
             path="/user/chat"
             element={
-              <ProtectedRoute allowedRoles={['user', 'admin']}>
-                <ChatInterface />
+              <ProtectedRoute allowedRoles={['user', 'admin']} allowedPortal="portal">
+                <GeneralChatInterface />
               </ProtectedRoute>
             }
           />
           <Route
             path="/user/help"
             element={
-              <ProtectedRoute allowedRoles={['user', 'admin']}>
+              <ProtectedRoute allowedRoles={['user', 'admin']} allowedPortal="portal">
                 <Help />
+              </ProtectedRoute>
+            }
+          />
+
+          {/* E-learning routes */}
+          <Route
+            path="/elearning/student"
+            element={
+              <ProtectedRoute allowedRoles={['student']} allowedPortal="elearning">
+                <StudentDashboard />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/elearning/student/course/:courseId"
+            element={
+              <ProtectedRoute allowedRoles={['student']} allowedPortal="elearning">
+                <CoursePage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/elearning/lecturer"
+            element={
+              <ProtectedRoute allowedRoles={['lecturer']} allowedPortal="elearning">
+                <LecturerDashboard />
               </ProtectedRoute>
             }
           />

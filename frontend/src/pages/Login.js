@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import { DEMO_ACCOUNTS } from '../config/accounts';
 
 const LoginContainer = styled.div`
   display: flex;
@@ -23,6 +24,33 @@ const FormTitle = styled.h2`
   color: var(--almost-black);
   margin-bottom: var(--spacing-lg);
   text-align: center;
+`;
+
+const PortalButtons = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-lg);
+`;
+
+const PortalButton = styled.button`
+  padding: var(--spacing-md);
+  border: 2px solid var(--primary-color);
+  border-radius: var(--radius-md);
+  background-color: ${props => props.active ? 'var(--primary-color)' : 'transparent'};
+  color: ${props => props.active ? 'var(--white)' : 'var(--primary-color)'};
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background-color: ${props => props.active ? 'var(--primary-dark)' : 'var(--primary-light)'};
+    transform: translateY(-2px);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
 `;
 
 const FormGroup = styled.div`
@@ -84,7 +112,8 @@ const Login = () => {
   const navigate = useNavigate();
   const [credentials, setCredentials] = useState({
     username: '',
-    password: ''
+    password: '',
+    portal: 'portal'
   });
   const [error, setError] = useState('');
 
@@ -92,14 +121,31 @@ const Login = () => {
     e.preventDefault();
     setError('');
     
-    // Check for admin credentials
-    if (credentials.username === 'admin' && credentials.password === 'admin') {
-      localStorage.setItem('userRole', 'admin');
-      navigate('/admin');
+    const account = Object.values(DEMO_ACCOUNTS).find(
+      acc => acc.username === credentials.username && 
+            acc.password === credentials.password &&
+            acc.portal === credentials.portal
+    );
+
+    if (account) {
+      localStorage.setItem('userRole', account.role);
+      localStorage.setItem('portal', account.portal);
+      
+      if (account.portal === 'portal') {
+        if (account.role === 'admin') {
+          navigate('/admin');
+        } else {
+          navigate('/user');
+        }
+      } else {
+        if (account.role === 'student') {
+          navigate('/elearning/student');
+        } else if (account.role === 'lecturer') {
+          navigate('/elearning/lecturer');
+        }
+      }
     } else {
-      // For any other credentials, assign user role
-      localStorage.setItem('userRole', 'user');
-      navigate('/user');
+      setError('Tên đăng nhập hoặc mật khẩu không đúng');
     }
   };
 
@@ -111,10 +157,33 @@ const Login = () => {
     }));
   };
 
+  const handlePortalSelect = (portal) => {
+    setCredentials(prev => ({
+      ...prev,
+      portal
+    }));
+  };
+
   return (
     <LoginContainer>
       <LoginForm onSubmit={handleSubmit}>
-        <FormTitle>Chào mừng</FormTitle>
+        <FormTitle>Đăng nhập</FormTitle>
+        <PortalButtons>
+          <PortalButton
+            type="button"
+            active={credentials.portal === 'portal'}
+            onClick={() => handlePortalSelect('portal')}
+          >
+            Cổng SV
+          </PortalButton>
+          <PortalButton
+            type="button"
+            active={credentials.portal === 'elearning'}
+            onClick={() => handlePortalSelect('elearning')}
+          >
+            E-Learning
+          </PortalButton>
+        </PortalButtons>
         <FormGroup>
           <Label htmlFor="username">Tên đăng nhập</Label>
           <Input
@@ -124,7 +193,7 @@ const Login = () => {
             value={credentials.username}
             onChange={handleChange}
             required
-            placeholder="Enter your username"
+            placeholder="Nhập tên đăng nhập"
           />
         </FormGroup>
         <FormGroup>
@@ -136,7 +205,7 @@ const Login = () => {
             value={credentials.password}
             onChange={handleChange}
             required
-            placeholder="Enter your password"
+            placeholder="Nhập mật khẩu"
           />
         </FormGroup>
         {error && <ErrorMessage>{error}</ErrorMessage>}

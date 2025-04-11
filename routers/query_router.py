@@ -17,6 +17,7 @@ class QueryInput(BaseModel):
     max_tokens: int = 500
     collection_names: Optional[List[str]] = None
     model: Optional[str] = None
+    image_data: Optional[str] = None  # Add this field for image data
 
 class CollectionQueryInput(BaseModel):
     query: str
@@ -73,9 +74,11 @@ async def query_rag(
             sources=[]
         )
     
-    # Log the model parameter
+    # Log the model parameter and image data
     logger = logging.getLogger(__name__)
     logger.info(f"Received model parameter: {query_input.model}")
+    if query_input.image_data:
+        logger.info(f"Received image data with length: {len(query_input.image_data)}")
     
     # Generate answer using LLM
     result = prompt_manager.generate_answer(
@@ -83,7 +86,8 @@ async def query_rag(
         documents=documents,
         temperature=query_input.temperature,
         max_tokens=query_input.max_tokens,
-        model=query_input.model
+        model=query_input.model,
+        image_data=query_input.image_data  # Pass image_data to generate_answer
     )
     
     # Enhance source information
