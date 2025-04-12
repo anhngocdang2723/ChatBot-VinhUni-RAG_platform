@@ -1,11 +1,13 @@
 import React, { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
-import { FiSend, FiFile, FiChevronDown, FiImage, FiX } from 'react-icons/fi';
+import { FiSend, FiFile, FiChevronDown, FiImage, FiX, FiCamera } from 'react-icons/fi';
 import { useApi } from '../context/ApiContext';
 import ReactMarkdown from 'react-markdown';
 import remarkMath from 'remark-math';
 import rehypeKatex from 'rehype-katex';
 import 'katex/dist/katex.min.css';
+import html2canvas from 'html2canvas';
+import TypingMessage from './TypingMessage';
 
 const ChatContainer = styled.div`
   height: 100%;
@@ -22,6 +24,7 @@ const ChatMessages = styled.div`
   flex-direction: column;
   gap: 1rem;
   background-color: var(--background-color);
+  scroll-behavior: smooth;
 
   &::-webkit-scrollbar {
     width: 6px;
@@ -333,12 +336,88 @@ const MessageImage = styled.img`
   border: 1px solid var(--light-gray);
 `;
 
+const CaptureButton = styled.button`
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s;
+  color: var(--gray);
+  background: none;
+  border: none;
+  position: relative;
+  
+  &:hover {
+    background: var(--light-gray);
+    color: var(--dark-gray);
+  }
+  
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  .shortcut-hint {
+    position: absolute;
+    bottom: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.7rem;
+    white-space: nowrap;
+    color: var(--gray);
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+
+  &:hover .shortcut-hint {
+    opacity: 1;
+  }
+`;
+
 // Maximum image size in bytes (3MB)
 const MAX_IMAGE_SIZE = 3 * 1024 * 1024;
+// Maximum number of messages to keep in chat history
+const MAX_CHAT_HISTORY = 3;
+
+const ScreenCaptureOverlay = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.2);
+  cursor: crosshair;
+  z-index: 9999;
+  display: ${props => props.visible ? 'block' : 'none'};
+`;
+
+const SelectionArea = styled.div`
+  position: absolute;
+  border: 2px solid #0066b3;
+  background: rgba(0, 102, 179, 0.1);
+  pointer-events: none;
+`;
+
+const CaptureInstructions = styled.div`
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: white;
+  padding: 8px 16px;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  font-size: 14px;
+  color: #333;
+  z-index: 10000;
+`;
 
 const ElearningChatInterface = ({ selectedCourse }) => {
   const { queryRag } = useApi();
   const [messages, setMessages] = useState([]);
+  const [chatHistory, setChatHistory] = useState([]);
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [expandedSources, setExpandedSources] = useState({});
@@ -346,11 +425,20 @@ const ElearningChatInterface = ({ selectedCourse }) => {
   const [imagePreview, setImagePreview] = useState(null);
   const [imageError, setImageError] = useState(null);
   const messagesEndRef = useRef(null);
+  const [isCapturing, setIsCapturing] = useState(false);
+  const [selectionStart, setSelectionStart] = useState(null);
+  const [selectionEnd, setSelectionEnd] = useState(null);
+  const [currentSelection, setCurrentSelection] = useState(null);
+  const overlayRef = useRef(null);
+  const mediaStreamRef = useRef(null);
   
   useEffect(() => {
+    setChatHistory([]);
+  }, [selectedCourse]);
+
+  useEffect(() => {
     if (selectedCourse) {
-      // Add initial greeting message with course context
-      setMessages([{
+      const initialMessage = {
         type: 'bot',
         content: `Chào mừng bạn đến với trợ lý học tập cho môn ${selectedCourse.title}! Tôi sẽ tập trung trả lời các câu hỏi liên quan đến:
 - Nội dung bài giảng và tài liệu học tập
@@ -359,8 +447,11 @@ const ElearningChatInterface = ({ selectedCourse }) => {
 - Các vấn đề liên quan đến môn học
 
 Bạn có thể hỏi bất cứ điều gì về môn học này!`,
-        sources: []
-      }]);
+        sources: [],
+        isTyping: true
+      };
+      setMessages([initialMessage]);
+      setChatHistory([{ role: 'assistant', content: initialMessage.content }]);
     }
   }, [selectedCourse]);
 
@@ -434,6 +525,15 @@ Bạn có thể hỏi bất cứ điều gì về môn học này!`,
     setImageError(null);
   };
 
+  // Update chat history with limit
+  const updateChatHistory = (newMessage) => {
+    setChatHistory(prev => {
+      const updatedHistory = [...prev, newMessage];
+      // Keep only the most recent messages up to MAX_CHAT_HISTORY
+      return updatedHistory.slice(-MAX_CHAT_HISTORY);
+    });
+  };
+
   const handleSend = async (e) => {
     e?.preventDefault();
     if ((!input.trim() && !selectedImage) || !selectedCourse) return;
@@ -472,6 +572,9 @@ Bạn có thể hỏi bất cứ điều gì về môn học này!`,
         }
       }
 
+      // Update chat history with user message
+      updateChatHistory({ role: 'user', content: input });
+
       const queryData = {
         query: input,
         collection_names: [selectedCourse.id],
@@ -480,10 +583,7 @@ Bạn có thể hỏi bất cứ điều gì về môn học này!`,
           course_code: selectedCourse.code,
           course_description: selectedCourse.description,
           chapters: selectedCourse.chapters,
-          chat_history: messages.slice(-4).map(msg => ({
-            role: msg.type === 'user' ? 'user' : 'assistant',
-            content: msg.content
-          }))
+          chat_history: chatHistory // This will now contain only the last MAX_CHAT_HISTORY messages
         },
         image_data: processedImage,
         has_image: !!processedImage,
@@ -518,9 +618,11 @@ Your goal is to enhance the student's understanding through clear and informativ
           type: 'bot',
           content: response.answer,
           sources: response.sources || [],
-          is_fallback: response.is_fallback || false
+          is_fallback: response.is_fallback || false,
+          isTyping: true
         };
         setMessages(prev => prev.slice(0, -1).concat(botMessage));
+        updateChatHistory({ role: 'assistant', content: response.answer });
       } else {
         throw new Error('Không nhận được phản hồi từ máy chủ');
       }
@@ -532,9 +634,11 @@ Your goal is to enhance the student's understanding through clear and informativ
         type: 'bot',
         content: `Đã xảy ra lỗi: ${error.message || 'Không thể xử lý yêu cầu của bạn'}. Vui lòng thử lại sau.`,
         sources: [],
-        is_fallback: false
+        is_fallback: false,
+        isTyping: true
       };
       setMessages(prev => prev.slice(0, -1).concat(errorMessage));
+      updateChatHistory({ role: 'assistant', content: errorMessage.content });
     } finally {
       setIsLoading(false);
       setSelectedImage(null);
@@ -557,133 +661,395 @@ Your goal is to enhance the student's understanding through clear and informativ
     }));
   };
 
-  return (
-    <ChatContainer>
-      {selectedCourse && (
-        <CourseContext>
-          <div className="context-header">Môn học: {selectedCourse.title}</div>
-          <div className="context-info">
-            <div>Mã môn: {selectedCourse.code}</div>
-            <div>Giảng viên: {selectedCourse.instructor}</div>
-            <div>Tiến độ: {selectedCourse.progress}</div>
-          </div>
-        </CourseContext>
-      )}
+  // Handle paste events
+  useEffect(() => {
+    const handlePaste = async (e) => {
+      if (!selectedCourse || isLoading) return;
+
+      const items = e.clipboardData.items;
+      let imageFile = null;
+
+      for (let i = 0; i < items.length; i++) {
+        if (items[i].type.indexOf('image') !== -1) {
+          imageFile = items[i].getAsFile();
+          break;
+        }
+      }
+
+      if (imageFile) {
+        try {
+          // Reset any previous errors
+          setImageError(null);
+          
+          // Check file size
+          if (imageFile.size > MAX_IMAGE_SIZE) {
+            setImageError(`Kích thước ảnh quá lớn (tối đa ${MAX_IMAGE_SIZE / (1024 * 1024)}MB)`);
+            return;
+          }
+          
+          setSelectedImage(imageFile);
+          const reader = new FileReader();
+          reader.onloadend = () => {
+            setImagePreview(reader.result);
+          };
+          reader.onerror = () => {
+            setImageError('Không thể đọc tập tin ảnh');
+            setSelectedImage(null);
+          };
+          reader.readAsDataURL(imageFile);
+        } catch (error) {
+          console.error('Error handling pasted image:', error);
+          setImageError('Lỗi xử lý ảnh được dán');
+        }
+      }
+    };
+
+    document.addEventListener('paste', handlePaste);
+    return () => document.removeEventListener('paste', handlePaste);
+  }, [selectedCourse, isLoading]);
+
+  // Handle keyboard shortcuts
+  useEffect(() => {
+    const handleKeyboardShortcut = (e) => {
+      // Check if Ctrl+Shift+S is pressed and component is active
+      if (e.ctrlKey && e.shiftKey && e.key === 'S' && selectedCourse && !isLoading) {
+        e.preventDefault(); // Prevent default browser save action
+        startScreenCapture();
+      }
+    };
+
+    document.addEventListener('keydown', handleKeyboardShortcut);
+    return () => document.removeEventListener('keydown', handleKeyboardShortcut);
+  }, [selectedCourse, isLoading]); // Dependencies for the effect
+
+  // Screen capture functionality
+  const startScreenCapture = async () => {
+    try {
+      // Request screen capture with system picker
+      const stream = await navigator.mediaDevices.getDisplayMedia({
+        video: {
+          cursor: "always"
+        },
+        audio: false
+      });
       
-      <ChatMessages>
-        {messages.map((message, index) => {
-          if (message.type === 'user') {
-            return (
-              <Message key={index} isUser={true}>
-                <MessageContent>
-                  {message.content}
-                  {message.image && (
-                    <MessageImage src={message.image} alt="Uploaded content" />
-                  )}
-                </MessageContent>
-              </Message>
-            );
-          } else if (message.content === 'loading') {
-            return (
-              <Message key={index} isUser={false}>
-                <MessageContent>
-                  <LoadingIndicator>
-                    <div className="loading-spinner" />
-                    <span>Đang xử lý câu hỏi của bạn...</span>
-                  </LoadingIndicator>
-                </MessageContent>
-              </Message>
-            );
-          } else {
-            return (
-              <Message key={index} isUser={false}>
-                <MessageContent>
-                  <div className="markdown-content">
-                    <ReactMarkdown
-                      remarkPlugins={[remarkMath]}
-                      rehypePlugins={[rehypeKatex]}
-                    >
-                      {message.content}
-                    </ReactMarkdown>
-                    {message.is_fallback && (
-                      <div style={{ 
-                        fontSize: '0.8rem', 
-                        color: 'var(--gray)', 
-                        marginTop: '0.5rem',
-                        fontStyle: 'italic'
-                      }}>
-                        (Câu trả lời được tạo bởi AI dựa trên kiến thức chung)
+      mediaStreamRef.current = stream;
+      setIsCapturing(true);
+    } catch (error) {
+      console.error('Error starting screen capture:', error);
+      if (error.name === 'NotAllowedError') {
+        setImageError('Người dùng đã hủy chụp màn hình');
+      } else {
+        setImageError('Lỗi khi bắt đầu chụp màn hình');
+      }
+    }
+  };
+
+  const handleMouseDown = (e) => {
+    if (!isCapturing) return;
+    
+    const overlay = overlayRef.current;
+    if (!overlay) return;
+
+    const rect = overlay.getBoundingClientRect();
+    setSelectionStart({
+      x: e.clientX - rect.left,
+      y: e.clientY - rect.top
+    });
+    setSelectionEnd(null);
+  };
+
+  const handleMouseMove = (e) => {
+    if (!isCapturing || !selectionStart) return;
+    
+    const overlay = overlayRef.current;
+    if (!overlay) return;
+
+    const rect = overlay.getBoundingClientRect();
+    const end = {
+      x: e.clientX - rect.left,
+      y: e.clientY - rect.top
+    };
+    setSelectionEnd(end);
+
+    // Calculate selection rectangle
+    const selection = {
+      left: Math.min(selectionStart.x, end.x),
+      top: Math.min(selectionStart.y, end.y),
+      width: Math.abs(end.x - selectionStart.x),
+      height: Math.abs(end.y - selectionStart.y)
+    };
+    setCurrentSelection(selection);
+  };
+
+  const handleMouseUp = async () => {
+    if (!isCapturing || !selectionStart || !selectionEnd || !currentSelection || !mediaStreamRef.current) {
+      resetCapture();
+      return;
+    }
+
+    try {
+      const stream = mediaStreamRef.current;
+      const video = document.createElement('video');
+      video.srcObject = stream;
+      video.muted = true;
+
+      await video.play();
+
+      // Create canvas for the selected area
+      const canvas = document.createElement('canvas');
+      const context = canvas.getContext('2d');
+      
+      // Set canvas size to selection size
+      canvas.width = currentSelection.width;
+      canvas.height = currentSelection.height;
+      
+      // Calculate the scale factor between video and screen coordinates
+      const track = stream.getVideoTracks()[0];
+      const settings = track.getSettings();
+      const scaleX = settings.width / window.innerWidth;
+      const scaleY = settings.height / window.innerHeight;
+
+      // Draw the selected portion of the video frame to canvas
+      context.drawImage(
+        video,
+        currentSelection.left * scaleX,
+        currentSelection.top * scaleY,
+        currentSelection.width * scaleX,
+        currentSelection.height * scaleY,
+        0,
+        0,
+        currentSelection.width,
+        currentSelection.height
+      );
+      
+      // Convert to blob
+      const blob = await new Promise(resolve => canvas.toBlob(resolve, 'image/jpeg', 0.95));
+      
+      // Stop all tracks
+      stream.getTracks().forEach(track => track.stop());
+      
+      // Create file from blob
+      const file = new File([blob], 'screenshot.jpg', { type: 'image/jpeg' });
+      
+      // Check file size
+      if (file.size > MAX_IMAGE_SIZE) {
+        setImageError(`Kích thước ảnh quá lớn (tối đa ${MAX_IMAGE_SIZE / (1024 * 1024)}MB)`);
+        resetCapture();
+        return;
+      }
+      
+      // Set the captured image
+      setSelectedImage(file);
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setImagePreview(reader.result);
+      };
+      reader.readAsDataURL(file);
+      
+    } catch (error) {
+      console.error('Error capturing screen area:', error);
+      setImageError('Lỗi khi chụp màn hình');
+    }
+    
+    resetCapture();
+  };
+
+  const resetCapture = () => {
+    if (mediaStreamRef.current) {
+      mediaStreamRef.current.getTracks().forEach(track => track.stop());
+      mediaStreamRef.current = null;
+    }
+    setIsCapturing(false);
+    setSelectionStart(null);
+    setSelectionEnd(null);
+    setCurrentSelection(null);
+  };
+
+  // Handle escape key to cancel capture
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape' && isCapturing) {
+        resetCapture();
+      }
+    };
+
+    document.addEventListener('keydown', handleKeyDown);
+    return () => document.removeEventListener('keydown', handleKeyDown);
+  }, [isCapturing]);
+
+  // Clean up media stream on unmount
+  useEffect(() => {
+    return () => {
+      if (mediaStreamRef.current) {
+        mediaStreamRef.current.getTracks().forEach(track => track.stop());
+      }
+    };
+  }, []);
+
+  return (
+    <>
+      <ChatContainer>
+        {selectedCourse && (
+          <CourseContext>
+            <div className="context-header">Môn học: {selectedCourse.title}</div>
+            <div className="context-info">
+              <div>Mã môn: {selectedCourse.code}</div>
+              <div>Giảng viên: {selectedCourse.instructor}</div>
+              <div>Tiến độ: {selectedCourse.progress}</div>
+            </div>
+          </CourseContext>
+        )}
+        
+        <ChatMessages className="chat-messages-container">
+          {messages.map((message, index) => {
+            if (message.type === 'user') {
+              return (
+                <Message key={index} isUser={true}>
+                  <MessageContent>
+                    {message.content}
+                    {message.image && (
+                      <MessageImage src={message.image} alt="Uploaded content" />
+                    )}
+                  </MessageContent>
+                </Message>
+              );
+            } else if (message.content === 'loading') {
+              return (
+                <Message key={index} isUser={false}>
+                  <MessageContent>
+                    <LoadingIndicator>
+                      <div className="loading-spinner" />
+                      <span>Đang xử lý câu hỏi của bạn...</span>
+                    </LoadingIndicator>
+                  </MessageContent>
+                </Message>
+              );
+            } else {
+              return (
+                <Message key={index} isUser={false}>
+                  <MessageContent>
+                    {message.isTyping ? (
+                      <TypingMessage content={message.content} isMath={true} />
+                    ) : (
+                      <div className="markdown-content">
+                        <ReactMarkdown
+                          remarkPlugins={[remarkMath]}
+                          rehypePlugins={[rehypeKatex]}
+                        >
+                          {message.content}
+                        </ReactMarkdown>
+                        {message.is_fallback && (
+                          <div style={{ 
+                            fontSize: '0.8rem', 
+                            color: 'var(--gray)', 
+                            marginTop: '0.5rem',
+                            fontStyle: 'italic'
+                          }}>
+                            (Câu trả lời được tạo bởi AI dựa trên kiến thức chung)
+                          </div>
+                        )}
                       </div>
                     )}
-                  </div>
-                  
-                  {message.sources && message.sources.length > 0 && (
-                    <SourcesContainer>
-                      <SourcesHeader onClick={() => toggleSources(index)}>
-                        <FiChevronDown className={expandedSources[index] ? 'expanded' : ''} />
-                        <span>Nguồn tham khảo ({message.sources.length})</span>
-                      </SourcesHeader>
-                      <SourcesList isExpanded={expandedSources[index]}>
-                        {message.sources.map((source, idx) => (
-                          <SourceItem key={idx}>
-                            <FiFile />
-                            <div>
-                              <div style={{ fontSize: '0.8rem', fontWeight: '500', marginBottom: '2px' }}>
-                                {source.metadata?.original_filename || 'Tài liệu'}
+                    
+                    {message.sources && message.sources.length > 0 && (
+                      <SourcesContainer>
+                        <SourcesHeader onClick={() => toggleSources(index)}>
+                          <FiChevronDown className={expandedSources[index] ? 'expanded' : ''} />
+                          <span>Nguồn tham khảo ({message.sources.length})</span>
+                        </SourcesHeader>
+                        <SourcesList isExpanded={expandedSources[index]}>
+                          {message.sources.map((source, idx) => (
+                            <SourceItem key={idx}>
+                              <FiFile />
+                              <div>
+                                <div style={{ fontSize: '0.8rem', fontWeight: '500', marginBottom: '2px' }}>
+                                  {source.metadata?.original_filename || 'Tài liệu'}
+                                </div>
+                                <SourceText>{source.text}</SourceText>
                               </div>
-                              <SourceText>{source.text}</SourceText>
-                            </div>
-                          </SourceItem>
-                        ))}
-                      </SourcesList>
-                    </SourcesContainer>
-                  )}
-                </MessageContent>
-              </Message>
-            );
-          }
-        })}
-        <div ref={messagesEndRef} />
-      </ChatMessages>
+                            </SourceItem>
+                          ))}
+                        </SourcesList>
+                      </SourcesContainer>
+                    )}
+                  </MessageContent>
+                </Message>
+              );
+            }
+          })}
+          <div ref={messagesEndRef} />
+        </ChatMessages>
 
-      <InputContainer>
-        <InputWrapper>
-          <Input
-            type="text"
-            placeholder="Nhập câu hỏi của bạn..."
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-            onKeyPress={handleKeyPress}
-            disabled={isLoading || !selectedCourse}
-          />
-          <ImageUploadButton>
-            <FiImage size={18} />
-            <input
-              type="file"
-              accept="image/*"
-              onChange={handleImageUpload}
+        <InputContainer>
+          <InputWrapper>
+            <Input
+              type="text"
+              placeholder="Nhập câu hỏi của bạn... (Ctrl+V để dán ảnh)"
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+              onKeyPress={handleKeyPress}
               disabled={isLoading || !selectedCourse}
             />
-          </ImageUploadButton>
-          <SendButton onClick={handleSend} disabled={(!input.trim() && !selectedImage) || isLoading || !selectedCourse || imageError}>
-            <FiSend size={18} />
-          </SendButton>
-        </InputWrapper>
-        {imagePreview && (
-          <ImagePreview>
-            <img src={imagePreview} alt="Preview" />
-            <div className="remove-image" onClick={removeImage}>
-              <FiX size={14} />
+            <CaptureButton
+              onClick={startScreenCapture}
+              disabled={isLoading || !selectedCourse}
+              title="Chụp màn hình (Ctrl+Shift+S)"
+            >
+              <FiCamera size={18} />
+              <span className="shortcut-hint">Ctrl+Shift+S</span>
+            </CaptureButton>
+            <ImageUploadButton>
+              <FiImage size={18} />
+              <input
+                type="file"
+                accept="image/*"
+                onChange={handleImageUpload}
+                disabled={isLoading || !selectedCourse}
+              />
+            </ImageUploadButton>
+            <SendButton onClick={handleSend} disabled={(!input.trim() && !selectedImage) || isLoading || !selectedCourse || imageError}>
+              <FiSend size={18} />
+            </SendButton>
+          </InputWrapper>
+          {imagePreview && (
+            <ImagePreview>
+              <img src={imagePreview} alt="Preview" />
+              <div className="remove-image" onClick={removeImage}>
+                <FiX size={14} />
+              </div>
+            </ImagePreview>
+          )}
+          {imageError && (
+            <div style={{ color: 'red', fontSize: '0.8rem', marginTop: '0.5rem' }}>
+              {imageError}
             </div>
-          </ImagePreview>
+          )}
+        </InputContainer>
+      </ChatContainer>
+
+      <ScreenCaptureOverlay
+        ref={overlayRef}
+        visible={isCapturing}
+        onMouseDown={handleMouseDown}
+        onMouseMove={handleMouseMove}
+        onMouseUp={handleMouseUp}
+      >
+        <CaptureInstructions>
+          Kéo chuột để chọn vùng muốn chụp. Nhấn ESC để hủy.
+        </CaptureInstructions>
+        {currentSelection && (
+          <SelectionArea
+            style={{
+              left: currentSelection.left + 'px',
+              top: currentSelection.top + 'px',
+              width: currentSelection.width + 'px',
+              height: currentSelection.height + 'px'
+            }}
+          />
         )}
-        {imageError && (
-          <div style={{ color: 'red', fontSize: '0.8rem', marginTop: '0.5rem' }}>
-            {imageError}
-          </div>
-        )}
-      </InputContainer>
-    </ChatContainer>
+      </ScreenCaptureOverlay>
+    </>
   );
 };
 

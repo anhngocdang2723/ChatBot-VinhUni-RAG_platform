@@ -5,6 +5,7 @@ from core.retriever import Retriever
 from core.llm_interface import RAGPromptManager, create_llm_provider
 from core.dependencies import get_retriever, get_prompt_manager, get_vector_store
 from core.vector_store import VectorStore
+from core.query_processor import QueryProcessor
 import logging
 
 router = APIRouter()
@@ -18,6 +19,7 @@ class QueryInput(BaseModel):
     collection_names: Optional[List[str]] = None
     model: Optional[str] = None
     image_data: Optional[str] = None  # Add this field for image data
+    context: Optional[Dict[str, Any]] = None  # Add context field for chat history and course info
 
 class CollectionQueryInput(BaseModel):
     query: str
@@ -56,13 +58,20 @@ async def query_rag(
 ) -> QueryResponse:
     """
     Process a RAG query:
-    1. Retrieve relevant documents
-    2. Rerank documents
-    3. Generate answer using LLM
+    1. Preprocess the query
+    2. Retrieve relevant documents
+    3. Rerank documents
+    4. Generate answer using LLM
     """
+    # Preprocess the query
+    processed_query = QueryProcessor.clean_query(query_input.query)
+    logger = logging.getLogger(__name__)
+    logger.info(f"Original query: {query_input.query}")
+    logger.info(f"Processed query: {processed_query}")
+    
     # Get relevant documents (optionally from multiple collections)
     documents = retriever.query(
-        query=query_input.query,
+        query=processed_query,
         top_k=query_input.top_k,
         top_n=query_input.top_n,
         collection_names=query_input.collection_names
@@ -75,19 +84,21 @@ async def query_rag(
         )
     
     # Log the model parameter and image data
-    logger = logging.getLogger(__name__)
     logger.info(f"Received model parameter: {query_input.model}")
     if query_input.image_data:
         logger.info(f"Received image data with length: {len(query_input.image_data)}")
+    if query_input.context:
+        logger.info(f"Received context with chat history length: {len(query_input.context.get('chat_history', []))}")
     
     # Generate answer using LLM
     result = prompt_manager.generate_answer(
-        query=query_input.query,
+        query=processed_query,
         documents=documents,
         temperature=query_input.temperature,
         max_tokens=query_input.max_tokens,
         model=query_input.model,
-        image_data=query_input.image_data  # Pass image_data to generate_answer
+        image_data=query_input.image_data,
+        context=query_input.context
     )
     
     # Enhance source information

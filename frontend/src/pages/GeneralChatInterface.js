@@ -5,6 +5,7 @@ import UserLayout from '../components/UserLayout';
 import { useApi } from '../context/ApiContext';
 import { checkSpecialQuery } from '../utils/specialQueries';
 import ReactMarkdown from 'react-markdown';
+import TypingMessage from '../components/TypingMessage';
 
 const PageContainer = styled.div`
   padding: ${props => props.isEmbedded ? '0' : 'var(--spacing-lg)'};
@@ -137,6 +138,7 @@ const ChatMessages = styled.div`
   padding: var(--spacing-lg);
   overflow-y: auto;
   background-color: var(--background-color);
+  scroll-behavior: smooth;
 
   &::-webkit-scrollbar {
     width: 6px;
@@ -624,7 +626,8 @@ const GeneralChatInterface = () => {
     setMessages([{
       type: 'bot',
       content: 'Xin chào! Tôi là trợ lý AI của Trường Đại học Vinh. Tôi có thể giúp bạn trả lời các câu hỏi về trường. Hãy đặt câu hỏi của bạn, tôi sẽ tìm kiếm thông tin trong tài liệu của trường để trả lời bạn một cách chính xác nhất.',
-      sources: []
+      sources: [],
+      isTyping: true
     }]);
   }, []);
   
@@ -679,7 +682,8 @@ const GeneralChatInterface = () => {
       const botMessage = {
         type: 'bot',
         content: specialQueryCheck.response,
-        sources: []
+        sources: [],
+        isTyping: true
       };
       setMessages(prev => prev.slice(0, -1).concat(botMessage));
       scrollToBottom();
@@ -707,14 +711,16 @@ const GeneralChatInterface = () => {
       const botMessage = {
         type: 'bot',
         content: response.answer,
-        sources: response.sources
+        sources: response.sources,
+        isTyping: true
       };
       setMessages(prev => prev.slice(0, -1).concat(botMessage));
     } else {
       const errorMessage = {
         type: 'bot',
         content: 'Rất tiếc, đã xảy ra lỗi khi xử lý yêu cầu của bạn.',
-        sources: []
+        sources: [],
+        isTyping: true
       };
       setMessages(prev => prev.slice(0, -1).concat(errorMessage));
     }
@@ -763,7 +769,7 @@ const GeneralChatInterface = () => {
           <SidebarOverlay isOpen={isSidebarOpen} onClick={toggleSidebar} />
           
           <MainChat>
-            <ChatMessages>
+            <ChatMessages className="chat-messages-container">
               {messages.length > 0 ? (
                 messages.map((message, index) => {
                   if (message.type === 'user') {
@@ -789,9 +795,13 @@ const GeneralChatInterface = () => {
                     return (
                       <BotMessage key={index}>
                         <MessageContent className="message-content">
-                          <div className="markdown-content">
-                            <ReactMarkdown>{message.content}</ReactMarkdown>
-                          </div>
+                          {message.isTyping ? (
+                            <TypingMessage content={message.content} />
+                          ) : (
+                            <div className="markdown-content">
+                              <ReactMarkdown>{message.content}</ReactMarkdown>
+                            </div>
+                          )}
                           
                           {message.sources && message.sources.length > 0 && (
                             <SourcesContainer>

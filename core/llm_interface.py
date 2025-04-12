@@ -96,7 +96,7 @@ class RAGPromptManager:
             }
         ]
 
-    def _create_prompt(self, query: str, documents: List[Dict[str, Any]]) -> str:
+    def _create_prompt(self, query: str, documents: List[Dict[str, Any]], context: Optional[Dict[str, Any]] = None) -> str:
         """
         Create an advanced prompt in English for the LLM using the query and retrieved documents,
         specifying it's a chatbot for Vinh University, and instructing it to provide a 
@@ -105,7 +105,10 @@ class RAGPromptManager:
         Args:
             query: User's question (will be included in the prompt)
             documents: List of retrieved documents with text and metadata
+            context: Optional dictionary containing chat history and course info
         """
+        # Maximum number of chat history messages to include in prompt
+        MAX_HISTORY_IN_PROMPT = 3
 
         # --- English Prompt Construction ---
 
@@ -122,6 +125,30 @@ class RAGPromptManager:
         prompt += "\n- Explanation of mathematical formulas, scientific concepts, and technical diagrams"
         prompt += "\n- Interpretation of graphs, tables, and data visualizations"
         prompt += "\n\nYou can answer based on both provided context documents, your general knowledge about education, and any visual content provided. Your final answer *must* be in Vietnamese."
+
+        # Add course context if available
+        if context:
+            prompt += "\n\n<course_context>"
+            if "course_title" in context:
+                prompt += f"\nCourse Title: {context['course_title']}"
+            if "course_code" in context:
+                prompt += f"\nCourse Code: {context['course_code']}"
+            if "course_description" in context:
+                prompt += f"\nCourse Description: {context['course_description']}"
+            prompt += "\n</course_context>"
+
+        # Add chat history if available, limiting to most recent messages
+        if context and "chat_history" in context:
+            chat_history = context["chat_history"]
+            if len(chat_history) > 0:
+                prompt += "\n\n<chat_history>"
+                prompt += "\nRecent conversation context:"
+                # Take only the most recent messages up to MAX_HISTORY_IN_PROMPT
+                recent_history = chat_history[-MAX_HISTORY_IN_PROMPT:]
+                for msg in recent_history:
+                    role = "User" if msg["role"] == "user" else "Assistant"
+                    prompt += f"\n{role}: {msg['content']}"
+                prompt += "\n</chat_history>"
 
         # Context Section
         prompt += "\n\n<context>"
@@ -151,7 +178,8 @@ class RAGPromptManager:
         prompt += "\n3. If the question is about education, academic matters, or educational content analysis:"
         prompt += "\n   a. If relevant documents are provided, prioritize using information from those documents."
         prompt += "\n   b. If no documents are provided or if the documents don't contain the answer, you may use your general knowledge about education to provide a reasonable answer."
-        prompt += "\n   c. If the question involves visual content (images, diagrams, etc.):"
+        prompt += "\n   c. Consider the chat history to maintain context and provide consistent answers."
+        prompt += "\n   d. If the question involves visual content (images, diagrams, etc.):"
         prompt += "\n      - Analyze the visual elements and their educational significance"
         prompt += "\n      - Explain how the visual content relates to the course material"
         prompt += "\n      - Provide clear and detailed explanations of any technical or academic concepts shown"
@@ -174,7 +202,8 @@ class RAGPromptManager:
         temperature: float = 0.1,
         max_tokens: int = 500,
         model: str = None,
-        image_data: Optional[str] = None
+        image_data: Optional[str] = None,
+        context: Optional[Dict[str, Any]] = None
     ) -> Dict[str, Any]:
         """
         Generate an answer using the LLM based on retrieved documents and/or image.
@@ -186,6 +215,7 @@ class RAGPromptManager:
             max_tokens: Maximum tokens in response
             model: Model to use (overrides provider's default model)
             image_data: Optional base64 encoded image data
+            context: Optional dictionary containing chat history and course info
             
         Returns:
             Dictionary containing the answer and source information
@@ -227,42 +257,64 @@ class RAGPromptManager:
             
             # Handle text-based query
             logger.info("Processing text-based query")
-            prompt = self._create_prompt(query, documents)
+            prompt = self._create_prompt(query, documents, context)
             logger.info(f"Created prompt with query: {query}")
             
             # Call appropriate API based on provider
             if current_provider == "openai":
                 logger.info("Using OpenAI API")
+                messages = [
+                    {
+                        "role": "system",
+                        "content": "Bạn là một trợ lý AI thông minh, nhiệm vụ của bạn là trả lời câu hỏi dựa trên các tài liệu được cung cấp một cách chính xác và đầy đủ."
+                    }
+                ]
+                
+                # Add chat history if available
+                if context and "chat_history" in context:
+                    for msg in context["chat_history"]:
+                        messages.append({
+                            "role": msg["role"],
+                            "content": msg["content"]
+                        })
+                
+                messages.append({
+                    "role": "user",
+                    "content": prompt
+                })
+                
                 response = client.chat.completions.create(
                     model="gpt-3.5-turbo",
-                    messages=[
-                        {
-                            "role": "system",
-                            "content": "Bạn là một trợ lý AI thông minh, nhiệm vụ của bạn là trả lời câu hỏi dựa trên các tài liệu được cung cấp một cách chính xác và đầy đủ."
-                        },
-                        {
-                            "role": "user",
-                            "content": prompt
-                        }
-                    ],
+                    messages=messages,
                     temperature=temperature,
                     max_tokens=max_tokens
                 )
                 answer = response.choices[0].message.content
             elif current_provider == "deepseek":
                 logger.info("Using Deepseek API")
+                messages = [
+                    {
+                        "role": "system",
+                        "content": "Bạn là một trợ lý AI thông minh, nhiệm vụ của bạn là trả lời câu hỏi dựa trên các tài liệu được cung cấp một cách chính xác và đầy đủ. Luôn trả lời bằng tiếng Việt."
+                    }
+                ]
+                
+                # Add chat history if available
+                if context and "chat_history" in context:
+                    for msg in context["chat_history"]:
+                        messages.append({
+                            "role": msg["role"],
+                            "content": msg["content"]
+                        })
+                
+                messages.append({
+                    "role": "user",
+                    "content": prompt
+                })
+                
                 response = client.chat.completions.create(
                     model="deepseek-chat",
-                    messages=[
-                        {
-                            "role": "system",
-                            "content": "Bạn là một trợ lý AI thông minh, nhiệm vụ của bạn là trả lời câu hỏi dựa trên các tài liệu được cung cấp một cách chính xác và đầy đủ. Luôn trả lời bằng tiếng Việt."
-                        },
-                        {
-                            "role": "user",
-                            "content": prompt
-                        }
-                    ],
+                    messages=messages,
                     temperature=temperature,
                     max_tokens=max_tokens,
                     stream=False
@@ -270,18 +322,29 @@ class RAGPromptManager:
                 answer = response.choices[0].message.content
             else:  # grok
                 logger.info("Using Grok API")
+                messages = [
+                    {
+                        "role": "system",
+                        "content": "Bạn là một trợ lý AI thông minh, nhiệm vụ của bạn là trả lời câu hỏi dựa trên các tài liệu được cung cấp một cách chính xác và đầy đủ. Luôn trả lời bằng tiếng Việt."
+                    }
+                ]
+                
+                # Add chat history if available
+                if context and "chat_history" in context:
+                    for msg in context["chat_history"]:
+                        messages.append({
+                            "role": msg["role"],
+                            "content": msg["content"]
+                        })
+                
+                messages.append({
+                    "role": "user",
+                    "content": prompt
+                })
+                
                 response = client.chat.completions.create(
-                    model="grok-3-beta", #Stable version: grok-2-latest #Image Understanding: grok-2-vision-latest #New version: grok-3-beta
-                    messages=[
-                        {
-                            "role": "system",
-                            "content": "Bạn là một trợ lý AI thông minh, nhiệm vụ của bạn là trả lời câu hỏi dựa trên các tài liệu được cung cấp một cách chính xác và đầy đủ. Luôn trả lời bằng tiếng Việt."
-                        },
-                        {
-                            "role": "user",
-                            "content": prompt
-                        }
-                    ],
+                    model="grok-3-beta",
+                    messages=messages,
                     temperature=temperature,
                     max_tokens=max_tokens
                 )

@@ -370,7 +370,7 @@ const CoursePage = () => {
   
   console.log('courseId:', courseId);
   console.log('courseData:', courseData);
-  const course = courseData[courseId];
+  const course = courseData.find(courseObj => courseObj[courseId])?.[courseId];
   console.log('course:', course);
 
   if (!course) {
