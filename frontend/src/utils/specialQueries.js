@@ -56,7 +56,6 @@ const SPECIAL_QUERIES = {
       /chào bạn/i,
       /hello/i,
       /hi bot/i,
-      /bắt đầu/i,
       /start/i
     ],
     response: "👋 Xin chào bạn! Tôi là trợ lý ảo của Trường Đại học Vinh. Bạn muốn tôi giúp gì hôm nay? 📚"

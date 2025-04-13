@@ -131,12 +131,14 @@ const Avatar = styled.div`
 const MessageContent = styled.div`
   background: ${props => props.isUser ? VINH_COLORS.lightBlue : VINH_COLORS.gray};
   padding: var(--spacing-md);
-  border-radius: ${props => props.isUser ? 'var(--radius-lg) var(--radius-lg) 0 var(--radius-lg)' : 'var(--radius-lg) var(--radius-lg) var(--radius-lg) 0'};
+  border-radius: var(--radius-lg);
   max-width: 70%;
   color: ${VINH_COLORS.text};
   line-height: 1.6;
   font-size: 0.95rem;
   order: ${props => props.isUser ? 1 : 0};
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  border: 1px solid ${props => props.isUser ? 'rgba(37, 99, 235, 0.1)' : 'rgba(0, 0, 0, 0.05)'};
 
   pre {
     background: ${VINH_COLORS.white};
