@@ -6,20 +6,21 @@ import { courseData } from '../config/courseData';
 import { ElearningHeader, ElearningFooter } from '../components/ElearningLayout';
 import { useApi } from '../context/ApiContext';
 import { toast } from 'react-toastify';
+import { VINH_COLORS } from '../config/colors';
 
 const PageContainer = styled.div`
   min-height: 100vh;
-  background-color: #f8fafc;
+  background-color: ${VINH_COLORS.backgroundAlt};
   display: flex;
   flex-direction: column;
 `;
 
 const CourseHeader = styled.div`
-  background: white;
+  background: ${VINH_COLORS.white};
   padding: 1.5rem 0;
-  border-bottom: 1px solid #e2e8f0;
+  border-bottom: 1px solid ${VINH_COLORS.border};
   margin-bottom: 2rem;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 4px 12px ${VINH_COLORS.shadow};
 
   .content {
     max-width: 1200px;
@@ -28,24 +29,27 @@ const CourseHeader = styled.div`
   }
 
   .breadcrumb {
-    color: #64748b;
+    color: ${VINH_COLORS.textLight};
     font-size: 0.875rem;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.75rem;
     display: flex;
     align-items: center;
     gap: 0.5rem;
 
     a {
-      color: #0066b3;
+      color: ${VINH_COLORS.primary};
       text-decoration: none;
+      transition: all 0.3s ease;
+      
       &:hover {
+        color: ${VINH_COLORS.primaryDark};
         text-decoration: underline;
       }
     }
   }
 
   h1 {
-    color: #1e293b;
+    color: ${VINH_COLORS.text};
     font-size: 1.75rem;
     margin: 0;
     margin-bottom: 1rem;
@@ -55,7 +59,7 @@ const CourseHeader = styled.div`
   .course-info {
     display: flex;
     gap: 2rem;
-    color: #64748b;
+    color: ${VINH_COLORS.textLight};
     font-size: 0.875rem;
 
     span {
@@ -63,13 +67,19 @@ const CourseHeader = styled.div`
       align-items: center;
       gap: 0.5rem;
       padding: 0.5rem 1rem;
-      background: #f8fafc;
-      border-radius: 6px;
-      transition: all 0.2s;
+      background: ${VINH_COLORS.backgroundAlt};
+      border-radius: 8px;
+      transition: all 0.3s ease;
+      border: 1px solid ${VINH_COLORS.border};
 
       &:hover {
-        background: #f1f5f9;
-        color: #0066b3;
+        background: ${VINH_COLORS.lightGray};
+        color: ${VINH_COLORS.primary};
+        transform: translateY(-2px);
+      }
+      
+      svg {
+        color: ${VINH_COLORS.primary};
       }
     }
   }
@@ -89,54 +99,63 @@ const MainContent = styled.div`
 `;
 
 const ContentSection = styled.div`
-  background: white;
-  border-radius: 8px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  background: ${VINH_COLORS.white};
+  border-radius: 12px;
+  box-shadow: 0 4px 12px ${VINH_COLORS.shadow};
   overflow: hidden;
   margin-bottom: 1.5rem;
+  border: 1px solid ${VINH_COLORS.border};
+  transition: all 0.3s ease;
+
+  &:hover {
+    box-shadow: 0 6px 16px ${VINH_COLORS.shadowDark};
+  }
 `;
 
 const SectionHeader = styled.div`
-  padding: 1rem;
-  background: #f8fafc;
-  border-bottom: 1px solid #e2e8f0;
+  padding: 1.25rem;
+  background: ${VINH_COLORS.backgroundAlt};
+  border-bottom: 1px solid ${VINH_COLORS.border};
   font-weight: 500;
-  color: #1e293b;
+  color: ${VINH_COLORS.text};
   display: flex;
   justify-content: space-between;
   align-items: center;
 
   .actions {
     display: flex;
-    gap: 0.5rem;
+    gap: 0.75rem;
   }
 
   button {
-    padding: 0.5rem 1rem;
+    padding: 0.75rem 1.25rem;
     border: none;
-    border-radius: 4px;
+    border-radius: 8px;
     cursor: pointer;
     font-weight: 500;
-    transition: all 0.2s;
+    transition: all 0.3s ease;
     display: flex;
     align-items: center;
     gap: 0.5rem;
+    font-size: 0.95rem;
 
     &.primary {
-      background-color: #0066b3;
-      color: white;
+      background-color: ${VINH_COLORS.primary};
+      color: ${VINH_COLORS.white};
 
       &:hover {
-        background-color: #005291;
+        background-color: ${VINH_COLORS.primaryDark};
+        transform: translateY(-2px);
       }
     }
 
     &.secondary {
-      background-color: #f0f0f0;
-      color: #333;
+      background-color: ${VINH_COLORS.backgroundAlt};
+      color: ${VINH_COLORS.text};
 
       &:hover {
-        background-color: #e0e0e0;
+        background-color: ${VINH_COLORS.lightGray};
+        transform: translateY(-2px);
       }
     }
   }
@@ -144,7 +163,7 @@ const SectionHeader = styled.div`
 
 const ChapterList = styled.div`
   .chapter {
-    border-bottom: 1px solid #e2e8f0;
+    border-bottom: 1px solid ${VINH_COLORS.border};
     
     &:last-child {
       border-bottom: none;
@@ -153,77 +172,81 @@ const ChapterList = styled.div`
 `;
 
 const ChapterHeader = styled.div`
-  padding: 1rem;
+  padding: 1.25rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
   cursor: pointer;
-  transition: all 0.2s;
-  border-radius: 6px;
+  transition: all 0.3s ease;
+  border-radius: 8px;
 
   &:hover {
-    background-color: #f8fafc;
+    background-color: ${VINH_COLORS.backgroundAlt};
   }
 
   .chapter-info {
     h3 {
       margin: 0;
-      font-size: 1rem;
+      font-size: 1.1rem;
       font-weight: 500;
-      color: #1e293b;
-      margin-bottom: 0.25rem;
+      color: ${VINH_COLORS.text};
+      margin-bottom: 0.5rem;
       display: flex;
       align-items: center;
       gap: 0.5rem;
 
       .chapter-number {
-        background: #0066b3;
-        color: white;
-        width: 24px;
-        height: 24px;
+        background: ${VINH_COLORS.primary};
+        color: ${VINH_COLORS.white};
+        width: 28px;
+        height: 28px;
         border-radius: 50%;
         display: flex;
         align-items: center;
         justify-content: center;
         font-size: 0.875rem;
+        font-weight: 600;
       }
     }
 
     .description {
       font-size: 0.875rem;
-      color: #64748b;
+      color: ${VINH_COLORS.textLight};
     }
   }
 
   .chapter-actions {
     display: flex;
-    gap: 0.5rem;
+    gap: 0.75rem;
 
     button {
       padding: 0.5rem;
       border: none;
-      border-radius: 4px;
+      border-radius: 8px;
       cursor: pointer;
-      transition: all 0.2s;
+      transition: all 0.3s ease;
       display: flex;
       align-items: center;
       justify-content: center;
 
       &.edit {
-        background-color: #f0f0f0;
-        color: #333;
+        background-color: ${VINH_COLORS.backgroundAlt};
+        color: ${VINH_COLORS.text};
 
         &:hover {
-          background-color: #e0e0e0;
+          background-color: ${VINH_COLORS.lightGray};
+          transform: translateY(-2px);
         }
       }
 
       &.delete {
-        background-color: #fee2e2;
-        color: #dc2626;
+        background-color: ${VINH_COLORS.errorLight};
+        color: ${VINH_COLORS.error};
 
         &:hover {
-          background-color: #fecaca;
+          background-color: ${VINH_COLORS.error};
+          color: ${VINH_COLORS.white};
+          transform: translateY(-2px);
         }
       }
     }
@@ -231,24 +254,26 @@ const ChapterHeader = styled.div`
 `;
 
 const MaterialList = styled.div`
-  padding: 0 1rem 1rem 3.5rem;
+  padding: 0 1rem 1.25rem 3.5rem;
 
   .material-item {
     display: flex;
     align-items: center;
     gap: 0.75rem;
     padding: 0.75rem;
-    color: #64748b;
+    color: ${VINH_COLORS.textLight};
     font-size: 0.875rem;
     cursor: pointer;
-    border-radius: 6px;
-    transition: all 0.2s;
+    border-radius: 8px;
+    transition: all 0.3s ease;
     text-decoration: none;
+    border: 1px solid transparent;
 
     &:hover {
-      background: #f1f5f9;
-      color: #0066b3;
-      border-color: #e2e8f0;
+      background: ${VINH_COLORS.backgroundAlt};
+      color: ${VINH_COLORS.primary};
+      border-color: ${VINH_COLORS.border};
+      transform: translateX(4px);
     }
 
     .material-icon {
@@ -257,15 +282,15 @@ const MaterialList = styled.div`
       justify-content: center;
       width: 32px;
       height: 32px;
-      background: #f8fafc;
-      border-radius: 6px;
-      color: #0066b3;
-      transition: all 0.2s;
+      background: ${VINH_COLORS.backgroundAlt};
+      border-radius: 8px;
+      color: ${VINH_COLORS.primary};
+      transition: all 0.3s ease;
     }
 
     &:hover .material-icon {
-      background: #0066b3;
-      color: white;
+      background: ${VINH_COLORS.primary};
+      color: ${VINH_COLORS.white};
     }
 
     .material-actions {
@@ -276,28 +301,31 @@ const MaterialList = styled.div`
       button {
         padding: 0.5rem;
         border: none;
-        border-radius: 4px;
+        border-radius: 8px;
         cursor: pointer;
-        transition: all 0.2s;
+        transition: all 0.3s ease;
         display: flex;
         align-items: center;
         justify-content: center;
 
         &.edit {
-          background-color: #f0f0f0;
-          color: #333;
+          background-color: ${VINH_COLORS.backgroundAlt};
+          color: ${VINH_COLORS.text};
 
           &:hover {
-            background-color: #e0e0e0;
+            background-color: ${VINH_COLORS.lightGray};
+            transform: translateY(-2px);
           }
         }
 
         &.delete {
-          background-color: #fee2e2;
-          color: #dc2626;
+          background-color: ${VINH_COLORS.errorLight};
+          color: ${VINH_COLORS.error};
 
           &:hover {
-            background-color: #fecaca;
+            background-color: ${VINH_COLORS.error};
+            color: ${VINH_COLORS.white};
+            transform: translateY(-2px);
           }
         }
       }
@@ -317,8 +345,8 @@ const SidebarCard = styled(ContentSection)`
 
 const AnnouncementList = styled.div`
   .announcement {
-    padding: 1rem;
-    border-bottom: 1px solid #e2e8f0;
+    padding: 1.25rem;
+    border-bottom: 1px solid ${VINH_COLORS.border};
 
     &:last-child {
       border-bottom: none;
@@ -326,51 +354,55 @@ const AnnouncementList = styled.div`
 
     .title {
       font-weight: 500;
-      color: #1e293b;
-      margin-bottom: 0.25rem;
+      color: ${VINH_COLORS.text};
+      margin-bottom: 0.5rem;
     }
 
     .content {
       font-size: 0.875rem;
-      color: #64748b;
-      margin-bottom: 0.5rem;
+      color: ${VINH_COLORS.textLight};
+      margin-bottom: 0.75rem;
+      line-height: 1.5;
     }
 
     .date {
       font-size: 0.75rem;
-      color: #94a3b8;
+      color: ${VINH_COLORS.textLighter};
     }
 
     .announcement-actions {
       display: flex;
-      gap: 0.5rem;
-      margin-top: 0.5rem;
+      gap: 0.75rem;
+      margin-top: 0.75rem;
 
       button {
         padding: 0.5rem;
         border: none;
-        border-radius: 4px;
+        border-radius: 8px;
         cursor: pointer;
-        transition: all 0.2s;
+        transition: all 0.3s ease;
         display: flex;
         align-items: center;
         justify-content: center;
 
         &.edit {
-          background-color: #f0f0f0;
-          color: #333;
+          background-color: ${VINH_COLORS.backgroundAlt};
+          color: ${VINH_COLORS.text};
 
           &:hover {
-            background-color: #e0e0e0;
+            background-color: ${VINH_COLORS.lightGray};
+            transform: translateY(-2px);
           }
         }
 
         &.delete {
-          background-color: #fee2e2;
-          color: #dc2626;
+          background-color: ${VINH_COLORS.errorLight};
+          color: ${VINH_COLORS.error};
 
           &:hover {
-            background-color: #fecaca;
+            background-color: ${VINH_COLORS.error};
+            color: ${VINH_COLORS.white};
+            transform: translateY(-2px);
           }
         }
       }
@@ -392,13 +424,15 @@ const Modal = styled.div`
 `;
 
 const ModalContent = styled.div`
-  background: white;
+  background: ${VINH_COLORS.white};
   padding: 2rem;
-  border-radius: 8px;
+  border-radius: 12px;
   width: 90%;
   max-width: 600px;
   max-height: 90vh;
   overflow-y: auto;
+  box-shadow: 0 8px 24px ${VINH_COLORS.shadowDark};
+  border: 1px solid ${VINH_COLORS.border};
 `;
 
 const ModalHeader = styled.div`
@@ -406,9 +440,14 @@ const ModalHeader = styled.div`
   justify-content: space-between;
   align-items: center;
   margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid ${VINH_COLORS.border};
 
   h2 {
     margin: 0;
+    color: ${VINH_COLORS.text};
+    font-weight: 600;
+    font-size: 1.5rem;
   }
 
   button {
@@ -420,30 +459,50 @@ const ModalHeader = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #64748b;
+    color: ${VINH_COLORS.textLight};
+    transition: all 0.3s ease;
 
     &:hover {
-      color: #dc2626;
+      color: ${VINH_COLORS.error};
+      transform: rotate(90deg);
     }
   }
 `;
 
 const UploadArea = styled.div`
-  border: 2px dashed #e2e8f0;
-  border-radius: 8px;
+  border: 2px dashed ${VINH_COLORS.border};
+  border-radius: 12px;
   padding: 2rem;
   text-align: center;
   cursor: pointer;
   margin-bottom: 1.5rem;
-  transition: all 0.2s;
+  transition: all 0.3s ease;
+  background-color: ${VINH_COLORS.backgroundAlt};
 
   &:hover {
-    border-color: #0066b3;
-    background-color: rgba(0, 102, 179, 0.05);
+    border-color: ${VINH_COLORS.primary};
+    background-color: ${VINH_COLORS.white};
   }
 
   input {
     display: none;
+  }
+  
+  svg {
+    font-size: 2.5rem;
+    color: ${VINH_COLORS.primary};
+    margin-bottom: 1rem;
+  }
+  
+  p {
+    color: ${VINH_COLORS.text};
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+  }
+  
+  .file-types {
+    color: ${VINH_COLORS.textLight};
+    font-size: 0.875rem;
   }
 `;
 
@@ -454,22 +513,31 @@ const FileList = styled.div`
 const FileItem = styled.div`
   display: flex;
   align-items: center;
-  padding: 0.5rem;
-  background: #f8fafc;
-  border-radius: 4px;
-  margin-bottom: 0.5rem;
+  padding: 0.75rem;
+  background: ${VINH_COLORS.backgroundAlt};
+  border-radius: 8px;
+  margin-bottom: 0.75rem;
+  border: 1px solid ${VINH_COLORS.border};
+  transition: all 0.3s ease;
+
+  &:hover {
+    background: ${VINH_COLORS.white};
+    transform: translateX(4px);
+  }
 
   .file-icon {
-    margin-right: 0.5rem;
-    color: #0066b3;
+    margin-right: 0.75rem;
+    color: ${VINH_COLORS.primary};
   }
 
   .file-name {
     flex: 1;
+    color: ${VINH_COLORS.text};
+    font-weight: 500;
   }
 
   .file-size {
-    color: #64748b;
+    color: ${VINH_COLORS.textLight};
     font-size: 0.875rem;
     margin-right: 1rem;
   }
@@ -478,11 +546,13 @@ const FileItem = styled.div`
     padding: 0.25rem;
     background: none;
     border: none;
-    color: #dc2626;
+    color: ${VINH_COLORS.error};
     cursor: pointer;
+    transition: all 0.3s ease;
 
     &:hover {
-      color: #b91c1c;
+      color: ${VINH_COLORS.errorDark};
+      transform: scale(1.1);
     }
   }
 `;
@@ -490,7 +560,7 @@ const FileItem = styled.div`
 const ProgressBar = styled.div`
   width: 100%;
   height: 8px;
-  background-color: #e2e8f0;
+  background-color: ${VINH_COLORS.backgroundAlt};
   border-radius: 4px;
   overflow: hidden;
   margin-top: 1rem;
@@ -499,23 +569,25 @@ const ProgressBar = styled.div`
 const ProgressFill = styled.div`
   width: ${props => props.progress}%;
   height: 100%;
-  background-color: #0066b3;
+  background-color: ${VINH_COLORS.primary};
   transition: width 0.3s ease;
 `;
 
 const StatusMessage = styled.div`
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  margin-top: 0.5rem;
+  gap: 0.75rem;
+  margin-top: 0.75rem;
   color: ${props => {
     switch (props.status) {
-      case 'success': return '#059669';
-      case 'error': return '#dc2626';
-      case 'processing': return '#0066b3';
-      default: return '#64748b';
+      case 'success': return VINH_COLORS.success;
+      case 'error': return VINH_COLORS.error;
+      case 'processing': return VINH_COLORS.primary;
+      default: return VINH_COLORS.textLight;
     }
   }};
+  font-size: 0.875rem;
+  font-weight: 500;
 
   svg {
     ${props => props.status === 'processing' && `
@@ -524,6 +596,52 @@ const StatusMessage = styled.div`
         100% { transform: rotate(360deg); }
       }
     `}
+  }
+`;
+
+const ModalActions = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  margin-top: 1.5rem;
+  
+  button {
+    padding: 0.75rem 1.25rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.95rem;
+    
+    &.cancel {
+      background-color: ${VINH_COLORS.backgroundAlt};
+      color: ${VINH_COLORS.text};
+      
+      &:hover {
+        background-color: ${VINH_COLORS.lightGray};
+        transform: translateY(-2px);
+      }
+    }
+    
+    &.upload {
+      background-color: ${VINH_COLORS.primary};
+      color: ${VINH_COLORS.white};
+      
+      &:hover {
+        background-color: ${VINH_COLORS.primaryDark};
+        transform: translateY(-2px);
+      }
+      
+      &:disabled {
+        background-color: ${VINH_COLORS.lightGray};
+        cursor: not-allowed;
+        transform: none;
+      }
+    }
   }
 `;
 
@@ -668,7 +786,7 @@ const LecturerCoursePage = () => {
 
   return (
     <PageContainer>
-      <ElearningHeader />
+      <ElearningHeader userRole="lecturer" />
       
       <CourseHeader>
         <div className="content">
@@ -788,12 +906,12 @@ const LecturerCoursePage = () => {
                   <ChapterHeader>
                     <div className="chapter-info">
                       <h3>
-                        <FiBookOpen size={20} style={{ color: '#0066b3' }} />
+                        <FiBookOpen size={20} style={{ color: VINH_COLORS.primary }} />
                         {exercise.title}
                       </h3>
                       <div className="description">
                         {exercise.description}
-                        <div style={{ color: '#ef4444', marginTop: '0.5rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                        <div style={{ color: VINH_COLORS.error, marginTop: '0.5rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                           <FiClock size={14} />
                           Hạn nộp: {new Date(exercise.dueDate).toLocaleString('vi-VN')}
                         </div>
@@ -894,9 +1012,9 @@ const LecturerCoursePage = () => {
                 onChange={handleFilesChange}
                 accept=".pdf,.docx,.txt,.md,.csv"
               />
-              <FiUpload size={32} style={{ marginBottom: '1rem', color: '#0066b3' }} />
+              <FiUpload size={32} />
               <p>Kéo và thả tài liệu vào đây, hoặc nhấp để chọn</p>
-              <p style={{ fontSize: '0.875rem', color: '#64748b', marginTop: '0.5rem' }}>
+              <p className="file-types">
                 Định dạng hỗ trợ: PDF, DOCX, TXT, MD, CSV
               </p>
             </UploadArea>
@@ -936,12 +1054,12 @@ const LecturerCoursePage = () => {
               </>
             )}
 
-            <div style={{ marginTop: '1.5rem', display: 'flex', justifyContent: 'flex-end', gap: '0.5rem' }}>
-              <button className="secondary" onClick={() => setShowUploadModal(false)}>
+            <ModalActions>
+              <button className="cancel" onClick={() => setShowUploadModal(false)}>
                 Hủy
               </button>
               <button
-                className="primary"
+                className="upload"
                 onClick={handleUpload}
                 disabled={selectedFiles.length === 0 || uploadStatus?.status === 'processing'}
               >
@@ -957,7 +1075,7 @@ const LecturerCoursePage = () => {
                   </>
                 )}
               </button>
-            </div>
+            </ModalActions>
           </ModalContent>
         </Modal>
       )}

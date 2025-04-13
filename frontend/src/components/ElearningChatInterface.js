@@ -9,22 +9,26 @@ import 'katex/dist/katex.min.css';
 import '../styles/katex.css';
 import html2canvas from 'html2canvas';
 import TypingMessage from './TypingMessage';
+import { VINH_COLORS } from '../config/colors';
 
 const ChatContainer = styled.div`
   height: 100%;
   display: flex;
   flex-direction: column;
-  background: #ffffff;
+  background: ${VINH_COLORS.white};
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px ${VINH_COLORS.shadow};
 `;
 
 const ChatMessages = styled.div`
   flex: 1;
   overflow-y: auto;
-  padding: 1rem;
+  padding: 1.25rem;
   display: flex;
   flex-direction: column;
-  gap: 1rem;
-  background-color: var(--background-color);
+  gap: 1.25rem;
+  background-color: ${VINH_COLORS.backgroundAlt};
   scroll-behavior: smooth;
 
   &::-webkit-scrollbar {
@@ -36,28 +40,40 @@ const ChatMessages = styled.div`
   }
 
   &::-webkit-scrollbar-thumb {
-    background: var(--mid-gray);
+    background: ${VINH_COLORS.lightGray};
     border-radius: 3px;
   }
 `;
 
 const Message = styled.div`
-  max-width: 80%;
-  padding: 0.75rem 1rem;
+  max-width: 85%;
+  padding: 0.875rem 1.25rem;
   border-radius: 12px;
   font-size: 0.95rem;
   line-height: 1.5;
+  box-shadow: 0 2px 4px ${VINH_COLORS.shadow};
+  transition: all 0.3s ease;
 
   ${props => props.isUser ? `
     align-self: flex-end;
-    background-color: #0066b3;
-    color: white;
+    background-color: ${VINH_COLORS.primary};
+    color: ${VINH_COLORS.white};
     border-bottom-right-radius: 4px;
+    
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px ${VINH_COLORS.shadowDark};
+    }
   ` : `
     align-self: flex-start;
-    background-color: #f1f5f9;
-    color: #1e293b;
+    background-color: ${VINH_COLORS.white};
+    color: ${VINH_COLORS.text};
     border-bottom-left-radius: 4px;
+    
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px ${VINH_COLORS.shadow};
+    }
   `}
 `;
 
@@ -66,15 +82,18 @@ const MessageContent = styled.div`
     h1, h2, h3, h4, h5, h6 {
       margin: 1em 0 0.5em 0;
       font-weight: 600;
+      color: ${props => props.isUser ? VINH_COLORS.white : VINH_COLORS.text};
     }
 
     p {
       margin: 0.5em 0;
+      color: ${props => props.isUser ? VINH_COLORS.white : VINH_COLORS.text};
     }
 
     ul, ol {
       margin: 0.5em 0;
       padding-left: 1.5em;
+      color: ${props => props.isUser ? VINH_COLORS.white : VINH_COLORS.text};
     }
 
     li {
@@ -82,25 +101,27 @@ const MessageContent = styled.div`
     }
 
     code {
-      background: var(--light-gray);
+      background: ${props => props.isUser ? 'rgba(255, 255, 255, 0.2)' : VINH_COLORS.lightGray};
       padding: 0.2em 0.4em;
       border-radius: 3px;
       font-size: 0.9em;
+      color: ${props => props.isUser ? VINH_COLORS.white : VINH_COLORS.text};
     }
 
     pre {
-      background: var(--light-gray);
-      padding: var(--spacing-md);
-      border-radius: var(--radius-md);
+      background: ${props => props.isUser ? 'rgba(255, 255, 255, 0.1)' : VINH_COLORS.lightGray};
+      padding: 0.75rem;
+      border-radius: 6px;
       overflow-x: auto;
-      margin: 0.5em 0;
+      margin: 0.75em 0;
+      color: ${props => props.isUser ? VINH_COLORS.white : VINH_COLORS.text};
     }
 
     blockquote {
-      border-left: 4px solid var(--primary-color);
-      margin: 0.5em 0;
-      padding-left: var(--spacing-md);
-      color: var(--gray);
+      border-left: 4px solid ${props => props.isUser ? VINH_COLORS.accent : VINH_COLORS.primary};
+      margin: 0.75em 0;
+      padding-left: 1rem;
+      color: ${props => props.isUser ? 'rgba(255, 255, 255, 0.8)' : VINH_COLORS.textLight};
     }
 
     /* Math formula styling */
@@ -158,23 +179,27 @@ const MessageContent = styled.div`
 `;
 
 const SourcesContainer = styled.div`
-  margin-top: var(--spacing-md);
+  margin-top: 1rem;
+  border-top: 1px solid ${props => props.isUser ? 'rgba(255, 255, 255, 0.1)' : VINH_COLORS.border};
+  padding-top: 0.75rem;
 `;
 
 const SourcesHeader = styled.div`
   display: flex;
   align-items: center;
-  gap: var(--spacing-xs);
-  color: var(--gray);
+  gap: 0.5rem;
+  color: ${props => props.isUser ? 'rgba(255, 255, 255, 0.8)' : VINH_COLORS.textLight};
   cursor: pointer;
-  padding: var(--spacing-xs) 0;
+  padding: 0.25rem 0;
+  font-size: 0.85rem;
+  transition: all 0.2s ease;
   
   &:hover {
-    color: var(--dark-gray);
+    color: ${props => props.isUser ? VINH_COLORS.white : VINH_COLORS.primary};
   }
 
   svg {
-    transition: transform 0.2s ease;
+    transition: transform 0.3s ease;
     
     &.expanded {
       transform: rotate(180deg);
@@ -183,10 +208,10 @@ const SourcesHeader = styled.div`
 `;
 
 const SourcesList = styled.div`
-  margin-top: var(--spacing-sm);
+  margin-top: 0.75rem;
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-xs);
+  gap: 0.75rem;
   transition: all 0.3s ease;
   max-height: ${props => props.isExpanded ? '500px' : '0'};
   overflow: hidden;
@@ -196,22 +221,28 @@ const SourcesList = styled.div`
 const SourceItem = styled.div`
   display: flex;
   align-items: flex-start;
-  padding: var(--spacing-xs) var(--spacing-sm);
-  border-radius: var(--radius-md);
-  background-color: var(--white);
-  gap: var(--spacing-xs);
-  border: 1px solid var(--light-gray);
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  background-color: ${props => props.isUser ? 'rgba(255, 255, 255, 0.1)' : VINH_COLORS.white};
+  gap: 0.75rem;
+  border: 1px solid ${props => props.isUser ? 'rgba(255, 255, 255, 0.1)' : VINH_COLORS.border};
+  transition: all 0.2s ease;
+  
+  &:hover {
+    transform: translateX(3px);
+    box-shadow: 0 2px 4px ${VINH_COLORS.shadow};
+  }
   
   svg {
     margin-top: 3px;
     flex-shrink: 0;
-    color: var(--primary-color);
+    color: ${props => props.isUser ? VINH_COLORS.accent : VINH_COLORS.primary};
   }
 `;
 
 const SourceText = styled.span`
-  font-size: 0.75rem;
-  color: var(--dark-gray);
+  font-size: 0.8rem;
+  color: ${props => props.isUser ? 'rgba(255, 255, 255, 0.8)' : VINH_COLORS.textLight};
   max-height: 60px;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -221,23 +252,23 @@ const SourceText = styled.span`
 `;
 
 const InputContainer = styled.div`
-  padding: 1rem;
-  border-top: 1px solid #e2e8f0;
-  background: white;
+  padding: 1.25rem;
+  border-top: 1px solid ${VINH_COLORS.border};
+  background: ${VINH_COLORS.white};
 `;
 
 const InputWrapper = styled.div`
   display: flex;
-  gap: 0.5rem;
-  background: #f8fafc;
-  border: 1px solid #e2e8f0;
+  gap: 0.75rem;
+  background: ${VINH_COLORS.backgroundAlt};
+  border: 1px solid ${VINH_COLORS.border};
   border-radius: 8px;
-  padding: 0.5rem;
-  transition: all 0.2s;
+  padding: 0.75rem;
+  transition: all 0.3s ease;
 
   &:focus-within {
-    border-color: #0066b3;
-    box-shadow: 0 0 0 2px rgba(0, 102, 179, 0.1);
+    border-color: ${VINH_COLORS.primary};
+    box-shadow: 0 0 0 3px rgba(0, 102, 179, 0.1);
   }
 `;
 
@@ -247,64 +278,67 @@ const Input = styled.input`
   background: none;
   padding: 0.5rem;
   font-size: 0.95rem;
-  color: #1e293b;
+  color: ${VINH_COLORS.text};
 
   &:focus {
     outline: none;
   }
 
   &::placeholder {
-    color: #94a3b8;
+    color: ${VINH_COLORS.textLighter};
   }
 `;
 
 const SendButton = styled.button`
-  background: #0066b3;
-  color: white;
+  background: ${VINH_COLORS.primary};
+  color: ${VINH_COLORS.white};
   border: none;
-  border-radius: 6px;
-  width: 36px;
-  height: 36px;
+  border-radius: 8px;
+  width: 40px;
+  height: 40px;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: all 0.2s;
+  transition: all 0.3s ease;
   padding: 0;
 
   svg {
     width: 20px;
     height: 20px;
-    color: #005291;
+    color: ${VINH_COLORS.white};
   }
 
   &:hover {
-    background: #005291;
+    background: ${VINH_COLORS.primaryDark};
+    transform: translateY(-2px);
   }
 
   &:disabled {
-    background: #cbd5e1;
+    background: ${VINH_COLORS.lightGray};
     cursor: not-allowed;
+    transform: none;
   }
 `;
 
 const CourseContext = styled.div`
-  padding: 1rem;
-  background: #f8fafc;
-  border-bottom: 1px solid #e2e8f0;
+  padding: 1.25rem;
+  background: ${VINH_COLORS.backgroundAlt};
+  border-bottom: 1px solid ${VINH_COLORS.border};
   font-size: 0.9rem;
-  color: #64748b;
+  color: ${VINH_COLORS.textLight};
 
   .context-header {
-    font-weight: 500;
-    color: #1e293b;
-    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: ${VINH_COLORS.text};
+    margin-bottom: 0.75rem;
+    font-size: 1rem;
   }
 
   .context-info {
     display: flex;
     flex-direction: column;
-    gap: 0.25rem;
+    gap: 0.5rem;
   }
 `;
 
@@ -312,20 +346,20 @@ const LoadingIndicator = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: var(--spacing-md);
-  gap: var(--spacing-sm);
+  padding: 1rem;
+  gap: 0.75rem;
   
   .loading-spinner {
     width: 24px;
     height: 24px;
-    border: 3px solid var(--light-gray);
-    border-top: 3px solid var(--primary-color);
+    border: 3px solid ${VINH_COLORS.lightGray};
+    border-top: 3px solid ${VINH_COLORS.primary};
     border-radius: 50%;
     animation: spin 1s linear infinite;
   }
   
   .loading-text {
-    color: var(--gray);
+    color: ${VINH_COLORS.textLight};
     font-size: 0.875rem;
   }
 
@@ -337,13 +371,14 @@ const LoadingIndicator = styled.div`
 
 const ImagePreview = styled.div`
   position: relative;
-  margin-top: 0.5rem;
+  margin-top: 0.75rem;
   max-width: 200px;
   
   img {
     max-width: 100%;
     border-radius: 8px;
-    border: 1px solid var(--light-gray);
+    border: 1px solid ${VINH_COLORS.border};
+    box-shadow: 0 2px 4px ${VINH_COLORS.shadow};
   }
   
   .remove-image {
@@ -352,17 +387,19 @@ const ImagePreview = styled.div`
     right: 8px;
     background: rgba(255, 255, 255, 0.9);
     border-radius: 50%;
-    width: 24px;
-    height: 24px;
+    width: 28px;
+    height: 28px;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    border: 1px solid var(--light-gray);
-    transition: all 0.2s;
+    border: 1px solid ${VINH_COLORS.border};
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 4px ${VINH_COLORS.shadow};
     
     &:hover {
-      background: white;
+      background: ${VINH_COLORS.errorLight};
+      color: ${VINH_COLORS.error};
       transform: scale(1.1);
     }
   }
@@ -373,14 +410,14 @@ const ImageUploadButton = styled.label`
   align-items: center;
   gap: 0.5rem;
   padding: 0.5rem;
-  border-radius: 6px;
+  border-radius: 8px;
   cursor: pointer;
-  transition: all 0.2s;
-  color: var(--gray);
+  transition: all 0.2s ease;
+  color: ${VINH_COLORS.textLight};
   
   &:hover {
-    background: var(--light-gray);
-    color: var(--dark-gray);
+    background: ${VINH_COLORS.lightGray};
+    color: ${VINH_COLORS.primary};
   }
   
   input[type="file"] {
@@ -392,8 +429,9 @@ const MessageImage = styled.img`
   max-width: 100%;
   max-height: 300px;
   border-radius: 8px;
-  margin-top: 0.5rem;
-  border: 1px solid var(--light-gray);
+  margin-top: 0.75rem;
+  border: 1px solid ${VINH_COLORS.border};
+  box-shadow: 0 2px 4px ${VINH_COLORS.shadow};
 `;
 
 const CaptureButton = styled.button`
@@ -401,17 +439,17 @@ const CaptureButton = styled.button`
   align-items: center;
   gap: 0.5rem;
   padding: 0.5rem;
-  border-radius: 6px;
+  border-radius: 8px;
   cursor: pointer;
-  transition: all 0.2s;
-  color: var(--gray);
+  transition: all 0.2s ease;
+  color: ${VINH_COLORS.textLight};
   background: none;
   border: none;
   position: relative;
   
   &:hover {
-    background: var(--light-gray);
-    color: var(--dark-gray);
+    background: ${VINH_COLORS.lightGray};
+    color: ${VINH_COLORS.primary};
   }
   
   &:disabled {
@@ -426,9 +464,13 @@ const CaptureButton = styled.button`
     transform: translateX(-50%);
     font-size: 0.7rem;
     white-space: nowrap;
-    color: var(--gray);
+    color: ${VINH_COLORS.textLight};
     opacity: 0;
-    transition: opacity 0.2s;
+    transition: opacity 0.2s ease;
+    background: ${VINH_COLORS.white};
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px ${VINH_COLORS.shadow};
   }
 
   &:hover .shortcut-hint {
@@ -455,7 +497,7 @@ const ScreenCaptureOverlay = styled.div`
 
 const SelectionArea = styled.div`
   position: absolute;
-  border: 2px solid #0066b3;
+  border: 2px solid ${VINH_COLORS.primary};
   background: rgba(0, 102, 179, 0.1);
   pointer-events: none;
 `;
@@ -465,13 +507,14 @@ const CaptureInstructions = styled.div`
   top: 20px;
   left: 50%;
   transform: translateX(-50%);
-  background: white;
-  padding: 8px 16px;
-  border-radius: 4px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-  font-size: 14px;
-  color: #333;
+  background: ${VINH_COLORS.white};
+  padding: 0.75rem 1.25rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px ${VINH_COLORS.shadowDark};
+  font-size: 0.9rem;
+  color: ${VINH_COLORS.text};
   z-index: 10000;
+  border: 1px solid ${VINH_COLORS.border};
 `;
 
 const ElearningChatInterface = ({ selectedCourse }) => {
@@ -962,7 +1005,7 @@ Your goal is to enhance the student's understanding through clear and informativ
             if (message.type === 'user') {
               return (
                 <Message key={index} isUser={true}>
-                  <MessageContent>
+                  <MessageContent isUser={true}>
                     {message.content}
                     {message.image && (
                       <MessageImage src={message.image} alt="Uploaded content" />
@@ -1010,8 +1053,8 @@ Your goal is to enhance the student's understanding through clear and informativ
                         {message.is_fallback && (
                           <div style={{ 
                             fontSize: '0.8rem', 
-                            color: 'var(--gray)', 
-                            marginTop: '0.5rem',
+                            color: VINH_COLORS.textLight, 
+                            marginTop: '0.75rem',
                             fontStyle: 'italic'
                           }}>
                             (Câu trả lời được tạo bởi AI dựa trên kiến thức chung)
@@ -1089,7 +1132,7 @@ Your goal is to enhance the student's understanding through clear and informativ
             </ImagePreview>
           )}
           {imageError && (
-            <div style={{ color: 'red', fontSize: '0.8rem', marginTop: '0.5rem' }}>
+            <div style={{ color: VINH_COLORS.error, fontSize: '0.8rem', marginTop: '0.75rem' }}>
               {imageError}
             </div>
           )}

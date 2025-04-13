@@ -3,36 +3,42 @@ export const DEMO_ACCOUNTS = {
     username: 'admin',
     password: 'admin',
     role: 'admin',
-    portal: 'portal' // portal or elearning
+    portal: 'portal', // portal or elearning
+    name: 'Administrator'
   },
-  user: {
+  user1: {
     username: 'user',
     password: 'user',
     role: 'user',
-    portal: 'portal'
+    portal: 'portal',
+    name: 'Regular User'
   },
-  user: {
+  user2: {
     username: '215748020110333',
     password: '215748020110333',
     role: 'user',
-    portal: 'portal'
+    portal: 'portal',
+    name: 'Đặng Ngọc Anh'
   },
-  student: {
+  student1: {
     username: 'student',
     password: 'student',
     role: 'student',
-    portal: 'elearning'
+    portal: 'elearning',
+    name: 'Student User'
   },
-  student: {
+  student2: {
     username: '215748020110333',
     password: '215748020110333',
     role: 'student',
-    portal: 'elearning'
+    portal: 'elearning',
+    name: 'Đặng Ngọc Anh'
   },
   lecturer: {
     username: 'lecturer',
     password: 'lecturer',
     role: 'lecturer',
-    portal: 'elearning'
+    portal: 'elearning',
+    name: 'Giảng viên'
   }
 }; 

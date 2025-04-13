@@ -5,23 +5,24 @@ import { FiBook, FiFileText, FiMessageCircle, FiInfo, FiChevronRight, FiDownload
 import { courseData } from '../config/courseData';
 import ElearningChatInterface from '../components/ElearningChatInterface';
 import { ElearningHeader, ElearningFooter } from '../components/ElearningLayout';
+import { VINH_COLORS } from '../config/colors';
 
 // Log courseData when the module loads
 console.log('Loading courseData:', courseData);
 
 const PageContainer = styled.div`
   min-height: 100vh;
-  background-color: #f8fafc;
+  background-color: ${VINH_COLORS.backgroundAlt};
   display: flex;
   flex-direction: column;
 `;
 
 const CourseHeader = styled.div`
-  background: white;
+  background: ${VINH_COLORS.white};
   padding: 1.5rem 0;
-  border-bottom: 1px solid #e2e8f0;
+  border-bottom: 1px solid ${VINH_COLORS.border};
   margin-bottom: 2rem;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 2px 4px ${VINH_COLORS.shadow};
 
   .content {
     max-width: 1200px;
@@ -30,48 +31,54 @@ const CourseHeader = styled.div`
   }
 
   .breadcrumb {
-    color: #64748b;
+    color: ${VINH_COLORS.textLight};
     font-size: 0.875rem;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.75rem;
     display: flex;
     align-items: center;
     gap: 0.5rem;
 
     a {
-      color: #0066b3;
+      color: ${VINH_COLORS.primary};
       text-decoration: none;
+      transition: all 0.2s ease;
+      
       &:hover {
+        color: ${VINH_COLORS.primaryDark};
         text-decoration: underline;
       }
     }
   }
 
   h1 {
-    color: #1e293b;
+    color: ${VINH_COLORS.text};
     font-size: 1.75rem;
     margin: 0;
-    margin-bottom: 1rem;
+    margin-bottom: 1.25rem;
     font-weight: 600;
   }
 
   .course-info {
     display: flex;
-    gap: 2rem;
-    color: #64748b;
+    gap: 1.5rem;
+    color: ${VINH_COLORS.textLight};
     font-size: 0.875rem;
+    flex-wrap: wrap;
 
     span {
       display: flex;
       align-items: center;
       gap: 0.5rem;
       padding: 0.5rem 1rem;
-      background: #f8fafc;
+      background: ${VINH_COLORS.backgroundAlt};
       border-radius: 6px;
-      transition: all 0.2s;
+      transition: all 0.2s ease;
+      font-weight: 500;
 
       &:hover {
-        background: #f1f5f9;
-        color: #0066b3;
+        background: ${VINH_COLORS.lightGray};
+        color: ${VINH_COLORS.primary};
+        transform: translateY(-2px);
       }
     }
   }
@@ -84,6 +91,7 @@ const MainContent = styled.div`
   display: grid;
   grid-template-columns: 1fr 300px;
   gap: 2rem;
+  flex: 1;
 
   @media (max-width: 1024px) {
     grid-template-columns: 1fr;
@@ -91,24 +99,30 @@ const MainContent = styled.div`
 `;
 
 const ContentSection = styled.div`
-  background: white;
+  background: ${VINH_COLORS.white};
   border-radius: 8px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 4px ${VINH_COLORS.shadow};
   overflow: hidden;
   margin-bottom: 1.5rem;
+  transition: all 0.3s ease;
+
+  &:hover {
+    box-shadow: 0 4px 8px ${VINH_COLORS.shadowDark};
+  }
 `;
 
 const SectionHeader = styled.div`
-  padding: 1rem;
-  background: #f8fafc;
-  border-bottom: 1px solid #e2e8f0;
-  font-weight: 500;
-  color: #1e293b;
+  padding: 1rem 1.25rem;
+  background: ${VINH_COLORS.backgroundAlt};
+  border-bottom: 1px solid ${VINH_COLORS.border};
+  font-weight: 600;
+  color: ${VINH_COLORS.text};
+  font-size: 0.95rem;
 `;
 
 const ChapterList = styled.div`
   .chapter {
-    border-bottom: 1px solid #e2e8f0;
+    border-bottom: 1px solid ${VINH_COLORS.border};
     
     &:last-child {
       border-bottom: none;
@@ -117,32 +131,32 @@ const ChapterList = styled.div`
 `;
 
 const ChapterHeader = styled.div`
-  padding: 1rem;
+  padding: 1rem 1.25rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
   cursor: pointer;
-  transition: all 0.2s;
+  transition: all 0.2s ease;
   border-radius: 6px;
 
   &:hover {
-    background-color: #f8fafc;
+    background-color: ${VINH_COLORS.backgroundAlt};
   }
 
   .chapter-info {
     h3 {
       margin: 0;
       font-size: 1rem;
-      font-weight: 500;
-      color: #1e293b;
+      font-weight: 600;
+      color: ${VINH_COLORS.text};
       margin-bottom: 0.25rem;
       display: flex;
       align-items: center;
       gap: 0.5rem;
 
       .chapter-number {
-        background: #0066b3;
-        color: white;
+        background: ${VINH_COLORS.primary};
+        color: ${VINH_COLORS.white};
         width: 24px;
         height: 24px;
         border-radius: 50%;
@@ -150,22 +164,23 @@ const ChapterHeader = styled.div`
         align-items: center;
         justify-content: center;
         font-size: 0.875rem;
+        font-weight: 600;
       }
     }
 
     .description {
       font-size: 0.875rem;
-      color: #64748b;
+      color: ${VINH_COLORS.textLight};
     }
   }
 
   .toggle-icon {
-    color: #94a3b8;
-    transition: transform 0.2s;
+    color: ${VINH_COLORS.textLighter};
+    transition: transform 0.2s ease;
     
     &.expanded {
       transform: rotate(90deg);
-      color: #0066b3;
+      color: ${VINH_COLORS.primary};
     }
   }
 `;
@@ -178,17 +193,17 @@ const MaterialList = styled.div`
     align-items: center;
     gap: 0.75rem;
     padding: 0.75rem;
-    color: #64748b;
+    color: ${VINH_COLORS.textLight};
     font-size: 0.875rem;
     cursor: pointer;
     border-radius: 6px;
-    transition: all 0.2s;
+    transition: all 0.2s ease;
     text-decoration: none;
 
     &:hover {
-      background: #f1f5f9;
-      color: #0066b3;
-      border-color: #e2e8f0;
+      background: ${VINH_COLORS.lightGray};
+      color: ${VINH_COLORS.primary};
+      transform: translateX(3px);
     }
 
     .material-icon {
@@ -197,22 +212,22 @@ const MaterialList = styled.div`
       justify-content: center;
       width: 32px;
       height: 32px;
-      background: #f8fafc;
+      background: ${VINH_COLORS.backgroundAlt};
       border-radius: 6px;
-      color: #0066b3;
-      transition: all 0.2s;
+      color: ${VINH_COLORS.primary};
+      transition: all 0.2s ease;
     }
 
     &:hover .material-icon {
-      background: #0066b3;
-      color: white;
+      background: ${VINH_COLORS.primary};
+      color: ${VINH_COLORS.white};
     }
 
     .download-icon {
       margin-left: auto;
       opacity: 0;
-      transition: opacity 0.2s;
-      color: #0066b3;
+      transition: opacity 0.2s ease;
+      color: ${VINH_COLORS.primary};
     }
 
     &:hover .download-icon {
@@ -233,28 +248,30 @@ const SidebarCard = styled(ContentSection)`
 
 const AnnouncementList = styled.div`
   .announcement {
-    padding: 1rem;
-    border-bottom: 1px solid #e2e8f0;
+    padding: 1rem 1.25rem;
+    border-bottom: 1px solid ${VINH_COLORS.border};
 
     &:last-child {
       border-bottom: none;
     }
 
     .title {
-      font-weight: 500;
-      color: #1e293b;
-      margin-bottom: 0.25rem;
+      font-weight: 600;
+      color: ${VINH_COLORS.text};
+      margin-bottom: 0.5rem;
+      font-size: 0.95rem;
     }
 
     .content {
       font-size: 0.875rem;
-      color: #64748b;
-      margin-bottom: 0.5rem;
+      color: ${VINH_COLORS.textLight};
+      margin-bottom: 0.75rem;
+      line-height: 1.5;
     }
 
     .date {
       font-size: 0.75rem;
-      color: #94a3b8;
+      color: ${VINH_COLORS.textLighter};
     }
   }
 `;
@@ -266,19 +283,20 @@ const ChatbotButton = styled.button`
   width: 56px;
   height: 56px;
   border-radius: 50%;
-  background-color: #0066b3;
-  color: white;
+  background-color: ${VINH_COLORS.primary};
+  color: ${VINH_COLORS.white};
   border: none;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  box-shadow: 0 4px 12px rgba(0, 102, 179, 0.3);
-  transition: all 0.3s;
+  box-shadow: 0 4px 12px ${VINH_COLORS.shadowDark};
+  transition: all 0.3s ease;
+  z-index: 100;
 
   &:hover {
     transform: scale(1.1);
-    background-color: #005291;
+    background-color: ${VINH_COLORS.primaryDark};
   }
 `;
 
@@ -288,9 +306,9 @@ const ChatbotModal = styled.div`
   right: 2rem;
   width: 400px;
   height: 600px;
-  background: white;
+  background: ${VINH_COLORS.white};
   border-radius: 12px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 4px 20px ${VINH_COLORS.shadowDark};
   transition: bottom 0.3s ease;
   overflow: hidden;
   z-index: 1000;
@@ -307,23 +325,29 @@ const ViewMaterialModal = styled.div`
   left: 0;
   right: 0;
   bottom: 0;
-  background: white;
+  background: ${VINH_COLORS.white};
   z-index: 1000;
   display: ${props => props.isOpen ? 'block' : 'none'};
   
   .modal-header {
-    padding: 1rem;
-    background-color: #0066b3;
-    color: white;
+    padding: 1rem 1.25rem;
+    background-color: ${VINH_COLORS.primary};
+    color: ${VINH_COLORS.white};
     display: flex;
     justify-content: space-between;
     align-items: center;
+    font-weight: 500;
+    
+    h3 {
+      margin: 0;
+      font-size: 1.1rem;
+    }
     
     .close-button {
       cursor: pointer;
       padding: 0.5rem;
       border-radius: 50%;
-      transition: background-color 0.2s;
+      transition: background-color 0.2s ease;
       
       &:hover {
         background-color: rgba(255, 255, 255, 0.1);
@@ -339,13 +363,14 @@ const ViewMaterialModal = styled.div`
 `;
 
 const ChatbotHeader = styled.div`
-  padding: 1rem;
-  background-color: #0066b3;
-  color: white;
+  padding: 1rem 1.25rem;
+  background-color: ${VINH_COLORS.primary};
+  color: ${VINH_COLORS.white};
   display: flex;
   justify-content: space-between;
   align-items: center;
   font-size: 0.95rem;
+  font-weight: 500;
 
   .close-button {
     width: 32px;
@@ -354,7 +379,11 @@ const ChatbotHeader = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: all 0.2s;
+    transition: all 0.2s ease;
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
 
     &:hover {
       background: rgba(255, 255, 255, 0.1);
@@ -398,7 +427,7 @@ const CoursePage = () => {
 
   return (
     <PageContainer>
-      <ElearningHeader />
+      <ElearningHeader userRole="student" />
       
       <CourseHeader>
         <div className="content">
@@ -481,18 +510,18 @@ const CoursePage = () => {
                   <ChapterHeader>
                     <div className="chapter-info">
                       <h3>
-                        <FiBookOpen size={20} style={{ color: '#0066b3' }} />
+                        <FiBookOpen size={20} style={{ color: VINH_COLORS.primary }} />
                         {exercise.title}
                       </h3>
                       <div className="description">
                         {exercise.description}
-                        <div style={{ color: '#ef4444', marginTop: '0.5rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                        <div style={{ color: VINH_COLORS.error, marginTop: '0.75rem', display: 'flex', alignItems: 'center', gap: '0.5rem', fontWeight: 500 }}>
                           <FiClock size={14} />
                           Hạn nộp: {new Date(exercise.dueDate).toLocaleString('vi-VN')}
                         </div>
                       </div>
                     </div>
-                    <FiChevronRight size={20} style={{ color: '#94a3b8' }} />
+                    <FiChevronRight size={20} style={{ color: VINH_COLORS.textLighter }} />
                   </ChapterHeader>
                 </div>
               ))}
@@ -542,12 +571,6 @@ const CoursePage = () => {
           <button 
             onClick={() => setIsChatOpen(false)}
             className="close-button"
-            style={{ 
-              background: 'none', 
-              border: 'none', 
-              color: 'white', 
-              cursor: 'pointer',
-            }}
           >
             <FiX size={20} />
           </button>
@@ -571,7 +594,7 @@ const CoursePage = () => {
                 className="modal-content"
                 src={selectedMaterial.url}
                 title={selectedMaterial.title}
-                style={{ flex: 2, borderRight: '1px solid #e2e8f0' }}
+                style={{ flex: 2, borderRight: `1px solid ${VINH_COLORS.border}` }}
               />
               <div style={{ flex: 1, overflow: 'hidden' }}>
                 <ElearningChatInterface selectedCourse={course} />

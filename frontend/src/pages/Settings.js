@@ -1,41 +1,56 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { FiCheck, FiRefreshCw, FiSave, FiX, FiAlertTriangle } from 'react-icons/fi';
+import { FiCheck, FiRefreshCw, FiSave, FiX, FiAlertTriangle, FiLoader } from 'react-icons/fi';
 import AdminLayout from '../components/AdminLayout';
 import { useApi } from '../context/ApiContext';
 import { toast } from 'react-toastify';
+import { VINH_COLORS } from '../config/colors';
 
 const PageContainer = styled.div`
-  background: var(--white);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-md);
-  padding: var(--spacing-lg);
-`;
-
-const PageTitle = styled.h2`
-  color: var(--almost-black);
-  margin-bottom: var(--spacing-lg);
+  padding: var(--spacing-xl);
 `;
 
 const PageHeader = styled.div`
   margin-bottom: var(--spacing-xl);
+  background: linear-gradient(135deg, ${VINH_COLORS.primary}, ${VINH_COLORS.primaryDark});
+  padding: var(--spacing-xl);
+  border-radius: var(--radius-lg);
+  color: ${VINH_COLORS.white};
+  box-shadow: var(--shadow-lg);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 `;
 
-const Title = styled.h1`
+const HeaderContent = styled.div`
+  flex: 1;
+`;
+
+const Title = styled.h2`
   font-size: 2rem;
+  font-weight: 700;
   margin-bottom: var(--spacing-sm);
+  color: inherit;
 `;
 
 const Subtitle = styled.p`
-  color: var(--dark-gray);
+  font-size: 1.1rem;
+  opacity: 0.9;
+  max-width: 600px;
 `;
 
 const Card = styled.div`
-  background-color: var(--white);
+  background: ${VINH_COLORS.white};
+  padding: var(--spacing-xl);
   border-radius: var(--radius-lg);
-  padding: var(--spacing-lg);
   box-shadow: var(--shadow-md);
-  margin-bottom: var(--spacing-xl);
+  transition: all 0.3s ease;
+  border: 1px solid ${VINH_COLORS.border};
+  margin-bottom: var(--spacing-lg);
+
+  &:hover {
+    box-shadow: var(--shadow-lg);
+  }
 `;
 
 const StatusContainer = styled.div`
@@ -45,22 +60,25 @@ const StatusContainer = styled.div`
   padding: var(--spacing-md);
   border-radius: var(--radius-md);
   background-color: ${props => 
-    props.connected ? 'rgba(34, 197, 94, 0.1)' : 'rgba(239, 68, 68, 0.1)'};
+    props.connected ? `${VINH_COLORS.successLight}` : `${VINH_COLORS.errorLight}`};
   color: ${props => 
-    props.connected ? 'var(--success-color)' : 'var(--error-color)'};
+    props.connected ? VINH_COLORS.success : VINH_COLORS.error};
+  border: 1px solid ${props => 
+    props.connected ? VINH_COLORS.success : VINH_COLORS.error};
 `;
 
 const StatusIcon = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 32px;
-  height: 32px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
   background-color: ${props => 
-    props.connected ? 'var(--success-color)' : 'var(--error-color)'};
-  color: var(--white);
+    props.connected ? VINH_COLORS.success : VINH_COLORS.error};
+  color: ${VINH_COLORS.white};
   margin-right: var(--spacing-md);
+  font-size: 1.25rem;
 `;
 
 const StatusText = styled.div`
@@ -68,10 +86,11 @@ const StatusText = styled.div`
   
   h3 {
     margin-bottom: var(--spacing-xs);
+    font-weight: 600;
   }
   
   p {
-    color: var(--dark-gray);
+    color: ${VINH_COLORS.textLight};
     font-size: 0.875rem;
   }
 `;
@@ -84,12 +103,27 @@ const Form = styled.form`
 
 const FormGroup = styled.div`
   margin-bottom: var(--spacing-md);
+  
+  input {
+    width: 100%;
+    padding: var(--spacing-sm) var(--spacing-md);
+    border: 1px solid ${VINH_COLORS.border};
+    border-radius: var(--radius-md);
+    transition: all 0.2s ease;
+    
+    &:focus {
+      outline: none;
+      border-color: ${VINH_COLORS.primary};
+      box-shadow: 0 0 0 2px ${VINH_COLORS.primaryLight}33;
+    }
+  }
 `;
 
 const Label = styled.label`
   display: block;
   margin-bottom: var(--spacing-xs);
   font-weight: 500;
+  color: ${VINH_COLORS.text};
 `;
 
 const ButtonGroup = styled.div`
@@ -100,8 +134,67 @@ const ButtonGroup = styled.div`
 
 const HelpText = styled.p`
   font-size: 0.875rem;
-  color: var(--gray);
+  color: ${VINH_COLORS.textLight};
   margin-top: var(--spacing-xs);
+`;
+
+const Button = styled.button`
+  background-color: ${props => {
+    switch (props.variant) {
+      case 'primary': return VINH_COLORS.primary;
+      case 'secondary': return VINH_COLORS.secondary;
+      case 'danger': return VINH_COLORS.error;
+      default: return VINH_COLORS.primary;
+    }
+  }};
+  color: ${VINH_COLORS.white};
+  border: none;
+  border-radius: var(--radius-md);
+  padding: var(--spacing-sm) var(--spacing-md);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  font-weight: 500;
+  
+  &:hover {
+    background-color: ${props => {
+      switch (props.variant) {
+        case 'primary': return VINH_COLORS.primaryDark;
+        case 'secondary': return VINH_COLORS.secondaryDark;
+        case 'danger': return VINH_COLORS.error;
+        default: return VINH_COLORS.primaryDark;
+      }
+    }};
+  }
+  
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+  
+  &.spinning svg {
+    animation: spin 1s linear infinite;
+    @keyframes spin {
+      100% { transform: rotate(360deg); }
+    }
+  }
+`;
+
+const LoadingSpinner = styled(FiLoader)`
+  animation: spin 1s linear infinite;
+  @keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+`;
+
+const CardTitle = styled.h2`
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: var(--spacing-md);
+  color: ${VINH_COLORS.text};
 `;
 
 const Settings = () => {
@@ -171,10 +264,20 @@ const Settings = () => {
   return (
     <AdminLayout>
       <PageContainer>
-        <PageTitle>Settings</PageTitle>
         <PageHeader>
-          <Title>Cài đặt</Title>
-          <Subtitle>Cấu hình kết nối API</Subtitle>
+          <HeaderContent>
+            <Title>Cài đặt</Title>
+            <Subtitle>Cấu hình kết nối API</Subtitle>
+          </HeaderContent>
+          
+          <Button 
+            onClick={handleTestConnection}
+            disabled={isLoading || isSaving}
+            variant="primary"
+          >
+            <FiRefreshCw className={isLoading ? 'spinning' : ''} /> 
+            {isLoading ? 'Đang kiểm tra...' : 'Kiểm tra kết nối'}
+          </Button>
         </PageHeader>
         
         <Card>
@@ -190,17 +293,9 @@ const Settings = () => {
                   : 'Vui lòng kiểm tra URL và thông tin xác thực của bạn.'}
               </p>
             </StatusText>
-            <button 
-              className="button-secondary" 
-              onClick={handleTestConnection}
-              disabled={isLoading || isSaving}
-            >
-              <FiRefreshCw className={isLoading ? 'spinning' : ''} /> 
-              Kiểm tra kết nối
-            </button>
           </StatusContainer>
           
-          <h2>Cấu hình API</h2>
+          <CardTitle>Cấu hình API</CardTitle>
           
           <Form onSubmit={handleSubmit}>
             <FormGroup>
@@ -237,20 +332,20 @@ const Settings = () => {
             </FormGroup>
             
             <ButtonGroup>
-              <button 
+              <Button 
                 type="submit" 
-                className="button-primary"
+                variant="primary"
                 disabled={isLoading || isSaving}
               >
                 <FiSave /> 
                 {isSaving ? 'Đang lưu...' : 'Lưu cấu hình'}
-              </button>
+              </Button>
             </ButtonGroup>
           </Form>
         </Card>
         
         <Card>
-          <h2>Giới thiệu</h2>
+          <CardTitle>Giới thiệu</CardTitle>
           <p>RAG Chatbot Interface v1.0.0</p>
           <p className="mt-md">
             Ứng dụng này cung cấp giao diện người dùng để tương tác với API RAG Chatbot của bạn.

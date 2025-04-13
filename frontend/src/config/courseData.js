@@ -1,9 +1,9 @@
 export const courseData = [
   {
-    id: 'CS410',
+    id: 'INF30044',
     title: 'Học máy',
     description: 'Giới thiệu về học máy và các ứng dụng',
-    instructor: 'GV. Nguyễn Văn A',
+    instructor: 'GV. Hoàng Hữu Việt',
     schedule: 'Thứ 2, 4 - Tiết 1-3',
     progress: '8/15 buổi',
     announcements: [
@@ -157,10 +157,10 @@ export const courseData = [
     ]
   },
   {
-    id: 'CS420',
-    title: 'Xử lý ảnh',
-    description: 'Giới thiệu về xử lý ảnh và các ứng dụng',
-    instructor: 'GV. Trần Thị B',
+    id: 'INF20141',
+    title: 'Thị giác máy tính',
+    description: 'Giới thiệu về thị giác máy tính và các ứng dụng',
+    instructor: 'GV. Nguyễn Thị Minh Tâm',
     schedule: 'Thứ 3, 5 - Tiết 4-6',
     progress: '6/15 buổi',
     announcements: [
@@ -224,10 +224,10 @@ export const courseData = [
     ]
   },
   {
-    id: 'CS430',
+    id: 'INF20007',
     title: 'Trí tuệ nhân tạo',
     description: 'Giới thiệu về trí tuệ nhân tạo và các ứng dụng',
-    instructor: 'GV. Lê Văn C',
+    instructor: 'GV. Võ Đức Quang',
     schedule: 'Thứ 6 - Tiết 7-9',
     progress: '4/15 buổi',
     announcements: [

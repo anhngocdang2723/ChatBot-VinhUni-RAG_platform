@@ -17,6 +17,7 @@ import StudentDashboard from './pages/StudentDashboard';
 import LecturerDashboard from './pages/LecturerDashboard';
 import CoursePage from './pages/CoursePage';
 import LecturerCoursePage from './pages/LecturerCoursePage';
+import UnderDevelopment from './pages/UnderDevelopment';
 import './index.css';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -113,6 +114,9 @@ root.render(
               </ProtectedRoute>
             }
           />
+          
+          {/* Under Development route */}
+          <Route path="/under-development" element={<UnderDevelopment />} />
           
           {/* Catch all route */}
           <Route path="*" element={<NotFound />} />

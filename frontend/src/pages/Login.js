@@ -2,22 +2,48 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { DEMO_ACCOUNTS } from '../config/accounts';
+import logoVinhuni from '../assets/logo-vinhuni.png';
+import bgLogin from '../assets/bg-login.jpg';
 
 const LoginContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background-color: var(--light-gray);
+  background: url(${bgLogin}) no-repeat center center fixed;
+  background-size: cover;
+`;
+
+const Logo = styled.img`
+  width: 120px;
+  height: 120px;
+  margin: 0 auto;
+  display: block;
+  margin-bottom: var(--spacing-md);
+`;
+
+const Attribution = styled.p`
+  text-align: center;
+  color: var(--dark-gray);
+  font-size: 0.875rem;
+  margin-bottom: var(--spacing-lg);
 `;
 
 const LoginForm = styled.form`
-  background: var(--white);
+  background: rgba(255, 255, 255, 0.95);
   padding: var(--spacing-xl);
   border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-lg);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
   width: 100%;
-  max-width: 400px;
+  max-width: 450px;
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  transition: transform 0.2s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 40px 0 rgba(31, 38, 135, 0.4);
+  }
 `;
 
 const FormTitle = styled.h2`
@@ -35,16 +61,17 @@ const PortalButtons = styled.div`
 
 const PortalButton = styled.button`
   padding: var(--spacing-md);
-  border: 2px solid var(--primary-color);
+  border: 2px solid #005BAA;
   border-radius: var(--radius-md);
-  background-color: ${props => props.active ? 'var(--primary-color)' : 'transparent'};
-  color: ${props => props.active ? 'var(--white)' : 'var(--primary-color)'};
+  background-color: ${props => props.active ? '#005BAA' : 'transparent'};
+  color: ${props => props.active ? 'var(--white)' : '#005BAA'};
   font-weight: 600;
+  font-size: 1.1rem;
   cursor: pointer;
   transition: all 0.2s ease;
 
   &:hover {
-    background-color: ${props => props.active ? 'var(--primary-dark)' : 'var(--primary-light)'};
+    background-color: ${props => props.active ? '#004c8c' : 'rgba(0, 91, 170, 0.1)'};
     transform: translateY(-2px);
   }
 
@@ -79,20 +106,39 @@ const Input = styled.input`
   }
 `;
 
+const RememberMeContainer = styled.div`
+  display: flex;
+  align-items: center;
+  margin-bottom: var(--spacing-md);
+  gap: var(--spacing-sm);
+`;
+
+const Checkbox = styled.input`
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+`;
+
+const CheckboxLabel = styled.label`
+  color: var(--dark-gray);
+  font-size: 0.95rem;
+  cursor: pointer;
+`;
+
 const SubmitButton = styled.button`
   width: 100%;
   padding: var(--spacing-md);
-  background-color: var(--primary-color);
+  background-color: #005BAA;
   color: var(--white);
   border: none;
   border-radius: var(--radius-md);
-  font-size: 1rem;
+  font-size: 1.2rem;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.2s ease;
   
   &:hover {
-    background-color: var(--primary-dark);
+    background-color: #004c8c;
     transform: translateY(-1px);
   }
   
@@ -113,7 +159,8 @@ const Login = () => {
   const [credentials, setCredentials] = useState({
     username: '',
     password: '',
-    portal: 'portal'
+    portal: 'portal',
+    rememberMe: false
   });
   const [error, setError] = useState('');
 
@@ -128,8 +175,15 @@ const Login = () => {
     );
 
     if (account) {
+      if (credentials.rememberMe) {
+        localStorage.setItem('rememberedUser', credentials.username);
+      } else {
+        localStorage.removeItem('rememberedUser');
+      }
+      
       localStorage.setItem('userRole', account.role);
       localStorage.setItem('portal', account.portal);
+      localStorage.setItem('user', account.username);
       
       if (account.portal === 'portal') {
         if (account.role === 'admin') {
@@ -150,10 +204,10 @@ const Login = () => {
   };
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
+    const { name, value, type, checked } = e.target;
     setCredentials(prev => ({
       ...prev,
-      [name]: value
+      [name]: type === 'checkbox' ? checked : value
     }));
   };
 
@@ -167,7 +221,9 @@ const Login = () => {
   return (
     <LoginContainer>
       <LoginForm onSubmit={handleSubmit}>
-        <FormTitle>Đăng nhập</FormTitle>
+        <Logo src={logoVinhuni} alt="Vinh University Logo" />
+        <FormTitle>TRƯỜNG ĐẠI HỌC VINH</FormTitle>
+        <Attribution>Hệ thống quản trị đại học thông minh - USMART</Attribution>
         <PortalButtons>
           <PortalButton
             type="button"
@@ -208,6 +264,18 @@ const Login = () => {
             placeholder="Nhập mật khẩu"
           />
         </FormGroup>
+        <RememberMeContainer>
+          <Checkbox
+            type="checkbox"
+            id="rememberMe"
+            name="rememberMe"
+            checked={credentials.rememberMe}
+            onChange={handleChange}
+          />
+          <CheckboxLabel htmlFor="rememberMe">
+            Ghi nhớ đăng nhập
+          </CheckboxLabel>
+        </RememberMeContainer>
         {error && <ErrorMessage>{error}</ErrorMessage>}
         <SubmitButton type="submit">Đăng nhập</SubmitButton>
       </LoginForm>

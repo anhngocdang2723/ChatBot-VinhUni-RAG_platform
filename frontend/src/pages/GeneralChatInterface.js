@@ -1,47 +1,63 @@
 import React, { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
-import { FiSend, FiSettings, FiSearch, FiCornerDownRight, FiFile, FiChevronDown, FiChevronUp, FiBookmark } from 'react-icons/fi';
+import { FiSend, FiSettings, FiSearch, FiCornerDownRight, FiFile, FiChevronDown, FiChevronUp, FiBookmark, FiRefreshCw, FiAlertCircle } from 'react-icons/fi';
 import UserLayout from '../components/UserLayout';
 import { useApi } from '../context/ApiContext';
 import { checkSpecialQuery } from '../utils/specialQueries';
 import ReactMarkdown from 'react-markdown';
 import TypingMessage from '../components/TypingMessage';
+import chatbotAvartar from '../assets/meme-image4.png';
+import userAvatar from '../assets/meme-image2.png';
+import { VINH_COLORS } from '../config/colors';
+// import userAvatar from '../assets/male-avatar-placeholder.png';
 
 const PageContainer = styled.div`
-  padding: ${props => props.isEmbedded ? '0' : 'var(--spacing-lg)'};
-  height: ${props => props.isEmbedded ? '100%' : 'calc(100vh - 32px)'};
+  height: calc(100vh - 64px);
   display: flex;
   flex-direction: column;
-  
-  @media (max-width: 768px) {
-    padding: ${props => props.isEmbedded ? '0' : 'var(--spacing-md)'};
-    height: ${props => props.isEmbedded ? '100%' : 'calc(100vh - 16px)'};
-  }
+  overflow: hidden;
 `;
 
 const PageHeader = styled.div`
-  margin-bottom: var(--spacing-lg);
-  display: ${props => props.isEmbedded ? 'none' : 'block'};
-  
-  @media (max-width: 768px) {
-    margin-bottom: var(--spacing-md);
-    padding-top: calc(var(--spacing-lg) + 36px);
+  padding: var(--spacing-md) var(--spacing-lg);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  background: ${VINH_COLORS.white};
+  border-bottom: 1px solid ${VINH_COLORS.gray};
+`;
+
+const LogoContainer = styled.div`
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  overflow: hidden;
+  background: ${VINH_COLORS.white};
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
   }
+`;
+
+const HeaderContent = styled.div`
+  flex: 1;
 `;
 
 const Title = styled.h1`
-  font-size: 1.75rem;
-  margin-bottom: var(--spacing-sm);
-  color: var(--almost-black);
-  
-  @media (max-width: 768px) {
-    font-size: 1.5rem;
-  }
+  font-size: 1.25rem;
+  margin: 0;
+  color: ${VINH_COLORS.text};
 `;
 
 const Subtitle = styled.p`
-  color: var(--gray);
   font-size: 0.875rem;
+  color: ${VINH_COLORS.textLight};
+  margin: 0;
 `;
 
 const ChatContainer = styled.div`
@@ -50,9 +66,11 @@ const ChatContainer = styled.div`
   gap: var(--spacing-lg);
   min-height: 0;
   position: relative;
+  padding: var(--spacing-md);
   
   @media (max-width: 768px) {
     gap: 0;
+    padding: var(--spacing-sm);
   }
 `;
 
@@ -60,16 +78,215 @@ const MainChat = styled.div`
   flex: 1;
   display: flex;
   flex-direction: column;
-  background-color: var(--white);
-  border-radius: ${props => props.isEmbedded ? '0' : 'var(--radius-lg)'};
-  box-shadow: ${props => props.isEmbedded ? 'none' : 'var(--shadow-md)'};
+  background-color: ${VINH_COLORS.white};
+  border-radius: var(--radius-lg);
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
   overflow: hidden;
   min-width: 0;
-  margin-bottom: 0px;
+`;
+
+const ChatMessages = styled.div`
+  flex: 1;
+  padding: var(--spacing-md);
+  overflow-y: auto;
+  background-color: ${VINH_COLORS.white};
+
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: ${VINH_COLORS.gray};
+    border-radius: 3px;
+  }
+`;
+
+const Message = styled.div`
+  margin-bottom: var(--spacing-md);
+  display: flex;
+  align-items: flex-start;
+  gap: var(--spacing-md);
+  justify-content: ${props => props.isUser ? 'flex-end' : 'flex-start'};
+`;
+
+const Avatar = styled.div`
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  overflow: hidden;
+  flex-shrink: 0;
+  order: ${props => props.isUser ? 2 : 0};
+  
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+`;
+
+const MessageContent = styled.div`
+  background: ${props => props.isUser ? VINH_COLORS.lightBlue : VINH_COLORS.gray};
+  padding: var(--spacing-md);
+  border-radius: ${props => props.isUser ? 'var(--radius-lg) var(--radius-lg) 0 var(--radius-lg)' : 'var(--radius-lg) var(--radius-lg) var(--radius-lg) 0'};
+  max-width: 70%;
+  color: ${VINH_COLORS.text};
+  line-height: 1.6;
+  font-size: 0.95rem;
+  order: ${props => props.isUser ? 1 : 0};
+
+  pre {
+    background: ${VINH_COLORS.white};
+    padding: var(--spacing-md);
+    border-radius: var(--radius-sm);
+    overflow-x: auto;
+    margin: var(--spacing-sm) 0;
+    font-family: 'Courier New', Courier, monospace;
+  }
+
+  .markdown-content {
+    h1, h2, h3, h4, h5, h6 {
+      margin: 1em 0 0.5em 0;
+      font-weight: 600;
+      
+      @media (max-width: 768px) {
+        font-size: 0.9em;
+      }
+    }
+
+    p {
+      margin: 0.5em 0;
+      
+      @media (max-width: 768px) {
+        font-size: 0.9em;
+      }
+    }
+
+    ul, ol {
+      margin: 0.5em 0;
+      padding-left: 1.5em;
+      
+      @media (max-width: 768px) {
+        font-size: 0.9em;
+      }
+    }
+
+    li {
+      margin: 0.25em 0;
+    }
+
+    code {
+      background: var(--light-gray);
+      padding: 0.2em 0.4em;
+      border-radius: 3px;
+      font-size: 0.9em;
+      
+      @media (max-width: 768px) {
+        font-size: 0.8em;
+      }
+    }
+
+    blockquote {
+      border-left: 4px solid var(--primary-color);
+      margin: 0.5em 0;
+      padding-left: var(--spacing-md);
+      color: var(--gray);
+      
+      @media (max-width: 768px) {
+        font-size: 0.9em;
+      }
+    }
+  }
+`;
+
+const ChatInputContainer = styled.div`
+  padding: var(--spacing-md);
+  background-color: var(--white);
+  border-top: 1px solid var(--light-gray);
   
   @media (max-width: 768px) {
-    border-radius: ${props => props.isEmbedded ? '0' : 'var(--radius-md)'};
-    margin-bottom: ${props => props.isEmbedded ? '0' : '40px'};
+    padding: var(--spacing-sm);
+  }
+`;
+
+const ChatInputForm = styled.form`
+  display: flex;
+  gap: var(--spacing-sm);
+  
+  @media (max-width: 768px) {
+    gap: var(--spacing-xs);
+  }
+`;
+
+const ChatInput = styled.input`
+  flex: 1;
+  padding: var(--spacing-md);
+  border: 1px solid var(--light-gray);
+  border-radius: var(--radius-full);
+  font-size: 1rem;
+  transition: all 0.2s ease;
+  
+  &:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 2px var(--primary-light);
+  }
+
+  &::placeholder {
+    color: var(--gray);
+  }
+  
+  @media (max-width: 768px) {
+    padding: var(--spacing-sm) var(--spacing-md);
+    font-size: 0.875rem;
+  }
+`;
+
+const SendButton = styled.button`
+  background: ${props => props.variant === 'secondary' ? VINH_COLORS.gray : VINH_COLORS.primary};
+  color: ${props => props.variant === 'secondary' ? VINH_COLORS.text : VINH_COLORS.white};
+  border: none;
+  padding: 0 var(--spacing-md);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-sm);
+  font-weight: 500;
+
+  &:hover {
+    background: ${props => props.variant === 'secondary' ? VINH_COLORS.lightBlue : VINH_COLORS.secondary};
+  }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+
+  svg {
+    width: 20px;
+    height: 20px;
+  }
+`;
+
+const ErrorMessage = styled.div`
+  color: #DC2626;
+  background: #FEE2E2;
+  padding: var(--spacing-md);
+  border-radius: var(--radius-md);
+  margin-bottom: var(--spacing-md);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+
+  svg {
+    width: 20px;
+    height: 20px;
   }
 `;
 
@@ -131,248 +348,6 @@ const SidebarOverlay = styled.div`
   @media (max-width: 768px) {
     display: ${props => props.isOpen ? 'block' : 'none'};
   }
-`;
-
-const ChatMessages = styled.div`
-  flex: 1;
-  padding: var(--spacing-lg);
-  overflow-y: auto;
-  background-color: var(--background-color);
-  scroll-behavior: smooth;
-
-  &::-webkit-scrollbar {
-    width: 6px;
-  }
-
-  &::-webkit-scrollbar-track {
-    background: transparent;
-  }
-
-  &::-webkit-scrollbar-thumb {
-    background: var(--mid-gray);
-    border-radius: 3px;
-  }
-  
-  @media (max-width: 768px) {
-    padding: var(--spacing-md);
-  }
-`;
-
-const ChatInputContainer = styled.div`
-  padding: var(--spacing-md);
-  background-color: var(--white);
-  border-top: 1px solid var(--light-gray);
-  
-  @media (max-width: 768px) {
-    padding: var(--spacing-sm);
-  }
-`;
-
-const ChatInputForm = styled.form`
-  display: flex;
-  gap: var(--spacing-sm);
-  
-  @media (max-width: 768px) {
-    gap: var(--spacing-xs);
-  }
-`;
-
-const ChatInput = styled.input`
-  flex: 1;
-  padding: var(--spacing-md);
-  border: 1px solid var(--light-gray);
-  border-radius: var(--radius-full);
-  font-size: 1rem;
-  transition: all 0.2s ease;
-  
-  &:focus {
-    outline: none;
-    border-color: var(--primary-color);
-    box-shadow: 0 0 0 2px var(--primary-light);
-  }
-
-  &::placeholder {
-    color: var(--gray);
-  }
-  
-  @media (max-width: 768px) {
-    padding: var(--spacing-sm) var(--spacing-md);
-    font-size: 0.875rem;
-  }
-`;
-
-const SendButton = styled.button`
-  width: 42px;
-  height: 42px;
-  border-radius: 50%;
-  background-color: var(--primary-color);
-  color: white;
-  border: none;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  padding: 0;
-  line-height: 1;
-
-  &:hover {
-    background-color: var(--primary-dark);
-    transform: scale(1.05);
-  }
-
-  &:disabled {
-    background-color: var(--gray);
-    cursor: not-allowed;
-    transform: none;
-    opacity: 0.7;
-  }
-
-  svg {
-    fill: currentColor;
-    stroke: currentColor;
-    width: 20px;
-    height: 20px;
-  }
-`;
-
-const Message = styled.div`
-  margin-bottom: var(--spacing-lg);
-  display: flex;
-  flex-direction: column;
-`;
-
-const UserMessage = styled(Message)`
-  align-items: flex-end;
-  
-  .message-content {
-    background-color: var(--primary-color);
-    color: var(--white);
-    border-radius: var(--radius-lg) var(--radius-lg) 0 var(--radius-lg);
-  }
-`;
-
-const BotMessage = styled(Message)`
-  align-items: flex-start;
-  
-  .message-content {
-    background-color: var(--light-gray);
-    color: var(--almost-black);
-    border-radius: var(--radius-lg) var(--radius-lg) var(--radius-lg) 0;
-  }
-`;
-
-const MessageContent = styled.div`
-  padding: var(--spacing-md) var(--spacing-lg);
-  max-width: 70%;
-  line-height: 1.5;
-  
-  @media (max-width: 768px) {
-    max-width: 85%;
-    padding: var(--spacing-sm) var(--spacing-md);
-  }
-
-  .markdown-content {
-    h1, h2, h3, h4, h5, h6 {
-      margin: 1em 0 0.5em 0;
-      font-weight: 600;
-      
-      @media (max-width: 768px) {
-        font-size: 0.9em;
-      }
-    }
-
-    p {
-      margin: 0.5em 0;
-      
-      @media (max-width: 768px) {
-        font-size: 0.9em;
-      }
-    }
-
-    ul, ol {
-      margin: 0.5em 0;
-      padding-left: 1.5em;
-      
-      @media (max-width: 768px) {
-        font-size: 0.9em;
-      }
-    }
-
-    li {
-      margin: 0.25em 0;
-    }
-
-    code {
-      background: var(--light-gray);
-      padding: 0.2em 0.4em;
-      border-radius: 3px;
-      font-size: 0.9em;
-      
-      @media (max-width: 768px) {
-        font-size: 0.8em;
-      }
-    }
-
-    pre {
-      background: var(--light-gray);
-      padding: var(--spacing-md);
-      border-radius: var(--radius-md);
-      overflow-x: auto;
-      margin: 0.5em 0;
-      
-      @media (max-width: 768px) {
-        padding: var(--spacing-sm);
-        font-size: 0.8em;
-      }
-    }
-
-    blockquote {
-      border-left: 4px solid var(--primary-color);
-      margin: 0.5em 0;
-      padding-left: var(--spacing-md);
-      color: var(--gray);
-      
-      @media (max-width: 768px) {
-        font-size: 0.9em;
-      }
-    }
-  }
-`;
-
-const MessageSources = styled.div`
-  margin-top: var(--spacing-sm);
-  font-size: 0.875rem;
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-xs);
-`;
-
-const SourceItem = styled.div`
-  display: flex;
-  align-items: flex-start;
-  padding: var(--spacing-xs) var(--spacing-sm);
-  border-radius: var(--radius-md);
-  background-color: var(--white);
-  gap: var(--spacing-xs);
-  border: 1px solid var(--light-gray);
-  
-  svg {
-    margin-top: 3px;
-    flex-shrink: 0;
-    color: var(--primary-color);
-  }
-`;
-
-const SourceText = styled.span`
-  font-size: 0.75rem;
-  color: var(--dark-gray);
-  max-height: 60px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
 `;
 
 const SidebarCard = styled.div`
@@ -456,33 +431,7 @@ const CollectionsContainer = styled.div`
   }
 `;
 
-const SettingsForm = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-sm);
-
-  label {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-    font-size: 0.875rem;
-    color: var(--dark-gray);
-  }
-
-  input, select {
-    padding: 8px;
-    border: 1px solid var(--light-gray);
-    border-radius: var(--radius-sm);
-    font-size: 0.875rem;
-
-    &:focus {
-      outline: none;
-      border-color: var(--primary-color);
-    }
-  }
-`;
-
-const CollectionItem = styled.label`
+const CollectionItem = styled.div`
   display: grid;
   grid-template-columns: 24px 1fr;
   padding: 8px var(--spacing-sm);
@@ -508,6 +457,36 @@ const CollectionItem = styled.label`
     line-height: 1.4;
     word-break: break-word;
   }
+`;
+
+const SettingsFormItem = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 0.875rem;
+  color: var(--dark-gray);
+
+  span {
+    margin-bottom: 4px;
+  }
+
+  input, select {
+    padding: 8px;
+    border: 1px solid var(--light-gray);
+    border-radius: var(--radius-sm);
+    font-size: 0.875rem;
+
+    &:focus {
+      outline: none;
+      border-color: var(--primary-color);
+    }
+  }
+`;
+
+const SettingsForm = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
 `;
 
 const EmptyState = styled.div`
@@ -600,6 +579,33 @@ const SourcesList = styled.div`
   opacity: ${props => props.isExpanded ? '1' : '0'};
 `;
 
+const SourceItem = styled.div`
+  display: flex;
+  align-items: flex-start;
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border-radius: var(--radius-md);
+  background-color: var(--white);
+  gap: var(--spacing-xs);
+  border: 1px solid var(--light-gray);
+  
+  svg {
+    margin-top: 3px;
+    flex-shrink: 0;
+    color: var(--primary-color);
+  }
+`;
+
+const SourceText = styled.span`
+  font-size: 0.75rem;
+  color: var(--dark-gray);
+  max-height: 60px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+`;
+
 const GeneralChatInterface = () => {
   const { queryRag, getCollections, isLoading } = useApi();
   const [messages, setMessages] = useState([]);
@@ -617,8 +623,9 @@ const GeneralChatInterface = () => {
   const [isSettingsExpanded, setIsSettingsExpanded] = useState(false);
   const [expandedSources, setExpandedSources] = useState({});
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [error, setError] = useState(null);
   
-  const messagesEndRef = useRef(null);
+  const chatHistoryRef = useRef(null);
   
   useEffect(() => {
     fetchCollections();
@@ -660,7 +667,7 @@ const GeneralChatInterface = () => {
   };
   
   const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+    chatHistoryRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
   
   const handleSubmit = async (e) => {
@@ -676,6 +683,7 @@ const GeneralChatInterface = () => {
     
     setMessages(prev => [...prev, userMessage, loadingMessage]);
     setInput('');
+    setError(null);
 
     const specialQueryCheck = checkSpecialQuery(input);
     if (specialQueryCheck.isSpecial) {
@@ -705,27 +713,31 @@ const GeneralChatInterface = () => {
       queryData.collection_names = selectedCollections;
     }
 
-    const response = await queryRag(queryData);
-    
-    if (response) {
-      const botMessage = {
-        type: 'bot',
-        content: response.answer,
-        sources: response.sources,
-        isTyping: true
-      };
-      setMessages(prev => prev.slice(0, -1).concat(botMessage));
-    } else {
-      const errorMessage = {
-        type: 'bot',
-        content: 'Rất tiếc, đã xảy ra lỗi khi xử lý yêu cầu của bạn.',
-        sources: [],
-        isTyping: true
-      };
-      setMessages(prev => prev.slice(0, -1).concat(errorMessage));
+    try {
+      const response = await queryRag(queryData);
+      
+      if (response) {
+        const botMessage = {
+          type: 'bot',
+          content: response.answer,
+          sources: response.sources,
+          isTyping: true
+        };
+        setMessages(prev => prev.slice(0, -1).concat(botMessage));
+      } else {
+        const errorMessage = {
+          type: 'bot',
+          content: 'Rất tiếc, đã xảy ra lỗi khi xử lý yêu cầu của bạn.',
+          sources: [],
+          isTyping: true
+        };
+        setMessages(prev => prev.slice(0, -1).concat(errorMessage));
+      }
+    } catch (err) {
+      setError('Có lỗi xảy ra khi gửi tin nhắn. Vui lòng thử lại.');
+    } finally {
+      scrollToBottom();
     }
-
-    scrollToBottom();
   };
   
   const handleCollectionSelect = (collectionName) => {
@@ -757,44 +769,63 @@ const GeneralChatInterface = () => {
     setIsSidebarOpen(!isSidebarOpen);
   };
   
+  const handleKeyPress = (e) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      handleSubmit(e);
+    }
+  };
+  
   return (
     <UserLayout>
       <PageContainer>
         <PageHeader>
-          <Title>Trợ lý thông tin chung</Title>
-          <Subtitle>Đặt câu hỏi về thông tin chung của trường</Subtitle>
+          <LogoContainer>
+            <img src={chatbotAvartar} alt="VinhUni Bot Avatar" />
+          </LogoContainer>
+          <HeaderContent>
+            <Title>Trợ lý thông tin chung</Title>
+            <Subtitle>Đặt câu hỏi về thông tin chung của trường</Subtitle>
+          </HeaderContent>
         </PageHeader>
         
         <ChatContainer>
-          <SidebarOverlay isOpen={isSidebarOpen} onClick={toggleSidebar} />
-          
           <MainChat>
-            <ChatMessages className="chat-messages-container">
+            <ChatMessages>
               {messages.length > 0 ? (
                 messages.map((message, index) => {
                   if (message.type === 'user') {
                     return (
-                      <UserMessage key={index}>
-                        <MessageContent className="message-content">
+                      <Message key={index} isUser={true}>
+                        <Avatar isUser={true}>
+                          <img src={userAvatar} alt="User" />
+                        </Avatar>
+                        <MessageContent isUser={true}>
                           {message.content}
                         </MessageContent>
-                      </UserMessage>
+                      </Message>
                     );
                   } else if (message.content === 'loading') {
                     return (
-                      <BotMessage key={index}>
-                        <MessageContent className="message-content">
+                      <Message key={index} isUser={false}>
+                        <Avatar isUser={false}>
+                          <img src={chatbotAvartar} alt="Bot" />
+                        </Avatar>
+                        <MessageContent isUser={false}>
                           <LoadingIndicator>
                             <div className="loading-spinner" />
                             <span>Đang xử lý câu hỏi của bạn...</span>
                           </LoadingIndicator>
                         </MessageContent>
-                      </BotMessage>
+                      </Message>
                     );
                   } else {
                     return (
-                      <BotMessage key={index}>
-                        <MessageContent className="message-content">
+                      <Message key={index} isUser={false}>
+                        <Avatar isUser={false}>
+                          <img src={chatbotAvartar} alt="Bot" />
+                        </Avatar>
+                        <MessageContent isUser={false}>
                           {message.isTyping ? (
                             <TypingMessage content={message.content} />
                           ) : (
@@ -825,7 +856,7 @@ const GeneralChatInterface = () => {
                             </SourcesContainer>
                           )}
                         </MessageContent>
-                      </BotMessage>
+                      </Message>
                     );
                   }
                 })
@@ -836,7 +867,7 @@ const GeneralChatInterface = () => {
                   <p>Tôi sẽ tìm kiếm trong bộ sưu tập tài liệu của bạn và cung cấp câu trả lời.</p>
                 </EmptyState>
               )}
-              <div ref={messagesEndRef} />
+              <div ref={chatHistoryRef} />
             </ChatMessages>
             
             <ChatInputContainer>
@@ -854,7 +885,7 @@ const GeneralChatInterface = () => {
               </ChatInputForm>
             </ChatInputContainer>
           </MainChat>
-          
+
           <Sidebar isOpen={isSidebarOpen}>
             <SidebarCard>
               <CardHeader onClick={() => setIsSettingsExpanded(!isSettingsExpanded)}>
@@ -866,8 +897,8 @@ const GeneralChatInterface = () => {
               </CardHeader>
               <CardContent isExpanded={isSettingsExpanded}>
                 <SettingsForm>
-                  <label>
-                    Mô hình AI
+                  <SettingsFormItem>
+                    <span>Mô hình AI</span>
                     <select
                       name="model"
                       value={querySettings.model}
@@ -876,10 +907,10 @@ const GeneralChatInterface = () => {
                       <option value="grok">Grok</option>
                       <option value="deepseek">Deepseek</option>
                     </select>
-                  </label>
+                  </SettingsFormItem>
                   
-                  <label>
-                    Số lượng tài liệu lấy về (retrieval)
+                  <SettingsFormItem>
+                    <span>Số lượng tài liệu lấy về (retrieval)</span>
                     <input
                       type="number"
                       name="topK"
@@ -888,10 +919,10 @@ const GeneralChatInterface = () => {
                       value={querySettings.topK}
                       onChange={handleSettingChange}
                     />
-                  </label>
+                  </SettingsFormItem>
                   
-                  <label>
-                    Số lượng tài liệu xếp hạng lại (reranking)
+                  <SettingsFormItem>
+                    <span>Số lượng tài liệu xếp hạng lại (reranking)</span>
                     <input
                       type="number"
                       name="topN"
@@ -900,10 +931,10 @@ const GeneralChatInterface = () => {
                       value={querySettings.topN}
                       onChange={handleSettingChange}
                     />
-                  </label>
+                  </SettingsFormItem>
                   
-                  <label style={{ display: "none" }}>
-                    Độ ngẫu nhiên (temperature)
+                  <SettingsFormItem>
+                    <span>Độ ngẫu nhiên (temperature)</span>
                     <input
                       type="number"
                       name="temperature"
@@ -913,10 +944,10 @@ const GeneralChatInterface = () => {
                       value={querySettings.temperature}
                       onChange={handleSettingChange}
                     />
-                  </label>
+                  </SettingsFormItem>
                   
-                  <label>
-                    Giới hạn số từ đầu ra (max_tokens)
+                  <SettingsFormItem>
+                    <span>Giới hạn số từ đầu ra (max_tokens)</span>
                     <input
                       type="number"
                       name="maxTokens"
@@ -926,7 +957,7 @@ const GeneralChatInterface = () => {
                       value={querySettings.maxTokens}
                       onChange={handleSettingChange}
                     />
-                  </label>
+                  </SettingsFormItem>
                 </SettingsForm>
               </CardContent>
             </SidebarCard>
@@ -942,11 +973,11 @@ const GeneralChatInterface = () => {
                 {collections.length > 0 ? (
                   <CollectionsContainer>
                     {collections.map(collection => (
-                      <CollectionItem key={collection.name}>
+                      <CollectionItem key={collection.name} onClick={() => handleCollectionSelect(collection.name)}>
                         <input
                           type="checkbox"
                           checked={selectedCollections.includes(collection.name)}
-                          onChange={() => handleCollectionSelect(collection.name)}
+                          onChange={() => {}}
                         />
                         <span>{collection.display_name || collection.name}</span>
                       </CollectionItem>
