@@ -3,6 +3,9 @@ import styled from 'styled-components';
 import { FiMessageSquare, FiX, FiBook, FiCalendar, FiClock, FiChevronRight, FiBell, FiMessageCircle, FiSearch, FiInfo } from 'react-icons/fi';
 import ElearningChatInterface from '../components/ElearningChatInterface';
 import { useNavigate } from 'react-router-dom';
+import { courseData } from '../config/courseData';
+import { DEMO_ACCOUNTS } from '../config/accounts';
+import { TopBarComponent } from '../components/ElearningLayout';
 
 const PageContainer = styled.div`
   min-height: 100vh;
@@ -12,69 +15,6 @@ const PageContainer = styled.div`
 const HeaderWrapper = styled.div`
   background-color: #0066b3;
   width: 100%;
-`;
-
-const TopBar = styled.div`
-  background-color: #005291;
-  padding: 0.5rem 0;
-  
-  .content {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 1rem;
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    gap: 1rem;
-  }
-
-  .user-controls {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    color: white;
-    font-size: 0.9rem;
-
-    .notifications {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      cursor: pointer;
-      
-      &:hover {
-        opacity: 0.9;
-      }
-    }
-
-    .messages {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      cursor: pointer;
-      
-      &:hover {
-        opacity: 0.9;
-      }
-    }
-
-    .user-info {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      cursor: pointer;
-      
-      img {
-        width: 24px;
-        height: 24px;
-        border-radius: 50%;
-        background: white;
-      }
-      
-      &:hover {
-        opacity: 0.9;
-      }
-    }
-  }
 `;
 
 const Header = styled.header`
@@ -519,33 +459,18 @@ const StudentDashboard = () => {
   const [selectedCourse, setSelectedCourse] = useState(null);
   const navigate = useNavigate();
 
-  // Mock course data
-  const courses = [
-    {
-      id: 1,
-      title: 'Học máy',
-      instructor: 'GV. Nguyễn Văn A',
-      schedule: 'Thứ 2, 4 - Tiết 1-3',
-      progress: '8/15 buổi',
-      code: 'CS410'
-    },
-    {
-      id: 2,
-      title: 'Xử lý ảnh',
-      instructor: 'GV. Trần Thị B',
-      schedule: 'Thứ 3, 5 - Tiết 4-6',
-      progress: '6/15 buổi',
-      code: 'CS420'
-    },
-    {
-      id: 3,
-      title: 'Trí tuệ nhân tạo',
-      instructor: 'GV. Lê Văn C',
-      schedule: 'Thứ 4, 6 - Tiết 7-9',
-      progress: '10/15 buổi',
-      code: 'CS430'
-    }
-  ];
+  // Get current user from accounts
+  const currentUser = DEMO_ACCOUNTS.student; // Using the student account
+
+  // Use courseData directly from config
+  const courses = courseData.map(course => ({
+    id: course.id,
+    title: course.title,
+    instructor: course.instructor,
+    schedule: course.schedule,
+    progress: course.progress,
+    code: course.id
+  }));
 
   const handleCourseClick = (course) => {
     navigate(`/elearning/student/course/${course.code}`);
@@ -558,25 +483,7 @@ const StudentDashboard = () => {
   return (
     <PageContainer>
       <HeaderWrapper>
-        <TopBar>
-          <div className="content">
-            <div className="user-controls">
-              <div className="notifications">
-                <FiBell />
-                <span>Thông báo</span>
-              </div>
-              <div className="messages">
-                <FiMessageCircle />
-                <span>Tin nhắn</span>
-              </div>
-              <div className="user-info">
-                <img src="/male-avatar-placeholder.png" alt="User avatar" />
-                <span>Đặng Ngọc Anh</span>
-              </div>
-            </div>
-          </div>
-        </TopBar>
-
+        <TopBarComponent userRole="student" />
         <Header>
           <div className="content">
             <Logo>

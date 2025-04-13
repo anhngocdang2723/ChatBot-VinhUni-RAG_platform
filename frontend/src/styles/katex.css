@@ -1,0 +1,52 @@
+/* KaTeX custom styles */
+.katex {
+  font-size: 1.2em !important;
+  line-height: 1.6 !important;
+}
+
+.katex-display {
+  display: block !important;
+  margin: 1.5em 0 !important;
+  text-align: center !important;
+  overflow-x: auto !important;
+  overflow-y: hidden !important;
+  padding: 0.5em 0 !important;
+}
+
+.katex-display > .katex {
+  display: inline-block !important;
+  text-align: initial !important;
+  max-width: 100% !important;
+}
+
+.katex-html {
+  overflow-x: auto !important;
+  overflow-y: hidden !important;
+  padding: 0.5em !important;
+}
+
+.katex-html > .base {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* Math formula styling */
+.math {
+  display: block !important;
+  margin: 1em 0 !important;
+  text-align: center !important;
+}
+
+.math-inline {
+  display: inline !important;
+  margin: 0 !important;
+}
+
+/* Ensure proper spacing around math blocks */
+.katex-display + p {
+  margin-top: 1.5em !important;
+}
+
+p + .katex-display {
+  margin-top: 1.5em !important;
+} 

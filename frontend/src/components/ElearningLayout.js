@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import { FiBell, FiMessageCircle, FiSearch } from 'react-icons/fi';
+import { FiBell, FiMessageCircle, FiSearch, FiLogOut } from 'react-icons/fi';
+import { DEMO_ACCOUNTS } from '../config/accounts';
 
 const HeaderWrapper = styled.div`
   background-color: #0066b3;
@@ -28,7 +29,7 @@ const TopBar = styled.div`
     color: white;
     font-size: 0.9rem;
 
-    .notifications, .messages, .user-info {
+    .notifications, .messages, .user-info, .logout {
       display: flex;
       align-items: center;
       gap: 0.5rem;
@@ -37,6 +38,11 @@ const TopBar = styled.div`
       &:hover {
         opacity: 0.9;
       }
+    }
+
+    .logout {
+      padding-left: 1rem;
+      border-left: 1px solid rgba(255, 255, 255, 0.2);
     }
 
     .user-info img {
@@ -200,28 +206,58 @@ const Footer = styled.footer`
   }
 `;
 
-export const ElearningHeader = () => {
+export const TopBarComponent = ({ userRole = 'student' }) => {
+  const currentUser = userRole === 'student' ? DEMO_ACCOUNTS.student : DEMO_ACCOUNTS.lecturer;
+
+  const handleLogout = () => {
+    // Add logout logic here
+    window.location.href = '/';
+  };
+
   return (
-    <HeaderWrapper>
-      <TopBar>
-        <div className="content">
-          <div className="user-controls">
-            <div className="notifications">
-              <FiBell />
-              <span>Thông báo</span>
-            </div>
-            <div className="messages">
-              <FiMessageCircle />
-              <span>Tin nhắn</span>
-            </div>
-            <div className="user-info">
-              <img src="/male-avatar-placeholder.png" alt="User avatar" />
-              <span>Đặng Ngọc Anh</span>
-            </div>
+    <TopBar>
+      <div className="content">
+        <div className="user-controls">
+          <div className="notifications">
+            <FiBell />
+            <span>Thông báo</span>
+          </div>
+          <div className="messages">
+            <FiMessageCircle />
+            <span>Tin nhắn</span>
+          </div>
+          <div className="user-info">
+            <img src="/male-avatar-placeholder.png" alt="User avatar" />
+            <span>{currentUser.username}</span>
+            {currentUser.role && (
+              <span style={{ 
+                fontSize: '0.8rem', 
+                opacity: 0.8, 
+                backgroundColor: 'rgba(255, 255, 255, 0.1)',
+                padding: '2px 6px',
+                borderRadius: '4px',
+                marginLeft: '4px'
+              }}>
+                {currentUser.role === 'student' ? 'Sinh viên' : 
+                 currentUser.role === 'lecturer' ? 'Giảng viên' : 
+                 currentUser.role}
+              </span>
+            )}
+          </div>
+          <div className="logout" onClick={handleLogout}>
+            <FiLogOut />
+            <span>Đăng xuất</span>
           </div>
         </div>
-      </TopBar>
+      </div>
+    </TopBar>
+  );
+};
 
+export const ElearningHeader = ({ userRole = 'student' }) => {
+  return (
+    <HeaderWrapper>
+      <TopBarComponent userRole={userRole} />
       <Header>
         <div className="content">
           <Logo>

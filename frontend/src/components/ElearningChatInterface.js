@@ -6,6 +6,7 @@ import ReactMarkdown from 'react-markdown';
 import remarkMath from 'remark-math';
 import rehypeKatex from 'rehype-katex';
 import 'katex/dist/katex.min.css';
+import '../styles/katex.css';
 import html2canvas from 'html2canvas';
 import TypingMessage from './TypingMessage';
 
@@ -100,6 +101,58 @@ const MessageContent = styled.div`
       margin: 0.5em 0;
       padding-left: var(--spacing-md);
       color: var(--gray);
+    }
+
+    /* Math formula styling */
+    .math {
+      display: block;
+      margin: 1em 0;
+      text-align: center;
+    }
+
+    .math-inline {
+      display: inline;
+      margin: 0;
+    }
+
+    .katex {
+      font-size: 1.2em;
+      line-height: 1.6;
+    }
+
+    .katex-display {
+      display: block;
+      margin: 1.5em 0;
+      text-align: center;
+      overflow-x: auto;
+      overflow-y: hidden;
+      padding: 0.5em 0;
+    }
+
+    .katex-display > .katex {
+      display: inline-block;
+      text-align: initial;
+      max-width: 100%;
+    }
+
+    .katex-html {
+      overflow-x: auto;
+      overflow-y: hidden;
+      padding: 0.5em;
+    }
+
+    .katex-html > .base {
+      margin: 0;
+      padding: 0;
+    }
+
+    /* Ensure proper spacing around math blocks */
+    .katex-display + p {
+      margin-top: 1.5em;
+    }
+
+    p + .katex-display {
+      margin-top: 1.5em;
     }
   }
 `;
@@ -217,6 +270,13 @@ const SendButton = styled.button`
   justify-content: center;
   cursor: pointer;
   transition: all 0.2s;
+  padding: 0;
+
+  svg {
+    width: 20px;
+    height: 20px;
+    color: #005291;
+  }
 
   &:hover {
     background: #005291;
@@ -561,29 +621,25 @@ Bạn có thể hỏi bất cứ điều gì về môn học này!`,
     try {
       let processedImage = null;
       
-      // Process image if present
       if (selectedImage) {
-        console.log('Processing image:', selectedImage.name, 'Size:', selectedImage.size);
         try {
           processedImage = await prepareImageForApi(selectedImage, imagePreview);
-          console.log('Image processed successfully, data length:', processedImage?.length || 0);
         } catch (imgError) {
           throw new Error(`Lỗi xử lý ảnh: ${imgError.message}`);
         }
       }
 
-      // Update chat history with user message
       updateChatHistory({ role: 'user', content: input });
 
       const queryData = {
         query: input,
-        collection_names: [selectedCourse.id],
+        collection_names: [selectedCourse.collectionName],
         context: {
           course_title: selectedCourse.title,
           course_code: selectedCourse.code,
           course_description: selectedCourse.description,
           chapters: selectedCourse.chapters,
-          chat_history: chatHistory // This will now contain only the last MAX_CHAT_HISTORY messages
+          chat_history: chatHistory
         },
         image_data: processedImage,
         has_image: !!processedImage,
@@ -935,7 +991,19 @@ Your goal is to enhance the student's understanding through clear and informativ
                       <div className="markdown-content">
                         <ReactMarkdown
                           remarkPlugins={[remarkMath]}
-                          rehypePlugins={[rehypeKatex]}
+                          rehypePlugins={[[rehypeKatex, {
+                            strict: false,
+                            throwOnError: false,
+                            displayMode: true,
+                            fleqn: false,
+                            leqno: false,
+                            minRuleThickness: 0.04,
+                            macros: {
+                              "\\text": "\\text",
+                              "\\frac": "\\frac",
+                              "\\displaystyle": "\\displaystyle"
+                            }
+                          }]]}
                         >
                           {message.content}
                         </ReactMarkdown>
@@ -1009,7 +1077,7 @@ Your goal is to enhance the student's understanding through clear and informativ
               />
             </ImageUploadButton>
             <SendButton onClick={handleSend} disabled={(!input.trim() && !selectedImage) || isLoading || !selectedCourse || imageError}>
-              <FiSend size={18} />
+              <FiSend size={20} />
             </SendButton>
           </InputWrapper>
           {imagePreview && (

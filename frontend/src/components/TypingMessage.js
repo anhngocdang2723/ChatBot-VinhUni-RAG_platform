@@ -15,7 +15,7 @@ const TypingMessage = ({ content, isMath = false }) => {
       const timeout = setTimeout(() => {
         setDisplayedText(prev => prev + content[currentIndex]);
         setCurrentIndex(prev => prev + 1);
-      }, 15); // Adjust typing speed here (lower number = faster) now is 15ms
+      }, 20); // Adjust typing speed here (lower number = faster) now is 15ms
 
       return () => clearTimeout(timeout);
     }

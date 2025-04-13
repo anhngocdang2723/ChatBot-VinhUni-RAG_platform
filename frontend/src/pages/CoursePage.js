@@ -368,14 +368,18 @@ const CoursePage = () => {
   const [isChatOpen, setIsChatOpen] = useState(false);
   const [selectedMaterial, setSelectedMaterial] = useState(null);
   
-  console.log('courseId:', courseId);
-  console.log('courseData:', courseData);
-  const course = courseData.find(courseObj => courseObj[courseId])?.[courseId];
-  console.log('course:', course);
+  // Find course by matching id
+  const course = courseData.find(course => course.id === courseId);
 
   if (!course) {
+    console.log('Course not found:', courseId);
+    console.log('Available courses:', courseData.map(c => c.id));
     return <div>Không tìm thấy khóa học</div>;
   }
+
+  // Format collection name
+  const collectionName = `course_${courseId.toLowerCase()}`;
+  course.collectionName = collectionName;
 
   const toggleChapter = (chapterId) => {
     setExpandedChapters(prev => ({
@@ -409,7 +413,7 @@ const CoursePage = () => {
           <div className="course-info">
             <span>
               <FiBook />
-              {course.code}
+              {course.id}
             </span>
             <span>
               <FiInfo />

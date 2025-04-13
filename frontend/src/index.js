@@ -14,11 +14,10 @@ import NotFound from './pages/NotFound';
 import GeneralChatInterface from './pages/GeneralChatInterface';
 import Help from './pages/Help';
 import StudentDashboard from './pages/StudentDashboard';
+import LecturerDashboard from './pages/LecturerDashboard';
 import CoursePage from './pages/CoursePage';
+import LecturerCoursePage from './pages/LecturerCoursePage';
 import './index.css';
-
-// Placeholder component for Lecturer dashboard
-const LecturerDashboard = () => <div>Lecturer Dashboard (Coming Soon)</div>;
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -103,6 +102,14 @@ root.render(
             element={
               <ProtectedRoute allowedRoles={['lecturer']} allowedPortal="elearning">
                 <LecturerDashboard />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/elearning/lecturer/course/:courseId"
+            element={
+              <ProtectedRoute allowedRoles={['lecturer']} allowedPortal="elearning">
+                <LecturerCoursePage />
               </ProtectedRoute>
             }
           />

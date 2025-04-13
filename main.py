@@ -23,7 +23,7 @@ app = FastAPI(
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
-        "https://chatbot-vinhuni.vercel.app/", # Vercel
+        "https://chatbot-vinhuni.vercel.app", # Vercel
         "http://localhost:3000", # Local development
         "https://freehosting.id.vn", # Cloudflare Tunnel
     ],
