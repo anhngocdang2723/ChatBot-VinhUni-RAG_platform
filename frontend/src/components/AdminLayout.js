@@ -168,7 +168,7 @@ const AdminLayout = ({ children }) => {
     <LayoutContainer>
       <Sidebar>
         <Logo>
-          <span>Chatbot VinhUni RAG</span>
+          <span>Chatbot VinhUni</span>
         </Logo>
         
         <NavList>

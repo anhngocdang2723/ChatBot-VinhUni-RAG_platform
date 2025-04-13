@@ -14,7 +14,7 @@ load_dotenv()
 
 # Initialize FastAPI app
 app = FastAPI(
-    title="RAG Chatbot API",
+    title="Chatbot Vinhuni API",
     description="API for RAG-based chatbot with multiple LLM provider support",
     version="1.0.0"
 )
@@ -23,10 +23,9 @@ app = FastAPI(
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
-        "https://e789-2405-4802-4988-de10-85df-6076-7ece-9730.ngrok-free.app/",
-        "https://chat-bot-vinh-uni-rag-platform.vercel.app",
-        "https://chat-bot-vinh-uni-rag-platform-git-main-ngoc-anh-dangs-projects.vercel.app/",
-        "http://localhost:3000",  # Local development
+        "https://chatbot-vinhuni.vercel.app/", # Vercel
+        "http://localhost:3000", # Local development
+        "https://freehosting.id.vn", # Cloudflare Tunnel
     ],
     allow_credentials=True,
     allow_methods=["*"],  # Allow all methods

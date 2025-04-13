@@ -3,6 +3,7 @@ import ReactMarkdown from 'react-markdown';
 import remarkMath from 'remark-math';
 import rehypeKatex from 'rehype-katex';
 import 'katex/dist/katex.min.css';
+import '../styles/math.css';
 
 const TypingMessage = ({ content, isMath = false }) => {
   const [displayedText, setDisplayedText] = useState('');
@@ -36,6 +37,20 @@ const TypingMessage = ({ content, isMath = false }) => {
         <ReactMarkdown
           remarkPlugins={[remarkMath]}
           rehypePlugins={[rehypeKatex]}
+          components={{
+            math: ({ node, ...props }) => (
+              <span className="math-inline" {...props} />
+            ),
+            inlineMath: ({ node, ...props }) => (
+              <span className="math-inline" {...props} />
+            ),
+            mathBlock: ({ node, ...props }) => (
+              <div className="math-display" {...props} />
+            ),
+            blockMath: ({ node, ...props }) => (
+              <div className="math-display" {...props} />
+            )
+          }}
         >
           {displayedText}
         </ReactMarkdown>

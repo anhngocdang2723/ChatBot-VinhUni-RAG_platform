@@ -1,0 +1,144 @@
+/* Math formulas styling */
+.markdown-content {
+  line-height: 1.6;
+  font-size: 1rem;
+}
+
+/* Inline math */
+.markdown-content .math-inline {
+  display: inline-block;
+  margin: 0 0.2em;
+  vertical-align: middle;
+}
+
+/* Block math */
+.markdown-content .math-display {
+  display: block;
+  margin: 1em 0;
+  text-align: center;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+/* KaTeX specific styles */
+.markdown-content .katex {
+  font-size: 1.1em;
+}
+
+.markdown-content .katex-display {
+  margin: 1em 0;
+  text-align: center;
+}
+
+.markdown-content .katex-display > .katex {
+  display: inline-block;
+  text-align: initial;
+}
+
+/* Code blocks */
+.markdown-content pre {
+  background-color: var(--light-gray);
+  padding: 1em;
+  border-radius: 0.5em;
+  overflow-x: auto;
+  margin: 1em 0;
+}
+
+.markdown-content code {
+  font-family: 'Fira Code', monospace;
+  font-size: 0.9em;
+  background-color: var(--light-gray);
+  padding: 0.2em 0.4em;
+  border-radius: 0.3em;
+}
+
+/* Lists */
+.markdown-content ul, 
+.markdown-content ol {
+  padding-left: 1.5em;
+  margin: 0.5em 0;
+}
+
+.markdown-content li {
+  margin: 0.3em 0;
+}
+
+/* Headings */
+.markdown-content h1,
+.markdown-content h2,
+.markdown-content h3,
+.markdown-content h4,
+.markdown-content h5,
+.markdown-content h6 {
+  margin: 1em 0 0.5em 0;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+/* Tables */
+.markdown-content table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 1em 0;
+}
+
+.markdown-content th,
+.markdown-content td {
+  border: 1px solid var(--light-gray);
+  padding: 0.5em;
+  text-align: left;
+}
+
+.markdown-content th {
+  background-color: var(--light-gray);
+  font-weight: 600;
+}
+
+/* Blockquotes */
+.markdown-content blockquote {
+  border-left: 4px solid var(--primary-color);
+  margin: 1em 0;
+  padding: 0.5em 1em;
+  background-color: var(--light-gray);
+  color: var(--dark-gray);
+}
+
+/* Links */
+.markdown-content a {
+  color: var(--primary-color);
+  text-decoration: none;
+}
+
+.markdown-content a:hover {
+  text-decoration: underline;
+}
+
+/* Images */
+.markdown-content img {
+  max-width: 100%;
+  height: auto;
+  margin: 1em 0;
+  border-radius: 0.5em;
+}
+
+/* Horizontal rules */
+.markdown-content hr {
+  border: none;
+  border-top: 1px solid var(--light-gray);
+  margin: 1.5em 0;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .markdown-content {
+    font-size: 0.95rem;
+  }
+  
+  .markdown-content .katex {
+    font-size: 1em;
+  }
+  
+  .markdown-content pre {
+    padding: 0.8em;
+  }
+} 
