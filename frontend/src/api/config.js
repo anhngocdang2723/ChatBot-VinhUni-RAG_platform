@@ -1,6 +1,6 @@
 // API Configuration
 export const API_CONFIG = {
-    BASE_URL: process.env.REACT_APP_API_URL || 'http://localhost:8000/api',
+    BASE_URL: process.env.REACT_APP_API_URL || 'http://localhost:8000/api' || 'https://freehosting.id.vn/api',
     TIMEOUT: 60000, // 60 seconds
     RETRY_ATTEMPTS: 3,
     RETRY_DELAY: 10000, // 10 seconds
