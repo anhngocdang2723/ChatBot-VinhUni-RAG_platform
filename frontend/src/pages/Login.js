@@ -12,6 +12,14 @@ const LoginContainer = styled.div`
   min-height: 100vh;
   background: url(${bgLogin}) no-repeat center center fixed;
   background-size: cover;
+  padding: 20px;
+  
+  @media (max-width: 768px) {
+    padding: 12px;
+    align-items: flex-start;
+    min-height: 100vh;
+    height: 100%;
+  }
 `;
 
 const Logo = styled.img`
@@ -20,6 +28,12 @@ const Logo = styled.img`
   margin: 0 auto;
   display: block;
   margin-bottom: var(--spacing-md);
+  
+  @media (max-width: 768px) {
+    width: 80px;
+    height: 80px;
+    margin-bottom: var(--spacing-sm);
+  }
 `;
 
 const Attribution = styled.p`
@@ -27,6 +41,11 @@ const Attribution = styled.p`
   color: var(--dark-gray);
   font-size: 0.875rem;
   margin-bottom: var(--spacing-lg);
+  
+  @media (max-width: 768px) {
+    font-size: 0.8rem;
+    margin-bottom: var(--spacing-md);
+  }
 `;
 
 const LoginForm = styled.form`
@@ -44,12 +63,23 @@ const LoginForm = styled.form`
     transform: translateY(-2px);
     box-shadow: 0 10px 40px 0 rgba(31, 38, 135, 0.4);
   }
+  
+  @media (max-width: 768px) {
+    padding: var(--spacing-lg);
+    margin-top: 40px;
+    max-width: 100%;
+  }
 `;
 
 const FormTitle = styled.h2`
   color: var(--almost-black);
   margin-bottom: var(--spacing-lg);
   text-align: center;
+  
+  @media (max-width: 768px) {
+    font-size: 1.2rem;
+    margin-bottom: var(--spacing-md);
+  }
 `;
 
 const PortalButtons = styled.div`
@@ -57,6 +87,11 @@ const PortalButtons = styled.div`
   grid-template-columns: 1fr 1fr;
   gap: var(--spacing-md);
   margin-bottom: var(--spacing-lg);
+  
+  @media (max-width: 768px) {
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-md);
+  }
 `;
 
 const PortalButton = styled.button`
@@ -78,10 +113,19 @@ const PortalButton = styled.button`
   &:active {
     transform: translateY(0);
   }
+  
+  @media (max-width: 768px) {
+    padding: var(--spacing-sm);
+    font-size: 1rem;
+  }
 `;
 
 const FormGroup = styled.div`
   margin-bottom: var(--spacing-md);
+  
+  @media (max-width: 768px) {
+    margin-bottom: var(--spacing-sm);
+  }
 `;
 
 const Label = styled.label`
@@ -89,6 +133,11 @@ const Label = styled.label`
   margin-bottom: var(--spacing-sm);
   color: var(--dark-gray);
   font-weight: 500;
+  
+  @media (max-width: 768px) {
+    font-size: 0.9rem;
+    margin-bottom: 4px;
+  }
 `;
 
 const Input = styled.input`
@@ -104,6 +153,11 @@ const Input = styled.input`
     border-color: var(--primary-color);
     box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
   }
+  
+  @media (max-width: 768px) {
+    padding: 8px 12px;
+    font-size: 0.9rem;
+  }
 `;
 
 const RememberMeContainer = styled.div`
@@ -111,18 +165,31 @@ const RememberMeContainer = styled.div`
   align-items: center;
   margin-bottom: var(--spacing-md);
   gap: var(--spacing-sm);
+  
+  @media (max-width: 768px) {
+    margin-bottom: var(--spacing-sm);
+  }
 `;
 
 const Checkbox = styled.input`
   width: 18px;
   height: 18px;
   cursor: pointer;
+  
+  @media (max-width: 768px) {
+    width: 16px;
+    height: 16px;
+  }
 `;
 
 const CheckboxLabel = styled.label`
   color: var(--dark-gray);
   font-size: 0.95rem;
   cursor: pointer;
+  
+  @media (max-width: 768px) {
+    font-size: 0.9rem;
+  }
 `;
 
 const SubmitButton = styled.button`
@@ -145,6 +212,11 @@ const SubmitButton = styled.button`
   &:active {
     transform: translateY(0);
   }
+  
+  @media (max-width: 768px) {
+    padding: 12px;
+    font-size: 1.1rem;
+  }
 `;
 
 const ErrorMessage = styled.div`
@@ -152,6 +224,11 @@ const ErrorMessage = styled.div`
   font-size: 0.875rem;
   margin-top: var(--spacing-sm);
   text-align: center;
+  
+  @media (max-width: 768px) {
+    font-size: 0.8rem;
+    margin-top: 8px;
+  }
 `;
 
 const Login = () => {

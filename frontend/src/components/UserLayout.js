@@ -29,31 +29,42 @@ const Sidebar = styled.aside`
   position: fixed;
   height: 100vh;
   z-index: 1000;
-  transition: all 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   box-shadow: 4px 0 10px rgba(0, 0, 0, 0.05);
   padding-top: 72px;
   
   @media (max-width: 768px) {
     transform: translateX(${props => props.isOpen ? '0' : '-100%'});
     width: 100%;
+    max-width: 320px;
+    padding-top: 64px;
   }
 `;
 
 const MobileMenuButton = styled.button`
   display: none;
   position: fixed;
-  top: var(--spacing-md);
-  left: var(--spacing-md);
+  top: 12px;
+  left: 12px;
   z-index: 1001;
-  background: var(--almost-black);
-  color: var(--white);
+  background: ${VINH_COLORS.white};
+  color: ${VINH_COLORS.primary};
   border: none;
-  padding: var(--spacing-sm);
-  border-radius: var(--radius-md);
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
   cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
   
   @media (max-width: 768px) {
-    display: block;
+    display: flex;
+  }
+  
+  &:active {
+    transform: scale(0.95);
   }
 `;
 
@@ -66,6 +77,9 @@ const Overlay = styled.div`
   bottom: 0;
   background: rgba(0, 0, 0, 0.5);
   z-index: 999;
+  opacity: ${props => props.isOpen ? 1 : 0};
+  transition: opacity 0.3s ease;
+  backdrop-filter: blur(2px);
   
   @media (max-width: 768px) {
     display: ${props => props.isOpen ? 'block' : 'none'};
@@ -167,18 +181,32 @@ const Header = styled.header`
   padding: 0 24px;
   z-index: 1001;
   color: ${VINH_COLORS.white};
+  
+  @media (max-width: 768px) {
+    padding: 0 12px;
+    height: 48px;
+  }
 `;
 
 const HeaderLeft = styled.div`
   display: flex;
   align-items: center;
   gap: 16px;
+  
+  @media (max-width: 768px) {
+    gap: 8px;
+  }
 `;
 
 const HeaderLogo = styled.img`
   width: 32px;
   height: 32px;
   object-fit: contain;
+  
+  @media (max-width: 768px) {
+    width: 24px;
+    height: 24px;
+  }
 `;
 
 const HeaderTitle = styled.div`
@@ -191,6 +219,10 @@ const TitleContent = styled.div`
   display: flex;
   flex-direction: column;
   gap: 0px;
+  
+  @media (max-width: 768px) {
+    display: none;
+  }
 `;
 
 const TitleDivider = styled.div`
@@ -206,6 +238,10 @@ const MainTitle = styled.h1`
   color: ${VINH_COLORS.white};
   margin: 0;
   letter-spacing: 0.3px;
+  
+  @media (max-width: 768px) {
+    font-size: 0.8rem;
+  }
 `;
 
 const SubTitle = styled.h2`
@@ -214,6 +250,10 @@ const SubTitle = styled.h2`
   color: ${VINH_COLORS.white};
   margin: 0;
   opacity: 0.9;
+  
+  @media (max-width: 768px) {
+    font-size: 0.7rem;
+  }
 `;
 
 const SearchContainer = styled.div`
@@ -221,6 +261,11 @@ const SearchContainer = styled.div`
   max-width: 480px;
   margin: 0 32px;
   position: relative;
+  
+  @media (max-width: 768px) {
+    margin: 0 12px;
+    max-width: none;
+  }
 `;
 
 const SearchInput = styled.input`
@@ -247,6 +292,12 @@ const SearchInput = styled.input`
   &::placeholder {
     color: rgba(255, 255, 255, 0.7);
   }
+  
+  @media (max-width: 768px) {
+    height: 28px;
+    padding: 4px 36px;
+    font-size: 0.8rem;
+  }
 `;
 
 const SearchIcon = styled(FiSearch)`
@@ -257,12 +308,22 @@ const SearchIcon = styled(FiSearch)`
   color: rgba(255, 255, 255, 0.7);
   width: 16px;
   height: 16px;
+  
+  @media (max-width: 768px) {
+    left: 8px;
+    width: 14px;
+    height: 14px;
+  }
 `;
 
 const HeaderActions = styled.div`
   display: flex;
   align-items: center;
   gap: 12px;
+  
+  @media (max-width: 768px) {
+    gap: 8px;
+  }
 `;
 
 const IconButton = styled.button`
@@ -292,6 +353,16 @@ const IconButton = styled.button`
   &:hover svg {
     opacity: 1;
   }
+  
+  @media (max-width: 768px) {
+    width: 28px;
+    height: 28px;
+    
+    svg {
+      width: 16px;
+      height: 16px;
+    }
+  }
 `;
 
 const UserInfo = styled.div`
@@ -305,6 +376,10 @@ const UserInfo = styled.div`
   
   &:hover {
     background: rgba(255, 255, 255, 0.1);
+  }
+  
+  @media (max-width: 768px) {
+    padding: 4px 8px;
   }
 `;
 
@@ -320,12 +395,22 @@ const UserAvatar = styled.div`
     height: 100%;
     object-fit: cover;
   }
+  
+  @media (max-width: 768px) {
+    width: 28px;
+    height: 28px;
+  }
 `;
 
 const UserName = styled.span`
   font-weight: 400;
   color: ${VINH_COLORS.white};
   font-size: 0.875rem;
+  
+  @media (max-width: 768px) {
+    font-size: 0.8rem;
+    display: none;
+  }
 `;
 
 const Content = styled.main`
@@ -339,6 +424,7 @@ const Content = styled.main`
   
   @media (max-width: 768px) {
     margin-left: 0;
+    padding: 64px 12px 12px;
   }
 `;
 
@@ -355,6 +441,13 @@ const StatusIndicator = styled.div`
   font-size: 0.875rem;
   color: ${VINH_COLORS.text};
   z-index: 1000;
+  
+  @media (max-width: 768px) {
+    bottom: 16px;
+    right: 16px;
+    padding: 6px 12px;
+    font-size: 0.8rem;
+  }
 `;
 
 const StatusDot = styled.span`
