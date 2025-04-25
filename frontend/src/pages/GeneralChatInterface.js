@@ -11,6 +11,9 @@ import userAvatar from '../assets/meme-image2.png';
 import { VINH_COLORS } from '../config/colors';
 // import userAvatar from '../assets/male-avatar-placeholder.png';
 
+// Maximum number of messages to keep in chat history
+const MAX_CHAT_HISTORY = 3;
+
 const PageContainer = styled.div`
   height: calc(100vh - 64px);
   display: flex;
@@ -25,6 +28,14 @@ const PageHeader = styled.div`
   gap: var(--spacing-md);
   background: ${VINH_COLORS.white};
   border-bottom: 1px solid ${VINH_COLORS.gray};
+  
+  @media (max-width: 768px) {
+    padding: var(--spacing-sm) var(--spacing-md);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  }
 `;
 
 const LogoContainer = styled.div`
@@ -52,12 +63,21 @@ const Title = styled.h1`
   font-size: 1.25rem;
   margin: 0;
   color: ${VINH_COLORS.text};
+  
+  @media (max-width: 768px) {
+    font-size: 1rem;
+  }
 `;
 
 const Subtitle = styled.p`
   font-size: 0.875rem;
   color: ${VINH_COLORS.textLight};
   margin: 0;
+  
+  @media (max-width: 768px) {
+    font-size: 0.75rem;
+    display: none;
+  }
 `;
 
 const ChatContainer = styled.div`
@@ -70,7 +90,8 @@ const ChatContainer = styled.div`
   
   @media (max-width: 768px) {
     gap: 0;
-    padding: var(--spacing-sm);
+    padding: var(--spacing-xs);
+    height: calc(100vh - 64px - 56px); /* Adjust for header and bottom safe area */
   }
 `;
 
@@ -83,6 +104,11 @@ const MainChat = styled.div`
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
   overflow: hidden;
   min-width: 0;
+  
+  @media (max-width: 768px) {
+    border-radius: 0;
+    box-shadow: none;
+  }
 `;
 
 const ChatMessages = styled.div`
@@ -90,6 +116,7 @@ const ChatMessages = styled.div`
   padding: var(--spacing-md);
   overflow-y: auto;
   background-color: ${VINH_COLORS.white};
+  -webkit-overflow-scrolling: touch;
 
   &::-webkit-scrollbar {
     width: 6px;
@@ -103,6 +130,10 @@ const ChatMessages = styled.div`
     background: ${VINH_COLORS.gray};
     border-radius: 3px;
   }
+  
+  @media (max-width: 768px) {
+    padding: var(--spacing-sm);
+  }
 `;
 
 const Message = styled.div`
@@ -111,6 +142,11 @@ const Message = styled.div`
   align-items: flex-start;
   gap: var(--spacing-md);
   justify-content: ${props => props.isUser ? 'flex-end' : 'flex-start'};
+  
+  @media (max-width: 768px) {
+    margin-bottom: var(--spacing-sm);
+    gap: var(--spacing-sm);
+  }
 `;
 
 const Avatar = styled.div`
@@ -126,6 +162,11 @@ const Avatar = styled.div`
     height: 100%;
     object-fit: cover;
   }
+  
+  @media (max-width: 768px) {
+    width: 32px;
+    height: 32px;
+  }
 `;
 
 const MessageContent = styled.div`
@@ -140,6 +181,13 @@ const MessageContent = styled.div`
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
   border: 1px solid ${props => props.isUser ? 'rgba(37, 99, 235, 0.1)' : 'rgba(0, 0, 0, 0.05)'};
 
+  @media (max-width: 768px) {
+    max-width: 85%;
+    padding: var(--spacing-sm);
+    font-size: 0.9rem;
+    line-height: 1.5;
+  }
+
   pre {
     background: ${VINH_COLORS.white};
     padding: var(--spacing-md);
@@ -147,6 +195,11 @@ const MessageContent = styled.div`
     overflow-x: auto;
     margin: var(--spacing-sm) 0;
     font-family: 'Courier New', Courier, monospace;
+    
+    @media (max-width: 768px) {
+      padding: var(--spacing-sm);
+      font-size: 0.85rem;
+    }
   }
 
   .markdown-content {
@@ -211,6 +264,10 @@ const ChatInputContainer = styled.div`
   
   @media (max-width: 768px) {
     padding: var(--spacing-sm);
+    position: sticky;
+    bottom: 0;
+    z-index: 10;
+    box-shadow: 0 -1px 3px rgba(0, 0, 0, 0.1);
   }
 `;
 
@@ -243,7 +300,8 @@ const ChatInput = styled.input`
   
   @media (max-width: 768px) {
     padding: var(--spacing-sm) var(--spacing-md);
-    font-size: 0.875rem;
+    font-size: 0.9rem;
+    border-radius: var(--radius-lg);
   }
 `;
 
@@ -305,35 +363,42 @@ const Sidebar = styled.div`
     bottom: 0;
     width: 100%;
     max-width: 320px;
-    background: var(--white);
+    background: ${VINH_COLORS.white};
     padding: var(--spacing-md);
     transform: translateX(${props => props.isOpen ? '0' : '100%'});
-    transition: transform 0.3s ease;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     z-index: 1000;
-    box-shadow: var(--shadow-lg);
+    box-shadow: -2px 0 8px rgba(0, 0, 0, 0.15);
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
   }
 `;
 
 const MobileSidebarToggle = styled.button`
   display: none;
   position: fixed;
-  top: var(--spacing-lg);
-  right: var(--spacing-lg);
+  bottom: calc(var(--spacing-lg) + 64px);
+  right: var(--spacing-md);
   z-index: 1001;
-  background: var(--primary-color);
-  color: var(--white);
+  background: ${VINH_COLORS.primary};
+  color: ${VINH_COLORS.white};
   border: none;
-  padding: var(--spacing-sm);
-  border-radius: var(--radius-full);
-  cursor: pointer;
-  box-shadow: var(--shadow-lg);
   width: 48px;
   height: 48px;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
   align-items: center;
   justify-content: center;
+  transition: transform 0.2s ease;
   
   @media (max-width: 768px) {
     display: flex;
+    transform: ${props => props.isOpen ? 'rotate(180deg)' : 'none'};
+  }
+  
+  &:active {
+    transform: scale(0.95);
   }
 `;
 
@@ -346,6 +411,9 @@ const SidebarOverlay = styled.div`
   bottom: 0;
   background: rgba(0, 0, 0, 0.5);
   z-index: 999;
+  opacity: ${props => props.isOpen ? 1 : 0};
+  transition: opacity 0.3s ease;
+  backdrop-filter: blur(2px);
   
   @media (max-width: 768px) {
     display: ${props => props.isOpen ? 'block' : 'none'};
@@ -353,34 +421,38 @@ const SidebarOverlay = styled.div`
 `;
 
 const SidebarCard = styled.div`
-  background-color: var(--white);
+  background-color: ${VINH_COLORS.white};
   border-radius: var(--radius-lg);
   padding: var(--spacing-md);
-  box-shadow: var(--shadow-md);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
   
   @media (max-width: 768px) {
-    min-width: 200px;
-    flex-shrink: 0;
     border-radius: var(--radius-md);
+    padding: var(--spacing-sm);
+    margin-bottom: var(--spacing-sm);
   }
 `;
 
 const CardHeader = styled.div`
   padding: var(--spacing-md);
-  border-bottom: 1px solid var(--light-gray);
+  border-bottom: 1px solid ${VINH_COLORS.gray};
   font-weight: 500;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  color: var(--almost-black);
+  color: ${VINH_COLORS.text};
   cursor: pointer;
   user-select: none;
   transition: background-color 0.2s ease;
 
+  @media (max-width: 768px) {
+    padding: var(--spacing-sm);
+  }
+
   &:hover {
-    background-color: var(--light-gray);
+    background-color: ${VINH_COLORS.gray};
   }
 
   .header-content {
@@ -389,12 +461,12 @@ const CardHeader = styled.div`
     gap: var(--spacing-sm);
 
     svg {
-      color: var(--primary-color);
+      color: ${VINH_COLORS.primary};
     }
   }
 
   .toggle-icon {
-    color: var(--gray);
+    color: ${VINH_COLORS.gray};
     transition: transform 0.3s ease;
     
     &.expanded {
@@ -626,18 +698,21 @@ const GeneralChatInterface = () => {
   const [expandedSources, setExpandedSources] = useState({});
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [error, setError] = useState(null);
+  const [chatHistory, setChatHistory] = useState([]);
   
   const chatHistoryRef = useRef(null);
   
   useEffect(() => {
     fetchCollections();
     // Add initial greeting message
-    setMessages([{
+    const initialMessage = {
       type: 'bot',
       content: 'Xin chào! Tôi là trợ lý AI của Trường Đại học Vinh. Tôi có thể giúp bạn trả lời các câu hỏi về trường. Hãy đặt câu hỏi của bạn, tôi sẽ tìm kiếm thông tin trong tài liệu của trường để trả lời bạn một cách chính xác nhất.',
       sources: [],
       isTyping: true
-    }]);
+    };
+    setMessages([initialMessage]);
+    updateChatHistory({ role: 'assistant', content: initialMessage.content });
   }, []);
   
   useEffect(() => {
@@ -672,6 +747,15 @@ const GeneralChatInterface = () => {
     chatHistoryRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
   
+  // Update chat history with limit
+  const updateChatHistory = (newMessage) => {
+    setChatHistory(prev => {
+      const updatedHistory = [...prev, newMessage];
+      // Keep only the most recent messages up to MAX_CHAT_HISTORY
+      return updatedHistory.slice(-MAX_CHAT_HISTORY);
+    });
+  };
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!input.trim()) return;
@@ -696,6 +780,8 @@ const GeneralChatInterface = () => {
         isTyping: true
       };
       setMessages(prev => prev.slice(0, -1).concat(botMessage));
+      updateChatHistory({ role: 'user', content: input });
+      updateChatHistory({ role: 'assistant', content: specialQueryCheck.response });
       scrollToBottom();
       return;
     }
@@ -706,7 +792,8 @@ const GeneralChatInterface = () => {
       top_n: querySettings.topN,
       temperature: querySettings.temperature,
       max_tokens: querySettings.maxTokens,
-      model: querySettings.model
+      model: querySettings.model,
+      chat_history: chatHistory
     };
 
     console.log('Selected model:', querySettings.model); // Debug log
@@ -716,6 +803,7 @@ const GeneralChatInterface = () => {
     }
 
     try {
+      updateChatHistory({ role: 'user', content: input });
       const response = await queryRag(queryData);
       
       if (response) {
@@ -726,6 +814,7 @@ const GeneralChatInterface = () => {
           isTyping: true
         };
         setMessages(prev => prev.slice(0, -1).concat(botMessage));
+        updateChatHistory({ role: 'assistant', content: response.answer });
       } else {
         const errorMessage = {
           type: 'bot',
@@ -734,6 +823,7 @@ const GeneralChatInterface = () => {
           isTyping: true
         };
         setMessages(prev => prev.slice(0, -1).concat(errorMessage));
+        updateChatHistory({ role: 'assistant', content: errorMessage.content });
       }
     } catch (err) {
       setError('Có lỗi xảy ra khi gửi tin nhắn. Vui lòng thử lại.');
