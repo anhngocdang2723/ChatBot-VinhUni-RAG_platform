@@ -5,6 +5,7 @@ from qdrant_client.http.models import Filter, FieldCondition, MatchValue, MatchA
 import logging
 import time
 import torch
+import os
 
 # Configure logger
 logger = logging.getLogger(__name__)
@@ -360,3 +361,20 @@ class Retriever:
             all_results = all_results[:top_n]
 
         return all_results 
+
+# Singleton retriever instance
+_retriever_instance = None
+
+def get_retriever_singleton(qdrant_url=None, qdrant_api_key=None, verbose=False):
+    global _retriever_instance
+    if _retriever_instance is None:
+        # Nếu không truyền tham số thì lấy từ biến môi trường hoặc config
+        if qdrant_url is None or qdrant_api_key is None:
+            qdrant_url = os.getenv('QDRANT_URL')
+            qdrant_api_key = os.getenv('QDRANT_API_KEY')
+        _retriever_instance = Retriever(
+            qdrant_url=qdrant_url,
+            qdrant_api_key=qdrant_api_key,
+            verbose=verbose
+        )
+    return _retriever_instance 

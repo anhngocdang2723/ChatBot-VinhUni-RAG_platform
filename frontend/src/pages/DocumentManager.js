@@ -5,6 +5,7 @@ import AdminLayout from '../components/AdminLayout';
 import { useApi } from '../context/ApiContext';
 import { toast } from 'react-toastify';
 import debounce from 'lodash/debounce';
+import { getCachedCollections, setCachedCollections, clearCachedCollections } from '../utils/collectionSessionCache';
 
 const PageContainer = styled.div`
   background: var(--white);
@@ -336,11 +337,18 @@ const DocumentManager = () => {
 
   // Memoize fetchCollections to prevent unnecessary re-renders
   const fetchCollections = useCallback(async () => {
+    console.log('[DocumentManager] Gọi fetchCollections');
     if (isRefreshing) return; // Prevent multiple simultaneous requests
-    
     try {
       setIsRefreshing(true);
-      const fetchedCollections = await getCollections();
+      let fetchedCollections = getCachedCollections();
+      if (!fetchedCollections) {
+        console.log('[DocumentManager] Không có cache FE, gọi API backend');
+        fetchedCollections = await getCollections();
+        setCachedCollections(fetchedCollections);
+      } else {
+        console.log('[DocumentManager] Đã có cache FE, không gọi API backend');
+      }
       // Only store essential collection information
       const simplifiedCollections = fetchedCollections.map(collection => ({
         name: collection.name,
@@ -366,6 +374,7 @@ const DocumentManager = () => {
 
   // Only fetch collections on mount and when explicitly requested
   useEffect(() => {
+    console.log('[DocumentManager] useEffect gọi fetchCollections');
     fetchCollections();
   }, []); // Remove fetchCollections from dependencies to prevent re-fetching
 
@@ -392,6 +401,11 @@ const DocumentManager = () => {
       ...prev,
       [name]: value
     }));
+  };
+
+  const refreshCollectionsCache = async () => {
+    await fetch('http://localhost:8000/api/manage/collections/refresh', { method: 'POST' });
+    clearCachedCollections(); // Xóa cache FE để lần sau lấy lại từ backend
   };
 
   const handleUpload = async (event) => {
@@ -453,7 +467,7 @@ const DocumentManager = () => {
       }
       
       // Reset form after a delay
-      setTimeout(() => {
+      setTimeout(async () => {
         setSelectedFile(null);
         setUploadConfig({
           collectionName: '',
@@ -463,14 +477,13 @@ const DocumentManager = () => {
         setUploadStatus(null);
         setUploadProgress(0);
         setUploadStep(null);
-        
         // Reset file input
         const fileInput = document.getElementById('file-upload');
         if (fileInput) {
           fileInput.value = '';
         }
-        
-        // Refresh collections
+        // Refresh backend cache and then fetch collections
+        await refreshCollectionsCache();
         fetchCollections();
       }, 3000);
       
@@ -489,6 +502,7 @@ const DocumentManager = () => {
     if (window.confirm(`Are you sure you want to delete collection "${collectionName}"? This action cannot be undone.`)) {
       try {
         await deleteCollection(collectionName);
+        await refreshCollectionsCache();
         await fetchCollections();
       } catch (error) {
         toast.error('Failed to delete collection');

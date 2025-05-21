@@ -3,6 +3,7 @@ from typing import List, Dict, Any, Optional
 from pydantic import BaseModel
 from core.vector_store import VectorStore
 from core.dependencies import get_vector_store
+from core.collection_cache import get_collection_cache, refresh_collection_cache
 import logging
 import os
 import shutil
@@ -41,13 +42,11 @@ async def list_collections(
 ) -> List[CollectionInfo]:
     """Get basic information about all available collections."""
     try:
-        # Get basic collection info
-        collections = vector_store.list_collections()
-        
+        # Lấy collection từ cache
+        collections = get_collection_cache(vector_store)
         # Convert to CollectionInfo format
         enhanced_collections = []
         for collection in collections:
-            # Get document count for each collection
             doc_count = vector_store.get_collection_size(collection['name'])
             enhanced_collections.append(
                 CollectionInfo(
@@ -56,7 +55,6 @@ async def list_collections(
                     document_count=doc_count
                 )
             )
-        
         return enhanced_collections
     except Exception as e:
         logger.error(f"Error listing collections: {str(e)}")
@@ -225,4 +223,9 @@ async def get_collection_stats(
         )
     except Exception as e:
         logger.error(f"Error getting collection stats: {str(e)}")
-        raise HTTPException(status_code=500, detail=f"Error getting collection stats: {str(e)}") 
+        raise HTTPException(status_code=500, detail=f"Error getting collection stats: {str(e)}")
+
+@router.post("/collections/refresh")
+async def refresh_collections(vector_store: VectorStore = Depends(get_vector_store)):
+    refresh_collection_cache(vector_store)
+    return {"status": "refreshed"} 

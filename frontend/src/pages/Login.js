@@ -241,42 +241,32 @@ const Login = () => {
   });
   const [error, setError] = useState('');
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
-    
-    const account = Object.values(DEMO_ACCOUNTS).find(
-      acc => acc.username === credentials.username && 
-            acc.password === credentials.password &&
-            acc.portal === credentials.portal
-    );
 
-    if (account) {
-      if (credentials.rememberMe) {
-        localStorage.setItem('rememberedUser', credentials.username);
+    try {
+      const response = await fetch('http://localhost:8000/api/auth/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          username: credentials.username,
+          password: credentials.password
+        })
+      });
+
+      if (response.ok) {
+        localStorage.setItem('userRole', 'user');
+        localStorage.setItem('portal', 'portal');
+        localStorage.setItem('user', credentials.username);
+        await response.json();
+        navigate('/user');
       } else {
-        localStorage.removeItem('rememberedUser');
+        const data = await response.json();
+        setError(data.detail || 'Tên đăng nhập hoặc mật khẩu không đúng');
       }
-      
-      localStorage.setItem('userRole', account.role);
-      localStorage.setItem('portal', account.portal);
-      localStorage.setItem('user', account.username);
-      
-      if (account.portal === 'portal') {
-        if (account.role === 'admin') {
-          navigate('/admin');
-        } else {
-          navigate('/user');
-        }
-      } else {
-        if (account.role === 'student') {
-          navigate('/elearning/student');
-        } else if (account.role === 'lecturer') {
-          navigate('/elearning/lecturer');
-        }
-      }
-    } else {
-      setError('Tên đăng nhập hoặc mật khẩu không đúng');
+    } catch (err) {
+      setError('Lỗi kết nối server!');
     }
   };
 
@@ -355,6 +345,11 @@ const Login = () => {
         </RememberMeContainer>
         {error && <ErrorMessage>{error}</ErrorMessage>}
         <SubmitButton type="submit">Đăng nhập</SubmitButton>
+        <SubmitButton type="button" style={{marginTop: '10px', backgroundColor: '#4CAF50'}} onClick={() => alert('Tính năng đang phát triển!')}>Đăng nhập bằng tài khoản nhà trường</SubmitButton>
+        <div style={{textAlign: 'center', marginTop: '16px'}}>
+          <span>Bạn chưa có tài khoản? </span>
+          <a href="/register" style={{color: '#005BAA', textDecoration: 'underline', cursor: 'pointer'}}>Đăng ký tài khoản</a>
+        </div>
       </LoginForm>
     </LoginContainer>
   );

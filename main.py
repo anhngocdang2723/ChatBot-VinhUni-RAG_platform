@@ -8,6 +8,7 @@ from typing import List, Dict, Any
 # Import routers
 from routers import document_router, query_router, document_manager
 from core.config import Settings
+from core import auth_router
 
 # Load environment variables
 load_dotenv()
@@ -40,6 +41,7 @@ os.makedirs("output", exist_ok=True)
 app.include_router(document_router.router, prefix="/api/documents", tags=["documents"])
 app.include_router(query_router.router, prefix="/api/query", tags=["query"])
 app.include_router(document_manager.router, prefix="/api/manage", tags=["management"])
+app.include_router(auth_router.router, prefix="/api/auth", tags=["auth"])
 
 # Add health check endpoint
 @app.get("/api/health")

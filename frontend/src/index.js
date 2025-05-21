@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { ApiProvider } from './context/ApiContext';
@@ -18,6 +18,7 @@ import LecturerDashboard from './pages/LecturerDashboard';
 import CoursePage from './pages/CoursePage';
 import LecturerCoursePage from './pages/LecturerCoursePage';
 import UnderDevelopment from './pages/UnderDevelopment';
+import Register from './pages/Register';
 import './index.css';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -27,7 +28,9 @@ root.render(
       <Router>
         <Routes>
           {/* Public routes */}
-          <Route path="/" element={<Login />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/" element={<Navigate to="/login" replace />} />
           
           {/* Admin routes */}
           <Route

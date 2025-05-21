@@ -1,6 +1,6 @@
 from functools import lru_cache
 from core.vector_store import VectorStore
-from core.retriever import Retriever
+from core.retriever import Retriever, get_retriever_singleton
 from core.llm_interface import RAGPromptManager, create_llm_provider
 from core.config import get_settings
 from core.document_processor import DocumentProcessor
@@ -16,11 +16,7 @@ def get_vector_store() -> VectorStore:
 
 @lru_cache()
 def get_retriever() -> Retriever:
-    return Retriever(
-        qdrant_url=settings.QDRANT_URL,
-        qdrant_api_key=settings.QDRANT_API_KEY,
-        verbose=True  # Enable verbose logging for debugging
-    )
+    return get_retriever_singleton(verbose=True)
 
 @lru_cache()
 def get_prompt_manager() -> RAGPromptManager:
