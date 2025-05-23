@@ -1,9 +1,9 @@
 from fastapi import APIRouter, HTTPException, Depends, Query
 from typing import List, Dict, Any, Optional
 from pydantic import BaseModel
-from core.vector_store import VectorStore
-from core.dependencies import get_vector_store
-from core.collection_cache import get_collection_cache, refresh_collection_cache
+from core.document_processing.vector_store import VectorStore
+from core.utils.dependencies import get_vector_store
+from core.utils.collection_cache import get_collection_cache, refresh_collection_cache
 import logging
 import os
 import shutil

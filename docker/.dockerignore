@@ -1,0 +1,60 @@
+# Frontend
+frontend/
+
+# Data and uploads
+data/
+
+# Python cache and test files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.pyi
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+.nox/
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+
+# IDE settings
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Virtual environment
+myenv/
+venv/
+env/
+.env/
+.venv/
+
+# Git
+.git
+.gitignore
+
+# Docker
+
+# Logs
+*.log
+logs/
+
+# Environment variables
+.env
+.env.*
+
+# Documentation
+README.md
+LICENSE
+docs/
+
+# Temporary files
+*.tmp
+*.temp
+.DS_Store
+Thumbs.db

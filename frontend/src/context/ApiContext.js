@@ -128,18 +128,29 @@ export const ApiProvider = ({ children }) => {
     }
   };
 
-  const uploadDocument = async (file, collectionName = null, chunkingConfig = {}) => {
+  const uploadDocument = async (file, collectionName = null, config = {}) => {
     try {
       const formData = new FormData();
       formData.append('file', file);
+      
       if (collectionName) {
         formData.append('collection_name', collectionName);
       }
-      if (Object.keys(chunkingConfig).length > 0) {
-        formData.append('chunking_config', JSON.stringify(chunkingConfig));
+
+      // Add chunking configuration
+      if (config.chunk_size) {
+        formData.append('chunk_size', config.chunk_size.toString());
+      }
+      if (config.chunk_overlap) {
+        formData.append('chunk_overlap', config.chunk_overlap.toString());
       }
 
-      const response = await api.post(`${API_ENDPOINTS.DOCUMENTS}/upload`, formData, {
+      // Add metadata if provided
+      if (config.metadata) {
+        formData.append('metadata', JSON.stringify(config.metadata));
+      }
+
+      const response = await api.post(API_ENDPOINTS.DOCUMENTS + '/upload', formData, {
         headers: {
           ...getHeaders(apiKey),
           'Content-Type': 'multipart/form-data',
@@ -149,6 +160,23 @@ export const ApiProvider = ({ children }) => {
     } catch (error) {
       handleError(error);
       return null;
+    }
+  };
+
+  const deleteDocument = async (documentId) => {
+    try {
+      const response = await fetch(`${API_ENDPOINTS.DOCUMENTS}/${documentId}`, {
+        method: 'DELETE',
+      });
+      
+      if (!response.ok) {
+        throw new Error('Failed to delete document');
+      }
+      
+      return await response.json();
+    } catch (error) {
+      console.error('Error deleting document:', error);
+      throw error;
     }
   };
 
@@ -164,6 +192,7 @@ export const ApiProvider = ({ children }) => {
     queryRag,
     retrieveDocuments,
     uploadDocument,
+    deleteDocument,
   };
 
   return (

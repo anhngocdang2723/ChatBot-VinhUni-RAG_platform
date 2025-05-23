@@ -15,6 +15,14 @@ import tabula
 import json
 from enum import Enum
 import numpy as np
+from fastapi import UploadFile
+from core.document_processing.vector_store import VectorStore
+from core.llm.config import settings
+from core.document_processing.text_splitter import TextSplitter
+from core.document_processing.file_processor import FileProcessor
+from core.database.database import get_db
+import time
+import shutil
 
 # Configure logging
 logger = logging.getLogger(__name__)
@@ -333,51 +341,80 @@ class DocumentProcessor:
         'spreadsheet': ['xls', 'xlsx', 'csv'],
         'web': ['html', 'htm'],
     }
+
+    # Maximum file size (50MB)
+    MAX_FILE_SIZE = 50 * 1024 * 1024
     
     def __init__(
         self,
-        chunk_size: int = 1000,
-        chunk_overlap: int = 200,
         upload_dir: str = "data/uploads",
+        chunk_size: int = settings.chunking_config.DEFAULT_CHUNK_SIZE,
+        chunk_overlap: int = settings.chunking_config.DEFAULT_CHUNK_OVERLAP
     ):
+        """
+        Initialize DocumentProcessor.
+        
+        Args:
+            upload_dir: Directory to store uploaded files
+            chunk_size: Size of text chunks for processing
+            chunk_overlap: Overlap between chunks
+        """
+        self.upload_dir = upload_dir
         self.chunk_size = chunk_size
         self.chunk_overlap = chunk_overlap
-        self.upload_dir = upload_dir
-        
-        # Initialize tabular processor
+        self.text_splitter = TextSplitter(chunk_size=chunk_size, chunk_overlap=chunk_overlap)
+        self.file_processor = FileProcessor()
+        # Get db session
+        self.db = next(get_db())
+        self.vector_store = VectorStore(
+            qdrant_url=settings.QDRANT_URL,
+            qdrant_api_key=settings.QDRANT_API_KEY,
+            db=self.db,
+            verbose=True
+        )
         self.tabular_processor = TabularDataProcessor()
         
         # Create upload directory if it doesn't exist
-        os.makedirs(self.upload_dir, exist_ok=True)
-        
-        # Initialize text splitter
-        self.text_splitter = RecursiveCharacterTextSplitter(
-            chunk_size=self.chunk_size,
-            chunk_overlap=self.chunk_overlap,
-            length_function=len,
-            is_separator_regex=False
-        )
+        os.makedirs(upload_dir, exist_ok=True)
     
-    def process_file(self, file_path: str) -> Tuple[List[Union[str, Dict[str, Any]]], List[Dict[str, Any]]]:
+    def process_file(
+        self, 
+        file_path: str,
+        metadata: Optional[Dict[str, Any]] = None
+    ) -> Tuple[List[Union[str, Dict[str, Any]]], List[Dict[str, Any]]]:
         """
         Process a file and return its chunks and associated metadata.
         
         Args:
             file_path: Path to the file to process
+            metadata: Additional metadata to include with each chunk
             
         Returns:
             Tuple containing:
                 - List of text chunks (for text files) or descriptions (for tabular data)
                 - List of metadata dictionaries for each chunk
+                
+        Raises:
+            ValueError: If file is invalid or too large
+            FileNotFoundError: If file doesn't exist
+            Exception: For other processing errors
         """
         try:
+            # Validate file exists
+            if not os.path.exists(file_path):
+                raise FileNotFoundError(f"File not found: {file_path}")
+                
+            # Validate file size
+            file_size = os.path.getsize(file_path)
+            if file_size > self.MAX_FILE_SIZE:
+                raise ValueError(f"File too large: {file_size} bytes. Maximum size: {self.MAX_FILE_SIZE} bytes")
+                
             # Extract file extension
             file_ext = os.path.splitext(file_path)[1].lower().replace('.', '')
             
             # Validate file type
             if not self._is_supported_file_type(file_ext):
-                logger.error(f"Unsupported file type: {file_ext}")
-                return [], []
+                raise ValueError(f"Unsupported file type: {file_ext}")
             
             # Generate file hash for identification
             file_hash = self._generate_file_hash(file_path)
@@ -386,77 +423,118 @@ class DocumentProcessor:
             base_metadata = self._extract_metadata(file_path, file_ext)
             base_metadata["file_hash"] = file_hash
             
+            # Merge with provided metadata
+            if metadata:
+                base_metadata.update(metadata)
+            
             content = []
             metadata_list = []
             
-            # Process based on file type
-            if file_ext in self.SUPPORTED_EXTENSIONS['spreadsheet']:
-                # For spreadsheet files, process as tabular data
-                if file_ext in ['xlsx', 'xls']:
-                    tables = self.tabular_processor.process_excel(file_path)
-                elif file_ext == 'csv':
-                    tables = self.tabular_processor.process_csv(file_path)
-                
-                # Each table record becomes a separate content piece
-                for table in tables:
-                    # Ensure description exists and is properly formatted
-                    if "description" not in table:
-                        table["description"] = str(table.get("records", []))
+            try:
+                # Process based on file type
+                if file_ext in self.SUPPORTED_EXTENSIONS['spreadsheet']:
+                    # For spreadsheet files, process as tabular data
+                    if file_ext in ['xlsx', 'xls']:
+                        tables = self.tabular_processor.process_excel(file_path)
+                    elif file_ext == 'csv':
+                        tables = self.tabular_processor.process_csv(file_path)
                     
-                    # Only store the description as content
-                    content.append(table["description"])
-                    
-                    # Simplified metadata
-                    record_metadata = base_metadata.copy()
-                    record_metadata.update({
-                        "content_type": "table_record"
-                    })
-                    metadata_list.append(record_metadata)
-            
-            else:
-                # For non-spreadsheet files, process text and embedded tables
-                
-                # Extract text content
-                text = self._extract_text(file_path, file_ext)
-                
-                # Process any tables in the document
-                tables = self._extract_tables(file_path, file_ext)
-                
-                # Add table records first
-                for table in tables:
-                    # Ensure description exists and is properly formatted
-                    if "description" not in table:
-                        table["description"] = str(table.get("records", []))
-                    
-                    # Only store the description as content
-                    content.append(table["description"])
-                    
-                    # Simplified metadata
-                    record_metadata = base_metadata.copy()
-                    record_metadata.update({
-                        "content_type": "table_record"
-                    })
-                    metadata_list.append(record_metadata)
-                
-                # Then add text chunks
-                if text:
-                    chunks = self.text_splitter.split_text(text)
-                    for i, chunk in enumerate(chunks):
-                        content.append(chunk)
-                        chunk_metadata = base_metadata.copy()
-                        chunk_metadata.update({
-                            "content_type": "text",
-                            "chunk_id": i,
-                            "total_chunks": len(chunks)
+                    # Each table record becomes a separate content piece
+                    for table in tables:
+                        # Ensure description exists and is properly formatted
+                        if "description" not in table:
+                            table["description"] = str(table.get("records", []))
+                        
+                        # Only store the description as content
+                        content.append(table["description"])
+                        
+                        # Enhanced metadata for table records
+                        record_metadata = base_metadata.copy()
+                        record_metadata.update({
+                            "content_type": "table_record",
+                            "table_info": {
+                                "row_count": len(table.get("records", [])),
+                                "headers": table.get("headers", []),
+                                "table_index": len(content) - 1
+                            }
                         })
-                        metadata_list.append(chunk_metadata)
-            
-            logger.info(f"Processed {file_path} into {len(content)} content pieces")
-            return content, metadata_list
-            
+                        metadata_list.append(record_metadata)
+                
+                else:
+                    # For non-spreadsheet files, process text and embedded tables
+                    
+                    # Extract text content
+                    text = self._extract_text(file_path, file_ext)
+                    if not text.strip():
+                        logger.warning(f"No text content extracted from file: {file_path}")
+                    
+                    # Process any tables in the document
+                    tables = self._extract_tables(file_path, file_ext)
+                    
+                    # Add table records first
+                    for table in tables:
+                        # Ensure description exists and is properly formatted
+                        if "description" not in table:
+                            table["description"] = str(table.get("records", []))
+                        
+                        # Only store the description as content
+                        content.append(table["description"])
+                        
+                        # Enhanced metadata for table records
+                        record_metadata = base_metadata.copy()
+                        record_metadata.update({
+                            "content_type": "table_record",
+                            "table_info": {
+                                "row_count": len(table.get("records", [])),
+                                "headers": table.get("headers", []),
+                                "table_index": len(content) - 1
+                            }
+                        })
+                        metadata_list.append(record_metadata)
+                    
+                    # Then add text chunks
+                    if text:
+                        chunks = self.text_splitter.split_text(text)
+                        for i, chunk in enumerate(chunks):
+                            content.append(chunk)
+                            chunk_metadata = base_metadata.copy()
+                            chunk_metadata.update({
+                                "content_type": "text",
+                                "chunk_info": {
+                                    "chunk_id": i,
+                                    "total_chunks": len(chunks),
+                                    "chunk_size": len(chunk),
+                                    "chunk_overlap": self.chunk_overlap
+                                }
+                            })
+                            metadata_list.append(chunk_metadata)
+                
+                if not content:
+                    logger.warning(f"No content extracted from file: {file_path}")
+                    return [], []
+                
+                logger.info(f"Processed {file_path} into {len(content)} content pieces")
+                return content, metadata_list
+                
+            except Exception as e:
+                logger.error(f"Error processing file content: {str(e)}")
+                raise
+                
         except Exception as e:
             logger.error(f"Error processing file {file_path}: {str(e)}")
-            return [], []
+            raise
+        finally:
+            # Cleanup any temporary files if needed
+            self._cleanup_temp_files(file_path)
+    
+    def _cleanup_temp_files(self, file_path: str):
+        """Clean up any temporary files created during processing."""
+        try:
+            temp_dir = os.path.join(os.path.dirname(file_path), "temp")
+            if os.path.exists(temp_dir):
+                shutil.rmtree(temp_dir)
+        except Exception as e:
+            logger.warning(f"Error cleaning up temporary files: {str(e)}")
     
     def _extract_tables(self, file_path: str, file_ext: str) -> List[Dict[str, Any]]:
         """Extract tables from various file types."""
@@ -660,4 +738,104 @@ class DocumentProcessor:
                 "file_name": os.path.basename(file_path),
                 "file_type": file_ext,
                 "error": str(e)
-            } 
+            }
+
+    async def process_upload(
+        self,
+        file: UploadFile,
+        metadata: Dict[str, Any]
+    ) -> bool:
+        """
+        Process an uploaded file with proper transaction handling.
+        
+        Args:
+            file: The uploaded file
+            metadata: Document metadata including display_name, document_type, etc.
+            
+        Returns:
+            bool: True if successful, False otherwise
+        """
+        temp_file_path = None
+        try:
+            # Step 1: Save uploaded file to temp location
+            file_ext = os.path.splitext(file.filename)[1].lower().replace('.', '')
+            temp_file_path = os.path.join(self.upload_dir, f"temp_{int(time.time())}_{file.filename}")
+            
+            with open(temp_file_path, "wb") as buffer:
+                buffer.write(await file.read())
+            
+            # Step 2: Begin database transaction
+            self.db.begin()
+            
+            # Step 3: Create Document record first
+            timestamp = int(time.time() * 1000)
+            document_id = f"doc_{timestamp}"
+            
+            new_document = Document(
+                document_id=document_id,
+                display_name=metadata.get("display_name", file.filename),
+                file_name=file.filename,
+                file_type=file_ext,
+                document_type=metadata.get("document_type", "NOTICE"),
+                department=metadata.get("department", "GENERAL"),
+                description=metadata.get("description", ""),
+                reference_number=metadata.get("reference_number", ""),
+                impact_date=metadata.get("impact_date"),
+                effective_date=metadata.get("effective_date"),
+                expiry_date=metadata.get("expiry_date"),
+                created_by=metadata.get("upload_by", 1)
+            )
+            
+            # Add to session but don't commit yet
+            self.db.add(new_document)
+            
+            # Step 4: Process file content
+            content, chunk_metadata = self.process_file(temp_file_path, metadata)
+            
+            if not content:
+                raise Exception("No content extracted from file")
+            
+            # Update document with chunk count
+            new_document.total_chunks = len(content)
+            
+            # Step 5: Store in vector database
+            success = self.vector_store.store_documents(
+                collection_name=settings.collection_name,
+                texts=content,
+                metadata_list=[{
+                    "document_id": document_id,
+                    "display_name": new_document.display_name,
+                    "document_type": new_document.document_type,
+                    "department": new_document.department,
+                    "description": new_document.description,
+                    "reference_number": new_document.reference_number,
+                    "impact_date": new_document.impact_date.isoformat() if new_document.impact_date else None,
+                    "effective_date": new_document.effective_date.isoformat() if new_document.effective_date else None,
+                    "expiry_date": new_document.expiry_date.isoformat() if new_document.expiry_date else None,
+                    "original_filename": new_document.file_name
+                }]
+            )
+            
+            if not success:
+                raise Exception("Failed to store document in vector database")
+            
+            # Step 6: If everything is successful, commit the transaction
+            self.db.commit()
+            
+            logger.info(f"Successfully processed and stored document: {document_id}")
+            return True
+            
+        except Exception as e:
+            # Rollback database transaction
+            self.db.rollback()
+            
+            logger.error(f"Error processing upload: {str(e)}")
+            return False
+            
+        finally:
+            # Clean up temp file
+            if temp_file_path and os.path.exists(temp_file_path):
+                try:
+                    os.remove(temp_file_path)
+                except Exception as e:
+                    logger.warning(f"Failed to remove temp file: {str(e)}") 

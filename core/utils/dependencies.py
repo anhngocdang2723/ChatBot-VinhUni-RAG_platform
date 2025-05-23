@@ -1,17 +1,24 @@
 from functools import lru_cache
-from core.vector_store import VectorStore
-from core.retriever import Retriever, get_retriever_singleton
-from core.llm_interface import RAGPromptManager, create_llm_provider
-from core.config import get_settings
-from core.document_processor import DocumentProcessor
+from core.document_processing.vector_store import VectorStore
+from core.document_processing.retriever import Retriever, get_retriever_singleton
+from core.llm.llm_interface import RAGPromptManager, create_llm_provider
+from core.llm.config import get_settings
+from core.document_processing.document_processor import DocumentProcessor
+from core.database.database import get_db
+from sqlalchemy.orm import Session
+from fastapi import Depends
 
 settings = get_settings()
 
-@lru_cache()
-def get_vector_store() -> VectorStore:
+def get_vector_store(db: Session = Depends(get_db)) -> VectorStore:
+    settings = get_settings()
     return VectorStore(
         qdrant_url=settings.QDRANT_URL,
-        qdrant_api_key=settings.QDRANT_API_KEY
+        qdrant_api_key=settings.QDRANT_API_KEY,
+        db=db,
+        verbose=settings.VERBOSE,
+        chunk_size=settings.chunking_config.DEFAULT_CHUNK_SIZE,
+        chunk_overlap=settings.chunking_config.DEFAULT_CHUNK_OVERLAP
     )
 
 @lru_cache()

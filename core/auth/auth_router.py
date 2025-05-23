@@ -2,10 +2,10 @@ from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 from passlib.context import CryptContext
 from core.database import SessionLocal
-from core.models import User
+from core.database.models import User
 from pydantic import BaseModel, EmailStr
 import datetime
-from core.jwt_auth import create_access_token, decode_access_token
+from core.auth.jwt_auth import create_access_token, decode_access_token
 from fastapi.security import OAuth2PasswordBearer
 
 router = APIRouter()

@@ -1,41 +1,52 @@
+import logging
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from dotenv import load_dotenv
 import os
 import uvicorn
 from typing import List, Dict, Any
+from core.llm.config import Settings, get_settings
+from core.auth import auth_router
+from core.document_processing.model_singleton import model_singleton
 
 # Import routers
 from routers import document_router, query_router, document_manager
-from core.config import Settings
-from core import auth_router
 
 # Load environment variables
 load_dotenv()
 
+# Get settings
+settings = get_settings()
+
+# Configure logging
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
+
+# Initialize models at startup
+logger.info("Initializing models...")
+_ = model_singleton.embedding_model  # Initialize embedding model
+_ = model_singleton.reranking_model  # Initialize reranking model
+logger.info("Models initialization complete")
+
 # Initialize FastAPI app
 app = FastAPI(
-    title="Chatbot Vinhuni API",
-    description="API for RAG-based chatbot with multiple LLM provider support",
-    version="1.0.0"
+    title=settings.API_TITLE,
+    description=settings.API_DESCRIPTION
 )
 
 # Add CORS middleware
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[
-        "https://chatbot-vinhuni.vercel.app", # Vercel
-        "http://localhost:3000", # Local development
-        "https://freehosting.id.vn", # Cloudflare Tunnel
-    ],
+    allow_origins=["http://localhost:3000"],  # Frontend URL
     allow_credentials=True,
-    allow_methods=["*"],  # Allow all methods
-    allow_headers=["*"],  # Allow all headers
+    allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allow_headers=["*"],
+    expose_headers=["*"]
 )
 
 # Create required directories
-os.makedirs("data/uploads", exist_ok=True)
-os.makedirs("output", exist_ok=True)
+os.makedirs(settings.UPLOAD_DIR, exist_ok=True)
+os.makedirs(settings.OUTPUT_DIR, exist_ok=True)
 
 # Include routers
 app.include_router(document_router.router, prefix="/api/documents", tags=["documents"])
@@ -46,7 +57,14 @@ app.include_router(auth_router.router, prefix="/api/auth", tags=["auth"])
 # Add health check endpoint
 @app.get("/api/health")
 async def health_check():
-    return {"status": "ok"}
+    return {
+        "status": "ok",
+        "collection": {
+            "name": settings.collection_config.STORAGE_NAME,
+            "display_name": settings.collection_config.DISPLAY_NAME,
+            "description": settings.collection_config.DESCRIPTION
+        }
+    }
 
 @app.get("/api")
 async def root():

@@ -256,11 +256,50 @@ const Login = () => {
       });
 
       if (response.ok) {
-        localStorage.setItem('userRole', 'user');
-        localStorage.setItem('portal', 'portal');
+        const data = await response.json();
+        
+        // Find the user in DEMO_ACCOUNTS to get their role
+        let userRole = 'user'; // default role
+        for (const [_, account] of Object.entries(DEMO_ACCOUNTS)) {
+          if (account.username === credentials.username) {
+            userRole = account.role;
+            break;
+          }
+        }
+        
+        // Store user info in localStorage
+        localStorage.setItem('userRole', userRole);
+        localStorage.setItem('portal', credentials.portal);
         localStorage.setItem('user', credentials.username);
-        await response.json();
-        navigate('/user');
+
+        // Redirect based on role and portal
+        if (credentials.portal === 'portal') {
+          // Portal routes
+          switch(userRole) {
+            case 'admin':
+              navigate('/admin');
+              break;
+            case 'user':
+              navigate('/user');
+              break;
+            default:
+              navigate('/user');
+              break;
+          }
+        } else if (credentials.portal === 'elearning') {
+          // E-learning routes
+          switch(userRole) {
+            case 'student':
+              navigate('/elearning/student');
+              break;
+            case 'lecturer':
+              navigate('/elearning/lecturer');
+              break;
+            default:
+              setError('Bạn không có quyền truy cập vào hệ thống E-learning');
+              break;
+          }
+        }
       } else {
         const data = await response.json();
         setError(data.detail || 'Tên đăng nhập hoặc mật khẩu không đúng');

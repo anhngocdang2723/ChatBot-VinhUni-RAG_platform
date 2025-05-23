@@ -1,11 +1,12 @@
 from typing import List, Dict, Optional, Any
-from sentence_transformers import SentenceTransformer, CrossEncoder
 from qdrant_client import QdrantClient
 from qdrant_client.http.models import Filter, FieldCondition, MatchValue, MatchAny, Range
 import logging
 import time
 import torch
 import os
+from core.llm.config import collection_config
+from core.document_processing.model_singleton import model_singleton
 
 # Configure logger
 logger = logging.getLogger(__name__)
@@ -18,6 +19,7 @@ class Retriever:
     """
     Handles document retrieval and reranking operations.
     Supports hybrid search combining metadata filtering and semantic search.
+    All operations are performed on the fixed Truong Dai hoc Vinh collection.
     """
     
     def __init__(
@@ -28,19 +30,10 @@ class Retriever:
     ):
         self.verbose = verbose
         
-        # Check if CUDA is available
-        self.device = "cuda" if torch.cuda.is_available() else "cpu"
-        logger.info(f"Using device: {self.device}")
-        
-        # Initialize query embedding model
-        logger.info("Loading query embedding model: dangvantuan/vietnamese-embedding")
-        self.query_encoder = SentenceTransformer('dangvantuan/vietnamese-embedding')
-        self.query_encoder.to(self.device)
-        
-        # Initialize reranking model
-        logger.info("Loading reranking model: cross-encoder/mmarco-mMiniLMv2-L12-H384-v1")
-        self.reranker = CrossEncoder('cross-encoder/mmarco-mMiniLMv2-L12-H384-v1', max_length=512)
-        self.reranker.to(self.device)
+        # Use models from singleton
+        self.device = model_singleton.device
+        self.query_encoder = model_singleton.embedding_model
+        self.reranker = model_singleton.reranking_model
         
         # Initialize Qdrant client
         try:
@@ -162,23 +155,40 @@ class Retriever:
     def retrieve_documents(
         self,
         query: str,
-        collection_name: str,
+        collection_name: Optional[str] = None,
         metadata_filters: Optional[Dict[str, Any]] = None,
         top_k: int = 15,
-        score_threshold: float = 0.0
+        score_threshold: float = 0.0,
+        timeout: int = 30  # Add timeout parameter
     ) -> List[Dict]:
         """
         Retrieve documents using hybrid search with pre-filtering.
+        Always uses the fixed collection regardless of input collection name.
         
         Args:
             query: Search query text
-            collection_name: Name of the collection to search in
-            metadata_filters: Dictionary of metadata conditions for pre-filtering
+            collection_name: Collection name (ignored, always uses fixed collection)
+            metadata_filters: Optional metadata filters
             top_k: Number of results to return
-            score_threshold: Minimum similarity score
+            score_threshold: Minimum similarity score threshold
+            timeout: Maximum time in seconds to wait for results
+            
+        Returns:
+            List of document results with scores and metadata
         """
         try:
             start_time = time.time()
+            
+            # Input validation
+            if not query or not query.strip():
+                raise ValueError("Empty query")
+            
+            if len(query) > 1000:
+                query = query[:1000]
+                logger.warning("Query truncated to 1000 characters")
+            
+            # Always use fixed collection
+            collection_name = collection_config.STORAGE_NAME
             
             if self.verbose:
                 logger.info("Starting retrieval process...")
@@ -197,11 +207,18 @@ class Retriever:
             # Step 2: Generate query embedding
             if self.verbose:
                 logger.info("Generating query embedding...")
-                
-            query_embedding = self.query_encoder.encode(
-                query,
-                convert_to_numpy=True
-            )
+            
+            try:
+                with torch.no_grad():
+                    query_embedding = self.query_encoder.encode(
+                        query,
+                        convert_to_numpy=True,
+                        show_progress_bar=False,
+                        device=self.device
+                    )
+            except Exception as e:
+                logger.error(f"Error generating query embedding: {str(e)}")
+                return []
             
             # Step 3: Vector search with optional pre-filtering
             if self.verbose:
@@ -215,7 +232,8 @@ class Retriever:
                     query_vector=query_embedding.tolist(),
                     limit=top_k * 2,  # Get more results for reranking
                     score_threshold=score_threshold,
-                    query_filter=search_filter
+                    query_filter=search_filter,
+                    timeout=timeout
                 )
                 
                 if not results:
@@ -237,6 +255,10 @@ class Retriever:
                     text = payload.get("text", "")
                     metadata = payload.get("metadata", {})
                     
+                    # Truncate text if too long for reranker
+                    if len(text) > 512:
+                        text = text[:512]
+                    
                     # Add to formatted results
                     formatted_results.append({
                         "text": text,
@@ -252,26 +274,44 @@ class Retriever:
             if formatted_results:
                 if self.verbose:
                     logger.info(f"Reranking {len(formatted_results)} documents")
-                    
-                # Prepare pairs for reranking
-                rerank_pairs = [(query, doc["text"]) for doc in formatted_results]
-                rerank_scores = self.reranker.predict(rerank_pairs)
                 
-                # Add rerank scores and sort
-                for idx, score in enumerate(rerank_scores):
-                    formatted_results[idx]["rerank_score"] = float(score)
-                
-                # Sort by rerank score and take top_k
-                formatted_results.sort(key=lambda x: x["rerank_score"], reverse=True)
-                formatted_results = formatted_results[:top_k]
+                try:
+                    with torch.no_grad():
+                        # Prepare pairs for reranking
+                        rerank_pairs = [(query, doc["text"]) for doc in formatted_results]
+                        rerank_scores = self.reranker.predict(
+                            rerank_pairs,
+                            batch_size=8,  # Adjust based on available memory
+                            show_progress_bar=False
+                        )
+                        
+                        # Add rerank scores and sort
+                        for idx, score in enumerate(rerank_scores):
+                            formatted_results[idx]["rerank_score"] = float(score)
+                        
+                        # Sort by rerank score and take top_k
+                        formatted_results.sort(key=lambda x: x["rerank_score"], reverse=True)
+                        formatted_results = formatted_results[:top_k]
+                        
+                except Exception as e:
+                    logger.error(f"Error during reranking: {str(e)}")
+                    # Fall back to vector search scores if reranking fails
+                    formatted_results.sort(key=lambda x: x["score"], reverse=True)
+                    formatted_results = formatted_results[:top_k]
                 
                 if self.verbose:
                     logger.info(f"Final results after reranking: {len(formatted_results)}")
-                    
-            # Log timing if verbose
+            
+            # Add timing information
+            end_time = time.time()
+            elapsed_time = end_time - start_time
+            
+            # Add timing info to results
+            for result in formatted_results:
+                result["retrieval_time"] = elapsed_time
+            
             if self.verbose:
-                end_time = time.time()
-                logger.info(f"Total retrieval time: {end_time - start_time:.2f}s")
+                logger.info(f"Total retrieval time: {elapsed_time:.2f}s")
                 
             return formatted_results
             

@@ -1,11 +1,11 @@
 from fastapi import APIRouter, HTTPException, Depends, Query as QueryParam
 from typing import List, Dict, Any, Optional, Union
 from pydantic import BaseModel
-from core.retriever import Retriever
-from core.llm_interface import RAGPromptManager, create_llm_provider
-from core.dependencies import get_retriever, get_prompt_manager, get_vector_store
-from core.vector_store import VectorStore
-from core.query_processor import QueryProcessor
+from core.document_processing.retriever import Retriever
+from core.llm.llm_interface import RAGPromptManager, create_llm_provider
+from core.utils.dependencies import get_retriever, get_prompt_manager, get_vector_store
+from core.document_processing.vector_store import VectorStore
+from core.document_processing.query_processor import QueryProcessor
 import logging
 
 router = APIRouter()

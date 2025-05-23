@@ -1,19 +1,89 @@
-from fastapi import APIRouter, HTTPException, Depends, UploadFile, File, Form, BackgroundTasks, Query
+from fastapi import APIRouter, HTTPException, Depends, UploadFile, File, Form, BackgroundTasks, Query, Request
 from typing import List, Dict, Any, Optional
-from pydantic import BaseModel
-from core.vector_store import VectorStore
-from core.document_processor import DocumentProcessor
-from core.dependencies import get_vector_store
+from pydantic import BaseModel, Field, validator
+from core.document_processing.vector_store import VectorStore
+from core.document_processing.document_processor import DocumentProcessor
+from core.utils.dependencies import get_vector_store
+from core.llm.config import settings, ChunkingConfig
 import logging
 import os
 import shutil
-from datetime import datetime
+import json
+from datetime import datetime, timedelta
 import uuid
+import time
+from fastapi.responses import JSONResponse
+from sqlalchemy.orm import Session
+from core.database.database import get_db
+from core.database.models import Document
+from sqlalchemy import or_, and_
+import hashlib
 
 # Configure logging
 logger = logging.getLogger(__name__)
 
 router = APIRouter()
+
+# Rate limiting settings
+RATE_LIMIT_DURATION = 3600  # 1 hour in seconds
+MAX_REQUESTS_PER_HOUR = 100
+rate_limit_store = {}  # Store IP -> {count: int, reset_time: float}
+
+# File validation settings
+ALLOWED_EXTENSIONS = {'.pdf', '.docx', '.txt', '.xlsx', '.csv', '.html', '.htm'}
+MAX_FILE_SIZE = 50 * 1024 * 1024  # 50MB
+
+def check_rate_limit(request: Request) -> bool:
+    """Check if request is within rate limits."""
+    client_ip = request.client.host
+    current_time = time.time()
+    
+    # Clean up expired entries
+    expired = [ip for ip, data in rate_limit_store.items() 
+              if current_time > data['reset_time']]
+    for ip in expired:
+        del rate_limit_store[ip]
+    
+    if client_ip not in rate_limit_store:
+        rate_limit_store[client_ip] = {
+            'count': 1,
+            'reset_time': current_time + RATE_LIMIT_DURATION
+        }
+        return True
+    
+    client_data = rate_limit_store[client_ip]
+    if current_time > client_data['reset_time']:
+        # Reset counter if time window has passed
+        client_data['count'] = 1
+        client_data['reset_time'] = current_time + RATE_LIMIT_DURATION
+        return True
+    
+    if client_data['count'] >= MAX_REQUESTS_PER_HOUR:
+        return False
+    
+    client_data['count'] += 1
+    return True
+
+def validate_file(file: UploadFile) -> None:
+    """Validate file type and size."""
+    # Check file extension
+    file_ext = os.path.splitext(file.filename)[1].lower()
+    if file_ext not in ALLOWED_EXTENSIONS:
+        raise HTTPException(
+            status_code=400,
+            detail=f"Unsupported file type. Allowed types: {', '.join(ALLOWED_EXTENSIONS)}"
+        )
+    
+    # Check file size
+    file.file.seek(0, 2)  # Seek to end
+    file_size = file.file.tell()
+    file.file.seek(0)  # Reset file position
+    
+    if file_size > MAX_FILE_SIZE:
+        raise HTTPException(
+            status_code=400,
+            detail=f"File too large. Maximum size: {MAX_FILE_SIZE/1024/1024:.1f}MB"
+        )
 
 class DocumentInput(BaseModel):
     texts: List[str]
@@ -27,9 +97,23 @@ class FileUploadResponse(BaseModel):
     collection_name: str
     message: str
 
-class ChunkingConfig(BaseModel):
-    chunk_size: int = 1000
-    chunk_overlap: int = 200
+class ChunkingParams(BaseModel):
+    chunk_size: int = Field(
+        default=ChunkingConfig.DEFAULT_CHUNK_SIZE,
+        ge=ChunkingConfig.MIN_CHUNK_SIZE,
+        le=ChunkingConfig.MAX_CHUNK_SIZE
+    )
+    chunk_overlap: int = Field(
+        default=ChunkingConfig.DEFAULT_CHUNK_OVERLAP,
+        ge=ChunkingConfig.MIN_CHUNK_OVERLAP,
+        le=ChunkingConfig.MAX_CHUNK_OVERLAP
+    )
+
+    @validator('chunk_overlap')
+    def validate_overlap(cls, v, values):
+        if 'chunk_size' in values and v >= values['chunk_size']:
+            raise ValueError('chunk_overlap must be less than chunk_size')
+        return v
 
 class CollectionResponse(BaseModel):
     name: str
@@ -76,24 +160,144 @@ async def store_documents(
         logger.error(f"Error storing documents: {str(e)}")
         raise HTTPException(status_code=500, detail=f"Error storing documents: {str(e)}")
 
+async def calculate_file_hash(file_content: bytes) -> str:
+    """Calculate SHA-256 hash of file content."""
+    return hashlib.sha256(file_content).hexdigest()
+
+async def check_file_exists(
+    db: Session,
+    file_name: str,
+    file_size: int,
+    file_content: bytes,
+    metadata: Dict[str, Any]
+) -> Optional[Document]:
+    """
+    Check if file already exists in PostgreSQL based on multiple criteria.
+    Returns the existing document if found, None otherwise.
+    """
+    try:
+        # Calculate file hash
+        file_hash = await calculate_file_hash(file_content)
+        
+        # Build complex query to check for duplicates
+        query = db.query(Document).filter(
+            or_(
+                # Check exact file name match
+                Document.file_name == file_name,
+                # Check display name match
+                Document.display_name == file_name,
+                # Check content hash match with same file size
+                and_(
+                    Document.file_hash == file_hash,
+                    Document.file_size == file_size
+                )
+            )
+        )
+        
+        # Add metadata filters if available
+        if metadata:
+            if reference_number := metadata.get('reference_number'):
+                query = query.filter(Document.reference_number == reference_number)
+            if document_type := metadata.get('document_type'):
+                query = query.filter(Document.document_type == document_type)
+            if department := metadata.get('department'):
+                query = query.filter(Document.department == department)
+        
+        existing_doc = query.first()
+        
+        if existing_doc:
+            # Return detailed information about the duplicate
+            duplicate_info = {
+                'document_id': existing_doc.document_id,
+                'file_name': existing_doc.file_name,
+                'display_name': existing_doc.display_name,
+                'reference_number': existing_doc.reference_number,
+                'document_type': existing_doc.document_type.value if existing_doc.document_type else None,
+                'department': existing_doc.department.value if existing_doc.department else None,
+                'upload_date': existing_doc.created_at.isoformat() if existing_doc.created_at else None,
+                'match_type': []
+            }
+            
+            # Determine why it's considered a duplicate
+            if existing_doc.file_name == file_name:
+                duplicate_info['match_type'].append('file_name')
+            if existing_doc.display_name == file_name:
+                duplicate_info['match_type'].append('display_name')
+            if existing_doc.file_hash == file_hash and existing_doc.file_size == file_size:
+                duplicate_info['match_type'].append('content')
+            if existing_doc.reference_number and existing_doc.reference_number == metadata.get('reference_number'):
+                duplicate_info['match_type'].append('reference_number')
+            
+            logger.warning(f"Duplicate document found: {duplicate_info}")
+            raise HTTPException(
+                status_code=409,
+                detail={
+                    'message': 'Duplicate document found',
+                    'existing_document': duplicate_info
+                }
+            )
+        
+        return None
+        
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Error checking file existence: {str(e)}")
+        return None
+
 @router.post("/upload", response_model=FileUploadResponse)
 async def upload_document(
+    request: Request,
     background_tasks: BackgroundTasks,
     file: UploadFile = File(...),
-    chunk_size: int = Form(1000),
-    chunk_overlap: int = Form(200),
-    collection_name: Optional[str] = Form(None),
-    vector_store: VectorStore = Depends(get_vector_store)
+    chunk_size: int = Form(ChunkingConfig.DEFAULT_CHUNK_SIZE),
+    chunk_overlap: int = Form(ChunkingConfig.DEFAULT_CHUNK_OVERLAP),
+    metadata: Optional[str] = Form(None),
+    vector_store: VectorStore = Depends(get_vector_store),
+    db: Session = Depends(get_db)
 ):
     """
     Upload a document file (PDF, DOCX, TXT, etc.) for processing and storage.
     The file will be processed with specified chunking parameters and stored in vector db.
-    Each file will be stored in its own Qdrant collection named after the file for multi-collection RAG support.
     """
     try:
+        # Check rate limit
+        if not check_rate_limit(request):
+            raise HTTPException(
+                status_code=429,
+                detail="Rate limit exceeded. Please try again later."
+            )
+        
+        # Validate file
+        validate_file(file)
+        
+        # Read file content for hash calculation
+        file_content = await file.read()
+        file_size = len(file_content)
+        
+        # Parse metadata if provided
+        try:
+            metadata_dict = json.loads(metadata) if metadata else {}
+        except json.JSONDecodeError:
+            metadata_dict = {}
+        
+        # Check if file already exists
+        await check_file_exists(db, file.filename, file_size, file_content, metadata_dict)
+        
+        # Reset file position for later use
+        await file.seek(0)
+        
+        # Validate chunking parameters
+        chunking_params = ChunkingParams(
+            chunk_size=chunk_size,
+            chunk_overlap=chunk_overlap
+        )
+        
         # Set upload directory
-        upload_dir = "data/uploads"
+        upload_dir = os.path.join("data", "uploads")
+        temp_dir = os.path.join("data", "temp")
         os.makedirs(upload_dir, exist_ok=True)
+        os.makedirs(temp_dir, exist_ok=True)
         
         # Generate a unique filename to avoid collisions
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
@@ -101,39 +305,41 @@ async def upload_document(
         original_filename = file.filename
         file_extension = os.path.splitext(original_filename)[1].lower()
         safe_filename = f"{timestamp}_{file_id}{file_extension}"
-        file_path = os.path.join(upload_dir, safe_filename)
+        temp_path = os.path.join(temp_dir, safe_filename)
+        final_path = os.path.join(upload_dir, safe_filename)
         
-        # Save uploaded file
-        with open(file_path, "wb") as buffer:
-            shutil.copyfileobj(file.file, buffer)
-        
-        # Generate collection name based on the filename (without extension)
-        if not collection_name:
-            base_filename = os.path.splitext(original_filename)[0]
-            # Ensure the collection name is valid for Qdrant (only alphanumeric, hyphens, and underscores)
-            collection_name = "".join(c if c.isalnum() or c in ['-', '_'] else '_' for c in base_filename)
-            # Add timestamp to ensure uniqueness
-            collection_name = f"{collection_name}_{timestamp}"
-            # Limit length to avoid potential issues with Qdrant
-            collection_name = collection_name[:40]  # Qdrant has a length limit
-        
-        # Create or switch to the collection in Qdrant
-        success = vector_store.switch_collection(collection_name)
+        # Save uploaded file to temp location first
+        try:
+            with open(temp_path, "wb") as buffer:
+                shutil.copyfileobj(file.file, buffer)
+            
+            # Move to final location if save was successful
+            shutil.move(temp_path, final_path)
+        except Exception as e:
+            # Clean up temp file if it exists
+            if os.path.exists(temp_path):
+                os.remove(temp_path)
+            raise HTTPException(
+                status_code=500,
+                detail=f"Failed to save file: {str(e)}"
+            )
+
+        # Always use the fixed collection from settings
+        success = vector_store.switch_collection(settings.collection_config.STORAGE_NAME)
         if not success:
-            logger.error(f"Failed to create/switch to collection: {collection_name}")
-            raise HTTPException(status_code=500, detail=f"Failed to create collection: {collection_name}")
+            # Clean up saved file
+            if os.path.exists(final_path):
+                os.remove(final_path)
+            raise HTTPException(status_code=500, detail="Failed to switch to main collection")
             
         current_collection = vector_store.current_collection
         
-        # Initialize document processor
+        # Initialize document processor with validated chunking parameters
         document_processor = DocumentProcessor(
-            chunk_size=chunk_size,
-            chunk_overlap=chunk_overlap,
+            chunk_size=chunking_params.chunk_size,
+            chunk_overlap=chunking_params.chunk_overlap,
             upload_dir=upload_dir
         )
-        
-        # Get file size
-        file_size = os.path.getsize(file_path)
         
         # Initialize status tracking with enhanced metadata
         document_processing_status[file_id] = {
@@ -142,33 +348,41 @@ async def upload_document(
             "start_time": datetime.now().isoformat(),
             "chunks_count": 0,
             "collection_name": current_collection,
-            "file_path": file_path,
+            "file_path": final_path,
             "file_size": file_size,
             "file_extension": file_extension,
-            "upload_timestamp": timestamp
+            "upload_timestamp": timestamp,
         }
         
         # Process document in background
         background_tasks.add_task(
             process_and_store_document,
-            file_path=file_path,
+            file_path=final_path,
             original_filename=original_filename,
             file_id=file_id,
             vector_store=vector_store,
-            document_processor=document_processor
+            document_processor=document_processor,
+            metadata=document_processing_status[file_id]
         )
         
         return FileUploadResponse(
             filename=original_filename,
             status="processing",
             file_id=file_id,
-            chunks_count=0,  # Will be updated after processing
+            chunks_count=0,
             collection_name=current_collection,
-            message=f"File uploaded successfully. Processing started in the background. Collection: {current_collection}"
+            message=f"File uploaded successfully. Processing started in the background."
         )
         
+    except HTTPException:
+        raise
     except Exception as e:
         logger.error(f"Error uploading file: {str(e)}")
+        # Ensure temp files are cleaned up
+        if 'temp_path' in locals() and os.path.exists(temp_path):
+            os.remove(temp_path)
+        if 'final_path' in locals() and os.path.exists(final_path):
+            os.remove(final_path)
         raise HTTPException(status_code=500, detail=f"Error uploading file: {str(e)}")
 
 @router.get("/status/{file_id}")
@@ -234,7 +448,8 @@ async def process_and_store_document(
     original_filename: str,
     file_id: str,
     vector_store: VectorStore,
-    document_processor: DocumentProcessor
+    document_processor: DocumentProcessor,
+    metadata: Dict[str, Any]
 ):
     """
     Process a document and store it in the vector database.
@@ -275,7 +490,8 @@ async def process_and_store_document(
                 "last_updated": creation_time,
                 # Add additional metadata that helps with multi-collection RAG queries
                 "source_collection": collection_name,
-                "file_basename": os.path.splitext(original_filename)[0]
+                "file_basename": os.path.splitext(original_filename)[0],
+                **metadata  # Include provided metadata
             })
         
         # Store the chunks in the vector database
@@ -384,4 +600,122 @@ async def get_documents_summary(
         )
     except Exception as e:
         logger.error(f"Error generating document summary: {str(e)}")
-        raise HTTPException(status_code=500, detail=f"Error generating document summary: {str(e)}") 
+        raise HTTPException(status_code=500, detail=f"Error generating document summary: {str(e)}")
+
+@router.delete("/documents/{document_id}")
+async def delete_document(
+    document_id: str,
+    vector_store: VectorStore = Depends(get_vector_store)
+):
+    """Delete a specific document and all its chunks."""
+    try:
+        # Always use the fixed collection
+        success = vector_store.switch_collection(settings.collection_config.STORAGE_NAME)
+        if not success:
+            raise HTTPException(status_code=500, detail="Failed to switch to main collection")
+            
+        # Delete all points with this document_id
+        success = vector_store.delete_document_points(document_id)
+        if not success:
+            raise HTTPException(status_code=500, detail=f"Failed to delete document {document_id}")
+            
+        return {
+            "status": "success",
+            "message": f"Document {document_id} successfully deleted"
+        }
+    except Exception as e:
+        logger.error(f"Error deleting document {document_id}: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+class PostgreSQLDocument(BaseModel):
+    id: int
+    document_id: str
+    display_name: str
+    file_name: str
+    file_type: str
+    document_type: Optional[str] = None
+    department: Optional[str] = None
+    description: Optional[str] = None
+    reference_number: Optional[str] = None
+    impact_date: Optional[str] = None
+    effective_date: Optional[str] = None
+    expiry_date: Optional[str] = None
+    total_chunks: Optional[int] = None
+    point_start: Optional[int] = None
+    point_end: Optional[int] = None
+    created_at: Optional[str] = None
+    updated_at: Optional[str] = None
+    created_by: Optional[int] = None
+    file_hash: Optional[str] = None
+    file_size: Optional[int] = None
+
+    class Config:
+        from_attributes = True  # This enables ORM mode
+
+class PostgreSQLDocumentResponse(BaseModel):
+    total: int
+    items: List[PostgreSQLDocument]
+
+@router.get("/postgresql/documents", response_model=PostgreSQLDocumentResponse)
+async def get_postgresql_documents(
+    db: Session = Depends(get_db),
+    skip: int = Query(0, ge=0),
+    limit: int = Query(10, ge=1, le=100),
+    document_type: Optional[str] = None,
+    department: Optional[str] = None
+) -> PostgreSQLDocumentResponse:
+    """Get documents from PostgreSQL with optional filtering."""
+    try:
+        # Build query
+        query = db.query(Document)
+        
+        # Apply filters if provided and not empty strings
+        if document_type and document_type.strip():
+            query = query.filter(Document.document_type == document_type)
+        if department and department.strip():
+            query = query.filter(Document.department == department)
+            
+        # Get total count before pagination
+        total_count = query.count()
+        
+        # Apply pagination
+        query = query.offset(skip).limit(limit)
+        
+        # Execute query
+        documents = query.all()
+        
+        # Convert to dict and handle datetime serialization
+        result = []
+        for doc in documents:
+            doc_dict = {
+                "id": doc.id,
+                "document_id": doc.document_id,
+                "display_name": doc.display_name,
+                "file_name": doc.file_name,
+                "file_type": doc.file_type,
+                "document_type": doc.document_type.value if hasattr(doc.document_type, 'value') else doc.document_type,
+                "department": doc.department.value if hasattr(doc.department, 'value') else doc.department,
+                "description": doc.description,
+                "reference_number": doc.reference_number,
+                "impact_date": doc.impact_date.isoformat() if doc.impact_date else None,
+                "effective_date": doc.effective_date.isoformat() if doc.effective_date else None,
+                "expiry_date": doc.expiry_date.isoformat() if doc.expiry_date else None,
+                "total_chunks": doc.total_chunks,
+                "point_start": doc.point_start,
+                "point_end": doc.point_end,
+                "created_at": doc.created_at.isoformat() if doc.created_at else None,
+                "updated_at": doc.updated_at.isoformat() if doc.updated_at else None,
+                "created_by": doc.created_by,
+                "file_hash": doc.file_hash,
+                "file_size": doc.file_size
+            }
+            result.append(doc_dict)
+            
+        return PostgreSQLDocumentResponse(
+            total=total_count,
+            items=result
+        )
+        
+    except Exception as e:
+        logger.error(f"Error getting documents from PostgreSQL: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e)) 
