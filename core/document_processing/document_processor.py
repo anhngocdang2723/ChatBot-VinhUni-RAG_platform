@@ -23,6 +23,8 @@ from core.document_processing.file_processor import FileProcessor
 from core.database.database import get_db
 import time
 import shutil
+from sqlalchemy.orm import Session
+from core.database.models import Document as DBDocument, DocumentType, Department
 
 # Configure logging
 logger = logging.getLogger(__name__)
@@ -347,21 +349,27 @@ class DocumentProcessor:
     
     def __init__(
         self,
-        upload_dir: str = "data/uploads",
-        chunk_size: int = settings.chunking_config.DEFAULT_CHUNK_SIZE,
-        chunk_overlap: int = settings.chunking_config.DEFAULT_CHUNK_OVERLAP
+        db: Session,
+        chunk_size: int = settings.DEFAULT_CHUNK_SIZE,
+        chunk_overlap: int = settings.DEFAULT_CHUNK_OVERLAP,
+        min_chunk_size: int = settings.MIN_CHUNK_SIZE,
+        verbose: bool = False
     ):
         """
         Initialize DocumentProcessor.
         
         Args:
-            upload_dir: Directory to store uploaded files
+            db: Database session
             chunk_size: Size of text chunks for processing
             chunk_overlap: Overlap between chunks
+            min_chunk_size: Minimum records per chunk for SMART_CHUNK strategy
+            verbose: Whether to enable verbose logging
         """
-        self.upload_dir = upload_dir
+        self.db = db
         self.chunk_size = chunk_size
         self.chunk_overlap = chunk_overlap
+        self.min_chunk_size = min_chunk_size
+        self.verbose = verbose
         self.text_splitter = TextSplitter(chunk_size=chunk_size, chunk_overlap=chunk_overlap)
         self.file_processor = FileProcessor()
         # Get db session
@@ -370,12 +378,14 @@ class DocumentProcessor:
             qdrant_url=settings.QDRANT_URL,
             qdrant_api_key=settings.QDRANT_API_KEY,
             db=self.db,
-            verbose=True
+            verbose=self.verbose,
+            chunk_size=chunk_size,
+            chunk_overlap=chunk_overlap
         )
         self.tabular_processor = TabularDataProcessor()
         
         # Create upload directory if it doesn't exist
-        os.makedirs(upload_dir, exist_ok=True)
+        os.makedirs(settings.UPLOAD_DIR, exist_ok=True)
     
     def process_file(
         self, 
@@ -759,7 +769,7 @@ class DocumentProcessor:
         try:
             # Step 1: Save uploaded file to temp location
             file_ext = os.path.splitext(file.filename)[1].lower().replace('.', '')
-            temp_file_path = os.path.join(self.upload_dir, f"temp_{int(time.time())}_{file.filename}")
+            temp_file_path = os.path.join(settings.UPLOAD_DIR, f"temp_{int(time.time())}_{file.filename}")
             
             with open(temp_file_path, "wb") as buffer:
                 buffer.write(await file.read())
@@ -771,7 +781,7 @@ class DocumentProcessor:
             timestamp = int(time.time() * 1000)
             document_id = f"doc_{timestamp}"
             
-            new_document = Document(
+            new_document = DBDocument(
                 document_id=document_id,
                 display_name=metadata.get("display_name", file.filename),
                 file_name=file.filename,
@@ -800,7 +810,7 @@ class DocumentProcessor:
             
             # Step 5: Store in vector database
             success = self.vector_store.store_documents(
-                collection_name=settings.collection_name,
+                collection_name=settings.STORAGE_NAME,
                 texts=content,
                 metadata_list=[{
                     "document_id": document_id,

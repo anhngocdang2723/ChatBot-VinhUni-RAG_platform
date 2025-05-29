@@ -17,8 +17,8 @@ def get_vector_store(db: Session = Depends(get_db)) -> VectorStore:
         qdrant_api_key=settings.QDRANT_API_KEY,
         db=db,
         verbose=settings.VERBOSE,
-        chunk_size=settings.chunking_config.DEFAULT_CHUNK_SIZE,
-        chunk_overlap=settings.chunking_config.DEFAULT_CHUNK_OVERLAP
+        chunk_size=settings.DEFAULT_CHUNK_SIZE,
+        chunk_overlap=settings.DEFAULT_CHUNK_OVERLAP
     )
 
 @lru_cache()
@@ -39,9 +39,12 @@ def get_prompt_manager() -> RAGPromptManager:
     return RAGPromptManager(llm_provider)
 
 @lru_cache()
-def get_document_processor() -> DocumentProcessor:
+def get_document_processor(db: Session = Depends(get_db)) -> DocumentProcessor:
+    settings = get_settings()
     return DocumentProcessor(
-        chunk_size=1000,  # Default values, can be overridden when using
-        chunk_overlap=200,
-        upload_dir="data/uploads"
+        db=db,
+        chunk_size=settings.DEFAULT_CHUNK_SIZE,
+        chunk_overlap=settings.DEFAULT_CHUNK_OVERLAP,
+        min_chunk_size=settings.MIN_CHUNK_SIZE,
+        verbose=settings.VERBOSE
     ) 

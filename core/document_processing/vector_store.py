@@ -6,7 +6,7 @@ from qdrant_client.http.models import Filter, FieldCondition, MatchValue
 import logging
 import numpy as np
 from sqlalchemy.orm import Session
-from core.llm.config import collection_config, settings
+from core.llm.config import settings
 from core.database.models import Document, DocumentType, Department
 from core.database.database import get_db
 from core.document_processing.model_singleton import model_singleton
@@ -56,7 +56,7 @@ class VectorStore:
     }
 
     # Fixed collection name for Truong Dai hoc Vinh
-    FIXED_COLLECTION_NAME = "truong_dai_hoc_vinh"
+    FIXED_COLLECTION_NAME = settings.STORAGE_NAME
     
     def __init__(
         self,
@@ -64,11 +64,11 @@ class VectorStore:
         qdrant_api_key: str,
         db: Session,
         verbose: bool = False,
-        chunk_size: int = settings.chunking_config.DEFAULT_CHUNK_SIZE,
-        chunk_overlap: int = settings.chunking_config.DEFAULT_CHUNK_OVERLAP
+        chunk_size: int = settings.DEFAULT_CHUNK_SIZE,
+        chunk_overlap: int = settings.DEFAULT_CHUNK_OVERLAP
     ):
         self.verbose = verbose
-        self.current_collection = collection_config.STORAGE_NAME
+        self.current_collection = settings.STORAGE_NAME
         self.chunk_size = chunk_size
         self.chunk_overlap = chunk_overlap
         self.db = db
@@ -89,8 +89,8 @@ class VectorStore:
             
             # Ensure fixed collection exists
             self.setup_collection(
-                collection_config.STORAGE_NAME,
-                collection_config.DISPLAY_NAME
+                settings.STORAGE_NAME,
+                settings.DISPLAY_NAME
             )
             
         except Exception as e:
@@ -355,7 +355,7 @@ class VectorStore:
                 return False
             
             # Always use fixed collection
-            collection_name = collection_config.STORAGE_NAME
+            collection_name = settings.STORAGE_NAME
             
             total_docs = len(texts)
             if self.verbose:

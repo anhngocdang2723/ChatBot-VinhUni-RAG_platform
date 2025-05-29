@@ -6,9 +6,11 @@ from core.llm.llm_interface import RAGPromptManager, create_llm_provider
 from core.utils.dependencies import get_retriever, get_prompt_manager, get_vector_store
 from core.document_processing.vector_store import VectorStore
 from core.document_processing.query_processor import QueryProcessor
+from core.llm.config import get_settings
 import logging
 
 router = APIRouter()
+settings = get_settings()
 
 class QueryInput(BaseModel):
     query: str
@@ -74,6 +76,7 @@ async def query_rag(
         query=processed_query,
         top_k=query_input.top_k,
         top_n=query_input.top_n,
+        collection_name=settings.STORAGE_NAME if not query_input.collection_names else None,
         collection_names=query_input.collection_names
     )
     

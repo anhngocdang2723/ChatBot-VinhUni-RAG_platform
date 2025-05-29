@@ -60,9 +60,9 @@ async def health_check():
     return {
         "status": "ok",
         "collection": {
-            "name": settings.collection_config.STORAGE_NAME,
-            "display_name": settings.collection_config.DISPLAY_NAME,
-            "description": settings.collection_config.DESCRIPTION
+            "name": settings.STORAGE_NAME,
+            "display_name": settings.DISPLAY_NAME,
+            "description": settings.DESCRIPTION
         }
     }
 

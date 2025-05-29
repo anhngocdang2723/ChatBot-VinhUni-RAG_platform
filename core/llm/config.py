@@ -18,50 +18,56 @@ class ChunkingConfig:
     MAX_CHUNK_OVERLAP: int = 5000
 
 class Settings(BaseSettings):
-    """Main application settings"""
+    """Main application settings loaded from environment variables"""
     # Collection settings
-    collection_config: CollectionConfig = CollectionConfig()
+    STORAGE_NAME: str
+    DISPLAY_NAME: str
+    DESCRIPTION: str
     
     # Chunking settings
-    chunking_config: ChunkingConfig = ChunkingConfig()
+    DEFAULT_CHUNK_SIZE: int
+    DEFAULT_CHUNK_OVERLAP: int
+    MIN_CHUNK_SIZE: int
+    MAX_CHUNK_SIZE: int
+    MIN_CHUNK_OVERLAP: int
+    MAX_CHUNK_OVERLAP: int
     
     # API settings
-    API_TITLE: str = "Chatbot Vinhuni API"
-    API_DESCRIPTION: str = "API for RAG-based chatbot with multiple LLM provider support"
+    API_TITLE: str
+    API_DESCRIPTION: str
+    API_HOST: str
+    API_PORT: int
     
     # Qdrant settings
-    QDRANT_URL: str = "http://localhost:6333"
-    QDRANT_API_KEY: str = ""
+    QDRANT_URL: str
+    QDRANT_API_KEY: str
+    DEFAULT_COLLECTION: str
     
     # File upload settings
-    UPLOAD_DIR: str = "data/uploads"
-    OUTPUT_DIR: str = "output"
+    UPLOAD_DIR: str
+    OUTPUT_DIR: str
     
     # Database settings
-    POSTGRES_DB: str = "chatbot_rag"
-    POSTGRES_USER: str = "postgres"
-    POSTGRES_PASSWORD: str = "postgres"
-    DATABASE_URL: str = "postgresql://postgres:postgres@localhost:5432/chatbot_rag"
-    
-    # API settings
-    API_HOST: str = "0.0.0.0"
-    API_PORT: int = 8000
-    DEBUG: bool = False
+    POSTGRES_DB: str
+    POSTGRES_USER: str
+    POSTGRES_PASSWORD: str
+    DATABASE_URL: str
     
     # LLM settings
-    LLM_PROVIDER: str = "deepseek"  # or "grok"
-    DEEPSEEK_API_KEY: str = "sk-be5d9f6d8d1f4597aa1b616b4efcea88"
-    GROK_API_KEY: str = "xai-XjdRfpTV3QYNTqU2gs9esL4VgMS3yJH12WIDmnPYHGajrqv98WrAocukpeoo1QIllBOCOI68uoH7TR3e"
+    LLM_PROVIDER: str
+    DEEPSEEK_API_KEY: str
+    GROK_API_KEY: str
     
     # Application settings
-    VERBOSE: bool = False
-    SECRET_KEY: str = "unkillabledemonking"
-    ALGORITHM: str = "HS256"
-    ACCESS_TOKEN_EXPIRE_MINUTES: int = 30
+    DEBUG: bool
+    VERBOSE: bool
+    SECRET_KEY: str
+    ALGORITHM: str
+    ACCESS_TOKEN_EXPIRE_MINUTES: int
     
     class Config:
         env_file = ".env"
-        extra = "ignore"  # Ignore extra fields
+        case_sensitive = True
 
 @lru_cache()
 def get_settings() -> Settings:
