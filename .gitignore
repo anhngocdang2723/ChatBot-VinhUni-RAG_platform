@@ -51,4 +51,4 @@ report/
 .gitignore
 
 #config
-config.py
+core/llm/config.py

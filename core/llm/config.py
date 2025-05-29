@@ -51,7 +51,7 @@ class Settings(BaseSettings):
     # LLM settings
     LLM_PROVIDER: str = "deepseek"  # or "grok"
     DEEPSEEK_API_KEY: str = "sk-be5d9f6d8d1f4597aa1b616b4efcea88"
-    GROK_API_KEY: str = "xai-R0Vely3vJUqV3hOWIDuOb5dA7DUwZh1lYA815GKveHDdw2ZSH9EFuXwtFZQS2ZH5T6CqNYMzFXyHkOIy"
+    GROK_API_KEY: str = "xai-XjdRfpTV3QYNTqU2gs9esL4VgMS3yJH12WIDmnPYHGajrqv98WrAocukpeoo1QIllBOCOI68uoH7TR3e"
     
     # Application settings
     VERBOSE: bool = False
