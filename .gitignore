@@ -50,3 +50,5 @@ report/
 #git
 .gitignore
 
+#config
+config.py
