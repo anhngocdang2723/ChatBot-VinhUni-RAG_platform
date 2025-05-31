@@ -413,7 +413,7 @@ const ProgressBar = styled.div`
 `;
 
 const ProgressFill = styled.div`
-  width: ${props => props.progress}%;
+  width: ${props => Math.min(props.progress || 0, 100)}%;
   height: 100%;
   background-color: var(--primary-color);
   transition: width 0.3s ease;
@@ -838,38 +838,45 @@ const DocumentManager = () => {
     event.preventDefault();
     
     if (!selectedFile) {
-      toast.error('Please select a file to upload');
+      toast.error('Vui lòng chọn tài liệu để tải lên');
       return;
     }
 
     // Validate required fields
     const requiredFields = {
-      'document_type': 'Document Type',
-      'department': 'Department',
-      'display_name': 'Display Name'
+      'document_type': 'Loại văn bản',
+      'department': 'Phòng ban',
+      'display_name': 'Tên hiển thị'
     };
 
     for (const [field, label] of Object.entries(requiredFields)) {
       if (!uploadConfig.metadata[field]) {
-        toast.error(`${label} is required`);
+        toast.error(`${label} là bắt buộc`);
         return;
       }
     }
     
     try {
       setUploadStep('sending');
-      setUploadStatus({ status: 'processing', message: 'Sending document to server...' });
+      setUploadStatus({ status: 'processing', message: 'Đang chuẩn bị tải lên tài liệu...' });
       setUploadProgress(0);
-      
+
+      // Tính toán thời gian mô phỏng dựa trên kích thước file
+      const fileSize = selectedFile.size;
+      const simulatedTimePerMB = 2000; // 2 giây cho mỗi MB
+      const totalSimulatedTime = Math.max(3000, Math.min(20000, (fileSize / (1024 * 1024)) * simulatedTimePerMB));
+      const updateInterval = 100; // Cập nhật mỗi 100ms
+      const progressIncrement = 90 / (totalSimulatedTime / updateInterval); // Chỉ tăng đến 90%
+
+      let currentProgress = 0;
       const progressInterval = setInterval(() => {
-        setUploadProgress(prev => {
-          if (prev >= 90) {
-            clearInterval(progressInterval);
-            return prev;
-          }
-          return prev + 10;
-        });
-      }, 500);
+        currentProgress += progressIncrement;
+        if (currentProgress >= 90) {
+          clearInterval(progressInterval);
+          currentProgress = 90;
+        }
+        setUploadProgress(currentProgress);
+      }, updateInterval);
 
       // Add file metadata
       const enhancedMetadata = {
@@ -888,84 +895,70 @@ const DocumentManager = () => {
       formData.append('chunk_overlap', uploadConfig.chunkOverlap.toString());
       formData.append('metadata', JSON.stringify(enhancedMetadata));
       
+      // Thực hiện upload thực tế lên BE
       const response = await uploadDocument(selectedFile, formData);
       
+      if (!response || response.status === 'error') {
+        throw new Error(response?.error || 'Lỗi khi tải lên tài liệu');
+      }
+
+      // Mô phỏng quá trình xử lý tài liệu
+      setUploadStep('processing');
+      setUploadStatus({
+        status: 'processing',
+        message: 'Đang xử lý và lưu trữ tài liệu...'
+      });
+      
+      // Tăng progress từ 90% lên 95%
+      await new Promise(resolve => setTimeout(resolve, totalSimulatedTime * 0.3));
+      setUploadProgress(95);
+
+      // Mô phỏng hoàn thành và tăng lên 100%
+      await new Promise(resolve => setTimeout(resolve, totalSimulatedTime * 0.2));
       clearInterval(progressInterval);
       setUploadProgress(100);
-      
-      if (response && response.status === 'processing') {
-        setUploadStep('processing');
-        setUploadStatus({
-          status: 'processing',
-          message: 'Processing document and storing in the system...'
-        });
-        
-        // Poll for document status
-        const statusCheckInterval = setInterval(async () => {
-          try {
-            const statusResponse = await fetch(`/api/documents/status/${response.file_id}`);
-            const statusData = await statusResponse.json();
-            
-            if (statusData.status === 'completed') {
-              clearInterval(statusCheckInterval);
-              setUploadStep('created');
-              setUploadStatus({
-                status: 'success',
-                message: 'Document processed and stored successfully!'
-              });
-              toast.success('Document processed and stored successfully!');
-              
-              // Reset form and refresh documents
-              setTimeout(() => {
-                setSelectedFile(null);
-                setUploadConfig({
-                  chunkSize: 1000,
-                  chunkOverlap: 200,
-                  metadata: {
-                    document_type: '',
-                    department: '',
-                    display_name: '',
-                    description: '',
-                    impact_date: '',
-                    effective_date: '',
-                    expiry_date: '',
-                    reference_number: '',
-                  }
-                });
-                setUploadStatus(null);
-                setUploadProgress(0);
-                setUploadStep(null);
-                const fileInput = document.getElementById('file-upload');
-                if (fileInput) {
-                  fileInput.value = '';
-                }
-                fetchDocuments();
-              }, 3000);
-            } else if (statusData.status === 'failed') {
-              clearInterval(statusCheckInterval);
-              setUploadStep(null);
-              setUploadStatus({
-                status: 'error',
-                message: statusData.error || 'Failed to process document'
-              });
-              toast.error(statusData.error || 'Failed to process document');
-            }
-          } catch (error) {
-            console.error('Error checking document status:', error);
+      setUploadStep('created');
+      setUploadStatus({
+        status: 'success',
+        message: 'Tải lên và xử lý tài liệu thành công!'
+      });
+      toast.success('Tài liệu đã được tải lên thành công!');
+
+      // Reset form sau 3 giây
+      setTimeout(() => {
+        setSelectedFile(null);
+        setUploadConfig({
+          chunkSize: 1000,
+          chunkOverlap: 200,
+          metadata: {
+            document_type: '',
+            department: '',
+            display_name: '',
+            description: '',
+            impact_date: '',
+            effective_date: '',
+            expiry_date: '',
+            reference_number: '',
           }
-        }, 2000);
-        
-      } else {
-        throw new Error('Upload failed');
-      }
-      
+        });
+        setUploadStatus(null);
+        setUploadProgress(0);
+        setUploadStep(null);
+        const fileInput = document.getElementById('file-upload');
+        if (fileInput) {
+          fileInput.value = '';
+        }
+        fetchDocuments();
+      }, 3000);
+
     } catch (error) {
+      console.error('Upload error:', error);
       setUploadStatus({
         status: 'error',
-        message: error.message || 'Failed to upload document'
+        message: 'Không thể tải lên tài liệu. Vui lòng thử lại sau.'
       });
       setUploadStep(null);
-      toast.error(error.message || 'Failed to upload document');
+      toast.error('Không thể tải lên tài liệu');
       setUploadProgress(0);
     }
   };

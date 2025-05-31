@@ -4,7 +4,7 @@ from pydantic import BaseModel, Field, validator
 from core.document_processing.vector_store import VectorStore
 from core.document_processing.document_processor import DocumentProcessor
 from core.utils.dependencies import get_vector_store
-from core.llm.config import settings, ChunkingConfig
+from core.llm.config import CollectionConfig, ChunkingConfig, get_settings
 import logging
 import os
 import shutil
@@ -32,6 +32,9 @@ rate_limit_store = {}  # Store IP -> {count: int, reset_time: float}
 # File validation settings
 ALLOWED_EXTENSIONS = {'.pdf', '.docx', '.txt', '.xlsx', '.csv', '.html', '.htm'}
 MAX_FILE_SIZE = 50 * 1024 * 1024  # 50MB
+
+# Collection settings
+DEFAULT_COLLECTION = CollectionConfig.STORAGE_NAME
 
 def check_rate_limit(request: Request) -> bool:
     """Check if request is within rate limits."""
@@ -325,7 +328,7 @@ async def upload_document(
             )
 
         # Always use the fixed collection from settings
-        success = vector_store.switch_collection(settings.collection_config.STORAGE_NAME)
+        success = vector_store.switch_collection(CollectionConfig.STORAGE_NAME)
         if not success:
             # Clean up saved file
             if os.path.exists(final_path):
@@ -336,9 +339,9 @@ async def upload_document(
         
         # Initialize document processor with validated chunking parameters
         document_processor = DocumentProcessor(
+            db=db,
             chunk_size=chunking_params.chunk_size,
-            chunk_overlap=chunking_params.chunk_overlap,
-            upload_dir=upload_dir
+            chunk_overlap=chunking_params.chunk_overlap
         )
         
         # Initialize status tracking with enhanced metadata
@@ -610,7 +613,7 @@ async def delete_document(
     """Delete a specific document and all its chunks."""
     try:
         # Always use the fixed collection
-        success = vector_store.switch_collection(settings.collection_config.STORAGE_NAME)
+        success = vector_store.switch_collection(CollectionConfig.STORAGE_NAME)
         if not success:
             raise HTTPException(status_code=500, detail="Failed to switch to main collection")
             

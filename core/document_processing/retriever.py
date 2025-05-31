@@ -1,12 +1,14 @@
 from typing import List, Dict, Optional, Any
 from qdrant_client import QdrantClient
-from qdrant_client.http.models import Filter, FieldCondition, MatchValue, MatchAny, Range
+from qdrant_client.http.models import Filter, FieldCondition, MatchValue, MatchAny, Range, SearchParams
+from qdrant_client import models
 import logging
 import time
 import torch
 import os
-from core.llm.config import collection_config
+from core.llm.config import CollectionConfig
 from core.document_processing.model_singleton import model_singleton
+from concurrent.futures import ThreadPoolExecutor
 
 # Configure logger
 logger = logging.getLogger(__name__)
@@ -188,7 +190,7 @@ class Retriever:
                 logger.warning("Query truncated to 1000 characters")
             
             # Always use fixed collection
-            collection_name = collection_config.STORAGE_NAME
+            collection_name = CollectionConfig.STORAGE_NAME
             
             if self.verbose:
                 logger.info("Starting retrieval process...")
@@ -401,6 +403,124 @@ class Retriever:
             all_results = all_results[:top_n]
 
         return all_results 
+
+    def search_documents(
+        self,
+        query: str,
+        metadata_filters: Optional[Dict[str, Any]] = None,
+        top_k: int = 10,
+        score_threshold: float = 0.0,
+        timeout: Optional[float] = None
+    ) -> List[Dict[str, Any]]:
+        """
+        Search implementation with standard parameters.
+        """
+        try:
+            start_time = time.time()
+            
+            # Input validation
+            if not query or not query.strip():
+                raise ValueError("Empty query")
+            
+            if len(query) > 1000:
+                query = query[:1000]
+                logger.warning("Query truncated to 1000 characters")
+            
+            # Always use fixed collection
+            collection_name = CollectionConfig.STORAGE_NAME
+            
+            if self.verbose:
+                logger.info("Starting retrieval process...")
+                
+            # Step 1: Pre-filtering based on metadata if filters provided
+            if metadata_filters:
+                if self.verbose:
+                    logger.info(f"Applying pre-filters: {metadata_filters}")
+                    
+                search_filter = self._create_metadata_filter(metadata_filters)
+                if not search_filter:
+                    logger.warning("Invalid metadata filters, proceeding without pre-filtering")
+            else:
+                search_filter = None
+                
+            # Step 2: Generate query embedding
+            if self.verbose:
+                logger.info("Generating query embedding...")
+            
+            try:
+                with torch.no_grad():
+                    query_embedding = self.query_encoder.encode(
+                        query,
+                        convert_to_numpy=True,
+                        show_progress_bar=False,
+                        device=self.device
+                    )
+            except Exception as e:
+                logger.error(f"Error generating query embedding: {str(e)}")
+                return []
+            
+            # Step 3: Vector search with standard parameters
+            if self.verbose:
+                logger.info(f"Performing vector search in collection {collection_name}")
+                
+            try:
+                results = self.client.search(
+                    collection_name=collection_name,
+                    query_vector=query_embedding.tolist(),
+                    limit=top_k * 2,  # Get more results for reranking
+                    score_threshold=score_threshold,
+                    query_filter=search_filter,
+                    timeout=timeout
+                )
+                
+                if not results:
+                    logger.info("No results found with pre-filtering and vector search")
+                    return []
+                    
+                logger.info(f"Retrieved {len(results)} documents")
+                
+            except Exception as e:
+                logger.error(f"Error during vector search: {str(e)}")
+                return []
+                
+            # Step 4: Format results
+            formatted_results = []
+            for result in results:
+                formatted_result = self._format_search_result(result)
+                if formatted_result:
+                    formatted_results.append(formatted_result)
+            
+            # Log performance metrics
+            elapsed = time.time() - start_time
+            logger.info(f"Search completed in {elapsed:.2f}s with {len(formatted_results)} results")
+            
+            return formatted_results
+            
+        except Exception as e:
+            logger.error(f"Error in search_documents: {str(e)}")
+            return []
+            
+    def _format_search_result(self, result) -> Optional[Dict[str, Any]]:
+        """Helper method to format a single search result."""
+        try:
+            # Extract text and metadata
+            payload = result.payload
+            text = payload.get("text", "")
+            metadata = payload.get("metadata", {})
+            
+            # Truncate text if too long for reranker
+            if len(text) > 512:
+                text = text[:512]
+            
+            return {
+                "text": text,
+                "metadata": metadata,
+                "score": float(result.score),
+                "id": str(result.id)
+            }
+        except Exception as e:
+            logger.error(f"Error formatting result: {str(e)}")
+            return None
 
 # Singleton retriever instance
 _retriever_instance = None

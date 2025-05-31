@@ -6,7 +6,7 @@ from qdrant_client.http.models import Filter, FieldCondition, MatchValue
 import logging
 import numpy as np
 from sqlalchemy.orm import Session
-from core.llm.config import settings
+from core.llm.config import settings, CollectionConfig
 from core.database.models import Document, DocumentType, Department
 from core.database.database import get_db
 from core.document_processing.model_singleton import model_singleton
@@ -56,7 +56,7 @@ class VectorStore:
     }
 
     # Fixed collection name for Truong Dai hoc Vinh
-    FIXED_COLLECTION_NAME = settings.STORAGE_NAME
+    FIXED_COLLECTION_NAME = CollectionConfig.STORAGE_NAME
     
     def __init__(
         self,
@@ -68,7 +68,7 @@ class VectorStore:
         chunk_overlap: int = settings.DEFAULT_CHUNK_OVERLAP
     ):
         self.verbose = verbose
-        self.current_collection = settings.STORAGE_NAME
+        self.current_collection = CollectionConfig.STORAGE_NAME
         self.chunk_size = chunk_size
         self.chunk_overlap = chunk_overlap
         self.db = db
@@ -89,8 +89,8 @@ class VectorStore:
             
             # Ensure fixed collection exists
             self.setup_collection(
-                settings.STORAGE_NAME,
-                settings.DISPLAY_NAME
+                CollectionConfig.STORAGE_NAME,
+                CollectionConfig.DISPLAY_NAME
             )
             
         except Exception as e:
@@ -179,77 +179,34 @@ class VectorStore:
             display_name: Optional Vietnamese display name for the collection
         """
         try:
-            # Create collection if not exists
+            # Get list of collections
             collections = self.client.get_collections().collections
             collection_exists = any(c.name == collection_name for c in collections)
             
             if not collection_exists:
                 logger.info(f"Creating new collection: {collection_name}")
-                # Create collection with minimal configuration
+                
+                # Create collection with essential config only
+                vectors_config = models.VectorParams(
+                    size=self.doc_embedding_dim,
+                    distance=models.Distance.COSINE
+                )
+                
                 self.client.create_collection(
                     collection_name=collection_name,
-                    vectors_config=models.VectorParams(
-                        size=self.doc_embedding_dim,
-                        distance=models.Distance.COSINE
-                    ),
-                    optimizers_config=models.OptimizersConfigDiff(
-                        default_segment_number=2,
-                        max_optimization_threads=2
-                    ),
-                    hnsw_config=models.HnswConfigDiff(
-                        m=16,
-                        ef_construct=100,
-                        full_scan_threshold=10000
-                    )
+                    vectors_config=vectors_config
                 )
-                
-                # Update collection with additional configuration
-                self.client.update_collection(
-                    collection_name=collection_name,
-                    params=models.CollectionParamsDiff(
-                        replication_factor=1,
-                        write_consistency_factor=1
-                    )
-                )
-                
-                logger.info(f"Created new collection: {collection_name}")
-                
-                # Store collection metadata if display name is provided
-                if display_name:
-                    self.client.update_collection(
-                        collection_name=collection_name,
-                        metadata={
-                            "display_name": display_name,
-                            "indexes_created": False
-                        }
-                    )
+                logger.info(f"Created collection: {collection_name}")
                 
                 # Set up standard payload indexes
                 self.setup_payload_indexes(collection_name, self.STANDARD_FIELD_MAPPINGS)
+                return True
             else:
-                # Collection exists, just check metadata
-                collection_info = self.client.get_collection(collection_name)
-                metadata = collection_info.metadata or {}
+                logger.info(f"Collection {collection_name} already exists")
+                return True
                 
-                if not metadata.get("indexes_created", False):
-                    # Set up standard payload indexes
-                    self.setup_payload_indexes(collection_name, self.STANDARD_FIELD_MAPPINGS)
-                    # Mark indexes as created
-                    self.client.update_collection(
-                        collection_name=collection_name,
-                        metadata={
-                            **metadata,
-                            "indexes_created": True
-                        }
-                    )
-                else:
-                    logger.info(f"Indexes already exist for collection: {collection_name}")
-            
-            return True
-            
         except Exception as e:
             logger.error(f"Failed to set up collection: {str(e)}")
-            # Log more details about the error
             if hasattr(e, '__dict__'):
                 logger.error(f"Error details: {e.__dict__}")
             return False
@@ -355,7 +312,7 @@ class VectorStore:
                 return False
             
             # Always use fixed collection
-            collection_name = settings.STORAGE_NAME
+            collection_name = CollectionConfig.STORAGE_NAME
             
             total_docs = len(texts)
             if self.verbose:
@@ -856,4 +813,35 @@ class VectorStore:
         except Exception as e:
             logger.error(f"Error updating document: {str(e)}")
             self.db.rollback()
-            return False 
+            return False
+
+    def get_collection_config(self) -> Dict[str, Any]:
+        """Get the configuration for collection creation."""
+        return {
+            "vectors_config": models.VectorParams(
+                size=self.doc_embedding_dim,
+                distance=models.Distance.COSINE
+            ),
+            "optimizers_config": models.OptimizersConfigDiff(
+                default_segment_number=2,
+                max_optimization_threads=4,
+                memmap_threshold=1000,
+                indexing_threshold=50000,
+                flush_interval_sec=30
+            ),
+            "hnsw_config": models.HnswConfigDiff(
+                m=16,
+                ef_construct=100,
+                full_scan_threshold=10000,
+                max_indexing_threads=4
+            ),
+            "quantization_config": models.ScalarQuantization(
+                scalar=models.ScalarQuantizationConfig(
+                    type=models.ScalarType.INT8,
+                    always_ram=True
+                )
+            ),
+            "on_disk_payload": True,
+            "replication_factor": 1,
+            "write_consistency_factor": 1
+        } 

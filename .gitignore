@@ -1,6 +1,5 @@
 # Environment variables
 .env
-.env.template
 
 # Python
 __pycache__/
