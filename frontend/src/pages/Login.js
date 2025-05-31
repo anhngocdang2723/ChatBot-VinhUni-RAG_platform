@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { DEMO_ACCOUNTS } from '../config/accounts';
 import logoVinhuni from '../assets/logo-vinhuni.png';
 import bgLogin from '../assets/bg-login.jpg';
+import { useApi } from '../context/ApiContext';
 
 const LoginContainer = styled.div`
   display: flex;
@@ -233,6 +234,7 @@ const ErrorMessage = styled.div`
 
 const Login = () => {
   const navigate = useNavigate();
+  const { apiUrl } = useApi();
   const [credentials, setCredentials] = useState({
     username: '',
     password: '',
@@ -246,7 +248,7 @@ const Login = () => {
     setError('');
 
     try {
-      const response = await fetch('http://localhost:8000/api/auth/login', {
+      const response = await fetch(`${apiUrl}/auth/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

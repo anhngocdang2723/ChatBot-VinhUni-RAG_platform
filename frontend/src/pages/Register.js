@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import logoVinhuni from '../assets/logo-vinhuni.png';
 import { toast } from 'react-toastify';
+import { useApi } from '../context/ApiContext';
 
 const RegisterContainer = styled.div`
   display: flex;
@@ -91,6 +92,7 @@ const BackToLogin = styled.div`
 
 const Register = () => {
   const navigate = useNavigate();
+  const { apiUrl } = useApi();
   const [form, setForm] = useState({
     username: '',
     password: '',
@@ -118,7 +120,7 @@ const Register = () => {
     }
 
     try {
-      const response = await fetch('http://localhost:8000/api/auth/register', {
+      const response = await fetch(`${apiUrl}/auth/register`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
