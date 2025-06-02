@@ -6,7 +6,7 @@ import { FiHome, FiMessageSquare, FiHelpCircle, FiExternalLink, FiMenu, FiX, FiL
 import { useApi } from '../context/ApiContext';
 import memeLogo from '../assets/meme-image.png';
 import logoVinhuni from '../assets/logo-vinhuni.png';
-import userAvatar from '../assets/meme-image2.png';
+import userAvatar from '../assets/user.png';
 import { VINH_COLORS } from '../config/colors';
 import { DEMO_ACCOUNTS } from '../config/accounts';
 // import userAvatar from '../assets/male-avatar-placeholder.png';

@@ -6,8 +6,8 @@ import { useApi } from '../context/ApiContext';
 import { checkSpecialQuery } from '../utils/specialQueries';
 import ReactMarkdown from 'react-markdown';
 import TypingMessage from '../components/TypingMessage';
-import chatbotAvartar from '../assets/meme-image4.png';
-import userAvatar from '../assets/meme-image2.png';
+import chatbotAvartar from '../assets/chatbot.png';
+import userAvatar from '../assets/user.png';
 import { VINH_COLORS } from '../config/colors';
 // import userAvatar from '../assets/male-avatar-placeholder.png';
 
