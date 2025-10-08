@@ -105,12 +105,15 @@ async def login(request: LoginRequest, response: Response):
     }
     
     # Set session cookie
+    # Use SameSite=None for cross-origin requests (Vercel → Cloudflare Tunnel)
     response.set_cookie(
         key="session_id",
         value=session_id,
         httponly=True,
+        secure=True,  # Required for SameSite=None
         max_age=86400,  # 24 hours
-        samesite="lax"
+        samesite="none",  # Allow cross-origin cookie
+        domain=None  # Let browser handle it
     )
     
     logger.info(f"Successful login: username={request.username}, role={user_role}, portal={final_portal}")
