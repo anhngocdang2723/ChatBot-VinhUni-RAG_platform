@@ -1,0 +1,869 @@
+TT,Mã HP,Số TC,Lớp học phần,Khóa học,Khóa tổ chức,Số SV dự kiến,Số SV đã ĐK,Hình thức học,Tuần học,Ngày BĐ,Ngày KT,Số tiết /tuần,Thứ,Tiết BĐ,Số tiết,Phòng học,Cơ sở đào tạo,Giáo Viên,Khoa/Viện
+54,AET30014,3,Thực hành Động cơ đốt trong(224.2)_TH_01,K63,K63,15,0,TH/TN,23 -> 26,02/04/2025,02/25/2025,9,3,1,5,PTH_Diesel,Cơ sở 2,Nguyễn Phi Cường Anh,Kỹ thuật - Công nghệ
+55,AET30014,3,Thực hành Động cơ đốt trong(224.2)_TH_01,K63,K63,15,0,TH/TN,23 -> 26,02/04/2025,02/25/2025,9,3,6,5,PTH_Diesel,Cơ sở 2,Nguyễn Phi Cường Anh,Kỹ thuật - Công nghệ
+56,AET30014,3,Thực hành Động cơ đốt trong(224.2)_TH_01,K63,K63,15,0,TH/TN,23 -> 26,02/04/2025,02/25/2025,9,3,11,2,PTH_Diesel,Cơ sở 2,Nguyễn Phi Cường Anh,Kỹ thuật - Công nghệ
+57,AET30014,3,Thực hành Động cơ đốt trong(224.2)_TH_01,K63,K63,15,0,TH/TN,23 -> 26,02/05/2025,02/26/2025,9,4,1,5,PTH_Diesel,Cơ sở 2,Nguyễn Phi Cường Anh,Kỹ thuật - Công nghệ
+58,AET30014,3,Thực hành Động cơ đốt trong(224.2)_TH_01,K63,K63,15,0,TH/TN,23 -> 26,02/05/2025,02/26/2025,9,4,6,5,PTH_Diesel,Cơ sở 2,Nguyễn Phi Cường Anh,Kỹ thuật - Công nghệ
+59,AET30014,3,Thực hành Động cơ đốt trong(224.2)_TH_01,K63,K63,15,0,TH/TN,23 -> 26,02/05/2025,02/26/2025,9,4,11,1,PTH_Diesel,Cơ sở 2,Nguyễn Phi Cường Anh,Kỹ thuật - Công nghệ
+60,AET30014,3,Thực hành Động cơ đốt trong(224.2)_TH_02,K63,K63,15,0,TH/TN,"27 -> 29, 31",03/04/2025,04/01/2025,9,3,1,5,PTH_Diesel,Cơ sở 2,Nguyễn Phi Cường Anh,Kỹ thuật - Công nghệ
+61,AET30014,3,Thực hành Động cơ đốt trong(224.2)_TH_02,K63,K63,15,0,TH/TN,"27 -> 29, 31",03/04/2025,04/01/2025,9,3,6,5,PTH_Diesel,Cơ sở 2,Nguyễn Phi Cường Anh,Kỹ thuật - Công nghệ
+62,AET30014,3,Thực hành Động cơ đốt trong(224.2)_TH_02,K63,K63,15,0,TH/TN,"27 -> 29, 31",03/04/2025,04/01/2025,9,3,11,2,PTH_Diesel,Cơ sở 2,Nguyễn Phi Cường Anh,Kỹ thuật - Công nghệ
+63,AET30014,3,Thực hành Động cơ đốt trong(224.2)_TH_02,K63,K63,15,0,TH/TN,"27 -> 29, 31",03/05/2025,04/02/2025,9,4,1,5,PTH_Diesel,Cơ sở 2,Nguyễn Phi Cường Anh,Kỹ thuật - Công nghệ
+64,AET30014,3,Thực hành Động cơ đốt trong(224.2)_TH_02,K63,K63,15,0,TH/TN,"27 -> 29, 31",03/05/2025,04/02/2025,9,4,6,5,PTH_Diesel,Cơ sở 2,Nguyễn Phi Cường Anh,Kỹ thuật - Công nghệ
+65,AET30014,3,Thực hành Động cơ đốt trong(224.2)_TH_02,K63,K63,15,0,TH/TN,"27 -> 29, 31",03/05/2025,04/02/2025,9,4,11,1,PTH_Diesel,Cơ sở 2,Nguyễn Phi Cường Anh,Kỹ thuật - Công nghệ
+66,AET30014,3,Thực hành Động cơ đốt trong(224.2)_TH_03,K63,K63,15,0,TH/TN,32 -> 35,04/08/2025,04/29/2025,9,3,1,5,PTH_Diesel,Cơ sở 2,Nguyễn Phi Cường Anh,Kỹ thuật - Công nghệ
+67,AET30014,3,Thực hành Động cơ đốt trong(224.2)_TH_03,K63,K63,15,0,TH/TN,32 -> 35,04/08/2025,04/29/2025,9,3,6,5,PTH_Diesel,Cơ sở 2,Nguyễn Phi Cường Anh,Kỹ thuật - Công nghệ
+68,AET30014,3,Thực hành Động cơ đốt trong(224.2)_TH_03,K63,K63,15,0,TH/TN,32 -> 35,04/08/2025,04/29/2025,9,3,11,2,PTH_Diesel,Cơ sở 2,Nguyễn Phi Cường Anh,Kỹ thuật - Công nghệ
+69,AET30014,3,Thực hành Động cơ đốt trong(224.2)_TH_03,K63,K63,15,0,TH/TN,32 -> 35,04/09/2025,04/30/2025,9,4,1,5,PTH_Diesel,Cơ sở 2,Nguyễn Phi Cường Anh,Kỹ thuật - Công nghệ
+70,AET30014,3,Thực hành Động cơ đốt trong(224.2)_TH_03,K63,K63,15,0,TH/TN,32 -> 35,04/09/2025,04/30/2025,9,4,6,5,PTH_Diesel,Cơ sở 2,Nguyễn Phi Cường Anh,Kỹ thuật - Công nghệ
+71,AET30014,3,Thực hành Động cơ đốt trong(224.2)_TH_03,K63,K63,15,0,TH/TN,32 -> 35,04/09/2025,04/30/2025,9,4,11,1,PTH_Diesel,Cơ sở 2,Nguyễn Phi Cường Anh,Kỹ thuật - Công nghệ
+72,AET30014,3,Thực hành Động cơ đốt trong(224.2)_TH_04,K63,K63,15,0,TH/TN,36 -> 39,05/06/2025,05/27/2025,9,3,1,5,PTH_Diesel,Cơ sở 2,Nguyễn Phi Cường Anh,Kỹ thuật - Công nghệ
+73,AET30014,3,Thực hành Động cơ đốt trong(224.2)_TH_04,K63,K63,15,0,TH/TN,36 -> 39,05/06/2025,05/27/2025,9,3,6,5,PTH_Diesel,Cơ sở 2,Nguyễn Phi Cường Anh,Kỹ thuật - Công nghệ
+74,AET30014,3,Thực hành Động cơ đốt trong(224.2)_TH_04,K63,K63,15,0,TH/TN,36 -> 39,05/06/2025,05/27/2025,9,3,11,2,PTH_Diesel,Cơ sở 2,Nguyễn Phi Cường Anh,Kỹ thuật - Công nghệ
+75,AET30014,3,Thực hành Động cơ đốt trong(224.2)_TH_04,K63,K63,15,0,TH/TN,36 -> 39,05/07/2025,05/28/2025,9,4,1,5,PTH_Diesel,Cơ sở 2,Nguyễn Phi Cường Anh,Kỹ thuật - Công nghệ
+76,AET30014,3,Thực hành Động cơ đốt trong(224.2)_TH_04,K63,K63,15,0,TH/TN,36 -> 39,05/07/2025,05/28/2025,9,4,6,5,PTH_Diesel,Cơ sở 2,Nguyễn Phi Cường Anh,Kỹ thuật - Công nghệ
+77,AET30014,3,Thực hành Động cơ đốt trong(224.2)_TH_04,K63,K63,15,0,TH/TN,36 -> 39,05/07/2025,05/28/2025,9,4,11,1,PTH_Diesel,Cơ sở 2,Nguyễn Phi Cường Anh,Kỹ thuật - Công nghệ
+78,AET30014,3,Thực hành Động cơ đốt trong(224.2)_TH_05,K63,K63,15,0,TH/TN,23 -> 26,02/04/2025,02/25/2025,9,3,1,5,PTH_DC_XANG,Cơ sở 2,Phan Quốc Cường,Kỹ thuật - Công nghệ
+79,AET30014,3,Thực hành Động cơ đốt trong(224.2)_TH_05,K63,K63,15,0,TH/TN,23 -> 26,02/04/2025,02/25/2025,9,3,6,5,PTH_DC_XANG,Cơ sở 2,Phan Quốc Cường,Kỹ thuật - Công nghệ
+80,AET30014,3,Thực hành Động cơ đốt trong(224.2)_TH_05,K63,K63,15,0,TH/TN,23 -> 26,02/04/2025,02/25/2025,9,3,11,2,PTH_DC_XANG,Cơ sở 2,Phan Quốc Cường,Kỹ thuật - Công nghệ
+81,AET30014,3,Thực hành Động cơ đốt trong(224.2)_TH_05,K63,K63,15,0,TH/TN,23 -> 26,02/05/2025,02/26/2025,9,4,1,5,PTH_DC_XANG,Cơ sở 2,Phan Quốc Cường,Kỹ thuật - Công nghệ
+82,AET30014,3,Thực hành Động cơ đốt trong(224.2)_TH_05,K63,K63,15,0,TH/TN,23 -> 26,02/05/2025,02/26/2025,9,4,6,5,PTH_DC_XANG,Cơ sở 2,Phan Quốc Cường,Kỹ thuật - Công nghệ
+83,AET30014,3,Thực hành Động cơ đốt trong(224.2)_TH_05,K63,K63,15,0,TH/TN,23 -> 26,02/05/2025,02/26/2025,9,4,11,1,PTH_DC_XANG,Cơ sở 2,Phan Quốc Cường,Kỹ thuật - Công nghệ
+84,AET30014,3,Thực hành Động cơ đốt trong(224.2)_TH_06,K63,K63,15,0,TH/TN,"27 -> 29, 31",03/04/2025,04/01/2025,9,3,1,5,PTH_DC_XANG,Cơ sở 2,Phan Quốc Cường,Kỹ thuật - Công nghệ
+85,AET30014,3,Thực hành Động cơ đốt trong(224.2)_TH_06,K63,K63,15,0,TH/TN,"27 -> 29, 31",03/04/2025,04/01/2025,9,3,6,5,PTH_DC_XANG,Cơ sở 2,Phan Quốc Cường,Kỹ thuật - Công nghệ
+86,AET30014,3,Thực hành Động cơ đốt trong(224.2)_TH_06,K63,K63,15,0,TH/TN,"27 -> 29, 31",03/05/2025,04/02/2025,9,4,1,5,PTH_DC_XANG,Cơ sở 2,Phan Quốc Cường,Kỹ thuật - Công nghệ
+87,AET30014,3,Thực hành Động cơ đốt trong(224.2)_TH_06,K63,K63,15,0,TH/TN,"27 -> 29, 31",03/04/2025,04/01/2025,9,3,11,2,PTH_DC_XANG,Cơ sở 2,Phan Quốc Cường,Kỹ thuật - Công nghệ
+88,AET30014,3,Thực hành Động cơ đốt trong(224.2)_TH_06,K63,K63,15,0,TH/TN,"27 -> 29, 31",03/05/2025,04/02/2025,9,4,6,5,PTH_DC_XANG,Cơ sở 2,Phan Quốc Cường,Kỹ thuật - Công nghệ
+89,AET30014,3,Thực hành Động cơ đốt trong(224.2)_TH_06,K63,K63,15,0,TH/TN,"27 -> 29, 31",03/05/2025,04/02/2025,9,4,11,1,PTH_DC_XANG,Cơ sở 2,Phan Quốc Cường,Kỹ thuật - Công nghệ
+90,AET30014,3,Thực hành Động cơ đốt trong(224.2)_TH_07,K63,K63,15,0,TH/TN,32 -> 35,04/08/2025,04/29/2025,9,3,1,5,PTH_DC_XANG,Cơ sở 2,Phan Quốc Cường,Kỹ thuật - Công nghệ
+91,AET30014,3,Thực hành Động cơ đốt trong(224.2)_TH_07,K63,K63,15,0,TH/TN,32 -> 35,04/08/2025,04/29/2025,9,3,6,5,PTH_DC_XANG,Cơ sở 2,Phan Quốc Cường,Kỹ thuật - Công nghệ
+92,AET30014,3,Thực hành Động cơ đốt trong(224.2)_TH_07,K63,K63,15,0,TH/TN,32 -> 35,04/08/2025,04/29/2025,9,3,11,2,PTH_DC_XANG,Cơ sở 2,Phan Quốc Cường,Kỹ thuật - Công nghệ
+93,AET30014,3,Thực hành Động cơ đốt trong(224.2)_TH_07,K63,K63,15,0,TH/TN,32 -> 35,04/09/2025,04/30/2025,9,4,1,5,PTH_DC_XANG,Cơ sở 2,Phan Quốc Cường,Kỹ thuật - Công nghệ
+94,AET30014,3,Thực hành Động cơ đốt trong(224.2)_TH_07,K63,K63,15,0,TH/TN,32 -> 35,04/09/2025,04/30/2025,9,4,6,5,PTH_DC_XANG,Cơ sở 2,Phan Quốc Cường,Kỹ thuật - Công nghệ
+95,AET30014,3,Thực hành Động cơ đốt trong(224.2)_TH_07,K63,K63,15,0,TH/TN,32 -> 35,04/09/2025,04/30/2025,9,4,11,1,PTH_DC_XANG,Cơ sở 2,Phan Quốc Cường,Kỹ thuật - Công nghệ
+96,AET30014,3,Thực hành Động cơ đốt trong(224.2)_TH_08,K63,K63,15,0,TH/TN,36 -> 39,05/06/2025,05/27/2025,9,3,1,5,PTH_DC_XANG,Cơ sở 2,Phan Quốc Cường,Kỹ thuật - Công nghệ
+97,AET30014,3,Thực hành Động cơ đốt trong(224.2)_TH_08,K63,K63,15,0,TH/TN,36 -> 39,05/06/2025,05/27/2025,9,3,6,5,PTH_DC_XANG,Cơ sở 2,Phan Quốc Cường,Kỹ thuật - Công nghệ
+98,AET30014,3,Thực hành Động cơ đốt trong(224.2)_TH_08,K63,K63,15,0,TH/TN,36 -> 39,05/07/2025,05/28/2025,9,4,1,5,PTH_DC_XANG,Cơ sở 2,Phan Quốc Cường,Kỹ thuật - Công nghệ
+99,AET30014,3,Thực hành Động cơ đốt trong(224.2)_TH_08,K63,K63,15,0,TH/TN,36 -> 39,05/07/2025,05/28/2025,9,4,6,5,PTH_DC_XANG,Cơ sở 2,Phan Quốc Cường,Kỹ thuật - Công nghệ
+100,AET30014,3,Thực hành Động cơ đốt trong(224.2)_TH_08,K63,K63,15,0,TH/TN,36 -> 39,05/06/2025,05/27/2025,9,3,11,2,PTH_DC_XANG,Cơ sở 2,Phan Quốc Cường,Kỹ thuật - Công nghệ
+101,AET30014,3,Thực hành Động cơ đốt trong(224.2)_TH_08,K63,K63,15,0,TH/TN,36 -> 39,05/07/2025,05/28/2025,9,4,11,1,PTH_DC_XANG,Cơ sở 2,Phan Quốc Cường,Kỹ thuật - Công nghệ
+102,AET30048,3,Cấu tạo và nguyên lý ô tô(224.1)_LT_01,K64,K64,50,0,LT,"23 -> 29, 31 -> 38",02/03/2025,05/19/2025,3,2,3,3,A3 404,Cơ sở 1,Nguyễn Phi Cường Anh,Kỹ thuật - Công nghệ
+103,AET30048,3,Cấu tạo và nguyên lý ô tô(224.1)_LT_02,K64,K64,50,0,LT,"23 -> 29, 31 -> 38",02/03/2025,05/19/2025,3,2,8,3,A3 404,Cơ sở 1,Nguyễn Phi Cường Anh,Kỹ thuật - Công nghệ
+104,AET30049,3,"Vận hành trang thiết bị xưởng và quy trình bảo dưỡng, sửa chữa ô tô(224.1)_LT_01",K64,K64,50,0,LT,23,02/05/2025,02/05/2025,2,4,1,5,TH_CO_KHI,Cơ sở 2,Bùi Hà Phan,Kỹ thuật - Công nghệ
+105,AET30049,3,"Vận hành trang thiết bị xưởng và quy trình bảo dưỡng, sửa chữa ô tô(224.1)_LT_01",K64,K64,50,0,LT,23,02/05/2025,02/05/2025,2,4,6,5,TH_CO_KHI,Cơ sở 2,Bùi Hà Phan,Kỹ thuật - Công nghệ
+106,AET30049,3,"Vận hành trang thiết bị xưởng và quy trình bảo dưỡng, sửa chữa ô tô(224.1)_LT_01",K64,K64,50,0,LT,24,02/12/2025,02/12/2025,2,4,1,5,TH_CO_KHI,Cơ sở 2,Bùi Hà Phan,Kỹ thuật - Công nghệ
+107,AET30049,3,"Vận hành trang thiết bị xưởng và quy trình bảo dưỡng, sửa chữa ô tô(224.1)_LT_01_TH_01",K64,K64,17,0,TH/TN,"25 -> 29, 31",02/19/2025,04/02/2025,5,4,1,5,TH_CO_KHI,Cơ sở 2,Bùi Hà Phan,Kỹ thuật - Công nghệ
+108,AET30049,3,"Vận hành trang thiết bị xưởng và quy trình bảo dưỡng, sửa chữa ô tô(224.1)_LT_01_TH_01",K64,K64,17,0,TH/TN,"25 -> 29, 31",02/19/2025,04/02/2025,5,4,6,5,TH_CO_KHI,Cơ sở 2,Bùi Hà Phan,Kỹ thuật - Công nghệ
+109,AET30049,3,"Vận hành trang thiết bị xưởng và quy trình bảo dưỡng, sửa chữa ô tô(224.1)_LT_01_TH_02",K64,K64,17,0,TH/TN,32 -> 37,04/09/2025,05/14/2025,5,4,1,5,TH_CO_KHI,Cơ sở 2,Bùi Hà Phan,Kỹ thuật - Công nghệ
+110,AET30049,3,"Vận hành trang thiết bị xưởng và quy trình bảo dưỡng, sửa chữa ô tô(224.1)_LT_01_TH_02",K64,K64,17,0,TH/TN,32 -> 37,04/09/2025,05/14/2025,5,4,6,5,TH_CO_KHI,Cơ sở 2,Bùi Hà Phan,Kỹ thuật - Công nghệ
+111,AET30049,3,"Vận hành trang thiết bị xưởng và quy trình bảo dưỡng, sửa chữa ô tô(224.1)_LT_01_TH_03",K64,K64,17,0,TH/TN,"25 -> 29, 31",02/19/2025,04/02/2025,5,4,1,5,P. TH Ð?ng co,Cơ sở 2,Phan Văn Nguyên,Kỹ thuật - Công nghệ
+112,AET30049,3,"Vận hành trang thiết bị xưởng và quy trình bảo dưỡng, sửa chữa ô tô(224.1)_LT_01_TH_03",K64,K64,17,0,TH/TN,"25 -> 29, 31",02/19/2025,04/02/2025,5,4,6,5,P. TH Ð?ng co,Cơ sở 2,Phan Văn Nguyên,Kỹ thuật - Công nghệ
+113,AET30049,3,"Vận hành trang thiết bị xưởng và quy trình bảo dưỡng, sửa chữa ô tô(224.1)_LT_02",K64,K64,50,0,LT,23,02/05/2025,02/05/2025,2,4,1,5,TH_CO_KHI_2,Cơ sở 2,Nguyễn Phúc Ngọc,Kỹ thuật - Công nghệ
+114,AET30049,3,"Vận hành trang thiết bị xưởng và quy trình bảo dưỡng, sửa chữa ô tô(224.1)_LT_02",K64,K64,50,0,LT,23,02/05/2025,02/05/2025,2,4,6,5,TH_CO_KHI_2,Cơ sở 2,Nguyễn Phúc Ngọc,Kỹ thuật - Công nghệ
+115,AET30049,3,"Vận hành trang thiết bị xưởng và quy trình bảo dưỡng, sửa chữa ô tô(224.1)_LT_02",K64,K64,50,0,LT,24,02/12/2025,02/12/2025,2,4,1,5,TH_CO_KHI_2,Cơ sở 2,Nguyễn Phúc Ngọc,Kỹ thuật - Công nghệ
+116,AET30049,3,"Vận hành trang thiết bị xưởng và quy trình bảo dưỡng, sửa chữa ô tô(224.1)_LT_02_TH_01",K64,K64,17,0,TH/TN,"25 -> 29, 31",02/19/2025,04/02/2025,5,4,1,5,TH_CO_KHI_2,Cơ sở 2,Nguyễn Phúc Ngọc,Kỹ thuật - Công nghệ
+117,AET30049,3,"Vận hành trang thiết bị xưởng và quy trình bảo dưỡng, sửa chữa ô tô(224.1)_LT_02_TH_01",K64,K64,17,0,TH/TN,"25 -> 29, 31",02/19/2025,04/02/2025,5,4,6,5,TH_CO_KHI_2,Cơ sở 2,Nguyễn Phúc Ngọc,Kỹ thuật - Công nghệ
+118,AET30049,3,"Vận hành trang thiết bị xưởng và quy trình bảo dưỡng, sửa chữa ô tô(224.1)_LT_02_TH_02",K64,K64,17,0,TH/TN,32 -> 37,04/09/2025,05/14/2025,5,4,1,5,TH_CO_KHI_2,Cơ sở 2,Nguyễn Phúc Ngọc,Kỹ thuật - Công nghệ
+119,AET30049,3,"Vận hành trang thiết bị xưởng và quy trình bảo dưỡng, sửa chữa ô tô(224.1)_LT_02_TH_02",K64,K64,17,0,TH/TN,32 -> 37,04/09/2025,05/14/2025,5,4,6,5,TH_CO_KHI_2,Cơ sở 2,Nguyễn Phúc Ngọc,Kỹ thuật - Công nghệ
+120,AET30049,3,"Vận hành trang thiết bị xưởng và quy trình bảo dưỡng, sửa chữa ô tô(224.1)_LT_02_TH_03",K64,K64,17,0,TH/TN,32 -> 37,04/09/2025,05/14/2025,5,4,1,5,P. TH Ð?ng co,Cơ sở 2,Phan Văn Nguyên,Kỹ thuật - Công nghệ
+121,AET30049,3,"Vận hành trang thiết bị xưởng và quy trình bảo dưỡng, sửa chữa ô tô(224.1)_LT_02_TH_03",K64,K64,17,0,TH/TN,32 -> 37,04/09/2025,05/14/2025,5,4,6,5,P. TH Ð?ng co,Cơ sở 2,Phan Văn Nguyên,Kỹ thuật - Công nghệ
+122,AET30050,3,"Kỹ thuật điều khiển thủy lực, khí nén trên ô tô(224.1)_LT_01",K64,K64,50,0,LT,"23 -> 29, 31 -> 38",02/04/2025,05/20/2025,3,3,8,3,D3.101,Cơ sở 1,Nguyễn Văn Phú,Kỹ thuật - Công nghệ
+123,AET30050,3,"Kỹ thuật điều khiển thủy lực, khí nén trên ô tô(224.1)_LT_02",K64,K64,50,0,LT,"23 -> 29, 31 -> 38",02/09/2025,05/25/2025,3,8,8,3,B1 302,Cơ sở 1,Nguyễn Văn Phú,Kỹ thuật - Công nghệ
+124,AET30056,4,Thực tập Hệ thống điều hòa không khí ô tô(224.1)_DAMH_01_TH_01,K63,K63,14,0,TH/TN,23 -> 27,02/06/2025,03/06/2025,10,5,1,5,P_TH_Điện,Cơ sở 2,Trịnh Ngọc Hoàng,Kỹ thuật - Công nghệ
+125,AET30056,4,Thực tập Hệ thống điều hòa không khí ô tô(224.1)_DAMH_01_TH_01,K63,K63,14,0,TH/TN,23 -> 27,02/06/2025,03/06/2025,10,5,6,5,P_TH_Điện,Cơ sở 2,Trịnh Ngọc Hoàng,Kỹ thuật - Công nghệ
+126,AET30056,4,Thực tập Hệ thống điều hòa không khí ô tô(224.1)_DAMH_01_TH_01,K63,K63,14,0,TH/TN,23 -> 26,02/07/2025,02/28/2025,10,6,1,5,P_TH_Điện,Cơ sở 2,Trịnh Ngọc Hoàng,Kỹ thuật - Công nghệ
+127,AET30056,4,Thực tập Hệ thống điều hòa không khí ô tô(224.1)_DAMH_01_TH_01,K63,K63,14,0,TH/TN,23 -> 26,02/07/2025,02/28/2025,10,6,6,5,P_TH_Điện,Cơ sở 2,Trịnh Ngọc Hoàng,Kỹ thuật - Công nghệ
+128,AET30056,4,Thực tập Hệ thống điều hòa không khí ô tô(224.1)_DAMH_01_TH_02,K63,K63,14,0,TH/TN,"28, 29, 31, 32",03/13/2025,04/10/2025,10,5,1,5,P_TH_Điện,Cơ sở 2,Trịnh Ngọc Hoàng,Kỹ thuật - Công nghệ
+129,AET30056,4,Thực tập Hệ thống điều hòa không khí ô tô(224.1)_DAMH_01_TH_02,K63,K63,14,0,TH/TN,"28, 29, 31, 32",03/13/2025,04/10/2025,10,5,6,5,P_TH_Điện,Cơ sở 2,Trịnh Ngọc Hoàng,Kỹ thuật - Công nghệ
+130,AET30056,4,Thực tập Hệ thống điều hòa không khí ô tô(224.1)_DAMH_01_TH_02,K63,K63,14,0,TH/TN,"27 -> 29, 31, 32",03/07/2025,04/11/2025,10,6,1,5,P_TH_Điện,Cơ sở 2,Trịnh Ngọc Hoàng,Kỹ thuật - Công nghệ
+131,AET30056,4,Thực tập Hệ thống điều hòa không khí ô tô(224.1)_DAMH_01_TH_02,K63,K63,14,0,TH/TN,"27 -> 29, 31, 32",03/07/2025,04/11/2025,10,6,6,5,P_TH_Điện,Cơ sở 2,Trịnh Ngọc Hoàng,Kỹ thuật - Công nghệ
+132,AET30056,4,Thực tập Hệ thống điều hòa không khí ô tô(224.1)_DAMH_01_TH_03,K63,K63,14,0,TH/TN,33 -> 37,04/17/2025,05/15/2025,10,5,1,5,P_TH_Điện,Cơ sở 2,Trịnh Ngọc Hoàng,Kỹ thuật - Công nghệ
+133,AET30056,4,Thực tập Hệ thống điều hòa không khí ô tô(224.1)_DAMH_01_TH_03,K63,K63,14,0,TH/TN,33 -> 37,04/17/2025,05/15/2025,10,5,6,5,P_TH_Điện,Cơ sở 2,Trịnh Ngọc Hoàng,Kỹ thuật - Công nghệ
+134,AET30056,4,Thực tập Hệ thống điều hòa không khí ô tô(224.1)_DAMH_01_TH_03,K63,K63,14,0,TH/TN,33 -> 36,04/18/2025,05/09/2025,10,6,1,5,P_TH_Điện,Cơ sở 2,Trịnh Ngọc Hoàng,Kỹ thuật - Công nghệ
+135,AET30056,4,Thực tập Hệ thống điều hòa không khí ô tô(224.1)_DAMH_01_TH_03,K63,K63,14,0,TH/TN,33 -> 36,04/18/2025,05/09/2025,10,6,6,5,P_TH_Điện,Cơ sở 2,Trịnh Ngọc Hoàng,Kỹ thuật - Công nghệ
+136,AET30056,4,Thực tập Hệ thống điều hòa không khí ô tô(224.1)_DAMH_02_TH_04,K63,K63,14,0,TH/TN,23 -> 27,02/06/2025,03/06/2025,10,5,1,5,P_TH_DIEUHOA,Cơ sở 2,Đặng Đình Thành,Kỹ thuật - Công nghệ
+137,AET30056,4,Thực tập Hệ thống điều hòa không khí ô tô(224.1)_DAMH_02_TH_04,K63,K63,14,0,TH/TN,23 -> 27,02/06/2025,03/06/2025,10,5,6,5,P_TH_DIEUHOA,Cơ sở 2,Đặng Đình Thành,Kỹ thuật - Công nghệ
+138,AET30056,4,Thực tập Hệ thống điều hòa không khí ô tô(224.1)_DAMH_02_TH_04,K63,K63,14,0,TH/TN,23 -> 26,02/07/2025,02/28/2025,10,6,1,5,P_TH_DIEUHOA,Cơ sở 2,Đặng Đình Thành,Kỹ thuật - Công nghệ
+139,AET30056,4,Thực tập Hệ thống điều hòa không khí ô tô(224.1)_DAMH_02_TH_04,K63,K63,14,0,TH/TN,23 -> 26,02/07/2025,02/28/2025,10,6,6,5,P_TH_DIEUHOA,Cơ sở 2,Đặng Đình Thành,Kỹ thuật - Công nghệ
+140,AET30056,4,Thực tập Hệ thống điều hòa không khí ô tô(224.1)_DAMH_02_TH_05,K63,K63,14,0,TH/TN,"28, 29, 31, 32",03/13/2025,04/10/2025,10,5,1,5,P_TH_DIEUHOA,Cơ sở 2,Đặng Đình Thành,Kỹ thuật - Công nghệ
+141,AET30056,4,Thực tập Hệ thống điều hòa không khí ô tô(224.1)_DAMH_02_TH_05,K63,K63,14,0,TH/TN,"28, 29, 31, 32",03/13/2025,04/10/2025,10,5,6,5,P_TH_DIEUHOA,Cơ sở 2,Đặng Đình Thành,Kỹ thuật - Công nghệ
+142,AET30056,4,Thực tập Hệ thống điều hòa không khí ô tô(224.1)_DAMH_02_TH_05,K63,K63,14,0,TH/TN,"27 -> 29, 31, 32",03/07/2025,04/11/2025,10,6,1,5,P_TH_DIEUHOA,Cơ sở 2,Đặng Đình Thành,Kỹ thuật - Công nghệ
+143,AET30056,4,Thực tập Hệ thống điều hòa không khí ô tô(224.1)_DAMH_02_TH_05,K63,K63,14,0,TH/TN,"27 -> 29, 31, 32",03/07/2025,04/11/2025,10,6,6,5,P_TH_DIEUHOA,Cơ sở 2,Đặng Đình Thành,Kỹ thuật - Công nghệ
+144,AET30056,4,Thực tập Hệ thống điều hòa không khí ô tô(224.1)_DAMH_02_TH_06,K63,K63,14,0,TH/TN,33 -> 37,04/17/2025,05/15/2025,10,5,1,5,P_TH_DIEUHOA,Cơ sở 2,Đặng Đình Thành,Kỹ thuật - Công nghệ
+145,AET30056,4,Thực tập Hệ thống điều hòa không khí ô tô(224.1)_DAMH_02_TH_06,K63,K63,14,0,TH/TN,33 -> 37,04/17/2025,05/15/2025,10,5,6,5,P_TH_DIEUHOA,Cơ sở 2,Đặng Đình Thành,Kỹ thuật - Công nghệ
+146,AET30056,4,Thực tập Hệ thống điều hòa không khí ô tô(224.1)_DAMH_02_TH_06,K63,K63,14,0,TH/TN,33 -> 36,04/18/2025,05/09/2025,10,6,1,5,P_TH_DIEUHOA,Cơ sở 2,Đặng Đình Thành,Kỹ thuật - Công nghệ
+147,AET30056,4,Thực tập Hệ thống điều hòa không khí ô tô(224.1)_DAMH_02_TH_06,K63,K63,14,0,TH/TN,33 -> 36,04/18/2025,05/09/2025,10,6,6,5,P_TH_DIEUHOA,Cơ sở 2,Đặng Đình Thành,Kỹ thuật - Công nghệ
+148,AET30056,4,Thực tập Hệ thống điều hòa không khí ô tô(224.1)_DAMH_03_TH_07,K63,K63,14,0,TH/TN,23 -> 27,02/06/2025,03/06/2025,10,5,1,5,P. TH Ch?n doán,Cơ sở 2,Nguyễn Phi Cường Anh,Kỹ thuật - Công nghệ
+149,AET30056,4,Thực tập Hệ thống điều hòa không khí ô tô(224.1)_DAMH_03_TH_07,K63,K63,14,0,TH/TN,23 -> 27,02/06/2025,03/06/2025,10,5,6,5,P. TH Ch?n doán,Cơ sở 2,Nguyễn Phi Cường Anh,Kỹ thuật - Công nghệ
+150,AET30056,4,Thực tập Hệ thống điều hòa không khí ô tô(224.1)_DAMH_03_TH_07,K63,K63,14,0,TH/TN,23 -> 26,02/07/2025,02/28/2025,10,6,1,5,P. TH Ch?n doán,Cơ sở 2,Nguyễn Phi Cường Anh,Kỹ thuật - Công nghệ
+151,AET30056,4,Thực tập Hệ thống điều hòa không khí ô tô(224.1)_DAMH_03_TH_07,K63,K63,14,0,TH/TN,23 -> 26,02/07/2025,02/28/2025,10,6,6,5,P. TH Ch?n doán,Cơ sở 2,Nguyễn Phi Cường Anh,Kỹ thuật - Công nghệ
+152,AET30056,4,Thực tập Hệ thống điều hòa không khí ô tô(224.1)_DAMH_03_TH_08,K63,K63,14,0,TH/TN,"28, 29, 31, 32",03/13/2025,04/10/2025,10,5,1,5,P. TH Ch?n doán,Cơ sở 2,Nguyễn Phi Cường Anh,Kỹ thuật - Công nghệ
+153,AET30056,4,Thực tập Hệ thống điều hòa không khí ô tô(224.1)_DAMH_03_TH_08,K63,K63,14,0,TH/TN,"28, 29, 31, 32",03/13/2025,04/10/2025,10,5,6,5,P. TH Ch?n doán,Cơ sở 2,Nguyễn Phi Cường Anh,Kỹ thuật - Công nghệ
+154,AET30056,4,Thực tập Hệ thống điều hòa không khí ô tô(224.1)_DAMH_03_TH_08,K63,K63,14,0,TH/TN,"27 -> 29, 31, 32",03/07/2025,04/11/2025,10,6,1,5,P. TH Ch?n doán,Cơ sở 2,Nguyễn Phi Cường Anh,Kỹ thuật - Công nghệ
+155,AET30056,4,Thực tập Hệ thống điều hòa không khí ô tô(224.1)_DAMH_03_TH_08,K63,K63,14,0,TH/TN,"27 -> 29, 31, 32",03/07/2025,04/11/2025,10,6,6,5,P. TH Ch?n doán,Cơ sở 2,Nguyễn Phi Cường Anh,Kỹ thuật - Công nghệ
+156,AET30056,4,Thực tập Hệ thống điều hòa không khí ô tô(224.1)_DAMH_03_TH_09,K63,K63,14,0,TH/TN,33 -> 37,04/17/2025,05/15/2025,10,5,1,5,P. TH Ch?n doán,Cơ sở 2,Nguyễn Phi Cường Anh,Kỹ thuật - Công nghệ
+157,AET30056,4,Thực tập Hệ thống điều hòa không khí ô tô(224.1)_DAMH_03_TH_09,K63,K63,14,0,TH/TN,33 -> 37,04/17/2025,05/15/2025,10,5,6,5,P. TH Ch?n doán,Cơ sở 2,Nguyễn Phi Cường Anh,Kỹ thuật - Công nghệ
+158,AET30056,4,Thực tập Hệ thống điều hòa không khí ô tô(224.1)_DAMH_03_TH_09,K63,K63,14,0,TH/TN,33 -> 36,04/18/2025,05/09/2025,10,6,1,5,P. TH Ch?n doán,Cơ sở 2,Nguyễn Phi Cường Anh,Kỹ thuật - Công nghệ
+159,AET30056,4,Thực tập Hệ thống điều hòa không khí ô tô(224.1)_DAMH_03_TH_09,K63,K63,14,0,TH/TN,33 -> 36,04/18/2025,05/09/2025,10,6,6,5,P. TH Ch?n doán,Cơ sở 2,Nguyễn Phi Cường Anh,Kỹ thuật - Công nghệ
+160,AET30057,4,Thực hành điện - điện tử động cơ(224.1)_TH_01,K63,K63,14,0,TH/TN,23 -> 28,02/06/2025,03/13/2025,10,5,1,5,P_TH_Điên ô tô 3,Cơ sở 2,Nguyễn Bá Uy,Kỹ thuật - Công nghệ
+161,AET30057,4,Thực hành điện - điện tử động cơ(224.1)_TH_01,K63,K63,14,0,TH/TN,23 -> 28,02/06/2025,03/13/2025,10,5,6,5,P_TH_Điên ô tô 3,Cơ sở 2,Nguyễn Bá Uy,Kỹ thuật - Công nghệ
+162,AET30057,4,Thực hành điện - điện tử động cơ(224.1)_TH_01,K63,K63,14,0,TH/TN,23 -> 28,02/07/2025,03/14/2025,10,6,1,5,P_TH_Điên ô tô 3,Cơ sở 2,Nguyễn Bá Uy,Kỹ thuật - Công nghệ
+163,AET30057,4,Thực hành điện - điện tử động cơ(224.1)_TH_01,K63,K63,14,0,TH/TN,23 -> 28,02/07/2025,03/14/2025,10,6,6,5,P_TH_Điên ô tô 3,Cơ sở 2,Nguyễn Bá Uy,Kỹ thuật - Công nghệ
+164,AET30057,4,Thực hành điện - điện tử động cơ(224.1)_TH_02,K63,K63,14,0,TH/TN,"29, 31 -> 34",03/20/2025,04/24/2025,10,5,1,5,P_TH_Điên ô tô 3,Cơ sở 2,Nguyễn Bá Uy,Kỹ thuật - Công nghệ
+165,AET30057,4,Thực hành điện - điện tử động cơ(224.1)_TH_02,K63,K63,14,0,TH/TN,"29, 31 -> 34",03/20/2025,04/24/2025,10,5,6,5,P_TH_Điên ô tô 3,Cơ sở 2,Nguyễn Bá Uy,Kỹ thuật - Công nghệ
+166,AET30057,4,Thực hành điện - điện tử động cơ(224.1)_TH_02,K63,K63,14,0,TH/TN,"29, 31 -> 34",03/20/2025,04/24/2025,10,5,11,2,P_TH_Điên ô tô 3,Cơ sở 2,Nguyễn Bá Uy,Kỹ thuật - Công nghệ
+167,AET30057,4,Thực hành điện - điện tử động cơ(224.1)_TH_02,K63,K63,14,0,TH/TN,"29, 31 -> 34",03/21/2025,04/25/2025,10,6,1,5,P_TH_Điên ô tô 3,Cơ sở 2,Nguyễn Bá Uy,Kỹ thuật - Công nghệ
+168,AET30057,4,Thực hành điện - điện tử động cơ(224.1)_TH_02,K63,K63,14,0,TH/TN,"29, 31 -> 34",03/21/2025,04/25/2025,10,6,6,5,P_TH_Điên ô tô 3,Cơ sở 2,Nguyễn Bá Uy,Kỹ thuật - Công nghệ
+169,AET30057,4,Thực hành điện - điện tử động cơ(224.1)_TH_02,K63,K63,14,0,TH/TN,"29, 31 -> 34",03/21/2025,04/25/2025,10,6,11,2,P_TH_Điên ô tô 3,Cơ sở 2,Nguyễn Bá Uy,Kỹ thuật - Công nghệ
+170,AET30057,4,Thực hành điện - điện tử động cơ(224.1)_TH_03,K63,K63,14,0,TH/TN,35 -> 39,05/01/2025,05/29/2025,10,5,1,5,P_TH_Điên ô tô 3,Cơ sở 2,Nguyễn Bá Uy,Kỹ thuật - Công nghệ
+171,AET30057,4,Thực hành điện - điện tử động cơ(224.1)_TH_03,K63,K63,14,0,TH/TN,35 -> 39,05/01/2025,05/29/2025,10,5,6,5,P_TH_Điên ô tô 3,Cơ sở 2,Nguyễn Bá Uy,Kỹ thuật - Công nghệ
+172,AET30057,4,Thực hành điện - điện tử động cơ(224.1)_TH_03,K63,K63,14,0,TH/TN,35 -> 39,05/01/2025,05/29/2025,10,5,11,2,P_TH_Điên ô tô 3,Cơ sở 2,Nguyễn Bá Uy,Kỹ thuật - Công nghệ
+173,AET30057,4,Thực hành điện - điện tử động cơ(224.1)_TH_03,K63,K63,14,0,TH/TN,35 -> 39,05/02/2025,05/30/2025,10,6,1,5,P_TH_Điên ô tô 3,Cơ sở 2,Nguyễn Bá Uy,Kỹ thuật - Công nghệ
+174,AET30057,4,Thực hành điện - điện tử động cơ(224.1)_TH_03,K63,K63,14,0,TH/TN,35 -> 39,05/02/2025,05/30/2025,10,6,6,5,P_TH_Điên ô tô 3,Cơ sở 2,Nguyễn Bá Uy,Kỹ thuật - Công nghệ
+175,AET30057,4,Thực hành điện - điện tử động cơ(224.1)_TH_03,K63,K63,14,0,TH/TN,35 -> 39,05/02/2025,05/30/2025,10,6,11,2,P_TH_Điên ô tô 3,Cơ sở 2,Nguyễn Bá Uy,Kỹ thuật - Công nghệ
+176,AET30057,4,Thực hành điện - điện tử động cơ(224.1)_TH_04,K63,K63,14,0,TH/TN,23 -> 28,02/06/2025,03/13/2025,10,5,1,5,P_TH_Điện ô tô 3,Cơ sở 2,Nguyễn Phúc Ngọc,Kỹ thuật - Công nghệ
+177,AET30057,4,Thực hành điện - điện tử động cơ(224.1)_TH_04,K63,K63,14,0,TH/TN,23 -> 28,02/06/2025,03/13/2025,10,5,6,5,P_TH_Điện ô tô 3,Cơ sở 2,Nguyễn Phúc Ngọc,Kỹ thuật - Công nghệ
+178,AET30057,4,Thực hành điện - điện tử động cơ(224.1)_TH_04,K63,K63,14,0,TH/TN,23 -> 28,02/07/2025,03/14/2025,10,6,1,5,P_TH_Điện ô tô 3,Cơ sở 2,Nguyễn Phúc Ngọc,Kỹ thuật - Công nghệ
+179,AET30057,4,Thực hành điện - điện tử động cơ(224.1)_TH_04,K63,K63,14,0,TH/TN,23 -> 28,02/07/2025,03/14/2025,10,6,6,5,P_TH_Điện ô tô 3,Cơ sở 2,Nguyễn Phúc Ngọc,Kỹ thuật - Công nghệ
+180,AET30057,4,Thực hành điện - điện tử động cơ(224.1)_TH_05,K63,K63,14,0,TH/TN,"29, 31 -> 34",03/20/2025,04/24/2025,10,5,1,5,P_TH_Điện ô tô 3,Cơ sở 2,Nguyễn Phúc Ngọc,Kỹ thuật - Công nghệ
+181,AET30057,4,Thực hành điện - điện tử động cơ(224.1)_TH_05,K63,K63,14,0,TH/TN,"29, 31 -> 34",03/20/2025,04/24/2025,10,5,6,5,P_TH_Điện ô tô 3,Cơ sở 2,Nguyễn Phúc Ngọc,Kỹ thuật - Công nghệ
+182,AET30057,4,Thực hành điện - điện tử động cơ(224.1)_TH_05,K63,K63,14,0,TH/TN,"29, 31 -> 34",03/20/2025,04/24/2025,10,5,11,2,P_TH_Điện ô tô 3,Cơ sở 2,Nguyễn Phúc Ngọc,Kỹ thuật - Công nghệ
+183,AET30057,4,Thực hành điện - điện tử động cơ(224.1)_TH_05,K63,K63,14,0,TH/TN,"29, 31 -> 34",03/21/2025,04/25/2025,10,6,1,5,P_TH_Điện ô tô 3,Cơ sở 2,Nguyễn Phúc Ngọc,Kỹ thuật - Công nghệ
+184,AET30057,4,Thực hành điện - điện tử động cơ(224.1)_TH_05,K63,K63,14,0,TH/TN,"29, 31 -> 34",03/21/2025,04/25/2025,10,6,6,5,P_TH_Điện ô tô 3,Cơ sở 2,Nguyễn Phúc Ngọc,Kỹ thuật - Công nghệ
+185,AET30057,4,Thực hành điện - điện tử động cơ(224.1)_TH_05,K63,K63,14,0,TH/TN,"29, 31 -> 34",03/21/2025,04/25/2025,10,6,11,2,P_TH_Điện ô tô 3,Cơ sở 2,Nguyễn Phúc Ngọc,Kỹ thuật - Công nghệ
+186,AET30057,4,Thực hành điện - điện tử động cơ(224.1)_TH_06,K63,K63,14,0,TH/TN,35 -> 39,05/01/2025,05/29/2025,10,5,1,5,P_TH_Điện ô tô 3,Cơ sở 2,Nguyễn Phúc Ngọc,Kỹ thuật - Công nghệ
+187,AET30057,4,Thực hành điện - điện tử động cơ(224.1)_TH_06,K63,K63,14,0,TH/TN,35 -> 39,05/01/2025,05/29/2025,10,5,6,5,P_TH_Điện ô tô 3,Cơ sở 2,Nguyễn Phúc Ngọc,Kỹ thuật - Công nghệ
+188,AET30057,4,Thực hành điện - điện tử động cơ(224.1)_TH_06,K63,K63,14,0,TH/TN,35 -> 39,05/02/2025,05/30/2025,10,6,1,5,P_TH_Điện ô tô 3,Cơ sở 2,Nguyễn Phúc Ngọc,Kỹ thuật - Công nghệ
+189,AET30057,4,Thực hành điện - điện tử động cơ(224.1)_TH_06,K63,K63,14,0,TH/TN,35 -> 39,05/01/2025,05/29/2025,10,5,11,2,P_TH_Điện ô tô 3,Cơ sở 2,Nguyễn Phúc Ngọc,Kỹ thuật - Công nghệ
+190,AET30057,4,Thực hành điện - điện tử động cơ(224.1)_TH_06,K63,K63,14,0,TH/TN,35 -> 39,05/02/2025,05/30/2025,10,6,6,5,P_TH_Điện ô tô 3,Cơ sở 2,Nguyễn Phúc Ngọc,Kỹ thuật - Công nghệ
+191,AET30057,4,Thực hành điện - điện tử động cơ(224.1)_TH_06,K63,K63,14,0,TH/TN,35 -> 39,05/02/2025,05/30/2025,10,6,11,2,P_TH_Điện ô tô 3,Cơ sở 2,Nguyễn Phúc Ngọc,Kỹ thuật - Công nghệ
+192,AET30057,4,Thực hành điện - điện tử động cơ(224.1)_TH_07,K63,K63,14,0,TH/TN,23 -> 28,02/06/2025,03/13/2025,10,5,1,5,PTH_Ô tô 5,Cơ sở 2,Phan Quốc Cường,Kỹ thuật - Công nghệ
+193,AET30057,4,Thực hành điện - điện tử động cơ(224.1)_TH_07,K63,K63,14,0,TH/TN,23 -> 28,02/06/2025,03/13/2025,10,5,6,5,PTH_Ô tô 5,Cơ sở 2,Phan Quốc Cường,Kỹ thuật - Công nghệ
+194,AET30057,4,Thực hành điện - điện tử động cơ(224.1)_TH_07,K63,K63,14,0,TH/TN,23 -> 28,02/07/2025,03/14/2025,10,6,1,5,PTH_Ô tô 5,Cơ sở 2,Phan Quốc Cường,Kỹ thuật - Công nghệ
+195,AET30057,4,Thực hành điện - điện tử động cơ(224.1)_TH_07,K63,K63,14,0,TH/TN,23 -> 28,02/07/2025,03/14/2025,10,6,6,5,PTH_Ô tô 5,Cơ sở 2,Phan Quốc Cường,Kỹ thuật - Công nghệ
+196,AET30057,4,Thực hành điện - điện tử động cơ(224.1)_TH_08,K63,K63,14,0,TH/TN,"29, 31 -> 34",03/20/2025,04/24/2025,10,5,1,5,PTH_Ô tô 5,Cơ sở 2,Phan Quốc Cường,Kỹ thuật - Công nghệ
+197,AET30057,4,Thực hành điện - điện tử động cơ(224.1)_TH_08,K63,K63,14,0,TH/TN,"29, 31 -> 34",03/20/2025,04/24/2025,10,5,6,5,PTH_Ô tô 5,Cơ sở 2,Phan Quốc Cường,Kỹ thuật - Công nghệ
+198,AET30057,4,Thực hành điện - điện tử động cơ(224.1)_TH_08,K63,K63,14,0,TH/TN,"29, 31 -> 34",03/20/2025,04/24/2025,10,5,11,2,PTH_Ô tô 5,Cơ sở 2,Phan Quốc Cường,Kỹ thuật - Công nghệ
+199,AET30057,4,Thực hành điện - điện tử động cơ(224.1)_TH_08,K63,K63,14,0,TH/TN,"29, 31 -> 34",03/21/2025,04/25/2025,10,6,1,5,PTH_Ô tô 5,Cơ sở 2,Phan Quốc Cường,Kỹ thuật - Công nghệ
+200,AET30057,4,Thực hành điện - điện tử động cơ(224.1)_TH_08,K63,K63,14,0,TH/TN,"29, 31 -> 34",03/21/2025,04/25/2025,10,6,6,5,PTH_Ô tô 5,Cơ sở 2,Phan Quốc Cường,Kỹ thuật - Công nghệ
+201,AET30057,4,Thực hành điện - điện tử động cơ(224.1)_TH_08,K63,K63,14,0,TH/TN,"29, 31 -> 34",03/21/2025,04/25/2025,10,6,11,2,PTH_Ô tô 5,Cơ sở 2,Phan Quốc Cường,Kỹ thuật - Công nghệ
+202,AET30057,4,Thực hành điện - điện tử động cơ(224.1)_TH_09,"K61,K62,K63,K64,K65",K63,14,0,TH/TN,35 -> 39,05/01/2025,05/29/2025,60,5,1,5,PTH_Ô tô 5,Cơ sở 2,Phan Quốc Cường,Kỹ thuật - Công nghệ
+203,AET30057,4,Thực hành điện - điện tử động cơ(224.1)_TH_09,"K61,K62,K63,K64,K65",K63,14,0,TH/TN,35 -> 39,05/01/2025,05/29/2025,60,5,6,5,PTH_Ô tô 5,Cơ sở 2,Phan Quốc Cường,Kỹ thuật - Công nghệ
+204,AET30057,4,Thực hành điện - điện tử động cơ(224.1)_TH_09,"K61,K62,K63,K64,K65",K63,14,0,TH/TN,35 -> 39,05/01/2025,05/29/2025,60,5,11,2,PTH_Ô tô 5,Cơ sở 2,Phan Quốc Cường,Kỹ thuật - Công nghệ
+205,AET30057,4,Thực hành điện - điện tử động cơ(224.1)_TH_09,"K61,K62,K63,K64,K65",K63,14,0,TH/TN,35 -> 39,05/02/2025,05/30/2025,60,6,1,5,PTH_Ô tô 5,Cơ sở 2,Phan Quốc Cường,Kỹ thuật - Công nghệ
+206,AET30057,4,Thực hành điện - điện tử động cơ(224.1)_TH_09,"K61,K62,K63,K64,K65",K63,14,0,TH/TN,35 -> 39,05/02/2025,05/30/2025,60,6,6,5,PTH_Ô tô 5,Cơ sở 2,Phan Quốc Cường,Kỹ thuật - Công nghệ
+207,AET30057,4,Thực hành điện - điện tử động cơ(224.1)_TH_09,"K61,K62,K63,K64,K65",K63,14,0,TH/TN,35 -> 39,05/02/2025,05/30/2025,60,6,11,2,PTH_Ô tô 5,Cơ sở 2,Phan Quốc Cường,Kỹ thuật - Công nghệ
+208,AET30058,2,Ô tô điện và xe tự lái(224.1)_LT_01,K63,K63,60,0,LT,"23 -> 29, 31 -> 38",02/03/2025,05/19/2025,2,2,1,2,C_102_cs2,Cơ sở 2,Phan Văn Dư,Kỹ thuật - Công nghệ
+209,AET30058,2,Ô tô điện và xe tự lái(224.1)_LT_02,K63,K63,60,0,LT,"23 -> 29, 31 -> 38",02/03/2025,05/19/2025,2,2,4,2,C_103_cs2,Cơ sở 2,Phan Văn Dư,Kỹ thuật - Công nghệ
+210,AET30062,4,Thực tập Chẩn đoán và sửa chữa thân gầm ô tô(224.1)_TH_01,K62,K62,15,0,TH/TN,23 -> 28,02/04/2025,03/11/2025,10,3,1,5,P_TH_Điện,Cơ sở 2,Trịnh Ngọc Hoàng,Kỹ thuật - Công nghệ
+211,AET30062,4,Thực tập Chẩn đoán và sửa chữa thân gầm ô tô(224.1)_TH_01,K62,K62,15,0,TH/TN,23 -> 28,02/04/2025,03/11/2025,10,3,6,5,P_TH_Điện,Cơ sở 2,Trịnh Ngọc Hoàng,Kỹ thuật - Công nghệ
+212,AET30062,4,Thực tập Chẩn đoán và sửa chữa thân gầm ô tô(224.1)_TH_01,K62,K62,15,0,TH/TN,23 -> 28,02/05/2025,03/12/2025,10,4,1,5,P_TH_Điện,Cơ sở 2,Trịnh Ngọc Hoàng,Kỹ thuật - Công nghệ
+213,AET30062,4,Thực tập Chẩn đoán và sửa chữa thân gầm ô tô(224.1)_TH_01,K62,K62,15,0,TH/TN,23 -> 28,02/05/2025,03/12/2025,10,4,6,5,P_TH_Điện,Cơ sở 2,Trịnh Ngọc Hoàng,Kỹ thuật - Công nghệ
+214,AET30062,4,Thực tập Chẩn đoán và sửa chữa thân gầm ô tô(224.1)_TH_02,K62,K62,15,0,TH/TN,"29, 31 -> 34",03/18/2025,04/22/2025,10,3,1,5,P_TH_Điện,Cơ sở 2,Trịnh Ngọc Hoàng,Kỹ thuật - Công nghệ
+215,AET30062,4,Thực tập Chẩn đoán và sửa chữa thân gầm ô tô(224.1)_TH_02,K62,K62,15,0,TH/TN,"29, 31 -> 34",03/18/2025,04/22/2025,10,3,6,5,P_TH_Điện,Cơ sở 2,Trịnh Ngọc Hoàng,Kỹ thuật - Công nghệ
+216,AET30062,4,Thực tập Chẩn đoán và sửa chữa thân gầm ô tô(224.1)_TH_02,K62,K62,15,0,TH/TN,"29, 31 -> 34",03/18/2025,04/22/2025,10,3,11,2,P_TH_Điện,Cơ sở 2,Trịnh Ngọc Hoàng,Kỹ thuật - Công nghệ
+217,AET30062,4,Thực tập Chẩn đoán và sửa chữa thân gầm ô tô(224.1)_TH_02,K62,K62,15,0,TH/TN,"29, 31 -> 34",03/19/2025,04/23/2025,10,4,1,5,P_TH_Điện,Cơ sở 2,Trịnh Ngọc Hoàng,Kỹ thuật - Công nghệ
+218,AET30062,4,Thực tập Chẩn đoán và sửa chữa thân gầm ô tô(224.1)_TH_02,K62,K62,15,0,TH/TN,"29, 31 -> 34",03/19/2025,04/23/2025,10,4,6,5,P_TH_Điện,Cơ sở 2,Trịnh Ngọc Hoàng,Kỹ thuật - Công nghệ
+219,AET30062,4,Thực tập Chẩn đoán và sửa chữa thân gầm ô tô(224.1)_TH_02,K62,K62,15,0,TH/TN,"29, 31 -> 34",03/19/2025,04/23/2025,10,4,11,2,P_TH_Điện,Cơ sở 2,Trịnh Ngọc Hoàng,Kỹ thuật - Công nghệ
+220,AET30062,4,Thực tập Chẩn đoán và sửa chữa thân gầm ô tô(224.1)_TH_03,K62,K62,15,0,TH/TN,35 -> 39,04/29/2025,05/27/2025,10,3,1,5,P_TH_Điện,Cơ sở 2,Trịnh Ngọc Hoàng,Kỹ thuật - Công nghệ
+221,AET30062,4,Thực tập Chẩn đoán và sửa chữa thân gầm ô tô(224.1)_TH_03,K62,K62,15,0,TH/TN,35 -> 39,04/29/2025,05/27/2025,10,3,6,5,P_TH_Điện,Cơ sở 2,Trịnh Ngọc Hoàng,Kỹ thuật - Công nghệ
+222,AET30062,4,Thực tập Chẩn đoán và sửa chữa thân gầm ô tô(224.1)_TH_03,K62,K62,15,0,TH/TN,35 -> 39,04/30/2025,05/28/2025,10,4,1,5,P_TH_Điện,Cơ sở 2,Trịnh Ngọc Hoàng,Kỹ thuật - Công nghệ
+223,AET30062,4,Thực tập Chẩn đoán và sửa chữa thân gầm ô tô(224.1)_TH_03,K62,K62,15,0,TH/TN,35 -> 39,04/29/2025,05/27/2025,10,3,11,2,P_TH_Điện,Cơ sở 2,Trịnh Ngọc Hoàng,Kỹ thuật - Công nghệ
+224,AET30062,4,Thực tập Chẩn đoán và sửa chữa thân gầm ô tô(224.1)_TH_03,K62,K62,15,0,TH/TN,35 -> 39,04/30/2025,05/28/2025,10,4,6,5,P_TH_Điện,Cơ sở 2,Trịnh Ngọc Hoàng,Kỹ thuật - Công nghệ
+225,AET30062,4,Thực tập Chẩn đoán và sửa chữa thân gầm ô tô(224.1)_TH_03,K62,K62,15,0,TH/TN,35 -> 39,04/30/2025,05/28/2025,10,4,11,2,P_TH_Điện,Cơ sở 2,Trịnh Ngọc Hoàng,Kỹ thuật - Công nghệ
+226,AET30062,4,Thực tập Chẩn đoán và sửa chữa thân gầm ô tô(224.1)_TH_04,K62,K62,15,0,TH/TN,23 -> 28,02/04/2025,03/11/2025,10,3,1,5,KHOANGTH_OTO10,Cơ sở 2,Lương Ngọc Minh,Kỹ thuật - Công nghệ
+227,AET30062,4,Thực tập Chẩn đoán và sửa chữa thân gầm ô tô(224.1)_TH_04,K62,K62,15,0,TH/TN,23 -> 28,02/04/2025,03/11/2025,10,3,6,5,KHOANGTH_OTO10,Cơ sở 2,Lương Ngọc Minh,Kỹ thuật - Công nghệ
+228,AET30062,4,Thực tập Chẩn đoán và sửa chữa thân gầm ô tô(224.1)_TH_04,K62,K62,15,0,TH/TN,23 -> 28,02/05/2025,03/12/2025,10,4,1,5,KHOANGTH_OTO10,Cơ sở 2,Lương Ngọc Minh,Kỹ thuật - Công nghệ
+229,AET30062,4,Thực tập Chẩn đoán và sửa chữa thân gầm ô tô(224.1)_TH_04,K62,K62,15,0,TH/TN,23 -> 28,02/05/2025,03/12/2025,10,4,6,5,KHOANGTH_OTO10,Cơ sở 2,Lương Ngọc Minh,Kỹ thuật - Công nghệ
+230,AET30062,4,Thực tập Chẩn đoán và sửa chữa thân gầm ô tô(224.1)_TH_05,K62,K62,15,0,TH/TN,35 -> 39,04/29/2025,05/27/2025,10,3,1,5,KHOANGTH_OTO10,Cơ sở 2,Lương Ngọc Minh,Kỹ thuật - Công nghệ
+231,AET30062,4,Thực tập Chẩn đoán và sửa chữa thân gầm ô tô(224.1)_TH_05,K62,K62,15,0,TH/TN,35 -> 39,04/29/2025,05/27/2025,10,3,6,5,KHOANGTH_OTO10,Cơ sở 2,Lương Ngọc Minh,Kỹ thuật - Công nghệ
+232,AET30062,4,Thực tập Chẩn đoán và sửa chữa thân gầm ô tô(224.1)_TH_05,K62,K62,15,0,TH/TN,35 -> 39,04/29/2025,05/27/2025,10,3,11,2,KHOANGTH_OTO10,Cơ sở 2,Lương Ngọc Minh,Kỹ thuật - Công nghệ
+233,AET30062,4,Thực tập Chẩn đoán và sửa chữa thân gầm ô tô(224.1)_TH_05,K62,K62,15,0,TH/TN,35 -> 39,04/30/2025,05/28/2025,10,4,1,5,KHOANGTH_OTO10,Cơ sở 2,Lương Ngọc Minh,Kỹ thuật - Công nghệ
+234,AET30062,4,Thực tập Chẩn đoán và sửa chữa thân gầm ô tô(224.1)_TH_05,K62,K62,15,0,TH/TN,35 -> 39,04/30/2025,05/28/2025,10,4,6,5,KHOANGTH_OTO10,Cơ sở 2,Lương Ngọc Minh,Kỹ thuật - Công nghệ
+235,AET30062,4,Thực tập Chẩn đoán và sửa chữa thân gầm ô tô(224.1)_TH_05,K62,K62,15,0,TH/TN,35 -> 39,04/30/2025,05/28/2025,10,4,11,2,KHOANGTH_OTO10,Cơ sở 2,Lương Ngọc Minh,Kỹ thuật - Công nghệ
+236,AET30062,4,Thực tập Chẩn đoán và sửa chữa thân gầm ô tô(224.1)_TH_06,K62,K62,15,0,TH/TN,"29, 31 -> 34",03/18/2025,04/22/2025,10,3,1,5,KHOANGTH_OTO10,Cơ sở 2,Lương Ngọc Minh,Kỹ thuật - Công nghệ
+237,AET30062,4,Thực tập Chẩn đoán và sửa chữa thân gầm ô tô(224.1)_TH_06,K62,K62,15,0,TH/TN,"29, 31 -> 34",03/18/2025,04/22/2025,10,3,6,5,KHOANGTH_OTO10,Cơ sở 2,Lương Ngọc Minh,Kỹ thuật - Công nghệ
+238,AET30062,4,Thực tập Chẩn đoán và sửa chữa thân gầm ô tô(224.1)_TH_06,K62,K62,15,0,TH/TN,"29, 31 -> 34",03/18/2025,04/22/2025,10,3,11,2,KHOANGTH_OTO10,Cơ sở 2,Lương Ngọc Minh,Kỹ thuật - Công nghệ
+239,AET30062,4,Thực tập Chẩn đoán và sửa chữa thân gầm ô tô(224.1)_TH_06,K62,K62,15,0,TH/TN,"29, 31 -> 34",03/19/2025,04/23/2025,10,4,1,5,KHOANGTH_OTO10,Cơ sở 2,Lương Ngọc Minh,Kỹ thuật - Công nghệ
+240,AET30062,4,Thực tập Chẩn đoán và sửa chữa thân gầm ô tô(224.1)_TH_06,K62,K62,15,0,TH/TN,"29, 31 -> 34",03/19/2025,04/23/2025,10,4,6,5,KHOANGTH_OTO10,Cơ sở 2,Lương Ngọc Minh,Kỹ thuật - Công nghệ
+241,AET30062,4,Thực tập Chẩn đoán và sửa chữa thân gầm ô tô(224.1)_TH_06,K62,K62,15,0,TH/TN,"29, 31 -> 34",03/19/2025,04/23/2025,10,4,11,2,KHOANGTH_OTO10,Cơ sở 2,Lương Ngọc Minh,Kỹ thuật - Công nghệ
+242,AET30062,4,Thực tập Chẩn đoán và sửa chữa thân gầm ô tô(224.1)_TH_07,K62,K62,15,0,TH/TN,23 -> 28,02/04/2025,03/11/2025,10,3,1,5,PTH_Ô tô 5,Cơ sở 2,Đặng Đình Thành,Kỹ thuật - Công nghệ
+243,AET30062,4,Thực tập Chẩn đoán và sửa chữa thân gầm ô tô(224.1)_TH_07,K62,K62,15,0,TH/TN,23 -> 28,02/04/2025,03/11/2025,10,3,6,5,PTH_Ô tô 5,Cơ sở 2,Đặng Đình Thành,Kỹ thuật - Công nghệ
+244,AET30062,4,Thực tập Chẩn đoán và sửa chữa thân gầm ô tô(224.1)_TH_07,K62,K62,15,0,TH/TN,23 -> 28,02/05/2025,03/12/2025,10,4,1,5,PTH_Ô tô 5,Cơ sở 2,Đặng Đình Thành,Kỹ thuật - Công nghệ
+245,AET30062,4,Thực tập Chẩn đoán và sửa chữa thân gầm ô tô(224.1)_TH_07,K62,K62,15,0,TH/TN,23 -> 28,02/05/2025,03/12/2025,10,4,6,5,PTH_Ô tô 5,Cơ sở 2,Đặng Đình Thành,Kỹ thuật - Công nghệ
+246,AET30062,4,Thực tập Chẩn đoán và sửa chữa thân gầm ô tô(224.1)_TH_08,K62,K62,15,0,TH/TN,"29, 31 -> 34",03/18/2025,04/22/2025,10,3,1,5,PTH_Ô tô 5,Cơ sở 2,Đặng Đình Thành,Kỹ thuật - Công nghệ
+247,AET30062,4,Thực tập Chẩn đoán và sửa chữa thân gầm ô tô(224.1)_TH_08,K62,K62,15,0,TH/TN,"29, 31 -> 34",03/18/2025,04/22/2025,10,3,6,5,PTH_Ô tô 5,Cơ sở 2,Đặng Đình Thành,Kỹ thuật - Công nghệ
+248,AET30062,4,Thực tập Chẩn đoán và sửa chữa thân gầm ô tô(224.1)_TH_08,K62,K62,15,0,TH/TN,"29, 31 -> 34",03/18/2025,04/22/2025,10,3,11,2,PTH_Ô tô 5,Cơ sở 2,Đặng Đình Thành,Kỹ thuật - Công nghệ
+249,AET30062,4,Thực tập Chẩn đoán và sửa chữa thân gầm ô tô(224.1)_TH_08,K62,K62,15,0,TH/TN,"29, 31 -> 34",03/19/2025,04/23/2025,10,4,1,5,PTH_Ô tô 5,Cơ sở 2,Đặng Đình Thành,Kỹ thuật - Công nghệ
+250,AET30062,4,Thực tập Chẩn đoán và sửa chữa thân gầm ô tô(224.1)_TH_08,K62,K62,15,0,TH/TN,"29, 31 -> 34",03/19/2025,04/23/2025,10,4,6,5,PTH_Ô tô 5,Cơ sở 2,Đặng Đình Thành,Kỹ thuật - Công nghệ
+251,AET30062,4,Thực tập Chẩn đoán và sửa chữa thân gầm ô tô(224.1)_TH_08,K62,K62,15,0,TH/TN,"29, 31 -> 34",03/19/2025,04/23/2025,10,4,11,2,PTH_Ô tô 5,Cơ sở 2,Đặng Đình Thành,Kỹ thuật - Công nghệ
+252,AET30062,4,Thực tập Chẩn đoán và sửa chữa thân gầm ô tô(224.1)_TH_09,K62,K62,15,0,TH/TN,35 -> 39,04/29/2025,05/27/2025,10,3,1,5,PTH_Ô tô 5,Cơ sở 2,Đặng Đình Thành,Kỹ thuật - Công nghệ
+253,AET30062,4,Thực tập Chẩn đoán và sửa chữa thân gầm ô tô(224.1)_TH_09,K62,K62,15,0,TH/TN,35 -> 39,04/29/2025,05/27/2025,10,3,6,5,PTH_Ô tô 5,Cơ sở 2,Đặng Đình Thành,Kỹ thuật - Công nghệ
+254,AET30062,4,Thực tập Chẩn đoán và sửa chữa thân gầm ô tô(224.1)_TH_09,K62,K62,15,0,TH/TN,35 -> 39,04/29/2025,05/27/2025,10,3,11,2,PTH_Ô tô 5,Cơ sở 2,Đặng Đình Thành,Kỹ thuật - Công nghệ
+255,AET30062,4,Thực tập Chẩn đoán và sửa chữa thân gầm ô tô(224.1)_TH_09,K62,K62,15,0,TH/TN,35 -> 39,04/30/2025,05/28/2025,10,4,1,5,PTH_Ô tô 5,Cơ sở 2,Đặng Đình Thành,Kỹ thuật - Công nghệ
+256,AET30062,4,Thực tập Chẩn đoán và sửa chữa thân gầm ô tô(224.1)_TH_09,K62,K62,15,0,TH/TN,35 -> 39,04/30/2025,05/28/2025,10,4,6,5,PTH_Ô tô 5,Cơ sở 2,Đặng Đình Thành,Kỹ thuật - Công nghệ
+257,AET30062,4,Thực tập Chẩn đoán và sửa chữa thân gầm ô tô(224.1)_TH_09,K62,K62,15,0,TH/TN,35 -> 39,04/30/2025,05/28/2025,10,4,11,2,PTH_Ô tô 5,Cơ sở 2,Đặng Đình Thành,Kỹ thuật - Công nghệ
+258,AET30064,3,Thực hành CAD/CAM/CNC(224.1)_TH_01_(TC),K62,K62,15,0,TH/TN,25 -> 29,02/20/2025,03/20/2025,10,5,1,5,P_THCNC,Cơ sở 2,Lương Ngọc Minh,Kỹ thuật - Công nghệ
+259,AET30064,3,Thực hành CAD/CAM/CNC(224.1)_TH_01_(TC),K62,K62,15,0,TH/TN,25 -> 29,02/20/2025,03/20/2025,10,5,6,5,P_THCNC,Cơ sở 2,Lương Ngọc Minh,Kỹ thuật - Công nghệ
+260,AET30064,3,Thực hành CAD/CAM/CNC(224.1)_TH_01_(TC),K62,K62,15,0,TH/TN,25 -> 28,02/21/2025,03/14/2025,10,6,1,5,P_THCNC,Cơ sở 2,Lương Ngọc Minh,Kỹ thuật - Công nghệ
+261,AET30064,3,Thực hành CAD/CAM/CNC(224.1)_TH_01_(TC),K62,K62,15,0,TH/TN,25 -> 28,02/21/2025,03/14/2025,10,6,6,5,P_THCNC,Cơ sở 2,Lương Ngọc Minh,Kỹ thuật - Công nghệ
+262,AET30064,3,Thực hành CAD/CAM/CNC(224.1)_TH_02_(TC),K62,K62,15,0,TH/TN,31 -> 34,04/03/2025,04/24/2025,6,5,1,5,P_THCNC,Cơ sở 2,Lương Ngọc Minh,Kỹ thuật - Công nghệ
+263,AET30064,3,Thực hành CAD/CAM/CNC(224.1)_TH_02_(TC),K62,K62,15,0,TH/TN,31 -> 34,04/03/2025,04/24/2025,6,5,6,5,P_THCNC,Cơ sở 2,Lương Ngọc Minh,Kỹ thuật - Công nghệ
+264,AET30064,3,Thực hành CAD/CAM/CNC(224.1)_TH_02_(TC),K62,K62,15,0,TH/TN,"29, 31 -> 34",03/21/2025,04/25/2025,6,6,1,5,P_THCNC,Cơ sở 2,Lương Ngọc Minh,Kỹ thuật - Công nghệ
+265,AET30064,3,Thực hành CAD/CAM/CNC(224.1)_TH_02_(TC),K62,K62,15,0,TH/TN,"29, 31 -> 34",03/21/2025,04/25/2025,6,6,6,5,P_THCNC,Cơ sở 2,Lương Ngọc Minh,Kỹ thuật - Công nghệ
+266,AET30064,3,Thực hành CAD/CAM/CNC(224.1)_TH_03_(TC),K62,K62,15,0,TH/TN,35 -> 39,05/01/2025,05/29/2025,6,5,1,5,P_THCNC,Cơ sở 2,Lương Ngọc Minh,Kỹ thuật - Công nghệ
+267,AET30064,3,Thực hành CAD/CAM/CNC(224.1)_TH_03_(TC),K62,K62,15,0,TH/TN,35 -> 39,05/01/2025,05/29/2025,6,5,6,5,P_THCNC,Cơ sở 2,Lương Ngọc Minh,Kỹ thuật - Công nghệ
+268,AET30064,3,Thực hành CAD/CAM/CNC(224.1)_TH_03_(TC),K62,K62,15,0,TH/TN,35 -> 38,05/02/2025,05/23/2025,6,6,1,5,P_THCNC,Cơ sở 2,Lương Ngọc Minh,Kỹ thuật - Công nghệ
+269,AET30064,3,Thực hành CAD/CAM/CNC(224.1)_TH_03_(TC),K62,K62,15,0,TH/TN,35 -> 38,05/02/2025,05/23/2025,6,6,6,5,P_THCNC,Cơ sở 2,Lương Ngọc Minh,Kỹ thuật - Công nghệ
+270,AET30064,3,Thực hành CAD/CAM/CNC(224.1)_TH_04_(TC),K62,K62,15,0,TH/TN,31 -> 34,04/03/2025,04/24/2025,6,5,1,5,P_THCNC5,Cơ sở 2,Phan Văn Nguyên,Kỹ thuật - Công nghệ
+271,AET30064,3,Thực hành CAD/CAM/CNC(224.1)_TH_04_(TC),K62,K62,15,0,TH/TN,31 -> 34,04/03/2025,04/24/2025,6,5,6,5,P_THCNC5,Cơ sở 2,Phan Văn Nguyên,Kỹ thuật - Công nghệ
+272,AET30064,3,Thực hành CAD/CAM/CNC(224.1)_TH_04_(TC),K62,K62,15,0,TH/TN,"29, 31 -> 34",03/21/2025,04/25/2025,6,6,1,5,P_THCNC5,Cơ sở 2,Phan Văn Nguyên,Kỹ thuật - Công nghệ
+273,AET30064,3,Thực hành CAD/CAM/CNC(224.1)_TH_04_(TC),K62,K62,15,0,TH/TN,"29, 31 -> 34",03/21/2025,04/25/2025,6,6,6,5,P_THCNC5,Cơ sở 2,Phan Văn Nguyên,Kỹ thuật - Công nghệ
+274,AET30065,3,Thực hành sửa chữa thân vỏ ô tô(224.1)_TH_01_(TC),K62,K62,15,0,TH/TN,25 -> 29,02/20/2025,03/20/2025,6,5,1,5,TH_THAN_VO,Cơ sở 2,Bùi Hà Phan,Kỹ thuật - Công nghệ
+275,AET30065,3,Thực hành sửa chữa thân vỏ ô tô(224.1)_TH_01_(TC),K62,K62,15,0,TH/TN,25 -> 29,02/20/2025,03/20/2025,6,5,6,5,TH_THAN_VO,Cơ sở 2,Bùi Hà Phan,Kỹ thuật - Công nghệ
+276,AET30065,3,Thực hành sửa chữa thân vỏ ô tô(224.1)_TH_01_(TC),K62,K62,15,0,TH/TN,25 -> 28,02/21/2025,03/14/2025,6,6,1,5,TH_THAN_VO,Cơ sở 2,Bùi Hà Phan,Kỹ thuật - Công nghệ
+277,AET30065,3,Thực hành sửa chữa thân vỏ ô tô(224.1)_TH_01_(TC),K62,K62,15,0,TH/TN,25 -> 28,02/21/2025,03/14/2025,6,6,6,5,TH_THAN_VO,Cơ sở 2,Bùi Hà Phan,Kỹ thuật - Công nghệ
+278,AET30065,3,Thực hành sửa chữa thân vỏ ô tô(224.1)_TH_02_(TC),K62,K62,15,0,TH/TN,31 -> 34,04/03/2025,04/24/2025,6,5,1,5,TH_THAN_VO,Cơ sở 2,Bùi Hà Phan,Kỹ thuật - Công nghệ
+279,AET30065,3,Thực hành sửa chữa thân vỏ ô tô(224.1)_TH_02_(TC),K62,K62,15,0,TH/TN,31 -> 34,04/03/2025,04/24/2025,6,5,6,5,TH_THAN_VO,Cơ sở 2,Bùi Hà Phan,Kỹ thuật - Công nghệ
+280,AET30065,3,Thực hành sửa chữa thân vỏ ô tô(224.1)_TH_02_(TC),K62,K62,15,0,TH/TN,"29, 31 -> 34",03/21/2025,04/25/2025,6,6,1,5,TH_THAN_VO,Cơ sở 2,Bùi Hà Phan,Kỹ thuật - Công nghệ
+281,AET30065,3,Thực hành sửa chữa thân vỏ ô tô(224.1)_TH_02_(TC),K62,K62,15,0,TH/TN,"29, 31 -> 34",03/21/2025,04/25/2025,6,6,6,5,TH_THAN_VO,Cơ sở 2,Bùi Hà Phan,Kỹ thuật - Công nghệ
+282,AET30065,3,Thực hành sửa chữa thân vỏ ô tô(224.1)_TH_03_(TC),K62,K62,15,0,TH/TN,35 -> 39,05/01/2025,05/29/2025,6,5,1,5,TH_THAN_VO,Cơ sở 2,Bùi Hà Phan,Kỹ thuật - Công nghệ
+283,AET30065,3,Thực hành sửa chữa thân vỏ ô tô(224.1)_TH_03_(TC),K62,K62,15,0,TH/TN,35 -> 39,05/01/2025,05/29/2025,6,5,6,5,TH_THAN_VO,Cơ sở 2,Bùi Hà Phan,Kỹ thuật - Công nghệ
+284,AET30065,3,Thực hành sửa chữa thân vỏ ô tô(224.1)_TH_03_(TC),K62,K62,15,0,TH/TN,35 -> 38,05/02/2025,05/23/2025,6,6,1,5,TH_THAN_VO,Cơ sở 2,Bùi Hà Phan,Kỹ thuật - Công nghệ
+285,AET30065,3,Thực hành sửa chữa thân vỏ ô tô(224.1)_TH_03_(TC),K62,K62,15,0,TH/TN,35 -> 38,05/02/2025,05/23/2025,6,6,6,5,TH_THAN_VO,Cơ sở 2,Bùi Hà Phan,Kỹ thuật - Công nghệ
+286,AET30065,3,Thực hành sửa chữa thân vỏ ô tô(224.1)_TH_04_(TC),K62,K62,15,0,TH/TN,35 -> 39,05/01/2025,05/29/2025,6,5,1,5,TH_THAN_VO_02,Cơ sở 2,Phan Văn Nguyên,Kỹ thuật - Công nghệ
+287,AET30065,3,Thực hành sửa chữa thân vỏ ô tô(224.1)_TH_04_(TC),K62,K62,15,0,TH/TN,35 -> 39,05/01/2025,05/29/2025,6,5,6,5,TH_THAN_VO_02,Cơ sở 2,Phan Văn Nguyên,Kỹ thuật - Công nghệ
+288,AET30065,3,Thực hành sửa chữa thân vỏ ô tô(224.1)_TH_04_(TC),K62,K62,15,0,TH/TN,35 -> 38,05/02/2025,05/23/2025,6,6,1,5,TH_THAN_VO_02,Cơ sở 2,Phan Văn Nguyên,Kỹ thuật - Công nghệ
+289,AET30065,3,Thực hành sửa chữa thân vỏ ô tô(224.1)_TH_04_(TC),K62,K62,15,0,TH/TN,35 -> 38,05/02/2025,05/23/2025,6,6,6,5,TH_THAN_VO_02,Cơ sở 2,Phan Văn Nguyên,Kỹ thuật - Công nghệ
+290,AET30066,3,Chế tạo và sửa chữa thân vỏ ô tô(224.1)_LT_01_(TC),K62,K62,70,0,LT,23 -> 28,02/03/2025,03/10/2025,3,2,1,5,C_302_cs2,Cơ sở 2,Nguyễn Bá Uy,Kỹ thuật - Công nghệ
+291,AET30066,3,Chế tạo và sửa chữa thân vỏ ô tô(224.1)_LT_01_(TC),K62,K62,70,0,LT,23 -> 27,02/04/2025,03/04/2025,3,3,6,5,C_401_cs2,Cơ sở 2,Nguyễn Bá Uy,Kỹ thuật - Công nghệ
+292,AET30068,3,Thực hành Gầm - Máy nâng cao(224.1)_TH_01_(TC),K62,K62,15,0,TH/TN,23 -> 27,02/03/2025,03/03/2025,6,2,6,5,P. TH Ch?n doán,Cơ sở 2,Nguyễn Bá Uy,Kỹ thuật - Công nghệ
+293,AET30068,3,Thực hành Gầm - Máy nâng cao(224.1)_TH_01_(TC),K62,K62,15,0,TH/TN,23 -> 27,02/03/2025,03/03/2025,6,2,11,3,P. TH Ch?n doán,Cơ sở 2,Nguyễn Bá Uy,Kỹ thuật - Công nghệ
+294,AET30068,3,Thực hành Gầm - Máy nâng cao(224.1)_TH_01_(TC),K62,K62,15,0,TH/TN,23 -> 26,02/05/2025,02/26/2025,6,4,1,5,P. TH Ch?n doán,Cơ sở 2,Nguyễn Bá Uy,Kỹ thuật - Công nghệ
+295,AET30068,3,Thực hành Gầm - Máy nâng cao(224.1)_TH_01_(TC),K62,K62,15,0,TH/TN,23 -> 26,02/05/2025,02/26/2025,6,4,6,5,P. TH Ch?n doán,Cơ sở 2,Nguyễn Bá Uy,Kỹ thuật - Công nghệ
+296,AET30068,3,Thực hành Gầm - Máy nâng cao(224.1)_TH_01_(TC),K62,K62,15,0,TH/TN,23 -> 26,02/05/2025,02/26/2025,6,4,11,3,P. TH Ch?n doán,Cơ sở 2,Nguyễn Bá Uy,Kỹ thuật - Công nghệ
+297,AET30068,3,Thực hành Gầm - Máy nâng cao(224.1)_TH_02_(TC),K62,K62,15,0,TH/TN,"28, 29, 31, 32",03/10/2025,04/07/2025,6,2,6,5,P. TH Ch?n doán,Cơ sở 2,Nguyễn Bá Uy,Kỹ thuật - Công nghệ
+298,AET30068,3,Thực hành Gầm - Máy nâng cao(224.1)_TH_02_(TC),K62,K62,15,0,TH/TN,"28, 29, 31, 32",03/10/2025,04/07/2025,6,2,11,3,P. TH Ch?n doán,Cơ sở 2,Nguyễn Bá Uy,Kỹ thuật - Công nghệ
+299,AET30068,3,Thực hành Gầm - Máy nâng cao(224.1)_TH_02_(TC),K62,K62,15,0,TH/TN,"27 -> 29, 31, 32",03/05/2025,04/09/2025,6,4,1,5,P. TH Ch?n doán,Cơ sở 2,Nguyễn Bá Uy,Kỹ thuật - Công nghệ
+300,AET30068,3,Thực hành Gầm - Máy nâng cao(224.1)_TH_02_(TC),K62,K62,15,0,TH/TN,"27 -> 29, 31, 32",03/05/2025,04/09/2025,6,4,6,5,P. TH Ch?n doán,Cơ sở 2,Nguyễn Bá Uy,Kỹ thuật - Công nghệ
+301,AET30068,3,Thực hành Gầm - Máy nâng cao(224.1)_TH_02_(TC),K62,K62,15,0,TH/TN,"27 -> 29, 31, 32",03/05/2025,04/09/2025,6,4,11,2,P. TH Ch?n doán,Cơ sở 2,Nguyễn Bá Uy,Kỹ thuật - Công nghệ
+302,AET30068,3,Thực hành Gầm - Máy nâng cao(224.1)_TH_03_(TC),K62,K62,15,0,TH/TN,33 -> 36,04/14/2025,05/05/2025,6,2,1,5,P. TH Ch?n doán,Cơ sở 2,Nguyễn Bá Uy,Kỹ thuật - Công nghệ
+303,AET30068,3,Thực hành Gầm - Máy nâng cao(224.1)_TH_03_(TC),K62,K62,15,0,TH/TN,33 -> 36,04/14/2025,05/05/2025,6,2,6,5,P. TH Ch?n doán,Cơ sở 2,Nguyễn Bá Uy,Kỹ thuật - Công nghệ
+304,AET30068,3,Thực hành Gầm - Máy nâng cao(224.1)_TH_03_(TC),K62,K62,15,0,TH/TN,33 -> 36,04/14/2025,05/05/2025,6,2,11,3,P. TH Ch?n doán,Cơ sở 2,Nguyễn Bá Uy,Kỹ thuật - Công nghệ
+305,AET30068,3,Thực hành Gầm - Máy nâng cao(224.1)_TH_03_(TC),K62,K62,15,0,TH/TN,33 -> 35,04/16/2025,04/30/2025,6,4,1,5,P. TH Ch?n doán,Cơ sở 2,Nguyễn Bá Uy,Kỹ thuật - Công nghệ
+306,AET30068,3,Thực hành Gầm - Máy nâng cao(224.1)_TH_03_(TC),K62,K62,15,0,TH/TN,33 -> 35,04/16/2025,04/30/2025,6,4,6,5,P. TH Ch?n doán,Cơ sở 2,Nguyễn Bá Uy,Kỹ thuật - Công nghệ
+307,AET30068,3,Thực hành Gầm - Máy nâng cao(224.1)_TH_03_(TC),K62,K62,15,0,TH/TN,33 -> 35,04/16/2025,04/30/2025,6,4,11,3,P. TH Ch?n doán,Cơ sở 2,Nguyễn Bá Uy,Kỹ thuật - Công nghệ
+308,AET30068,3,Thực hành Gầm - Máy nâng cao(224.1)_TH_04_(TC),K62,K62,15,0,TH/TN,37 -> 39,05/12/2025,05/26/2025,6,2,1,5,P. TH Ch?n doán,Cơ sở 2,Nguyễn Bá Uy,Kỹ thuật - Công nghệ
+309,AET30068,3,Thực hành Gầm - Máy nâng cao(224.1)_TH_04_(TC),K62,K62,15,0,TH/TN,37 -> 39,05/12/2025,05/26/2025,6,2,6,5,P. TH Ch?n doán,Cơ sở 2,Nguyễn Bá Uy,Kỹ thuật - Công nghệ
+310,AET30068,3,Thực hành Gầm - Máy nâng cao(224.1)_TH_04_(TC),K62,K62,15,0,TH/TN,37 -> 39,05/12/2025,05/26/2025,6,2,11,3,P. TH Ch?n doán,Cơ sở 2,Nguyễn Bá Uy,Kỹ thuật - Công nghệ
+311,AET30068,3,Thực hành Gầm - Máy nâng cao(224.1)_TH_04_(TC),K62,K62,15,0,TH/TN,36 -> 39,05/07/2025,05/28/2025,6,4,1,5,P. TH Ch?n doán,Cơ sở 2,Nguyễn Bá Uy,Kỹ thuật - Công nghệ
+312,AET30068,3,Thực hành Gầm - Máy nâng cao(224.1)_TH_04_(TC),K62,K62,15,0,TH/TN,36 -> 39,05/07/2025,05/28/2025,6,4,6,5,P. TH Ch?n doán,Cơ sở 2,Nguyễn Bá Uy,Kỹ thuật - Công nghệ
+313,AET30068,3,Thực hành Gầm - Máy nâng cao(224.1)_TH_04_(TC),K62,K62,15,0,TH/TN,36 -> 39,05/07/2025,05/28/2025,6,4,11,3,P. TH Ch?n doán,Cơ sở 2,Nguyễn Bá Uy,Kỹ thuật - Công nghệ
+314,AET30068,3,Thực hành Gầm - Máy nâng cao(224.1)_TH_05_(TC),K62,K62,15,0,TH/TN,23 -> 29,02/03/2025,03/17/2025,6,2,6,5,P_TH_CNKT Ô tô,Cơ sở 2,Đặng Đình Thành,Kỹ thuật - Công nghệ
+315,AET30068,3,Thực hành Gầm - Máy nâng cao(224.1)_TH_05_(TC),K62,K62,15,0,TH/TN,23 -> 29,02/03/2025,03/17/2025,6,2,11,3,P_TH_CNKT Ô tô,Cơ sở 2,Đặng Đình Thành,Kỹ thuật - Công nghệ
+316,AET30068,3,Thực hành Gầm - Máy nâng cao(224.1)_TH_06_(TC),K62,K62,15,0,TH/TN,31 -> 38,03/31/2025,05/19/2025,6,2,6,5,P_TH_CNKT Ô tô,Cơ sở 2,Đặng Đình Thành,Kỹ thuật - Công nghệ
+317,AET30068,3,Thực hành Gầm - Máy nâng cao(224.1)_TH_06_(TC),K62,K62,15,0,TH/TN,31 -> 38,03/31/2025,05/19/2025,6,2,11,3,P_TH_CNKT Ô tô,Cơ sở 2,Đặng Đình Thành,Kỹ thuật - Công nghệ
+318,AET30068,3,Thực hành Gầm - Máy nâng cao(224.1)_TH_06_(TC),K62,K62,15,0,TH/TN,33 -> 38,04/14/2025,05/19/2025,6,2,1,5,P_TH_CNKT Ô tô,Cơ sở 2,Đặng Đình Thành,Kỹ thuật - Công nghệ
+319,AET30070,3,Các hệ thống điều khiển tự động trên ô tô(224.1)_LT_01_(TC),K62,K62,70,0,LT,"23 -> 29, 31, 32",02/03/2025,04/07/2025,3,2,1,5,A5_301_CS2,Cơ sở 2,Nguyễn Phúc Ngọc,Kỹ thuật - Công nghệ
+320,AET30070,3,Các hệ thống điều khiển tự động trên ô tô(224.1)_LT_02_(TC),K62,K62,70,0,LT,"23 -> 29, 31, 32",02/08/2025,04/12/2025,3,7,1,5,C_103_cs2,Cơ sở 2,Nguyễn Phúc Ngọc,Kỹ thuật - Công nghệ
+321,AET31002,4,Nguyên lý động cơ đốt trong(224.1)_DAMH_01,K64,K64,50,0,DAMH,"23 -> 29, 31 -> 38",02/04/2025,05/20/2025,4,3,3,3,A2 302,Cơ sở 1,Nguyễn Bá Uy,Kỹ thuật - Công nghệ
+322,AET31002,4,Nguyên lý động cơ đốt trong(224.1)_DAMH_02,K64,K64,50,0,DAMH,"23 -> 29, 31 -> 38",02/09/2025,05/25/2025,4,8,3,3,B1 302,Cơ sở 1,Phan Quốc Cường,Kỹ thuật - Công nghệ
+323,AET31007,3,Lý thuyết ô tô(224.1)_LT_01,K64,K64,50,0,LT,"23 -> 29, 31 -> 38",02/03/2025,05/19/2025,3,2,3,3,D3.104,Cơ sở 1,Trịnh Ngọc Hoàng,Kỹ thuật - Công nghệ
+324,AET31007,3,Lý thuyết ô tô(224.1)_LT_02,K64,K64,50,0,LT,"23 -> 29, 31 -> 38",02/03/2025,05/19/2025,3,2,6,3,B3_101,Cơ sở 1,Trịnh Ngọc Hoàng,Kỹ thuật - Công nghệ
+402,AUT20001,4,CAD trong kỹ thuật(224.1)_DAMH_01_(CNKT_ô tô),K65,K65,50,0,DAMH,23 -> 25,02/03/2025,02/17/2025,2,2,1,5,PHLT_KTCN101,Cơ sở 1,Lương Ngọc Minh,Kỹ thuật - Công nghệ
+403,AUT20001,4,CAD trong kỹ thuật(224.1)_DAMH_01_(CNKT_ô tô)_TH_01,K65,K65,20,0,TH/TN,"26 -> 29, 31 -> 34",02/24/2025,04/21/2025,5,2,2,4,TTKT. 504,Cơ sở 1,Lương Ngọc Minh,Kỹ thuật - Công nghệ
+404,AUT20001,4,CAD trong kỹ thuật(224.1)_DAMH_01_(CNKT_ô tô)_TH_01,K65,K65,20,0,TH/TN,"26 -> 29, 31 -> 33",02/24/2025,04/14/2025,5,2,6,4,TTKT. 504,Cơ sở 1,Lương Ngọc Minh,Kỹ thuật - Công nghệ
+405,AUT20001,4,CAD trong kỹ thuật(224.1)_DAMH_01_(CNKT_ô tô)_TH_02,K65,K65,20,0,TH/TN,"26 -> 29, 31 -> 34",03/02/2025,04/27/2025,5,8,2,4,TTKT. 504,Cơ sở 1,Lương Ngọc Minh,Kỹ thuật - Công nghệ
+406,AUT20001,4,CAD trong kỹ thuật(224.1)_DAMH_01_(CNKT_ô tô)_TH_02,K65,K65,20,0,TH/TN,"26 -> 29, 31 -> 33",03/02/2025,04/20/2025,5,8,6,4,TTKT. 504,Cơ sở 1,Lương Ngọc Minh,Kỹ thuật - Công nghệ
+407,AUT20001,4,CAD trong kỹ thuật(224.1)_DAMH_02_(CNKT_ô tô),K65,K65,50,0,DAMH,23 -> 25,02/03/2025,02/17/2025,2,2,1,5,B1 201,Cơ sở 1,Bùi Hà Phan,Kỹ thuật - Công nghệ
+408,AUT20001,4,CAD trong kỹ thuật(224.1)_DAMH_02_(CNKT_ô tô)_TH_03,K65,K65,20,0,TH/TN,"26 -> 29, 31 -> 34",02/24/2025,04/21/2025,5,2,2,4,TTKT. 502,Cơ sở 1,Bùi Hà Phan,Kỹ thuật - Công nghệ
+409,AUT20001,4,CAD trong kỹ thuật(224.1)_DAMH_02_(CNKT_ô tô)_TH_03,K65,K65,20,0,TH/TN,"26 -> 29, 31 -> 33",02/24/2025,04/14/2025,5,2,6,4,TTKT. 502,Cơ sở 1,Bùi Hà Phan,Kỹ thuật - Công nghệ
+410,AUT20001,4,CAD trong kỹ thuật(224.1)_DAMH_02_(CNKT_ô tô)_TH_04,K65,K65,20,0,TH/TN,"26 -> 29, 31 -> 34",02/25/2025,04/22/2025,5,3,2,4,TTKT. 502,Cơ sở 1,Bùi Hà Phan,Kỹ thuật - Công nghệ
+411,AUT20001,4,CAD trong kỹ thuật(224.1)_DAMH_02_(CNKT_ô tô)_TH_04,K65,K65,20,0,TH/TN,"26 -> 29, 31 -> 33",02/25/2025,04/15/2025,5,3,6,4,TTKT. 502,Cơ sở 1,Bùi Hà Phan,Kỹ thuật - Công nghệ
+412,AUT20001,4,CAD trong kỹ thuật(224.1)_DAMH_03_(CNKT_ô tô),K65,K65,50,0,DAMH,23 -> 25,02/03/2025,02/17/2025,2,2,1,5,A3 403,Cơ sở 1,Phan Văn Nguyên,Kỹ thuật - Công nghệ
+413,AUT20001,4,CAD trong kỹ thuật(224.1)_DAMH_03_(CNKT_ô tô)_TH_05,K65,K65,20,0,TH/TN,"26 -> 29, 31 -> 34",02/24/2025,04/21/2025,5,2,2,4,TTKT. 604,Cơ sở 1,Phan Văn Nguyên,Kỹ thuật - Công nghệ
+414,AUT20001,4,CAD trong kỹ thuật(224.1)_DAMH_03_(CNKT_ô tô)_TH_05,K65,K65,20,0,TH/TN,"26 -> 29, 31 -> 33",02/24/2025,04/14/2025,5,2,6,4,TTKT. 604,Cơ sở 1,Phan Văn Nguyên,Kỹ thuật - Công nghệ
+415,AUT20001,4,CAD trong kỹ thuật(224.1)_DAMH_03_(CNKT_ô tô)_TH_06,K65,K65,20,0,TH/TN,"26 -> 29, 31 -> 34",02/25/2025,04/22/2025,5,3,2,4,TTKT. 604,Cơ sở 1,Phan Văn Nguyên,Kỹ thuật - Công nghệ
+416,AUT20001,4,CAD trong kỹ thuật(224.1)_DAMH_03_(CNKT_ô tô)_TH_06,K65,K65,20,0,TH/TN,"26 -> 29, 31 -> 33",02/25/2025,04/15/2025,5,3,6,4,TTKT. 604,Cơ sở 1,Phan Văn Nguyên,Kỹ thuật - Công nghệ
+417,AUT20001,4,CAD trong kỹ thuật(224.1)_DAMH_04_(CNKT_ô tô),K65,K65,50,0,DAMH,23 -> 25,02/03/2025,02/17/2025,2,2,1,5,B3_304,Cơ sở 1,Doãn Thị Thùy Hương,Kỹ thuật - Công nghệ
+418,AUT20001,4,CAD trong kỹ thuật(224.1)_DAMH_04_(CNKT_ô tô)_TH_07,K65,K65,20,0,TH/TN,"26 -> 29, 31 -> 34",02/24/2025,04/21/2025,5,2,2,4,TTKT. 601,Cơ sở 1,Doãn Thị Thùy Hương,Kỹ thuật - Công nghệ
+419,AUT20001,4,CAD trong kỹ thuật(224.1)_DAMH_04_(CNKT_ô tô)_TH_07,K65,K65,20,0,TH/TN,"26 -> 29, 31 -> 33",02/24/2025,04/14/2025,5,2,6,4,TTKT. 601,Cơ sở 1,Doãn Thị Thùy Hương,Kỹ thuật - Công nghệ
+420,AUT20001,4,CAD trong kỹ thuật(224.1)_DAMH_04_(CNKT_ô tô)_TH_08,K65,K65,20,0,TH/TN,"26 -> 29, 31 -> 34",03/02/2025,04/27/2025,5,8,2,4,TTKT. 601,Cơ sở 1,Doãn Thị Thùy Hương,Kỹ thuật - Công nghệ
+421,AUT20001,4,CAD trong kỹ thuật(224.1)_DAMH_04_(CNKT_ô tô)_TH_08,K65,K65,20,0,TH/TN,"26 -> 29, 31 -> 33",03/02/2025,04/20/2025,5,8,6,4,TTKT. 601,Cơ sở 1,Doãn Thị Thùy Hương,Kỹ thuật - Công nghệ
+422,AUT20001,4,CAD trong kỹ thuật(224.1)_DAMH_05_(KTĐK TĐH),K65,K65,60,0,DAMH,"23 -> 29, 31 -> 33",02/04/2025,04/15/2025,3,3,1,3,A3 403,Cơ sở 1,Lê Văn Chương,Kỹ thuật - Công nghệ
+423,AUT20001,4,CAD trong kỹ thuật(224.1)_DAMH_05_(KTĐK TĐH),K65,K65,60,0,DAMH,"23 -> 29, 31 -> 33",02/08/2025,04/19/2025,3,7,11,1,P_DA_2,Cơ sở 1,Lê Văn Chương,Kỹ thuật - Công nghệ
+424,AUT20001,4,CAD trong kỹ thuật(224.1)_DAMH_05_(KTĐK TĐH)_TH_09,K65,K65,20,0,TH/TN,"23 -> 29, 31 -> 34, 39",02/04/2025,05/27/2025,5,3,6,5,TTKT. 504,Cơ sở 1,Lê Văn Chương,Kỹ thuật - Công nghệ
+425,AUT20001,4,CAD trong kỹ thuật(224.1)_DAMH_05_(KTĐK TĐH)_TH_10,K65,K65,20,0,TH/TN,"23 -> 29, 31 -> 34, 39",02/05/2025,05/28/2025,5,4,6,5,TTKT. 504,Cơ sở 1,Lê Văn Chương,Kỹ thuật - Công nghệ
+426,AUT20001,4,CAD trong kỹ thuật(224.1)_DAMH_05_(KTĐK TĐH)_TH_11,K65,K65,20,0,TH/TN,"23 -> 29, 31 -> 34, 39",02/06/2025,05/29/2025,5,5,1,5,TTKT. 504,Cơ sở 1,Lê Văn Chương,Kỹ thuật - Công nghệ
+427,AUT20001,4,CAD trong kỹ thuật(224.1)_DAMH_06_(KTĐK TĐH),K65,K65,60,0,DAMH,"23 -> 29, 31 -> 33",02/04/2025,04/15/2025,3,3,4,2,A3 403,Cơ sở 1,Lê Văn Chương,Kỹ thuật - Công nghệ
+428,AUT20001,4,CAD trong kỹ thuật(224.1)_DAMH_06_(KTĐK TĐH),K65,K65,60,0,DAMH,"23 -> 29, 31 -> 33",02/08/2025,04/19/2025,3,7,12,2,P_DA_2,Cơ sở 1,Lê Văn Chương,Kỹ thuật - Công nghệ
+429,AUT20001,4,CAD trong kỹ thuật(224.1)_DAMH_06_(KTĐK TĐH)_TH_12,K65,K65,20,0,TH/TN,"23 -> 29, 31 -> 34, 39",02/06/2025,05/29/2025,5,5,6,5,TTKT. 504,Cơ sở 1,Lê Văn Chương,Kỹ thuật - Công nghệ
+430,AUT20001,4,CAD trong kỹ thuật(224.1)_DAMH_06_(KTĐK TĐH)_TH_13,K65,K65,20,0,TH/TN,"23 -> 29, 31 -> 34, 39",02/07/2025,05/30/2025,5,6,1,5,TTKT. 504,Cơ sở 1,Lê Văn Chương,Kỹ thuật - Công nghệ
+431,AUT20001,4,CAD trong kỹ thuật(224.1)_DAMH_06_(KTĐK TĐH)_TH_14,K65,K65,20,0,TH/TN,"23 -> 29, 31 -> 34, 39",02/07/2025,05/30/2025,5,6,6,5,TTKT. 504,Cơ sở 1,Lê Văn Chương,Kỹ thuật - Công nghệ
+432,AUT20001,4,CAD trong kỹ thuật(224.1)_DAMH_07_(KTĐK TĐH),K65,K65,60,0,DAMH,"23 -> 29, 31 -> 33",02/05/2025,04/16/2025,3,4,1,3,A3 404,Cơ sở 1,Lê Văn Chương,Kỹ thuật - Công nghệ
+433,AUT20001,4,CAD trong kỹ thuật(224.1)_DAMH_07_(KTĐK TĐH)_TH_15,K65,K65,20,0,TH/TN,"23 -> 29, 31 -> 34, 39",02/07/2025,05/30/2025,5,6,1,5,TTKT. 502,Cơ sở 1,Phan Văn Tiến,Kỹ thuật - Công nghệ
+434,AUT20001,4,CAD trong kỹ thuật(224.1)_DAMH_07_(KTĐK TĐH)_TH_16,K65,K65,20,0,TH/TN,"23 -> 29, 31 -> 34, 39",02/07/2025,05/30/2025,5,6,6,5,TTKT. 502,Cơ sở 1,Phan Văn Tiến,Kỹ thuật - Công nghệ
+435,AUT20001,4,CAD trong kỹ thuật(224.1)_DAMH_07_(KTĐK TĐH)_TH_17,K65,K65,20,0,TH/TN,"23 -> 29, 31 -> 34, 39",02/06/2025,05/29/2025,5,5,1,5,TTKT. 502,Cơ sở 1,Phan Văn Tiến,Kỹ thuật - Công nghệ
+436,AUT20001,4,CAD trong kỹ thuật(224.1)_DAMH_08_(Điện ĐT),K65,K65,40,0,DAMH,32 -> 38,04/10/2025,05/22/2025,2,5,11,2,ÐA8,Cơ sở 1,Phạm Mạnh Toàn,Kỹ thuật - Công nghệ
+437,AUT20001,4,CAD trong kỹ thuật(224.1)_DAMH_08_(Điện ĐT),K65,K65,40,0,DAMH,23 -> 30,02/05/2025,03/26/2025,2,4,9,2,B2_403,Cơ sở 1,Phạm Mạnh Toàn,Kỹ thuật - Công nghệ
+438,AUT20001,4,CAD trong kỹ thuật(224.1)_DAMH_08_(Điện ĐT)_TH_18,K65,K65,20,0,TH/TN,"26 -> 30, 32 -> 38",02/24/2025,05/19/2025,5,2,1,5,TTKT. 606,Cơ sở 1,Nguyễn Thị Huyền Trang,Kỹ thuật - Công nghệ
+439,AUT20001,4,CAD trong kỹ thuật(224.1)_DAMH_08_(Điện ĐT)_TH_19,K65,K65,20,0,TH/TN,"26 -> 30, 32 -> 38",02/25/2025,05/20/2025,5,3,1,5,TTKT. 501,Cơ sở 1,Nguyễn Thị Huyền Trang,Kỹ thuật - Công nghệ
+440,AUT20001,4,CAD trong kỹ thuật(224.1)_DAMH_08_(Điện ĐT)_TH_20,K65,K65,18,0,TH/TN,"26 -> 30, 32 -> 38",03/01/2025,05/24/2025,5,7,1,5,TTKT. 501,Cơ sở 1,Phạm Mạnh Toàn,Kỹ thuật - Công nghệ
+441,AUT20001,4,CAD trong kỹ thuật(224.1)_DAMH_09_(Điện ĐT),K65,K65,40,0,DAMH,23 -> 30,02/04/2025,03/25/2025,2,3,4,2,B3_505,Cơ sở 1,Phạm Mạnh Toàn,Kỹ thuật - Công nghệ
+442,AUT20001,4,CAD trong kỹ thuật(224.1)_DAMH_09_(Điện ĐT),K65,K65,40,0,DAMH,23 -> 30,02/04/2025,03/25/2025,2,3,14,2,P_DA_1,Cơ sở 1,Phạm Mạnh Toàn,Kỹ thuật - Công nghệ
+443,AUT20001,4,CAD trong kỹ thuật(224.1)_DAMH_09_(Điện ĐT)_TH_21,K65,K65,20,0,TH/TN,"26 -> 30, 32 -> 38",02/24/2025,05/19/2025,5,2,6,5,TTKT. 501,Cơ sở 1,Nguyễn Thị Huyền Trang,Kỹ thuật - Công nghệ
+444,AUT20001,4,CAD trong kỹ thuật(224.1)_DAMH_09_(Điện ĐT)_TH_22,K65,K65,20,0,TH/TN,"26 -> 30, 32 -> 38",02/25/2025,05/20/2025,5,3,6,5,TTKT. 607,Cơ sở 1,Nguyễn Thị Huyền Trang,Kỹ thuật - Công nghệ
+445,AUT20001,4,CAD trong kỹ thuật(224.1)_DAMH_09_(Điện ĐT)_TH_23,K65,K65,18,0,TH/TN,"26 -> 30, 32 -> 38",02/27/2025,05/22/2025,5,5,6,5,TTKT. 602,Cơ sở 1,Phạm Mạnh Toàn,Kỹ thuật - Công nghệ
+446,AUT20001,4,CAD trong kỹ thuật(224.1)_DAMH_10_(KTĐT VT),K65,K65,30,0,DAMH,"23 -> 30, 32 -> 38",02/03/2025,05/19/2025,2,2,7,2,D3.104,Cơ sở 1,Cao Thành Nghĩa,Kỹ thuật - Công nghệ
+447,AUT20001,4,CAD trong kỹ thuật(224.1)_DAMH_10_(KTĐT VT)_TH_24,K65,K65,15,0,TH/TN,"26 -> 30, 32 -> 38",03/01/2025,05/24/2025,5,7,1,5,TTKT. 605,Cơ sở 1,Cao Thành Nghĩa,Kỹ thuật - Công nghệ
+448,AUT20001,4,CAD trong kỹ thuật(224.1)_DAMH_10_(KTĐT VT)_TH_25,K65,K65,15,0,TH/TN,"26 -> 30, 32 -> 38",03/01/2025,05/24/2025,5,7,6,5,TTKT. 605,Cơ sở 1,Cao Thành Nghĩa,Kỹ thuật - Công nghệ
+449,AUT20001,4,CAD trong kỹ thuật(224.1)_DAMH_11_(Điện ĐT),K65,K65,40,0,DAMH,"23 -> 30, 32 -> 38",02/04/2025,05/20/2025,2,3,6,2,D3_305,Cơ sở 1,Phạm Mạnh Toàn,Kỹ thuật - Công nghệ
+450,AUT20001,4,CAD trong kỹ thuật(224.1)_DAMH_11_(Điện ĐT)_TH_26,K65,K65,20,0,TH/TN,"26 -> 30, 32 -> 38",02/28/2025,05/23/2025,5,6,1,5,TTKT. 501,Cơ sở 1,Phạm Mạnh Toàn,Kỹ thuật - Công nghệ
+451,AUT20001,4,CAD trong kỹ thuật(224.1)_DAMH_11_(Điện ĐT)_TH_27,K65,K65,20,0,TH/TN,"26 -> 30, 32 -> 38",02/28/2025,05/23/2025,5,6,6,5,TTKT. 501,Cơ sở 1,Phạm Mạnh Toàn,Kỹ thuật - Công nghệ
+452,AUT30001,4,Lý thuyết điều khiển tự động(224.2)_DAMH_01,K64,K64,45,0,DAMH,"23 -> 29, 31 -> 38",02/04/2025,05/20/2025,3,3,2,3,C_103_cs2,Cơ sở 2,Nguyễn Hoa Lư,Kỹ thuật - Công nghệ
+453,AUT30001,4,Lý thuyết điều khiển tự động(224.2)_DAMH_01_TH_01,K64,K64,15,0,TH/TN,32 -> 37,04/07/2025,05/12/2025,3,2,1,5,PTH.MOHINHHOA,Cơ sở 2,Hồ Sỹ Phương,Kỹ thuật - Công nghệ
+454,AUT30001,4,Lý thuyết điều khiển tự động(224.2)_DAMH_01_TH_02,K64,K64,15,0,TH/TN,32 -> 37,04/07/2025,05/12/2025,3,2,6,5,PTH.MOHINHHOA,Cơ sở 2,Hồ Sỹ Phương,Kỹ thuật - Công nghệ
+455,AUT30001,4,Lý thuyết điều khiển tự động(224.2)_DAMH_01_TH_07,K64,K64,15,0,TH/TN,32 -> 37,04/10/2025,05/15/2025,5,5,1,5,PM_01_CS2,Cơ sở 2,Hồ Sỹ Phương,Kỹ thuật - Công nghệ
+456,AUT30001,4,Lý thuyết điều khiển tự động(224.2)_DAMH_02,K64,K64,45,0,DAMH,"23 -> 29, 31 -> 38",02/05/2025,05/21/2025,3,4,2,3,C_102_cs2,Cơ sở 2,Nguyễn Hoa Lư,Kỹ thuật - Công nghệ
+457,AUT30001,4,Lý thuyết điều khiển tự động(224.2)_DAMH_02_TH_03,K64,K64,15,0,TH/TN,32 -> 37,04/08/2025,05/13/2025,3,3,1,5,PTH.MOHINHHOA,Cơ sở 2,Hồ Sỹ Phương,Kỹ thuật - Công nghệ
+458,AUT30001,4,Lý thuyết điều khiển tự động(224.2)_DAMH_02_TH_04,K64,K64,15,0,TH/TN,32 -> 37,04/08/2025,05/13/2025,3,3,6,5,PTH.MOHINHHOA,Cơ sở 2,Hồ Sỹ Phương,Kỹ thuật - Công nghệ
+459,AUT30001,4,Lý thuyết điều khiển tự động(224.2)_DAMH_02_TH_07,K64,K64,15,0,TH/TN,32 -> 37,04/10/2025,05/15/2025,5,5,6,5,PM_01_CS2,Cơ sở 2,Hồ Sỹ Phương,Kỹ thuật - Công nghệ
+460,AUT30001,4,Lý thuyết điều khiển tự động(224.2)_DAMH_03,K64,K64,45,0,DAMH,"23 -> 29, 31 -> 38",02/06/2025,05/22/2025,3,5,2,3,C_102_cs2,Cơ sở 2,Nguyễn Hoa Lư,Kỹ thuật - Công nghệ
+461,AUT30001,4,Lý thuyết điều khiển tự động(224.2)_DAMH_03_TH_05,K64,K64,15,0,TH/TN,32 -> 37,04/09/2025,05/14/2025,3,4,1,5,PM_01_CS2,Cơ sở 2,Hồ Sỹ Phương,Kỹ thuật - Công nghệ
+462,AUT30001,4,Lý thuyết điều khiển tự động(224.2)_DAMH_03_TH_06,K64,K64,15,0,TH/TN,32 -> 37,04/09/2025,05/14/2025,3,4,6,5,PM_01_CS2,Cơ sở 2,Hồ Sỹ Phương,Kỹ thuật - Công nghệ
+463,AUT30001,4,Lý thuyết điều khiển tự động(224.2)_DAMH_03_TH_07,K64,K64,15,0,TH/TN,32 -> 37,04/11/2025,05/16/2025,5,6,1,5,PM_01_CS2,Cơ sở 2,Hồ Sỹ Phương,Kỹ thuật - Công nghệ
+464,AUT30003,4,Điều khiển logic và PLC(224.2)_LT_01,K63,K63,52,0,LT,"23 -> 29, 31, 32",02/07/2025,04/11/2025,3,6,1,5,C_103_cs2,Cơ sở 2,Tạ Hùng Cường,Kỹ thuật - Công nghệ
+465,AUT30003,4,Điều khiển logic và PLC(224.2)_LT_01_TH_01,K63,K63,13,0,TH/TN,33 -> 38,04/16/2025,05/21/2025,5,4,6,5,PTH.TĐHCN,Cơ sở 2,Tạ Hùng Cường,Kỹ thuật - Công nghệ
+466,AUT30003,4,Điều khiển logic và PLC(224.2)_LT_01_TH_02,K63,K63,13,0,TH/TN,33 -> 38,04/17/2025,05/22/2025,5,5,1,5,PTH.TĐH CONG NGHIEP,Cơ sở 2,Tạ Hùng Cường,Kỹ thuật - Công nghệ
+467,AUT30003,4,Điều khiển logic và PLC(224.2)_LT_01_TH_03,K63,K63,13,0,TH/TN,33 -> 38,04/16/2025,05/21/2025,5,4,1,5,PTH.TĐH CONG NGHIEP,Cơ sở 2,Tạ Hùng Cường,Kỹ thuật - Công nghệ
+468,AUT30003,4,Điều khiển logic và PLC(224.2)_LT_01_TH_04,K63,K63,13,0,TH/TN,33 -> 38,04/16/2025,05/21/2025,5,4,11,5,PTH.TĐH CONG NGHIEP,Cơ sở 2,Tạ Hùng Cường,Kỹ thuật - Công nghệ
+469,AUT30003,4,Điều khiển logic và PLC(224.2)_LT_02,K63,K63,52,0,LT,"23 -> 29, 31, 32",02/07/2025,04/11/2025,3,6,6,5,C_202_cs2,Cơ sở 2,Tạ Hùng Cường,Kỹ thuật - Công nghệ
+470,AUT30003,4,Điều khiển logic và PLC(224.2)_LT_02_TH_01,K63,K63,13,0,TH/TN,33 -> 38,04/17/2025,05/22/2025,5,5,6,5,PTH.TĐH CONG NGHIEP,Cơ sở 2,Tạ Hùng Cường,Kỹ thuật - Công nghệ
+471,AUT30003,4,Điều khiển logic và PLC(224.2)_LT_02_TH_02,K63,K63,13,0,TH/TN,33 -> 38,04/18/2025,05/23/2025,5,6,1,5,PTH.TĐH CONG NGHIEP,Cơ sở 2,Tạ Hùng Cường,Kỹ thuật - Công nghệ
+472,AUT30003,4,Điều khiển logic và PLC(224.2)_LT_02_TH_03,K63,K63,13,0,TH/TN,33 -> 38,04/18/2025,05/23/2025,5,6,6,5,PTH.TĐH CONG NGHIEP,Cơ sở 2,Tạ Hùng Cường,Kỹ thuật - Công nghệ
+473,AUT30003,4,Điều khiển logic và PLC(224.2)_LT_02_TH_04,K63,K63,13,0,TH/TN,33 -> 38,04/17/2025,05/22/2025,5,5,11,5,PTH.TĐH CONG NGHIEP,Cơ sở 2,Tạ Hùng Cường,Kỹ thuật - Công nghệ
+474,AUT30009,4,Thiết kế hệ thống nhúng(224.2)_LT_01,K63,K63,52,0,LT,"23 -> 29, 31",02/03/2025,03/31/2025,2,2,2,4,C_401_cs2,Cơ sở 2,Mai Thế Anh,Kỹ thuật - Công nghệ
+475,AUT30009,4,Thiết kế hệ thống nhúng(224.2)_LT_01_TH_01,K63,K63,13,0,TH/TN,"26 -> 29, 31 -> 38",02/25/2025,05/20/2025,5,3,1,5,PTH.NhungIOT,Cơ sở 2,Mai Thế Anh,Kỹ thuật - Công nghệ
+476,AUT30009,4,Thiết kế hệ thống nhúng(224.2)_LT_01_TH_02,K63,K63,13,0,TH/TN,"26 -> 29, 31 -> 38",02/25/2025,05/20/2025,5,3,6,5,PTH.NhungIOT,Cơ sở 2,Mai Thế Anh,Kỹ thuật - Công nghệ
+477,AUT30009,4,Thiết kế hệ thống nhúng(224.2)_LT_01_TH_03,K63,K63,13,0,TH/TN,"26 -> 29, 31 -> 38",02/26/2025,05/21/2025,5,4,1,5,PTH.NhungIOT,Cơ sở 2,Mai Thế Anh,Kỹ thuật - Công nghệ
+478,AUT30009,4,Thiết kế hệ thống nhúng(224.2)_LT_01_TH_04,K63,K63,13,0,TH/TN,"26 -> 29, 31 -> 38",02/26/2025,05/21/2025,5,4,6,5,PTH.NhungIOT,Cơ sở 2,Mai Thế Anh,Kỹ thuật - Công nghệ
+479,AUT30009,4,Thiết kế hệ thống nhúng(224.2)_LT_02,K63,K63,52,0,LT,"23 -> 29, 31",02/03/2025,03/31/2025,2,2,6,4,C_301_cs2,Cơ sở 2,Mai Thế Anh,Kỹ thuật - Công nghệ
+480,AUT30009,4,Thiết kế hệ thống nhúng(224.2)_LT_02_TH_01,K63,K63,13,0,TH/TN,"26 -> 29, 31 -> 38",02/27/2025,05/22/2025,5,5,1,5,PTH.NhungIOT,Cơ sở 2,Mai Thế Anh,Kỹ thuật - Công nghệ
+481,AUT30009,4,Thiết kế hệ thống nhúng(224.2)_LT_02_TH_02,K63,K63,13,0,TH/TN,"26 -> 29, 31 -> 38",02/27/2025,05/22/2025,5,5,6,5,PTH.NhungIOT,Cơ sở 2,Mai Thế Anh,Kỹ thuật - Công nghệ
+482,AUT30009,4,Thiết kế hệ thống nhúng(224.2)_LT_02_TH_03,K63,K63,13,0,TH/TN,"26 -> 29, 31 -> 38",02/26/2025,05/21/2025,5,4,11,5,PTH.NhungIOT,Cơ sở 2,Mai Thế Anh,Kỹ thuật - Công nghệ
+483,AUT30009,4,Thiết kế hệ thống nhúng(224.2)_LT_02_TH_04,K63,K63,13,0,TH/TN,"26 -> 29, 31 -> 38",02/27/2025,05/22/2025,5,5,11,5,PTH.NhungIOT,Cơ sở 2,Mai Thế Anh,Kỹ thuật - Công nghệ
+484,AUT30012,3,Điều khiển hệ điện - cơ(224.2)_LT_01_(TC),K62,K62,30,0,LT,"26 -> 29, 31",03/01/2025,04/05/2025,3,7,1,5,C_102_cs2,Cơ sở 2,Ngô Trí Nam Cường,Kỹ thuật - Công nghệ
+485,AUT30012,3,Điều khiển hệ điện - cơ(224.2)_LT_01_(TC),K62,K62,30,0,LT,"26 -> 29, 31",03/01/2025,04/05/2025,3,7,6,5,C_102_cs2,Cơ sở 2,Ngô Trí Nam Cường,Kỹ thuật - Công nghệ
+486,AUT30012,3,Điều khiển hệ điện - cơ(224.2)_LT_02_(TC),K62,K62,30,0,LT,"26 -> 29, 31",03/02/2025,04/06/2025,3,8,1,5,C_102_cs2,Cơ sở 2,Ngô Trí Nam Cường,Kỹ thuật - Công nghệ
+487,AUT30012,3,Điều khiển hệ điện - cơ(224.2)_LT_02_(TC),K62,K62,30,0,LT,"26 -> 29, 31",03/02/2025,04/06/2025,3,8,6,5,C_102_cs2,Cơ sở 2,Ngô Trí Nam Cường,Kỹ thuật - Công nghệ
+488,AUT30017,3,Hệ thống điều khiển thông minh(224.2)_LT_01_(TC),K62,K62,30,0,LT,"23 -> 29, 31",02/05/2025,04/02/2025,3,4,6,4,C_303_cs2,Cơ sở 2,Phan Văn Dư,Kỹ thuật - Công nghệ
+489,AUT30017,3,Hệ thống điều khiển thông minh(224.2)_LT_01_(TC)_TH_01,K62,K62,15,0,TH/TN,32 -> 37,04/09/2025,05/14/2025,5,4,6,5,PTH.HTĐKTM,Cơ sở 2,Phan Văn Dư,Kỹ thuật - Công nghệ
+490,AUT30017,3,Hệ thống điều khiển thông minh(224.2)_LT_01_(TC)_TH_02,K62,K62,15,0,TH/TN,32 -> 37,04/07/2025,05/12/2025,5,2,6,5,PTH.HTĐKTM,Cơ sở 2,Phan Văn Dư,Kỹ thuật - Công nghệ
+491,AUT30017,3,Hệ thống điều khiển thông minh(224.2)_LT_02_(TC),K62,K62,30,0,LT,"23 -> 29, 31",02/03/2025,03/31/2025,3,2,6,4,C_202_cs2,Cơ sở 2,Phan Văn Dư,Kỹ thuật - Công nghệ
+492,AUT30017,3,Hệ thống điều khiển thông minh(224.2)_LT_02_(TC)_TH_01,K62,K62,15,0,TH/TN,32 -> 37,04/08/2025,05/13/2025,5,3,1,5,PTH.HTĐKTM,Cơ sở 2,Phan Văn Dư,Kỹ thuật - Công nghệ
+493,AUT30017,3,Hệ thống điều khiển thông minh(224.2)_LT_02_(TC)_TH_02,K62,K62,15,0,TH/TN,32 -> 37,04/08/2025,05/13/2025,5,3,6,5,PTH.HTĐKTM,Cơ sở 2,Phan Văn Dư,Kỹ thuật - Công nghệ
+494,AUT30019,3,Hệ thống SCADA & DCS(224.2)_LT_01_(TC),K62,K62,30,0,LT,"23 -> 29, 31",02/03/2025,03/31/2025,3,2,2,4,C_303_cs2,Cơ sở 2,Tạ Hùng Cường,Kỹ thuật - Công nghệ
+495,AUT30019,3,Hệ thống SCADA & DCS(224.2)_LT_01_(TC)_TH_01,K62,K62,15,0,TH/TN,32 -> 37,04/07/2025,05/12/2025,5,2,1,5,PTH.TĐH CONG NGHIEP,Cơ sở 2,Tạ Hùng Cường,Kỹ thuật - Công nghệ
+496,AUT30019,3,Hệ thống SCADA & DCS(224.2)_LT_01_(TC)_TH_02,K62,K62,15,0,TH/TN,32 -> 37,04/07/2025,05/12/2025,5,2,6,5,PTH.TĐH CONG NGHIEP,Cơ sở 2,Tạ Hùng Cường,Kỹ thuật - Công nghệ
+497,AUT30019,3,Hệ thống SCADA & DCS(224.2)_LT_02_(TC),K62,K62,30,0,LT,"23 -> 29, 31",02/03/2025,03/31/2025,3,2,6,4,C_203_cs2,Cơ sở 2,Tạ Hùng Cường,Kỹ thuật - Công nghệ
+498,AUT30019,3,Hệ thống SCADA & DCS(224.2)_LT_02_(TC)_TH_01,K62,K62,15,0,TH/TN,32 -> 37,04/08/2025,05/13/2025,5,3,1,5,PTH.TĐH CONG NGHIEP,Cơ sở 2,Tạ Hùng Cường,Kỹ thuật - Công nghệ
+499,AUT30019,3,Hệ thống SCADA & DCS(224.2)_LT_02_(TC)_TH_02,K62,K62,15,0,TH/TN,32 -> 37,04/08/2025,05/13/2025,5,3,6,5,PTH.TĐH CONG NGHIEP,Cơ sở 2,Tạ Hùng Cường,Kỹ thuật - Công nghệ
+500,AUT30020,3,Kỹ thuật robotics(224.2)_LT_01_(TC),K62,K62,30,0,LT,23 -> 25,02/08/2025,02/22/2025,3,7,1,5,C_102_cs2,Cơ sở 2,Thỉnh giảng CQ,Kỹ thuật - Công nghệ
+501,AUT30020,3,Kỹ thuật robotics(224.2)_LT_01_(TC),K62,K62,30,0,LT,23 -> 25,02/08/2025,02/22/2025,3,7,6,5,C_101_cs2,Cơ sở 2,Thỉnh giảng CQ,Kỹ thuật - Công nghệ
+502,AUT30020,3,Kỹ thuật robotics(224.2)_LT_01_(TC)_TH_01,K62,K62,15,0,TH/TN,"27 -> 29, 31 -> 33",03/08/2025,04/19/2025,5,7,1,5,PTH.ROBOT,Cơ sở 2,Hồ Sỹ Phương,Kỹ thuật - Công nghệ
+503,AUT30020,3,Kỹ thuật robotics(224.2)_LT_01_(TC)_TH_02,K62,K62,15,0,TH/TN,"27 -> 29, 31 -> 33",03/08/2025,04/19/2025,5,7,6,5,PTH.ROBOT,Cơ sở 2,Hồ Sỹ Phương,Kỹ thuật - Công nghệ
+504,AUT30020,3,Kỹ thuật robotics(224.2)_LT_02_(TC),K62,K62,30,0,LT,23 -> 25,02/09/2025,02/23/2025,3,8,1,5,C_102_cs2,Cơ sở 2,Thỉnh giảng CQ,Kỹ thuật - Công nghệ
+505,AUT30020,3,Kỹ thuật robotics(224.2)_LT_02_(TC),K62,K62,30,0,LT,23 -> 25,02/09/2025,02/23/2025,3,8,6,5,C_101_cs2,Cơ sở 2,Thỉnh giảng CQ,Kỹ thuật - Công nghệ
+506,AUT30020,3,Kỹ thuật robotics(224.2)_LT_02_(TC)_TH_01,K62,K62,15,0,TH/TN,"27 -> 29, 31 -> 33",03/09/2025,04/20/2025,5,8,1,5,PTH.ROBOT,Cơ sở 2,Hồ Sỹ Phương,Kỹ thuật - Công nghệ
+507,AUT30020,3,Kỹ thuật robotics(224.2)_LT_02_(TC)_TH_02,K62,K62,15,0,TH/TN,"27 -> 29, 31 -> 33",03/09/2025,04/20/2025,5,8,6,5,PTH.ROBOT,Cơ sở 2,Hồ Sỹ Phương,Kỹ thuật - Công nghệ
+508,AUT30021,3,Robot công nghiệp(224.2)_LT_01_(TC),K62,K62,30,0,LT,23 -> 28,02/04/2025,03/11/2025,3,3,1,5,C_203_cs2,Cơ sở 2,Hồ Sỹ Phương,Kỹ thuật - Công nghệ
+509,AUT30021,3,Robot công nghiệp(224.2)_LT_01_(TC)_TH_01,K62,K62,15,0,TH/TN,32 -> 37,04/07/2025,05/12/2025,5,2,1,5,PTH.ROBOT,Cơ sở 2,Đinh Văn Nam,Kỹ thuật - Công nghệ
+510,AUT30021,3,Robot công nghiệp(224.2)_LT_01_(TC)_TH_02,K62,K62,15,0,TH/TN,32 -> 37,04/07/2025,05/12/2025,5,2,6,5,PTH.ROBOT,Cơ sở 2,Đinh Văn Nam,Kỹ thuật - Công nghệ
+511,AUT30021,3,Robot công nghiệp(224.2)_LT_02_(TC),K62,K62,30,0,LT,23 -> 28,02/04/2025,03/11/2025,3,3,6,5,C_301_cs2,Cơ sở 2,Hồ Sỹ Phương,Kỹ thuật - Công nghệ
+512,AUT30021,3,Robot công nghiệp(224.2)_LT_02_(TC)_TH_01,K62,K62,15,0,TH/TN,32 -> 37,04/08/2025,05/13/2025,5,3,1,5,PTH.ROBOT,Cơ sở 2,Đinh Văn Nam,Kỹ thuật - Công nghệ
+513,AUT30021,3,Robot công nghiệp(224.2)_LT_02_(TC)_TH_02,K62,K62,15,0,TH/TN,32 -> 37,04/08/2025,05/13/2025,5,3,6,5,PTH.ROBOT,Cơ sở 2,Đinh Văn Nam,Kỹ thuật - Công nghệ
+514,AUT30022,3,Thị giác máy tính trong hệ thống điều khiển(224.2)_LT_01_(TC),K62,K62,30,0,LT,"23 -> 29, 31",02/04/2025,04/01/2025,3,3,2,4,C_301_cs2,Cơ sở 2,Dương Đình Tú,Kỹ thuật - Công nghệ
+515,AUT30022,3,Thị giác máy tính trong hệ thống điều khiển(224.2)_LT_01_(TC)_TH_01,K62,K62,15,0,TH/TN,32 -> 37,04/07/2025,05/12/2025,5,2,1,5,PTH.TĐH.SX,Cơ sở 2,Dương Đình Tú,Kỹ thuật - Công nghệ
+516,AUT30022,3,Thị giác máy tính trong hệ thống điều khiển(224.2)_LT_01_(TC)_TH_02,K62,K62,15,0,TH/TN,32 -> 37,04/07/2025,05/12/2025,5,2,6,5,PTH.TĐH.SX,Cơ sở 2,Dương Đình Tú,Kỹ thuật - Công nghệ
+517,AUT30022,3,Thị giác máy tính trong hệ thống điều khiển(224.2)_LT_02_(TC),K62,K62,30,0,LT,"23 -> 29, 31",02/04/2025,04/01/2025,3,3,6,4,C_302_cs2,Cơ sở 2,Dương Đình Tú,Kỹ thuật - Công nghệ
+518,AUT30022,3,Thị giác máy tính trong hệ thống điều khiển(224.2)_LT_02_(TC)_TH_01,K62,K62,15,0,TH/TN,32 -> 37,04/08/2025,05/13/2025,5,3,1,5,PTH.TĐH.SX,Cơ sở 2,Dương Đình Tú,Kỹ thuật - Công nghệ
+519,AUT30022,3,Thị giác máy tính trong hệ thống điều khiển(224.2)_LT_02_(TC)_TH_02,K62,K62,15,0,TH/TN,32 -> 37,04/08/2025,05/13/2025,5,3,6,5,PTH.TĐH.SX,Cơ sở 2,Dương Đình Tú,Kỹ thuật - Công nghệ
+520,AUT30031,4,Đồ án thiết kế hệ thống điều khiển nhúng(224.1)_DAMH_01,K63,K63,35,0,DAMH,"23 -> 29, 31 -> 38",02/04/2025,05/20/2025,4,3,15,1,ÐA1 - CS2,Cơ sở 2,Mai Thế Anh,Kỹ thuật - Công nghệ
+521,AUT30031,4,Đồ án thiết kế hệ thống điều khiển nhúng(224.1)_DAMH_02,K63,K63,35,0,DAMH,"23 -> 29, 31 -> 38",02/06/2025,05/22/2025,4,5,12,1,ÐA1 - CS2,Cơ sở 2,Lê Văn Chương,Kỹ thuật - Công nghệ
+522,AUT30031,4,Đồ án thiết kế hệ thống điều khiển nhúng(224.1)_DAMH_03,K63,K63,35,0,DAMH,"23 -> 29, 31 -> 38",02/06/2025,05/22/2025,4,5,13,1,ÐA1 - CS2,Cơ sở 2,Đinh Văn Nam,Kỹ thuật - Công nghệ
+523,AUT30033,3,"Kỹ thuật đo lường, cảm biến(224.1)_LT_01",K64,K64,45,0,LT,"23 -> 29, 31",02/06/2025,04/03/2025,4,5,2,4,C_203_cs2,Cơ sở 2,Phan Văn Dư,Kỹ thuật - Công nghệ
+524,AUT30033,3,"Kỹ thuật đo lường, cảm biến(224.1)_LT_02",K64,K64,45,0,LT,"23 -> 29, 31",02/06/2025,04/03/2025,4,5,6,4,C_201_cs2,Cơ sở 2,Phan Văn Dư,Kỹ thuật - Công nghệ
+525,AUT30033,3,"Kỹ thuật đo lường, cảm biến(224.1)_LT_03","K61,K62,K63,K64,K65",K64,45,0,LT,"23 -> 29, 31",02/05/2025,04/02/2025,4,4,2,4,C_302_cs2,Cơ sở 2,Phan Văn Dư,Kỹ thuật - Công nghệ
+526,AUT30036,5,Hệ thống truyền thông công nghiệp(224.1)_DAMH_01,K62,K62,40,0,DAMH,"23 -> 29, 31, 32",02/05/2025,04/09/2025,5,4,2,4,C_301_cs2,Cơ sở 2,Tạ Hùng Cường,Kỹ thuật - Công nghệ
+527,AUT30036,5,Hệ thống truyền thông công nghiệp(224.1)_DAMH_01,K62,K62,40,0,DAMH,"23 -> 29, 31, 32",02/03/2025,04/07/2025,5,2,14,1,ÐA1 - CS2,Cơ sở 2,Tạ Hùng Cường,Kỹ thuật - Công nghệ
+528,AUT30036,5,Hệ thống truyền thông công nghiệp(224.1)_DAMH_02,K62,K62,40,0,DAMH,"23 -> 29, 31, 32",02/05/2025,04/09/2025,5,4,6,4,C_201_cs2,Cơ sở 2,Tạ Hùng Cường,Kỹ thuật - Công nghệ
+529,AUT30036,5,Hệ thống truyền thông công nghiệp(224.1)_DAMH_02,K62,K62,40,0,DAMH,"23 -> 29, 31, 32",02/03/2025,04/07/2025,5,2,15,1,ÐA1 - CS2,Cơ sở 2,Tạ Hùng Cường,Kỹ thuật - Công nghệ
+530,AUT30036,5,Hệ thống truyền thông công nghiệp(224.1)_DAMH_03,K62,K62,40,0,DAMH,"23 -> 29, 31, 32",02/06/2025,04/10/2025,5,5,2,4,C_202_cs2,Cơ sở 2,Tạ Hùng Cường,Kỹ thuật - Công nghệ
+531,AUT30036,5,Hệ thống truyền thông công nghiệp(224.1)_DAMH_03,K62,K62,40,0,DAMH,"23 -> 29, 31, 32",02/04/2025,04/08/2025,5,3,14,1,ÐA1 - CS2,Cơ sở 2,Tạ Hùng Cường,Kỹ thuật - Công nghệ
+532,AUT31002,3,Cơ sở điện tử công suất(224.2)_LT_01,K64,K64,40,0,LT,"23 -> 29, 31 -> 38",02/04/2025,05/20/2025,3,3,8,3,A3 401,Cơ sở 1,Phạm Mạnh Toàn,Kỹ thuật - Công nghệ
+533,AUT31002,3,Cơ sở điện tử công suất(224.2)_LT_02,"K61,K62,K63,K64,K65",K64,40,0,LT,"23 -> 29, 31 -> 38",02/04/2025,05/20/2025,3,3,1,3,A3 404,Cơ sở 1,Phạm Mạnh Toàn,Kỹ thuật - Công nghệ
+534,AUT31011,4,Điện tử công suất(224.1)_LT_01,K64,K64,64,0,LT,"23 -> 29, 31",02/03/2025,03/31/2025,2,2,2,4,C_402_cs2,Cơ sở 2,Dương Đình Tú,Kỹ thuật - Công nghệ
+535,AUT31011,4,Điện tử công suất(224.1)_LT_01_TH_01,K64,K64,22,0,TH/TN,"26 -> 29, 31 -> 38",02/26/2025,05/21/2025,5,4,1,5,PTH.MOHINHHOA,Cơ sở 2,Dương Đình Tú,Kỹ thuật - Công nghệ
+536,AUT31011,4,Điện tử công suất(224.1)_LT_01_TH_02,K64,K64,22,0,TH/TN,"26 -> 29, 31 -> 38",02/26/2025,05/21/2025,5,4,6,5,PTH.MOHINHHOA,Cơ sở 2,Dương Đình Tú,Kỹ thuật - Công nghệ
+537,AUT31011,4,Điện tử công suất(224.1)_LT_01_TH_03,K64,K64,22,0,TH/TN,"26 -> 29, 31 -> 38",02/27/2025,05/22/2025,5,5,1,5,PTH.MOHINHHOA,Cơ sở 2,Dương Đình Tú,Kỹ thuật - Công nghệ
+538,AUT31011,4,Điện tử công suất(224.1)_LT_01_TH_04,K64,K64,16,0,TH/TN,"26 -> 29, 31 -> 38",02/26/2025,05/21/2025,5,4,11,5,PTH.MOHINHHOA,Cơ sở 2,Dương Đình Tú,Kỹ thuật - Công nghệ
+539,AUT31011,4,Điện tử công suất(224.1)_LT_02,K64,K64,64,0,LT,"23 -> 29, 31",02/03/2025,03/31/2025,2,2,6,4,C_302_cs2,Cơ sở 2,Dương Đình Tú,Kỹ thuật - Công nghệ
+540,AUT31011,4,Điện tử công suất(224.1)_LT_02_TH_01,K64,K64,22,0,TH/TN,"26 -> 29, 31 -> 38",02/27/2025,05/22/2025,5,5,6,5,PTH.MOHINHHOA,Cơ sở 2,Dương Đình Tú,Kỹ thuật - Công nghệ
+541,AUT31011,4,Điện tử công suất(224.1)_LT_02_TH_02,K64,K64,22,0,TH/TN,"26 -> 29, 31 -> 38",02/28/2025,05/23/2025,5,6,1,5,PTH.MOHINHHOA,Cơ sở 2,Dương Đình Tú,Kỹ thuật - Công nghệ
+542,AUT31011,4,Điện tử công suất(224.1)_LT_02_TH_03,K64,K64,22,0,TH/TN,"26 -> 29, 31 -> 38",02/28/2025,05/23/2025,5,6,6,5,PTH.MOHINHHOA,Cơ sở 2,Dương Đình Tú,Kỹ thuật - Công nghệ
+543,AUT31011,4,Điện tử công suất(224.1)_LT_02_TH_04,K64,K64,16,0,TH/TN,"26 -> 29, 31 -> 38",02/27/2025,05/22/2025,5,5,11,5,PTH.MOHINHHOA,Cơ sở 2,Dương Đình Tú,Kỹ thuật - Công nghệ
+544,AUT31024,4,Thực tập chuyên ngành KTĐK&TĐH(224.1)_TH_01,K63,K63,12,0,TH/TN,"23 -> 29, 31 -> 38",02/08/2025,05/24/2025,10,7,1,5,PTH.NhungIOT,Cơ sở 2,Mai Thế Anh,Kỹ thuật - Công nghệ
+545,AUT31024,4,Thực tập chuyên ngành KTĐK&TĐH(224.1)_TH_01,K63,K63,12,0,TH/TN,"23 -> 29, 31 -> 38",02/08/2025,05/24/2025,10,7,6,5,PTH.NhungIOT,Cơ sở 2,Mai Thế Anh,Kỹ thuật - Công nghệ
+546,AUT31024,4,Thực tập chuyên ngành KTĐK&TĐH(224.1)_TH_02,K63,K63,12,0,TH/TN,"23 -> 29, 31 -> 38",02/09/2025,05/25/2025,10,8,1,5,PTH.NhungIOT,Cơ sở 2,Mai Thế Anh,Kỹ thuật - Công nghệ
+547,AUT31024,4,Thực tập chuyên ngành KTĐK&TĐH(224.1)_TH_02,K63,K63,12,0,TH/TN,"23 -> 29, 31 -> 38",02/09/2025,05/25/2025,10,8,6,5,PTH.NhungIOT,Cơ sở 2,Mai Thế Anh,Kỹ thuật - Công nghệ
+548,AUT31024,4,Thực tập chuyên ngành KTĐK&TĐH(224.1)_TH_03,K63,K63,12,0,TH/TN,"23 -> 29, 31 -> 35",02/08/2025,05/03/2025,10,7,1,5,PTH.HTĐKTM,Cơ sở 2,Lê Văn Chương,Kỹ thuật - Công nghệ
+549,AUT31024,4,Thực tập chuyên ngành KTĐK&TĐH(224.1)_TH_03,K63,K63,12,0,TH/TN,"23 -> 29, 31 -> 35",02/08/2025,05/03/2025,10,7,6,5,PTH.HTĐKTM,Cơ sở 2,Lê Văn Chương,Kỹ thuật - Công nghệ
+550,AUT31024,4,Thực tập chuyên ngành KTĐK&TĐH(224.1)_TH_04,K63,K63,12,0,TH/TN,"23 -> 29, 31 -> 35",02/09/2025,05/04/2025,10,8,1,5,PTH.HTĐKTM,Cơ sở 2,Lê Văn Chương,Kỹ thuật - Công nghệ
+551,AUT31024,4,Thực tập chuyên ngành KTĐK&TĐH(224.1)_TH_04,K63,K63,12,0,TH/TN,"23 -> 29, 31 -> 35",02/09/2025,05/04/2025,10,8,6,5,PTH.HTĐKTM,Cơ sở 2,Lê Văn Chương,Kỹ thuật - Công nghệ
+552,AUT31024,4,Thực tập chuyên ngành KTĐK&TĐH(224.1)_TH_05,K63,K63,12,0,TH/TN,"23 -> 29, 31 -> 35",02/08/2025,05/03/2025,10,7,1,5,PTH.TĐH CONG NGHIEP,Cơ sở 2,Tạ Hùng Cường,Kỹ thuật - Công nghệ
+553,AUT31024,4,Thực tập chuyên ngành KTĐK&TĐH(224.1)_TH_05,K63,K63,12,0,TH/TN,"23 -> 29, 31 -> 35",02/08/2025,05/03/2025,10,7,6,5,PTH.TĐH CONG NGHIEP,Cơ sở 2,Tạ Hùng Cường,Kỹ thuật - Công nghệ
+554,AUT31024,4,Thực tập chuyên ngành KTĐK&TĐH(224.1)_TH_06,K63,K63,12,0,TH/TN,"23 -> 29, 31 -> 35",02/09/2025,05/04/2025,10,8,1,5,PTH.TĐH CONG NGHIEP,Cơ sở 2,Tạ Hùng Cường,Kỹ thuật - Công nghệ
+555,AUT31024,4,Thực tập chuyên ngành KTĐK&TĐH(224.1)_TH_06,K63,K63,12,0,TH/TN,"23 -> 29, 31 -> 35",02/09/2025,05/04/2025,10,8,6,5,PTH.TĐH CONG NGHIEP,Cơ sở 2,Tạ Hùng Cường,Kỹ thuật - Công nghệ
+556,AUT31024,4,Thực tập chuyên ngành KTĐK&TĐH(224.1)_TH_07,K63,K63,12,0,TH/TN,"23 -> 29, 31 -> 35",02/08/2025,05/03/2025,10,7,1,5,TH_CN_TĐH,Cơ sở 2,Đinh Văn Nam,Kỹ thuật - Công nghệ
+557,AUT31024,4,Thực tập chuyên ngành KTĐK&TĐH(224.1)_TH_07,K63,K63,12,0,TH/TN,"23 -> 29, 31 -> 35",02/08/2025,05/03/2025,10,7,6,5,TH_CN_TĐH,Cơ sở 2,Đinh Văn Nam,Kỹ thuật - Công nghệ
+558,AUT31024,4,Thực tập chuyên ngành KTĐK&TĐH(224.1)_TH_08,K63,K63,12,0,TH/TN,"23 -> 29, 31 -> 35",02/09/2025,05/04/2025,10,8,1,5,TH_CN_TĐH,Cơ sở 2,Đinh Văn Nam,Kỹ thuật - Công nghệ
+559,AUT31024,4,Thực tập chuyên ngành KTĐK&TĐH(224.1)_TH_08,K63,K63,12,0,TH/TN,"23 -> 29, 31 -> 35",02/09/2025,05/04/2025,10,8,6,5,TH_CN_TĐH,Cơ sở 2,Đinh Văn Nam,Kỹ thuật - Công nghệ
+560,AUT31024,4,Thực tập chuyên ngành KTĐK&TĐH(224.1)_TH_09,K63,K63,12,0,TH/TN,"23 -> 29, 31 -> 35",02/08/2025,05/03/2025,10,7,1,5,PTH.TĐH.SX,Cơ sở 2,Dương Đình Tú,Kỹ thuật - Công nghệ
+561,AUT31024,4,Thực tập chuyên ngành KTĐK&TĐH(224.1)_TH_09,K63,K63,12,0,TH/TN,"23 -> 29, 31 -> 35",02/08/2025,05/03/2025,10,7,6,5,PTH.TĐH.SX,Cơ sở 2,Dương Đình Tú,Kỹ thuật - Công nghệ
+562,AUT31024,4,Thực tập chuyên ngành KTĐK&TĐH(224.1)_TH_10,K63,K63,12,0,TH/TN,"23 -> 29, 31 -> 35",02/09/2025,05/04/2025,10,8,1,5,PTH.TĐH.SX,Cơ sở 2,Dương Đình Tú,Kỹ thuật - Công nghệ
+563,AUT31024,4,Thực tập chuyên ngành KTĐK&TĐH(224.1)_TH_10,K63,K63,12,0,TH/TN,"23 -> 29, 31 -> 35",02/09/2025,05/04/2025,10,8,6,5,PTH.TĐH.SX,Cơ sở 2,Dương Đình Tú,Kỹ thuật - Công nghệ
+564,AUT32005,4,Truyền động điện tự động(224.1)_LT_01,K63,K63,40,0,LT,"23 -> 29, 31",02/05/2025,04/02/2025,2,4,2,4,C_401_cs2,Cơ sở 2,Trần Đình Dũng,Kỹ thuật - Công nghệ
+565,AUT32005,4,Truyền động điện tự động(224.1)_LT_01_TH_01,K63,K63,20,0,TH/TN,"26 -> 29, 31 -> 38",02/25/2025,05/20/2025,5,3,6,5,PTH_KTĐ,Cơ sở 2,Trần Đình Dũng,Kỹ thuật - Công nghệ
+566,AUT32005,4,Truyền động điện tự động(224.1)_LT_01_TH_02,K63,K63,20,0,TH/TN,"26 -> 29, 31 -> 38",02/27/2025,05/22/2025,5,5,6,5,PTH_KTĐ,Cơ sở 2,Trần Đình Dũng,Kỹ thuật - Công nghệ
+567,AUT32005,4,Truyền động điện tự động(224.1)_LT_02,"K61,K62,K63,K64,K65",K63,40,0,LT,"23 -> 29, 31",02/05/2025,04/02/2025,2,4,6,4,C_203_cs2,Cơ sở 2,Trần Đình Dũng,Kỹ thuật - Công nghệ
+568,AUT32005,4,Truyền động điện tự động(224.1)_LT_02_TH_01,"K61,K62,K63,K64,K65",K63,20,0,TH/TN,"26 -> 29, 31 -> 38",03/01/2025,05/24/2025,5,7,1,5,PTH_KTĐ,Cơ sở 2,Trần Đình Dũng,Kỹ thuật - Công nghệ
+569,AUT32005,4,Truyền động điện tự động(224.1)_LT_02_TH_02,"K61,K62,K63,K64,K65",K63,20,0,TH/TN,"26 -> 29, 31 -> 38",03/01/2025,05/24/2025,5,7,6,5,PTH_KTĐ,Cơ sở 2,Trần Đình Dũng,Kỹ thuật - Công nghệ
+651,CAE30002,3,Ứng dụng CAD trong kỹ thuật(224.1)_DAMH_01,K65,K65,25,0,DAMH,"23 -> 29, 31 -> 34",02/05/2025,04/23/2025,5,4,4,2,A3 404,Cơ sở 1,Lê Văn Chương,Kỹ thuật - Công nghệ
+652,CAE30002,3,Ứng dụng CAD trong kỹ thuật(224.1)_DAMH_01,K65,K65,25,0,DAMH,"23 -> 29, 31 -> 34",02/09/2025,04/27/2025,5,8,11,2,P_DA_2,Cơ sở 1,Lê Văn Chương,Kỹ thuật - Công nghệ
+653,CAE30002,3,Ứng dụng CAD trong kỹ thuật(224.1)_DAMH_01_TH_01,K65,K65,22,0,TH/TN,"28, 29, 31 -> 34",03/13/2025,04/24/2025,5,5,6,5,TTKT. 502,Cơ sở 1,Phan Văn Tiến,Kỹ thuật - Công nghệ
+1097,ELE20007,3,Lý thuyết mạch điện(224.2)_LT_01_(TĐH),K64,K64,60,0,LT,"23 -> 29, 31 -> 38",02/03/2025,05/19/2025,3,2,3,3,C_403_cs2,Cơ sở 2,Nguyễn Tiến Dũng,Kỹ thuật - Công nghệ
+1098,ELE20007,3,Lý thuyết mạch điện(224.2)_LT_02_(TĐH),K64,K64,60,0,LT,"23 -> 29, 31 -> 38",02/03/2025,05/19/2025,3,2,6,3,C_303_cs2,Cơ sở 2,Nguyễn Tiến Dũng,Kỹ thuật - Công nghệ
+1099,ELE20007,3,Lý thuyết mạch điện(224.2)_LT_03_(Điện ĐT),K64,K64,60,0,LT,"23 -> 29, 31 -> 38",02/05/2025,05/21/2025,3,4,3,3,B3_204,Cơ sở 1,Nguyễn Tiến Dũng,Kỹ thuật - Công nghệ
+1100,ELE22003,2,Kỹ năng viết và tư duy phản biện(224.1)_LT_01_(TC),K64,K64,30,0,LT,"23 -> 29, 31 -> 38",02/03/2025,05/19/2025,2,2,9,2,D3.104,Cơ sở 1,Cao Thành Nghĩa,Kỹ thuật - Công nghệ
+1101,ELE22004,4,Kỹ thuật lập trình(224.1)_LT_01,K64,K64,35,0,LT,23 -> 25,02/07/2025,02/21/2025,2,6,11,5,ÐA6,Cơ sở 1,Mai Thế Anh,Kỹ thuật - Công nghệ
+1102,ELE22004,4,Kỹ thuật lập trình(224.1)_LT_01,K64,K64,35,0,LT,23 -> 25,02/07/2025,02/21/2025,2,6,1,5,PHLT_KTCN101,Cơ sở 1,Mai Thế Anh,Kỹ thuật - Công nghệ
+1103,ELE22004,4,Kỹ thuật lập trình(224.1)_LT_01_TH_01,K64,K64,17,0,TH/TN,"26 -> 29, 31 -> 38",02/28/2025,05/23/2025,5,6,1,5,TTKT. 507,Cơ sở 1,Mai Thế Anh,Kỹ thuật - Công nghệ
+1104,ELE22004,4,Kỹ thuật lập trình(224.1)_LT_01_TH_02,K64,K64,17,0,TH/TN,"26 -> 29, 31 -> 38",02/28/2025,05/23/2025,5,6,6,5,TTKT. 507,Cơ sở 1,Mai Thế Anh,Kỹ thuật - Công nghệ
+1105,ELE30012,3,Bảo vệ và tự động hóa công nghiệp(224.2)_LT_01,K62,K62,40,0,LT,"23 -> 29, 31 -> 38",02/03/2025,05/19/2025,3,2,3,3,C_501_cs2,Cơ sở 2,Trần Đình Dũng,Kỹ thuật - Công nghệ
+1106,ELE30012,3,Bảo vệ và tự động hóa công nghiệp(224.2)_LT_02,K62,K62,40,0,LT,"23 -> 29, 31 -> 38",02/03/2025,05/19/2025,3,2,6,3,C_401_cs2,Cơ sở 2,Trần Đình Dũng,Kỹ thuật - Công nghệ
+1107,ELE30014,3,Giải tích và mô phỏng hệ thống điện(224.2)_LT_01,K62,K62,40,0,LT,"23 -> 29, 31, 32",02/03/2025,04/07/2025,3,2,2,4,C_502_cs2,Cơ sở 2,Phạm Mạnh Toàn,Kỹ thuật - Công nghệ
+1108,ELE30014,3,Giải tích và mô phỏng hệ thống điện(224.2)_LT_01_TH_01,K62,K62,20,0,TH/TN,33 -> 38,04/14/2025,05/19/2025,5,2,1,5,PTH_ĐIENTM,Cơ sở 2,Phạm Mạnh Toàn,Kỹ thuật - Công nghệ
+1109,ELE30014,3,Giải tích và mô phỏng hệ thống điện(224.2)_LT_01_TH_02,K62,K62,20,0,TH/TN,33 -> 38,04/14/2025,05/19/2025,5,2,6,5,PTH_ĐIENTM,Cơ sở 2,Phạm Mạnh Toàn,Kỹ thuật - Công nghệ
+1110,ELE30014,3,Giải tích và mô phỏng hệ thống điện(224.2)_LT_02,K62,K62,40,0,LT,"23 -> 29, 31, 32",02/03/2025,04/07/2025,3,2,6,4,C_402_cs2,Cơ sở 2,Phạm Mạnh Toàn,Kỹ thuật - Công nghệ
+1111,ELE30014,3,Giải tích và mô phỏng hệ thống điện(224.2)_LT_02_TH_01,K62,K62,20,0,TH/TN,33 -> 38,04/16/2025,05/21/2025,5,4,1,5,PTH_ĐIENTM,Cơ sở 2,Phạm Mạnh Toàn,Kỹ thuật - Công nghệ
+1112,ELE30014,3,Giải tích và mô phỏng hệ thống điện(224.2)_LT_02_TH_02,K62,K62,20,0,TH/TN,33 -> 38,04/16/2025,05/21/2025,5,4,6,5,PTH_ĐIENTM,Cơ sở 2,Phạm Mạnh Toàn,Kỹ thuật - Công nghệ
+1113,ELE30020,3,Chất lượng điện năng(224.2)_LT_01_(TC),K62,K62,60,0,LT,"23 -> 29, 31 -> 38",02/06/2025,05/22/2025,3,5,2,3,C_303_cs2,Cơ sở 2,Phạm Mạnh Toàn,Kỹ thuật - Công nghệ
+1114,ELE30023,3,Hệ thống SCADA(224.2)_LT_01_(TC),K62,K62,60,0,LT,"23 -> 29, 31 -> 38",02/04/2025,05/20/2025,3,3,2,3,C_402_cs2,Cơ sở 2,Đỗ Mai Trang,Kỹ thuật - Công nghệ
+1115,ELE30027,3,Năng lượng tái tạo(224.2)_LT_01_(TC),K62,K62,40,0,LT,"23 -> 29, 31 -> 33",02/06/2025,04/17/2025,3,5,7,3,C_203_cs2,Cơ sở 2,Nguyễn Tiến Dũng,Kỹ thuật - Công nghệ
+1116,ELE30027,3,Năng lượng tái tạo(224.2)_LT_01_(TC)_TH_01,K62,K62,20,0,TH/TN,33 -> 38,04/15/2025,05/20/2025,5,3,1,5,PTH_ĐIENTM,Cơ sở 2,Nguyễn Tiến Dũng,Kỹ thuật - Công nghệ
+1117,ELE30027,3,Năng lượng tái tạo(224.2)_LT_01_(TC)_TH_02,K62,K62,20,0,TH/TN,33 -> 38,04/15/2025,05/20/2025,5,3,6,5,PTH_ĐIENTM,Cơ sở 2,Nguyễn Tiến Dũng,Kỹ thuật - Công nghệ
+1118,ELE30028,3,Nguồn dự phòng và hệ thống ATS(224.2)_LT_01_(TC),K62,K62,40,0,LT,"23 -> 29, 31, 32",02/07/2025,04/11/2025,2,6,2,4,C_203_cs2,Cơ sở 2,Trần Đình Dũng,Kỹ thuật - Công nghệ
+1119,ELE30028,3,Nguồn dự phòng và hệ thống ATS(224.2)_LT_01_(TC)_TH_01,K62,K62,20,0,TH/TN,33 -> 38,04/18/2025,05/23/2025,5,6,1,5,PTH_CUNGCAPDIEN,Cơ sở 2,Trần Đình Dũng,Kỹ thuật - Công nghệ
+1120,ELE30028,3,Nguồn dự phòng và hệ thống ATS(224.2)_LT_01_(TC)_TH_02,K62,K62,20,0,TH/TN,33 -> 38,04/18/2025,05/23/2025,5,6,6,5,PTH_CUNGCAPDIEN,Cơ sở 2,Trần Đình Dũng,Kỹ thuật - Công nghệ
+1121,ELE30029,3,Nhà máy điện và trạm biến áp(224.2)_LT_01_(TC),K62,K62,40,0,LT,"23 -> 29, 31, 32",02/07/2025,04/11/2025,3,6,6,5,C_301_cs2,Cơ sở 2,Trần Đình Dũng,Kỹ thuật - Công nghệ
+1122,ELE30033,3,Thiết bị trao đổi nhiệt(224.2)_LT_01_(TC),K62,K62,40,0,LT,"23 -> 29, 31",02/06/2025,04/03/2025,2,5,7,4,C_202_cs2,Cơ sở 2,Lưu văn Phúc,Kỹ thuật - Công nghệ
+1123,ELE30033,3,Thiết bị trao đổi nhiệt(224.2)_LT_01_(TC)_TH_01,K62,K62,20,0,TH/TN,33 -> 38,04/17/2025,05/22/2025,5,5,1,5,PTH_TBĐĐT,Cơ sở 2,Lưu văn Phúc,Kỹ thuật - Công nghệ
+1124,ELE30033,3,Thiết bị trao đổi nhiệt(224.2)_LT_01_(TC)_TH_02,K62,K62,20,0,TH/TN,33 -> 38,04/17/2025,05/22/2025,5,5,6,5,PTH_TBĐĐT,Cơ sở 2,Lưu văn Phúc,Kỹ thuật - Công nghệ
+1125,ELE30047,4,"Đồ án máy điện, thiết bị điện(224.1)_DAMH_01",K63,K63,40,0,DAMH,"23 -> 29, 31 -> 38",02/08/2025,05/24/2025,4,7,13,2,ÐA1 - CS2,Cơ sở 2,Trần Đình Dũng,Kỹ thuật - Công nghệ
+1126,ELE30047,4,"Đồ án máy điện, thiết bị điện(224.1)_DAMH_02",K63,K63,40,0,DAMH,"23 -> 29, 31 -> 38",02/09/2025,05/25/2025,4,8,13,2,ÐA1 - CS2,Cơ sở 2,Trần Đình Dũng,Kỹ thuật - Công nghệ
+1127,ELE30051,4,Đồ án hệ thống điện(224.1)_DAMH_01,K62,K62,40,0,DAMH,"23 -> 29, 31 -> 38",02/05/2025,05/21/2025,4,4,13,2,ÐA1 - CS2,Cơ sở 2,Nguyễn Tiến Dũng,Kỹ thuật - Công nghệ
+1128,ELE30051,4,Đồ án hệ thống điện(224.1)_DAMH_02,K62,K62,40,0,DAMH,"23 -> 29, 31 -> 38",02/07/2025,05/23/2025,4,6,13,2,ÐA1 - CS2,Cơ sở 2,Nguyễn Tiến Dũng,Kỹ thuật - Công nghệ
+1129,ELE30053,4,Cung cấp điện(224.1)_LT_01,K63,K63,40,0,LT,"23 -> 29, 31 -> 38",02/06/2025,05/22/2025,4,5,2,4,C_401_cs2,Cơ sở 2,Nguyễn Tiến Dũng,Kỹ thuật - Công nghệ
+1130,ELE30053,4,Cung cấp điện(224.1)_LT_02,K63,K63,40,0,LT,"23 -> 29, 31 -> 38",02/07/2025,05/23/2025,4,6,2,4,C_301_cs2,Cơ sở 2,Nguyễn Tiến Dũng,Kỹ thuật - Công nghệ
+1131,ELE31006,3,"Thực hành máy điện, thiết bi điện(224.2)_TH_01",K63,K63,14,0,TH/TN,"29, 31 -> 38",03/17/2025,05/19/2025,10,2,6,5,PTH_KTĐ,Cơ sở 2,Lưu văn Phúc,Kỹ thuật - Công nghệ
+1132,ELE31006,3,"Thực hành máy điện, thiết bi điện(224.2)_TH_01",K63,K63,14,0,TH/TN,"29, 31 -> 38",03/19/2025,05/21/2025,10,4,6,5,PTH_KTĐ,Cơ sở 2,Lưu văn Phúc,Kỹ thuật - Công nghệ
+1133,ELE31006,3,"Thực hành máy điện, thiết bi điện(224.2)_TH_02",K63,K63,14,0,TH/TN,"29, 31 -> 38",03/21/2025,05/23/2025,10,6,1,5,PTH_KTĐ,Cơ sở 2,Lưu văn Phúc,Kỹ thuật - Công nghệ
+1134,ELE31006,3,"Thực hành máy điện, thiết bi điện(224.2)_TH_02",K63,K63,14,0,TH/TN,"29, 31 -> 38",03/21/2025,05/23/2025,10,6,6,5,PTH_KTĐ,Cơ sở 2,Lưu văn Phúc,Kỹ thuật - Công nghệ
+1135,ELE31006,3,"Thực hành máy điện, thiết bi điện(224.2)_TH_03",K63,K63,14,0,TH/TN,"29, 31 -> 38",03/17/2025,05/19/2025,10,2,1,5,PTH_KTĐ,Cơ sở 2,Lưu văn Phúc,Kỹ thuật - Công nghệ
+1136,ELE31006,3,"Thực hành máy điện, thiết bi điện(224.2)_TH_03",K63,K63,14,0,TH/TN,"29, 31 -> 38",03/19/2025,05/21/2025,10,4,1,5,PTH_KTĐ,Cơ sở 2,Lưu văn Phúc,Kỹ thuật - Công nghệ
+1137,ELE31006,3,"Thực hành máy điện, thiết bi điện(224.2)_TH_04",K63,K63,14,0,TH/TN,"29, 31 -> 38",03/18/2025,05/20/2025,10,3,1,5,PTH_KTĐ,Cơ sở 2,Trần Đình Dũng,Kỹ thuật - Công nghệ
+1138,ELE31006,3,"Thực hành máy điện, thiết bi điện(224.2)_TH_04",K63,K63,14,0,TH/TN,"29, 31 -> 38",03/20/2025,05/22/2025,10,5,1,5,PTH_KTĐ,Cơ sở 2,Trần Đình Dũng,Kỹ thuật - Công nghệ
+1139,ELE31006,3,"Thực hành máy điện, thiết bi điện(224.2)_TH_05",K63,K63,14,0,TH/TN,"29, 31 -> 38",03/23/2025,05/25/2025,10,8,1,5,PTH_KTĐ,Cơ sở 2,Trần Đình Dũng,Kỹ thuật - Công nghệ
+1140,ELE31006,3,"Thực hành máy điện, thiết bi điện(224.2)_TH_05",K63,K63,14,0,TH/TN,"29, 31 -> 38",03/23/2025,05/25/2025,10,8,6,5,PTH_KTĐ,Cơ sở 2,Trần Đình Dũng,Kỹ thuật - Công nghệ
+1141,ELE31043,4,Kỹ thuật điện tử số và vi xử lý(224.1)_DAMH_01,K64,K64,40,0,DAMH,"23 -> 29, 31 -> 38",02/03/2025,05/19/2025,4,2,2,4,PHLT_KTCN202,Cơ sở 1,Lê Văn Chương,Kỹ thuật - Công nghệ
+1142,ELE31043,4,Kỹ thuật điện tử số và vi xử lý(224.1)_DAMH_02,K64,K64,40,0,DAMH,"23 -> 29, 31 -> 38",02/03/2025,05/19/2025,4,2,7,4,D3.1.2,Cơ sở 1,Lê Văn Chương,Kỹ thuật - Công nghệ
+1143,ELE31045,5,"Thực hành và thực tập cơ sở điện, điện tử(224.1)_TH_01",K64,K64,20,0,TH/TN,"29, 31 -> 38",03/22/2025,05/24/2025,10,7,6,5,XUONGTH_ĐĐT,Cơ sở 2,Phạm Mạnh Toàn,Kỹ thuật - Công nghệ
+1144,ELE31045,5,"Thực hành và thực tập cơ sở điện, điện tử(224.1)_TH_02",K64,K64,20,0,TH/TN,"29, 31 -> 38",03/23/2025,05/25/2025,10,8,1,5,XUONGTH_ĐĐT,Cơ sở 2,Phạm Mạnh Toàn,Kỹ thuật - Công nghệ
+1145,ELE31045,5,"Thực hành và thực tập cơ sở điện, điện tử(224.1)_TH_03",K64,K64,20,0,TH/TN,"29, 31 -> 38",03/23/2025,05/25/2025,10,8,6,5,XUONGTH_ĐĐT,Cơ sở 2,Phạm Mạnh Toàn,Kỹ thuật - Công nghệ
+1146,ELE31045,5,"Thực hành và thực tập cơ sở điện, điện tử(224.1)_TH_04",K64,K64,20,0,TH/TN,"29, 31 -> 38",03/22/2025,05/24/2025,10,7,1,5,XUONGTH_ĐĐT,Cơ sở 2,Lưu văn Phúc,Kỹ thuật - Công nghệ
+1147,ELE32005,3,Máy điện và khí cụ điện(224.1)_LT_01,K64,K64,64,0,LT,"23 -> 29, 31",02/07/2025,04/04/2025,2,6,2,4,C_201_cs2,Cơ sở 2,Hồ Sỹ Phương,Kỹ thuật - Công nghệ
+1148,ELE32005,3,Máy điện và khí cụ điện(224.1)_LT_01_TH_01,K64,K64,16,0,TH/TN,"25 -> 29, 31",02/17/2025,03/31/2025,3,2,1,5,PTH.TĐH CONG NGHIEP,Cơ sở 2,Hồ Sỹ Phương,Kỹ thuật - Công nghệ
+1149,ELE32005,3,Máy điện và khí cụ điện(224.1)_LT_01_TH_02,K64,K64,16,0,TH/TN,"25 -> 29, 31",02/17/2025,03/31/2025,3,2,6,5,PTH.TĐH CONG NGHIEP,Cơ sở 2,Hồ Sỹ Phương,Kỹ thuật - Công nghệ
+1150,ELE32005,3,Máy điện và khí cụ điện(224.1)_LT_01_TH_03,K64,K64,16,0,TH/TN,"25 -> 29, 31",02/19/2025,04/02/2025,3,4,1,5,PTH.TĐH CONG NGHIEP,Cơ sở 2,Hồ Sỹ Phương,Kỹ thuật - Công nghệ
+1151,ELE32005,3,Máy điện và khí cụ điện(224.1)_LT_01_TH_04,K64,K64,16,0,TH/TN,"25 -> 29, 31",02/17/2025,03/31/2025,5,2,11,5,PTH.TĐH CONG NGHIEP,Cơ sở 2,Hồ Sỹ Phương,Kỹ thuật - Công nghệ
+1152,ELE32005,3,Máy điện và khí cụ điện(224.1)_LT_02,K64,K64,64,0,LT,"23 -> 29, 31",02/07/2025,04/04/2025,2,6,6,4,C_203_cs2,Cơ sở 2,Hồ Sỹ Phương,Kỹ thuật - Công nghệ
+1153,ELE32005,3,Máy điện và khí cụ điện(224.1)_LT_02_TH_01,K64,K64,16,0,TH/TN,"25 -> 29, 31",02/19/2025,04/02/2025,3,4,6,5,PTH.TĐH CONG NGHIEP,Cơ sở 2,Hồ Sỹ Phương,Kỹ thuật - Công nghệ
+1154,ELE32005,3,Máy điện và khí cụ điện(224.1)_LT_02_TH_02,K64,K64,16,0,TH/TN,"25 -> 29, 31",02/20/2025,04/03/2025,3,5,1,5,PTH.TĐH CONG NGHIEP,Cơ sở 2,Hồ Sỹ Phương,Kỹ thuật - Công nghệ
+1155,ELE32005,3,Máy điện và khí cụ điện(224.1)_LT_02_TH_03,K64,K64,16,0,TH/TN,"25 -> 29, 31",02/19/2025,04/02/2025,3,4,11,5,PTH.TĐH CONG NGHIEP,Cơ sở 2,Hồ Sỹ Phương,Kỹ thuật - Công nghệ
+1156,ELE32005,3,Máy điện và khí cụ điện(224.1)_LT_02_TH_04,K64,K64,16,0,TH/TN,"25 -> 29, 31",02/20/2025,04/03/2025,5,5,6,5,PTH.TĐHCN,Cơ sở 2,Hồ Sỹ Phương,Kỹ thuật - Công nghệ
+1505,ETE30002,3,Điện tử số(224.1)_LT_01,K64,K64,35,0,LT,"23 -> 29, 31 -> 38",02/04/2025,05/20/2025,2,3,9,2,B2_501,Cơ sở 1,Lê Đình Công,Kỹ thuật - Công nghệ
+1506,ETE30002,3,Điện tử số(224.1)_LT_01_TH_01,K64,K64,17,0,TH/TN,"29, 31 -> 35",03/19/2025,04/30/2025,3,4,1,5,PTH_ĐTVT,Cơ sở 2,Lê Đình Công,Kỹ thuật - Công nghệ
+1507,ETE30002,3,Điện tử số(224.1)_LT_01_TH_02,K64,K64,17,0,TH/TN,"29, 31 -> 35",03/19/2025,04/30/2025,3,4,6,5,PTH_ĐTVT,Cơ sở 2,Lê Đình Công,Kỹ thuật - Công nghệ
+1508,ETE30003,4,Điện tử tương tự(224.1)_LT_01,K64,K64,35,0,LT,"23 -> 29, 31 -> 38",02/04/2025,05/20/2025,3,3,6,3,B1_102,Cơ sở 1,Lê Đình Công,Kỹ thuật - Công nghệ
+1509,ETE30003,4,Điện tử tương tự(224.1)_LT_01_TH_01,K64,K64,17,0,TH/TN,"29, 31 -> 35",03/20/2025,05/01/2025,3,5,1,5,PTH.CM ĐTVT,Cơ sở 2,Lê Đình Công,Kỹ thuật - Công nghệ
+1510,ETE30003,4,Điện tử tương tự(224.1)_LT_01_TH_02,K64,K64,17,0,TH/TN,"29, 31 -> 35",03/20/2025,05/01/2025,3,5,6,5,PTH.CM ĐTVT,Cơ sở 2,Lê Đình Công,Kỹ thuật - Công nghệ
+1511,ETE30004,3,Xử lý số tín hiệu(224.1)_LT_01,K64,K64,35,0,LT,"26 -> 29, 31",02/28/2025,04/04/2025,2,6,4,2,PHLT_KTCN101,Cơ sở 1,Nguyễn Thị Quỳnh Hoa,Kỹ thuật - Công nghệ
+1512,ETE30004,3,Xử lý số tín hiệu(224.1)_LT_01,K64,K64,35,0,LT,"26 -> 29, 31",02/28/2025,04/04/2025,2,6,6,4,PHLT_KTCN201,Cơ sở 1,Nguyễn Thị Quỳnh Hoa,Kỹ thuật - Công nghệ
+1513,ETE30004,3,Xử lý số tín hiệu(224.1)_LT_01_TH_01,K64,K64,17,0,TH/TN,32 -> 37,04/11/2025,05/16/2025,3,6,1,5,PTH.CM ĐTVT,Cơ sở 2,Nguyễn Thị Quỳnh Hoa,Kỹ thuật - Công nghệ
+1514,ETE30004,3,Xử lý số tín hiệu(224.1)_LT_01_TH_02,K64,K64,17,0,TH/TN,32 -> 37,04/11/2025,05/16/2025,3,6,6,5,PTH.CM ĐTVT,Cơ sở 2,Nguyễn Thị Quỳnh Hoa,Kỹ thuật - Công nghệ
+1515,ETE30010,4,Kỹ thuật siêu cao tần và Anten(224.1)_LT_01,K63,K63,35,0,LT,"23 -> 29, 31 -> 38",02/05/2025,05/21/2025,3,4,3,3,C_203_cs2,Cơ sở 2,Cao Thành Nghĩa,Kỹ thuật - Công nghệ
+1516,ETE30010,4,Kỹ thuật siêu cao tần và Anten(224.1)_LT_01_TH_01,K63,K63,18,0,TH/TN,"28, 29, 31 -> 34",03/11/2025,04/22/2025,3,3,1,5,PTH_ĐTVT,Cơ sở 2,Cao Thành Nghĩa,Kỹ thuật - Công nghệ
+1517,ETE30010,4,Kỹ thuật siêu cao tần và Anten(224.1)_LT_01_TH_02,K63,K63,18,0,TH/TN,"28, 29, 31 -> 34",03/11/2025,04/22/2025,3,3,6,5,PTH_ĐTVT,Cơ sở 2,Cao Thành Nghĩa,Kỹ thuật - Công nghệ
+1518,ETE30011,5,Lập trình ứng dụng di động(224.1)_DAMH_01,K63,K63,35,0,DAMH,"23 -> 29, 31",02/06/2025,04/03/2025,3,5,11,2,C_101_cs2,Cơ sở 2,Lê Quốc Anh,Kỹ thuật - Công nghệ
+1519,ETE30011,5,Lập trình ứng dụng di động(224.1)_DAMH_01_TH_01,K63,K63,18,0,TH/TN,23 -> 38,02/08/2025,05/24/2025,5,7,2,2,PM_03_CS2,Cơ sở 2,Lê Quốc Anh,Kỹ thuật - Công nghệ
+1520,ETE30011,5,Lập trình ứng dụng di động(224.1)_DAMH_01_TH_02,K63,K63,18,0,TH/TN,23 -> 38,02/08/2025,05/24/2025,5,7,4,2,PM_03_CS2,Cơ sở 2,Lê Quốc Anh,Kỹ thuật - Công nghệ
+1521,ETE30012,3,Kỹ thuật mạng máy tính(224.1)_LT_01,K63,K63,35,0,LT,"23 -> 29, 31 -> 38",02/05/2025,05/21/2025,2,4,9,2,C_103_cs2,Cơ sở 2,Cao Thành Nghĩa,Kỹ thuật - Công nghệ
+1522,ETE30012,3,Kỹ thuật mạng máy tính(224.1)_LT_01_TH_01,K63,K63,18,0,TH/TN,"28, 29, 31 -> 34",03/10/2025,04/21/2025,3,2,1,5,PTH_ĐTVT,Cơ sở 2,Cao Thành Nghĩa,Kỹ thuật - Công nghệ
+1523,ETE30012,3,Kỹ thuật mạng máy tính(224.1)_LT_01_TH_02,K63,K63,18,0,TH/TN,"28, 29, 31 -> 34",03/13/2025,04/24/2025,3,5,1,5,PTH_KTVT,Cơ sở 2,Cao Thành Nghĩa,Kỹ thuật - Công nghệ
+1524,ETE30013,4,Cơ sở dữ liệu và lập trình Web(224.1)_DAMH_01,K63,K63,35,0,DAMH,"23 -> 29, 31 -> 38",02/09/2025,05/25/2025,3,8,2,2,C_101_cs2,Cơ sở 2,Lê Văn Thành,Kỹ thuật - Công nghệ
+1525,ETE30013,4,Cơ sở dữ liệu và lập trình Web(224.1)_DAMH_01,K63,K63,35,0,DAMH,"23 -> 29, 31 -> 38",02/09/2025,05/25/2025,3,8,11,1,P_DA_CS2_2,Cơ sở 2,Lê Văn Thành,Kỹ thuật - Công nghệ
+1526,ETE30013,4,Cơ sở dữ liệu và lập trình Web(224.1)_DAMH_01_TH_01,K63,K63,18,0,TH/TN,"23 -> 29, 31 -> 38",02/09/2025,05/25/2025,3,8,4,2,PM_02_CS2,Cơ sở 2,Lê Văn Thành,Kỹ thuật - Công nghệ
+1527,ETE30013,4,Cơ sở dữ liệu và lập trình Web(224.1)_DAMH_01_TH_02,K63,K63,18,0,TH/TN,"23 -> 29, 31 -> 38",02/09/2025,05/25/2025,3,8,6,2,PM_02_CS2,Cơ sở 2,Lê Văn Thành,Kỹ thuật - Công nghệ
+1528,ETE30018,5,Kỹ thuật viễn thông(224.1)_DAMH_01,K62,K62,40,0,DAMH,25 -> 29,02/17/2025,03/17/2025,5,2,6,5,C_201_cs2,Cơ sở 2,Nguyễn Thị Quỳnh Hoa,Kỹ thuật - Công nghệ
+1529,ETE30018,5,Kỹ thuật viễn thông(224.1)_DAMH_01,K62,K62,40,0,DAMH,25 -> 29,02/18/2025,03/18/2025,5,3,2,4,C_202_cs2,Cơ sở 2,Nguyễn Thị Quỳnh Hoa,Kỹ thuật - Công nghệ
+1530,ETE30018,5,Kỹ thuật viễn thông(224.1)_DAMH_01,K62,K62,40,0,DAMH,25 -> 29,02/18/2025,03/18/2025,5,3,6,3,C_203_cs2,Cơ sở 2,Nguyễn Thị Quỳnh Hoa,Kỹ thuật - Công nghệ
+1531,ETE30018,5,Kỹ thuật viễn thông(224.1)_DAMH_01,K62,K62,40,0,DAMH,32 -> 37,04/07/2025,05/12/2025,5,2,6,5,PTH_KTVT,Cơ sở 2,Nguyễn Thị Quỳnh Hoa,Kỹ thuật - Công nghệ
+1532,ETE30021,3,Tổ chức và quy hoạch mạng viễn thông(224.1)_LT_01_(TC),K62,K62,35,0,LT,"23 -> 29, 31",02/05/2025,04/02/2025,2,4,6,4,C_102_cs2,Cơ sở 2,Nguyễn Thị Kim Thu,Kỹ thuật - Công nghệ
+1533,ETE30021,3,Tổ chức và quy hoạch mạng viễn thông(224.1)_LT_01_(TC)_TH_01,K62,K62,17,0,TH/TN,"28, 29, 31 -> 34",03/13/2025,04/24/2025,3,5,6,5,PTH_KTVT,Cơ sở 2,Nguyễn Thị Kim Thu,Kỹ thuật - Công nghệ
+1534,ETE30022,3,Thông tin quang(224.1)_LT_01_(TC),K62,K62,35,0,LT,"26 -> 29, 31",02/24/2025,03/31/2025,2,2,2,4,C_301_cs2,Cơ sở 2,Nguyễn Thị Quỳnh Hoa,Kỹ thuật - Công nghệ
+1535,ETE30022,3,Thông tin quang(224.1)_LT_01_(TC),K62,K62,35,0,LT,"26 -> 29, 31",02/25/2025,04/01/2025,2,3,9,2,C_102_cs2,Cơ sở 2,Nguyễn Thị Quỳnh Hoa,Kỹ thuật - Công nghệ
+1536,ETE30022,3,Thông tin quang(224.1)_LT_01_(TC)_TH_01,K62,K62,17,0,TH/TN,32 -> 37,04/08/2025,05/13/2025,3,3,6,5,PTH_KTVT,Cơ sở 2,Nguyễn Thị Quỳnh Hoa,Kỹ thuật - Công nghệ
+1537,ETE30023,3,Thông tin vệ tinh(224.1)_LT_01_(TC),K62,K62,35,0,LT,"23 -> 29, 31",02/07/2025,04/04/2025,2,6,2,4,C_202_cs2,Cơ sở 2,Cao Thành Nghĩa,Kỹ thuật - Công nghệ
+1538,ETE30023,3,Thông tin vệ tinh(224.1)_LT_01_(TC)_TH_01,K62,K62,17,0,TH/TN,"28, 29, 31 -> 34",03/14/2025,04/25/2025,3,6,6,5,PTH_KTVT,Cơ sở 2,Cao Thành Nghĩa,Kỹ thuật - Công nghệ
+1539,ETE30026,3,Điện tử công suất(224.1)_LT_01_(TC),K62,K62,35,0,LT,"23 -> 29, 31 -> 33",02/07/2025,04/18/2025,2,6,2,3,C_102_cs2,Cơ sở 2,Lê Đình Công,Kỹ thuật - Công nghệ
+1540,ETE30026,3,Điện tử công suất(224.1)_LT_01_(TC)_TH_01,K62,K62,17,0,TH/TN,"28, 29, 31 -> 34",03/14/2025,04/25/2025,3,6,6,5,PTH_ĐTVT,Cơ sở 2,Lê Đình Công,Kỹ thuật - Công nghệ
+1541,ETE30027,3,Xử lý ảnh và thị giác máy tinh(224.1)_LT_01_(TC),K62,K62,35,0,LT,"23 -> 29, 31",02/05/2025,04/02/2025,2,4,2,4,C_202_cs2,Cơ sở 2,Nguyễn Thị Kim Thu,Kỹ thuật - Công nghệ
+1542,ETE30027,3,Xử lý ảnh và thị giác máy tinh(224.1)_LT_01_(TC)_TH_01,K62,K62,17,0,TH/TN,"28, 29, 31 -> 34",03/13/2025,04/24/2025,3,5,1,5,PTH_ĐTVT,Cơ sở 2,Nguyễn Thị Kim Thu,Kỹ thuật - Công nghệ
+1543,ETE30028,3,Phân tích thiết kế hệ thống(224.1)_LT_01,K62,K62,35,0,LT,"23 -> 29, 31 -> 33",02/05/2025,04/16/2025,2,4,6,3,C_103_cs2,Cơ sở 2,Cao Thành Nghĩa,Kỹ thuật - Công nghệ
+1544,ETE30028,3,Phân tích thiết kế hệ thống(224.1)_LT_01_TH_01,K62,K62,17,0,TH/TN,"28, 29, 31 -> 34",03/13/2025,04/24/2025,3,5,6,5,PTH_ĐTVT,Cơ sở 2,Cao Thành Nghĩa,Kỹ thuật - Công nghệ
+1545,ETE30029,4,Đồ án II(224.1)_DAMH_01,K62,K62,40,0,DAMH,"23 -> 29, 31 -> 35",02/03/2025,04/28/2025,5,2,13,1,P_DA_CS2_2,Cơ sở 2,Nguyễn Thị Kim Thu,Kỹ thuật - Công nghệ
+1546,ETT30001,4,Công nghệ vi điện tử(224.1)_DAMH_01,K65,K65,20,0,DAMH,25 -> 29,02/19/2025,03/19/2025,4,4,6,5,D3.103,Cơ sở 1,Nguyễn Thị Quỳnh Hoa,Kỹ thuật - Công nghệ
+1547,ETT30001,4,Công nghệ vi điện tử(224.1)_DAMH_01,K65,K65,20,0,DAMH,25 -> 29,02/20/2025,03/20/2025,4,5,6,4,D3.103,Cơ sở 1,Nguyễn Thị Quỳnh Hoa,Kỹ thuật - Công nghệ
+1548,ETT30001,4,Công nghệ vi điện tử(224.1)_DAMH_01,K65,K65,20,0,DAMH,"30, 32 -> 36",03/26/2025,05/07/2025,4,4,6,5,A0 408,Cơ sở 1,Nguyễn Thị Quỳnh Hoa,Kỹ thuật - Công nghệ
+1549,ETT30003,3,Linh kiện bán dẫn(224.1)_LT_01,K65,K65,20,0,LT,25 -> 29,02/19/2025,03/19/2025,2,4,3,3,B3_101,Cơ sở 1,Nguyễn Thị Quỳnh Hoa,Kỹ thuật - Công nghệ
+1550,ETT30003,3,Linh kiện bán dẫn(224.1)_LT_01,K65,K65,20,0,LT,25 -> 29,02/20/2025,03/20/2025,2,5,3,3,B1_102,Cơ sở 1,Nguyễn Thị Quỳnh Hoa,Kỹ thuật - Công nghệ
+1551,ETT30003,3,Linh kiện bán dẫn(224.1)_LT_01_TH_01,K65,K65,20,0,TH/TN,"30, 32 -> 36",03/27/2025,05/08/2025,5,5,6,5,A0 408,Cơ sở 1,Nguyễn Thị Quỳnh Hoa,Kỹ thuật - Công nghệ
+2024,INF30064,4,Lập trình hướng đối tượng(224.2)_DAMH_01_(SP Tin)_TH_02,K65,K65,21,0,TH/TN,"28 -> 30, 32 -> 38",03/10/2025,05/19/2025,3,2,1,3,TTKT. 501,Cơ sở 1,Trần Thị Kim Oanh,Kỹ thuật - Công nghệ
+2036,INF30064,4,Lập trình hướng đối tượng(224.2)_LT_02_TH_10,K65,K65,18,0,TH/TN,"23 -> 30, 32 -> 38",02/03/2025,05/19/2025,3,2,1,2,TTKT. 505,Cơ sở 1,Nguyễn Quang Ninh,Kỹ thuật - Công nghệ
+2040,INF30064,4,Lập trình hướng đối tượng(224.2)_LT_03_TH_12,K65,K65,18,0,TH/TN,"23 -> 30, 32 -> 38",02/03/2025,05/19/2025,3,2,7,2,TTKT. 602,Cơ sở 1,Đặng Hồng Lĩnh,Kỹ thuật - Công nghệ
+2041,INF30064,4,Lập trình hướng đối tượng(224.2)_LT_03_TH_13,K65,K65,18,0,TH/TN,"23 -> 30, 32 -> 38",02/03/2025,05/19/2025,3,2,9,2,TTKT. 505,Cơ sở 1,Đặng Hồng Lĩnh,Kỹ thuật - Công nghệ
+2045,INF30064,4,Lập trình hướng đối tượng(224.2)_LT_04_TH_15,K65,K65,18,0,TH/TN,"23 -> 30, 32 -> 38",02/03/2025,05/19/2025,3,2,2,2,TTKT. 602,Cơ sở 1,Đặng Hồng Lĩnh,Kỹ thuật - Công nghệ
+2046,INF30064,4,Lập trình hướng đối tượng(224.2)_LT_04_TH_16,K65,K65,18,0,TH/TN,"23 -> 30, 32 -> 38",02/03/2025,05/19/2025,3,2,4,2,TTKT. 602,Cơ sở 1,Đặng Hồng Lĩnh,Kỹ thuật - Công nghệ
+2056,INF30064,4,Lập trình hướng đối tượng(224.2)_LT_06,K65,K65,36,0,LT,"23 -> 30, 32 -> 38",02/03/2025,05/19/2025,3,2,9,2,B3_101,Cơ sở 1,Trần Thị Kim Oanh,Kỹ thuật - Công nghệ
+2077,INF30093,4,Lập trình máy tính(224.2)_DAMH_01_(CNTT_CLC),K65,K65,15,0,DAMH,"23 -> 30, 32 -> 38",02/03/2025,05/19/2025,3,2,11,1,Phòng Đồ án 9,Cơ sở 1,Hoàng Hữu Việt,Kỹ thuật - Công nghệ
+1887,INF20007,3,Trí tuệ nhân tạo(224.2)_LT_01,K63,K63,50,0,LT,"23 -> 29, 31 -> 38",02/07/2025,05/23/2025,3,6,3,3,B1_102,Cơ sở 1,Hoàng Hữu Việt,Kỹ thuật - Công nghệ
+1888,INF20007,3,Trí tuệ nhân tạo(224.2)_LT_02,K63,K63,50,0,LT,"23 -> 29, 31 -> 38",02/05/2025,05/21/2025,3,4,1,3,D3_204,Cơ sở 1,Hoàng Hữu Việt,Kỹ thuật - Công nghệ
+1889,INF20007,3,Trí tuệ nhân tạo(224.2)_LT_03,K63,K63,50,0,LT,"23 -> 29, 31 -> 38",02/06/2025,05/22/2025,3,5,1,3,D3.104,Cơ sở 1,Hoàng Hữu Việt,Kỹ thuật - Công nghệ
+1890,INF20007,3,Trí tuệ nhân tạo(224.2)_LT_04,K63,K63,50,0,LT,"23 -> 29, 31 -> 38",02/07/2025,05/23/2025,3,6,1,3,PHLT_KTCN202,Cơ sở 1,Võ Đức Quang,Kỹ thuật - Công nghệ
+1891,INF20007,3,Trí tuệ nhân tạo(224.2)_LT_05,K63,K63,50,0,LT,"23 -> 29, 31 -> 38",02/07/2025,05/23/2025,3,6,8,3,A3 404,Cơ sở 1,Võ Đức Quang,Kỹ thuật - Công nghệ
+1892,INF20007,3,Trí tuệ nhân tạo(224.2)_LT_06,K63,K63,50,0,LT,"23 -> 29, 31 -> 38",02/06/2025,05/22/2025,3,5,3,3,D3_303,Cơ sở 1,Võ Đức Quang,Kỹ thuật - Công nghệ
+1893,INF20009,3,Hệ điều hành(224.2)_LT_01,K64,K64,60,0,LT,"23 -> 29, 31 -> 38",02/06/2025,05/22/2025,2,5,6,2,B3_502,Cơ sở 1,Lê Văn Thành,Kỹ thuật - Công nghệ
+1894,INF20009,3,Hệ điều hành(224.2)_LT_01_TH_01,K64,K64,20,0,TH/TN,"23 -> 29, 31 -> 38",02/05/2025,05/21/2025,3,4,4,2,TTKT. 601,Cơ sở 1,Lê Văn Thành,Kỹ thuật - Công nghệ
+1895,INF20009,3,Hệ điều hành(224.2)_LT_01_TH_02,K64,K64,20,0,TH/TN,"23 -> 29, 31 -> 38",02/06/2025,05/22/2025,3,5,8,2,TTKT. 601,Cơ sở 1,Lê Văn Thành,Kỹ thuật - Công nghệ
+1896,INF20009,3,Hệ điều hành(224.2)_LT_01_TH_03,K64,K64,20,0,TH/TN,"23 -> 29, 31 -> 38",02/07/2025,05/23/2025,3,6,2,2,TTKT. 601,Cơ sở 1,Lê Văn Thành,Kỹ thuật - Công nghệ
+1897,INF20009,3,Hệ điều hành(224.2)_LT_02,K64,K64,60,0,LT,"23 -> 29, 31 -> 38",02/07/2025,05/23/2025,2,6,6,2,B2_504,Cơ sở 1,Lê Văn Thành,Kỹ thuật - Công nghệ
+1898,INF20009,3,Hệ điều hành(224.2)_LT_02_TH_01,K64,K64,20,0,TH/TN,"23 -> 29, 31 -> 38",02/07/2025,05/23/2025,3,6,4,2,TTKT. 601,Cơ sở 1,Lê Văn Thành,Kỹ thuật - Công nghệ
+1899,INF20009,3,Hệ điều hành(224.2)_LT_02_TH_02,K64,K64,20,0,TH/TN,"23 -> 29, 31 -> 38",02/07/2025,05/23/2025,3,6,8,2,TTKT. 601,Cơ sở 1,Lê Văn Thành,Kỹ thuật - Công nghệ
+1900,INF20009,3,Hệ điều hành(224.2)_LT_02_TH_03,K64,K64,20,0,TH/TN,"23 -> 29, 31 -> 38",02/08/2025,05/24/2025,3,7,2,2,TTKT. 506,Cơ sở 1,Lê Văn Thành,Kỹ thuật - Công nghệ
+1901,INF20009,3,Hệ điều hành(224.2)_LT_03,K64,K64,60,0,LT,"23 -> 29, 31 -> 38",02/05/2025,05/21/2025,2,4,1,2,B1 304,Cơ sở 1,Lê Văn Thành,Kỹ thuật - Công nghệ
+1902,INF20009,3,Hệ điều hành(224.2)_LT_03_TH_01,K64,K64,20,0,TH/TN,"23 -> 29, 31 -> 38",02/08/2025,05/24/2025,3,7,4,2,TTKT. 507,Cơ sở 1,Lê Văn Thành,Kỹ thuật - Công nghệ
+1903,INF20009,3,Hệ điều hành(224.2)_LT_03_TH_02,K64,K64,20,0,TH/TN,"23 -> 29, 31 -> 38",02/08/2025,05/24/2025,3,7,6,2,TTKT. 507,Cơ sở 1,Lê Văn Thành,Kỹ thuật - Công nghệ
+1904,INF20009,3,Hệ điều hành(224.2)_LT_03_TH_03,K64,K64,20,0,TH/TN,"23 -> 29, 31 -> 38",02/08/2025,05/24/2025,3,7,8,2,TTKT. 508,Cơ sở 1,Lê Văn Thành,Kỹ thuật - Công nghệ
+1905,INF20009,3,Hệ điều hành(224.2)_LT_04,K64,K64,60,0,LT,"23 -> 29, 31 -> 38",02/06/2025,05/22/2025,2,5,4,2,A2 101,Cơ sở 1,Nguyễn Thúy Hòa,Kỹ thuật - Công nghệ
+1906,INF20009,3,Hệ điều hành(224.2)_LT_04_TH_01,K64,K64,20,0,TH/TN,"23 -> 29, 31 -> 38",02/05/2025,05/21/2025,3,4,2,2,TTKT. 601,Cơ sở 1,Nguyễn Thúy Hòa,Kỹ thuật - Công nghệ
+1907,INF20009,3,Hệ điều hành(224.2)_LT_04_TH_02,K64,K64,20,0,TH/TN,"23 -> 29, 31 -> 38",02/05/2025,05/21/2025,3,4,4,2,TTKT. 501,Cơ sở 1,Nguyễn Thúy Hòa,Kỹ thuật - Công nghệ
+1908,INF20009,3,Hệ điều hành(224.2)_LT_04_TH_03,K64,K64,20,0,TH/TN,"23 -> 29, 31 -> 38",02/05/2025,05/21/2025,3,4,6,2,TTKT. 601,Cơ sở 1,Nguyễn Thúy Hòa,Kỹ thuật - Công nghệ
+1909,INF20009,3,Hệ điều hành(224.2)_LT_05,K64,K64,60,0,LT,"23 -> 29, 31 -> 38",02/04/2025,05/20/2025,2,3,9,2,B3_201,Cơ sở 1,Nguyễn Thúy Hòa,Kỹ thuật - Công nghệ
+1910,INF20009,3,Hệ điều hành(224.2)_LT_05_TH_01,K64,K64,20,0,TH/TN,"23 -> 29, 31 -> 38",02/05/2025,05/21/2025,3,4,8,2,TTKT. 601,Cơ sở 1,Nguyễn Thúy Hòa,Kỹ thuật - Công nghệ
+1911,INF20009,3,Hệ điều hành(224.2)_LT_05_TH_02,K64,K64,20,0,TH/TN,"23 -> 29, 31 -> 38",02/04/2025,05/20/2025,3,3,2,2,TTKT. 601,Cơ sở 1,Nguyễn Thúy Hòa,Kỹ thuật - Công nghệ
+1912,INF20009,3,Hệ điều hành(224.2)_LT_05_TH_03,K64,K64,20,0,TH/TN,"23 -> 29, 31 -> 38",02/04/2025,05/20/2025,3,3,4,2,TTKT. 601,Cơ sở 1,Nguyễn Thúy Hòa,Kỹ thuật - Công nghệ
+1913,INF20141,3,Thị giác máy tính(224.2)_LT_01_(CNTT_CLC),K63,K63,35,0,LT,"23 -> 29, 31 -> 38",02/04/2025,05/20/2025,3,3,1,3,PHLT_KTCN202,Cơ sở 1,Nguyễn Thị Minh Tâm,Kỹ thuật - Công nghệ
+1914,INF21107,3,Toán rời rạc(224.2)_LT_01_(CNTT_CLC),K64,K64,32,0,LT,"23 -> 29, 31 -> 38",02/08/2025,05/24/2025,3,7,6,3,B2_203,Cơ sở 1,Trần Xuân Sang,Kỹ thuật - Công nghệ
+1915,INF21113,4,Phân tích và thiết kế hệ thống thông tin(224.2)_DAMH_01_(SP Tin),K64,K64,40,0,DAMH,"23 -> 29, 31 -> 38",02/07/2025,05/23/2025,4,6,2,4,D3_205,Cơ sở 1,Lê Văn Tấn,Kỹ thuật - Công nghệ
+1916,INF21113,4,Phân tích và thiết kế hệ thống thông tin(224.2)_DAMH_02_(KHMT),K64,K64,40,0,DAMH,"23 -> 29, 31 -> 38",02/06/2025,05/22/2025,4,5,6,4,D3_205,Cơ sở 1,Lê Văn Tấn,Kỹ thuật - Công nghệ
+1917,INF21117,3,Tiếng Anh chuyên ngành CNTT(224.2)_LT_01_(CNTT_CLC),K64,K64,32,0,LT,"23 -> 29, 31 -> 38",02/06/2025,05/22/2025,3,5,1,3,D3_205,Cơ sở 1,Phạm Thị Thu Hiền,Kỹ thuật - Công nghệ
+1918,INF22105,3,Cấu trúc dữ liệu và giải thuật(224.1)_LT_01,K64,K64,30,0,LT,"23 -> 29, 31 -> 38",02/06/2025,05/22/2025,3,5,8,3,D3_303,Cơ sở 1,Nguyễn Thị Uyên,Kỹ thuật - Công nghệ
+2173,INF31001,3,Kiến trúc và bảo trì máy tính(224.1)_LT_01_TH_03,K65,K65,15,0,TH/TN,"28 -> 30, 32 -> 38",03/10/2025,05/19/2025,3,2,8,3,TTKT. 508,Cơ sở 1,Nguyễn Quang Ninh,Kỹ thuật - Công nghệ
+1920,INF30001,3,Kiến trúc máy tính(224.2)_LT_02,K64,K64,50,0,LT,"23 -> 29, 31 -> 38",02/03/2025,05/19/2025,3,2,3,3,D3_301,Cơ sở 1,Nguyễn Quang Ninh,Kỹ thuật - Công nghệ
+1921,INF30001,3,Kiến trúc máy tính(224.2)_LT_03,K64,K64,50,0,LT,"23 -> 29, 31 -> 38",02/04/2025,05/20/2025,3,3,8,3,A2 203,Cơ sở 1,Nguyễn Quang Ninh,Kỹ thuật - Công nghệ
+1922,INF30001,3,Kiến trúc máy tính(224.2)_LT_04,K64,K64,50,0,LT,"23 -> 29, 31 -> 38",02/05/2025,05/21/2025,3,4,3,3,A3 401,Cơ sở 1,Nguyễn Quang Ninh,Kỹ thuật - Công nghệ
+1923,INF30001,3,Kiến trúc máy tính(224.2)_LT_05,K64,K64,50,0,LT,"23 -> 29, 31 -> 38",02/06/2025,05/22/2025,3,5,8,3,B3_505,Cơ sở 1,Nguyễn Quang Ninh,Kỹ thuật - Công nghệ
+1924,INF30001,3,Kiến trúc máy tính(224.2)_LT_06,K64,K64,60,0,LT,"23 -> 29, 31 -> 38",02/07/2025,05/23/2025,3,6,1,3,D3_302,Cơ sở 1,Nguyễn Quang Ninh,Kỹ thuật - Công nghệ
+1925,INF30001,3,Kiến trúc máy tính(224.2)_LT_07_(KHMT),K64,K64,50,0,LT,"23 -> 29, 31 -> 38",02/05/2025,05/21/2025,3,4,8,3,D3.104,Cơ sở 1,Nguyễn Quang Ninh,Kỹ thuật - Công nghệ
+1926,INF30007,3,Hệ quản trị cơ sở dữ liệu(224.2)_LT_01_(SP Tin học),K64,K64,30,0,LT,"23 -> 29, 31 -> 38",02/03/2025,05/19/2025,2,2,1,2,D3_204,Cơ sở 1,Hồ Thị Huyền Thương,Kỹ thuật - Công nghệ
+1927,INF30007,3,Hệ quản trị cơ sở dữ liệu(224.2)_LT_01_(SP Tin học)_TH_01,K64,K64,15,0,TH/TN,"23 -> 29, 31 -> 38",02/06/2025,05/22/2025,3,5,1,2,TTKT. 603,Cơ sở 1,Hồ Thị Huyền Thương,Kỹ thuật - Công nghệ
+1928,INF30007,3,Hệ quản trị cơ sở dữ liệu(224.2)_LT_01_(SP Tin học)_TH_02,K64,K64,15,0,TH/TN,"23 -> 29, 31 -> 38",02/03/2025,05/19/2025,3,2,7,2,TTKT. 603,Cơ sở 1,Hồ Thị Huyền Thương,Kỹ thuật - Công nghệ
+1929,INF30007,3,Hệ quản trị cơ sở dữ liệu(224.2)_LT_02_(CNTT_CLC),K64,K64,35,0,LT,"23 -> 29, 31 -> 38",02/05/2025,05/21/2025,2,4,9,2,A1 305,Cơ sở 1,Nguyễn Thị Minh Tâm,Kỹ thuật - Công nghệ
+1930,INF30007,3,Hệ quản trị cơ sở dữ liệu(224.2)_LT_02_(CNTT_CLC)_TH_01,K64,K64,16,0,TH/TN,"23 -> 29, 31 -> 38",02/06/2025,05/22/2025,3,5,4,2,TTKT. 603,Cơ sở 1,Nguyễn Thị Minh Tâm,Kỹ thuật - Công nghệ
+1931,INF30007,3,Hệ quản trị cơ sở dữ liệu(224.2)_LT_02_(CNTT_CLC)_TH_02,K64,K64,16,0,TH/TN,"23 -> 29, 31 -> 38",02/07/2025,05/23/2025,3,6,4,2,TTKT. 603,Cơ sở 1,Nguyễn Thị Minh Tâm,Kỹ thuật - Công nghệ
+1932,INF30007,3,Hệ quản trị cơ sở dữ liệu(224.2)_LT_03,K64,K64,60,0,LT,"23 -> 29, 31 -> 38",02/03/2025,05/19/2025,2,2,9,2,A3 403,Cơ sở 1,Hồ Thị Huyền Thương,Kỹ thuật - Công nghệ
+1933,INF30007,3,Hệ quản trị cơ sở dữ liệu(224.2)_LT_03_TH_01,K64,K64,20,0,TH/TN,"23 -> 29, 31 -> 38",02/03/2025,05/19/2025,3,2,3,2,TTKT. 603,Cơ sở 1,Hồ Thị Huyền Thương,Kỹ thuật - Công nghệ
+1934,INF30007,3,Hệ quản trị cơ sở dữ liệu(224.2)_LT_03_TH_02,K64,K64,20,0,TH/TN,"23 -> 29, 31 -> 38",02/04/2025,05/20/2025,3,3,7,2,TTKT. 603,Cơ sở 1,Hồ Thị Huyền Thương,Kỹ thuật - Công nghệ
+1935,INF30007,3,Hệ quản trị cơ sở dữ liệu(224.2)_LT_03_TH_03,K64,K64,20,0,TH/TN,"23 -> 29, 31 -> 38",02/04/2025,05/20/2025,3,3,3,2,TTKT. 603,Cơ sở 1,Hồ Thị Huyền Thương,Kỹ thuật - Công nghệ
+1936,INF30007,3,Hệ quản trị cơ sở dữ liệu(224.2)_LT_04,K64,K64,60,0,LT,"23 -> 29, 31 -> 38",02/04/2025,05/20/2025,2,3,1,2,A3 401,Cơ sở 1,Hồ Thị Huyền Thương,Kỹ thuật - Công nghệ
+1937,INF30007,3,Hệ quản trị cơ sở dữ liệu(224.2)_LT_04_TH_01,K64,K64,20,0,TH/TN,"23 -> 29, 31 -> 38",02/04/2025,05/20/2025,3,3,9,2,TTKT. 603,Cơ sở 1,Hồ Thị Huyền Thương,Kỹ thuật - Công nghệ
+1938,INF30007,3,Hệ quản trị cơ sở dữ liệu(224.2)_LT_04_TH_02,K64,K64,20,0,TH/TN,"23 -> 29, 31 -> 38",02/05/2025,05/21/2025,3,4,3,2,TTKT. 604,Cơ sở 1,Hồ Thị Huyền Thương,Kỹ thuật - Công nghệ
+1939,INF30007,3,Hệ quản trị cơ sở dữ liệu(224.2)_LT_04_TH_03,K64,K64,20,0,TH/TN,"23 -> 29, 31 -> 38",02/05/2025,05/21/2025,3,4,7,2,TTKT. 603,Cơ sở 1,Hồ Thị Huyền Thương,Kỹ thuật - Công nghệ
+1940,INF30007,3,Hệ quản trị cơ sở dữ liệu(224.2)_LT_05,K64,K64,60,0,LT,"23 -> 29, 31 -> 38",02/05/2025,05/21/2025,2,4,1,2,A2 405,Cơ sở 1,Hồ Thị Huyền Thương,Kỹ thuật - Công nghệ
+1941,INF30007,3,Hệ quản trị cơ sở dữ liệu(224.2)_LT_05_TH_01,K64,K64,20,0,TH/TN,"23 -> 29, 31 -> 38",02/05/2025,05/21/2025,3,4,9,2,TTKT. 603,Cơ sở 1,Hồ Thị Huyền Thương,Kỹ thuật - Công nghệ
+1942,INF30007,3,Hệ quản trị cơ sở dữ liệu(224.2)_LT_05_TH_02,K64,K64,20,0,TH/TN,"23 -> 29, 31 -> 38",02/06/2025,05/22/2025,3,5,7,2,TTKT. 603,Cơ sở 1,Hồ Thị Huyền Thương,Kỹ thuật - Công nghệ
+1943,INF30007,3,Hệ quản trị cơ sở dữ liệu(224.2)_LT_05_TH_03,K64,K64,20,0,TH/TN,"23 -> 29, 31 -> 38",02/06/2025,05/22/2025,3,5,9,2,TTKT. 603,Cơ sở 1,Hồ Thị Huyền Thương,Kỹ thuật - Công nghệ
+1944,INF30007,3,Hệ quản trị cơ sở dữ liệu(224.2)_LT_06,K64,K64,60,0,LT,"23 -> 29, 31 -> 38",02/06/2025,05/22/2025,2,5,1,2,A1 304,Cơ sở 1,Nguyễn Thị Minh Tâm,Kỹ thuật - Công nghệ
+1945,INF30007,3,Hệ quản trị cơ sở dữ liệu(224.2)_LT_06_TH_01,K64,K64,20,0,TH/TN,"23 -> 29, 31 -> 38",02/07/2025,05/23/2025,3,6,2,2,TTKT. 603,Cơ sở 1,Nguyễn Thị Minh Tâm,Kỹ thuật - Công nghệ
+1946,INF30007,3,Hệ quản trị cơ sở dữ liệu(224.2)_LT_06_TH_02,K64,K64,20,0,TH/TN,"23 -> 29, 31 -> 38",02/07/2025,05/23/2025,3,6,9,2,TTKT. 603,Cơ sở 1,Nguyễn Thị Minh Tâm,Kỹ thuật - Công nghệ
+1947,INF30007,3,Hệ quản trị cơ sở dữ liệu(224.2)_LT_06_TH_03,K64,K64,20,0,TH/TN,"23 -> 29, 31 -> 38",02/06/2025,05/22/2025,3,5,9,2,TTKT. 605,Cơ sở 1,Nguyễn Thị Minh Tâm,Kỹ thuật - Công nghệ
+1948,INF30007,3,Hệ quản trị cơ sở dữ liệu(224.2)_LT_07,K64,K64,60,0,LT,"23 -> 29, 31 -> 38",02/06/2025,05/22/2025,2,5,6,2,A2 404,Cơ sở 1,Nguyễn Thị Minh Tâm,Kỹ thuật - Công nghệ
+1949,INF30007,3,Hệ quản trị cơ sở dữ liệu(224.2)_LT_07_TH_01,K64,K64,20,0,TH/TN,"23 -> 29, 31 -> 38",02/03/2025,05/19/2025,3,2,2,2,TTKT. 607,Cơ sở 1,Nguyễn Thị Minh Tâm,Kỹ thuật - Công nghệ
+1950,INF30007,3,Hệ quản trị cơ sở dữ liệu(224.2)_LT_07_TH_02,K64,K64,20,0,TH/TN,"23 -> 29, 31 -> 38",02/03/2025,05/19/2025,3,2,4,2,TTKT. 607,Cơ sở 1,Nguyễn Thị Minh Tâm,Kỹ thuật - Công nghệ
+1951,INF30007,3,Hệ quản trị cơ sở dữ liệu(224.2)_LT_07_TH_03,K64,K64,20,0,TH/TN,"23 -> 29, 31 -> 38",02/03/2025,05/19/2025,3,2,6,2,TTKT. 607,Cơ sở 1,Nguyễn Thị Minh Tâm,Kỹ thuật - Công nghệ
+1952,INF30007,3,Hệ quản trị cơ sở dữ liệu(224.2)_LT_08_(KHMT),K64,K64,40,0,LT,"23 -> 29, 31 -> 38",02/07/2025,05/23/2025,2,6,6,2,B3_304,Cơ sở 1,Nguyễn Thị Minh Tâm,Kỹ thuật - Công nghệ
+1953,INF30007,3,Hệ quản trị cơ sở dữ liệu(224.2)_LT_08_(KHMT)_TH_01,K64,K64,20,0,TH/TN,"23 -> 29, 31 -> 38",02/03/2025,05/19/2025,3,2,8,2,TTKT. 607,Cơ sở 1,Nguyễn Thị Minh Tâm,Kỹ thuật - Công nghệ
+1954,INF30007,3,Hệ quản trị cơ sở dữ liệu(224.2)_LT_08_(KHMT)_TH_02,K64,K64,20,0,TH/TN,"23 -> 29, 31 -> 38",02/04/2025,05/20/2025,3,3,4,2,TTKT. 607,Cơ sở 1,Nguyễn Thị Minh Tâm,Kỹ thuật - Công nghệ
+1955,INF30019,3,Toán rời rạc(224.2)_LT_01,K63,K63,45,0,LT,"23 -> 29, 31 -> 38",02/05/2025,05/21/2025,3,4,6,3,A2 203,Cơ sở 1,Nguyễn Thị Minh Tâm,Kỹ thuật - Công nghệ
+1957,INF30033,3,An toàn thông tin(224.2)_LT_01,K63,K63,40,0,LT,"23 -> 29, 31 -> 38",02/06/2025,05/22/2025,3,5,6,3,PHLT_KTCN202,Cơ sở 1,Phạm Trà My,Kỹ thuật - Công nghệ
+1958,INF30037,3,An ninh mạng(224.2)_LT_01_(TC),K62,K62,65,0,LT,"23 -> 29, 31 -> 38",02/03/2025,05/19/2025,2,2,2,2,C_202_cs2,Cơ sở 2,Lê Văn Minh,Kỹ thuật - Công nghệ
+1959,INF30037,3,An ninh mạng(224.2)_LT_01_(TC)_TH_01,K62,K62,22,0,TH/TN,"23 -> 29, 31 -> 38",02/03/2025,05/19/2025,3,2,4,2,PTHMT.05,Cơ sở 2,Lê Văn Minh,Kỹ thuật - Công nghệ
+1960,INF30037,3,An ninh mạng(224.2)_LT_01_(TC)_TH_02,K62,K62,22,0,TH/TN,"23 -> 29, 31 -> 38",02/04/2025,05/20/2025,3,3,2,2,PM_01_CS2,Cơ sở 2,Lê Văn Minh,Kỹ thuật - Công nghệ
+1961,INF30037,3,An ninh mạng(224.2)_LT_01_(TC)_TH_03,K62,K62,21,0,TH/TN,"23 -> 29, 31 -> 38",02/04/2025,05/20/2025,3,3,4,2,PM_01_CS2,Cơ sở 2,Lê Văn Minh,Kỹ thuật - Công nghệ
+1962,INF30037,3,An ninh mạng(224.2)_LT_02_(TC),K62,K62,65,0,LT,"23 -> 29, 31 -> 38",02/03/2025,05/19/2025,2,2,7,2,C_103_cs2,Cơ sở 2,Lê Văn Minh,Kỹ thuật - Công nghệ
+1963,INF30037,3,An ninh mạng(224.2)_LT_02_(TC)_TH_01,K62,K62,22,0,TH/TN,"23 -> 29, 31 -> 38",02/03/2025,05/19/2025,3,2,9,2,PM_01_CS2,Cơ sở 2,Lê Văn Minh,Kỹ thuật - Công nghệ
+1964,INF30037,3,An ninh mạng(224.2)_LT_02_(TC)_TH_02,K62,K62,22,0,TH/TN,"23 -> 29, 31 -> 38",02/04/2025,05/20/2025,3,3,7,2,PM_01_CS2,Cơ sở 2,Lê Văn Minh,Kỹ thuật - Công nghệ
+1965,INF30037,3,An ninh mạng(224.2)_LT_02_(TC)_TH_03,K62,K62,21,0,TH/TN,"23 -> 29, 31 -> 38",02/04/2025,05/20/2025,3,3,9,2,PM_01_CS2,Cơ sở 2,Lê Văn Minh,Kỹ thuật - Công nghệ
+1966,INF30044,3,Học máy(224.2)_LT_01_(KHMT),K63,K63,50,0,LT,"23 -> 29, 31 -> 38",02/07/2025,05/23/2025,3,6,1,2,B3_101,Cơ sở 1,Phan Anh Phong,Kỹ thuật - Công nghệ
+1967,INF30044,3,Học máy(224.2)_LT_01_(KHMT)_TH_01,K63,K63,20,0,TH/TN,"23 -> 29, 31 -> 38",02/09/2025,05/25/2025,3,8,2,2,TTKT. 507,Cơ sở 1,Phan Anh Phong,Kỹ thuật - Công nghệ
+1968,INF30044,3,Học máy(224.2)_LT_01_(KHMT)_TH_02,K63,K63,20,0,TH/TN,"23 -> 29, 31 -> 38",02/09/2025,05/25/2025,3,8,4,2,TTKT. 507,Cơ sở 1,Phan Anh Phong,Kỹ thuật - Công nghệ
+1969,INF30044,3,Học máy(224.2)_LT_02_(TC),K62,K62,65,0,LT,"23 -> 29, 31 -> 38",02/03/2025,05/19/2025,3,2,2,2,C_203_cs2,Cơ sở 2,Hoàng Hữu Việt,Kỹ thuật - Công nghệ
+1970,INF30044,3,Học máy(224.2)_LT_02_(TC)_TH_01,K62,K62,22,0,TH/TN,"23 -> 29, 31 -> 38",02/04/2025,05/20/2025,3,3,9,2,PTHMT.05,Cơ sở 2,Hoàng Hữu Việt,Kỹ thuật - Công nghệ
+1971,INF30044,3,Học máy(224.2)_LT_02_(TC)_TH_02,K62,K62,22,0,TH/TN,"23 -> 29, 31 -> 38",02/03/2025,05/19/2025,3,2,7,2,PTHMT.05,Cơ sở 2,Hoàng Hữu Việt,Kỹ thuật - Công nghệ
+1972,INF30044,3,Học máy(224.2)_LT_02_(TC)_TH_03,K62,K62,21,0,TH/TN,"23 -> 29, 31 -> 38",02/03/2025,05/19/2025,3,2,9,2,PTHMT.05,Cơ sở 2,Hoàng Hữu Việt,Kỹ thuật - Công nghệ
+1973,INF30044,3,Học máy(224.2)_LT_03_(TC),K62,K62,65,0,LT,"23 -> 29, 31 -> 38",02/04/2025,05/20/2025,3,3,7,2,C_201_cs2,Cơ sở 2,Hoàng Hữu Việt,Kỹ thuật - Công nghệ
+1974,INF30044,3,Học máy(224.2)_LT_03_(TC)_TH_01,K62,K62,22,0,TH/TN,"23 -> 29, 31 -> 38",02/03/2025,05/19/2025,3,2,4,2,PTH.06,Cơ sở 2,Hoàng Hữu Việt,Kỹ thuật - Công nghệ
+1975,INF30044,3,Học máy(224.2)_LT_03_(TC)_TH_02,K62,K62,22,0,TH/TN,"23 -> 29, 31 -> 38",02/04/2025,05/20/2025,3,3,2,2,PTHMT.05,Cơ sở 2,Hoàng Hữu Việt,Kỹ thuật - Công nghệ
+1976,INF30044,3,Học máy(224.2)_LT_03_(TC)_TH_03,K62,K62,21,0,TH/TN,"23 -> 29, 31 -> 38",02/04/2025,05/20/2025,3,3,4,2,PTH.06,Cơ sở 2,Hoàng Hữu Việt,Kỹ thuật - Công nghệ
+1977,INF30045,3,Khai phá dữ liệu(224.2)_LT_01_(TC),K62,K62,65,0,LT,"23 -> 29, 31 -> 38",02/04/2025,05/20/2025,2,3,9,2,C_101_cs2,Cơ sở 2,Phan Anh Phong,Kỹ thuật - Công nghệ
+1978,INF30045,3,Khai phá dữ liệu(224.2)_LT_01_(TC)_TH_01,K62,K62,22,0,TH/TN,"23 -> 29, 31 -> 38",02/03/2025,05/19/2025,3,2,7,2,PM_02_CS2,Cơ sở 2,Phan Anh Phong,Kỹ thuật - Công nghệ
+1979,INF30045,3,Khai phá dữ liệu(224.2)_LT_01_(TC)_TH_02,K62,K62,22,0,TH/TN,"23 -> 29, 31 -> 38",02/04/2025,05/20/2025,3,3,7,2,PM_02_CS2,Cơ sở 2,Phan Anh Phong,Kỹ thuật - Công nghệ
+1980,INF30045,3,Khai phá dữ liệu(224.2)_LT_01_(TC)_TH_03,K62,K62,21,0,TH/TN,"23 -> 29, 31 -> 38",02/05/2025,05/21/2025,3,4,7,2,PTHMT.05,Cơ sở 2,Phan Anh Phong,Kỹ thuật - Công nghệ
+1981,INF30045,3,Khai phá dữ liệu(224.2)_LT_02_(TC),K62,K62,65,0,LT,"23 -> 29, 31 -> 38",02/05/2025,05/21/2025,2,4,9,2,A5_302,Cơ sở 2,Phan Anh Phong,Kỹ thuật - Công nghệ
+1982,INF30045,3,Khai phá dữ liệu(224.2)_LT_02_(TC)_TH_01,K62,K62,22,0,TH/TN,"23 -> 29, 31 -> 38",02/03/2025,05/19/2025,3,2,2,2,PM_02_CS2,Cơ sở 2,Phan Anh Phong,Kỹ thuật - Công nghệ
+1983,INF30045,3,Khai phá dữ liệu(224.2)_LT_02_(TC)_TH_02,K62,K62,22,0,TH/TN,"23 -> 29, 31 -> 38",02/03/2025,05/19/2025,3,2,4,2,PM_02_CS2,Cơ sở 2,Phan Anh Phong,Kỹ thuật - Công nghệ
+1984,INF30045,3,Khai phá dữ liệu(224.2)_LT_02_(TC)_TH_03,K62,K62,21,0,TH/TN,"23 -> 29, 31 -> 38",02/04/2025,05/20/2025,3,3,2,2,PM_02_CS2,Cơ sở 2,Phan Anh Phong,Kỹ thuật - Công nghệ
+1985,INF30045,3,Khai phá dữ liệu(224.2)_LT_03,"K61,K62,K63,K64,K65",K62,65,0,LT,"23 -> 29, 31 -> 38",02/03/2025,05/19/2025,2,2,9,2,C_102_cs2,Cơ sở 2,Phan Anh Phong,Kỹ thuật - Công nghệ
+1986,INF30045,3,Khai phá dữ liệu(224.2)_LT_03_TH_01,"K61,K62,K63,K64,K65",K62,22,0,TH/TN,"23 -> 29, 31 -> 38",02/04/2025,05/20/2025,3,3,4,2,PM_02_CS2,Cơ sở 2,Phan Anh Phong,Kỹ thuật - Công nghệ
+1987,INF30045,3,Khai phá dữ liệu(224.2)_LT_03_TH_02,"K61,K62,K63,K64,K65",K62,22,0,TH/TN,"23 -> 29, 31 -> 38",02/06/2025,05/22/2025,3,5,7,2,PTHMT.05,Cơ sở 2,Phan Anh Phong,Kỹ thuật - Công nghệ
+1988,INF30045,3,Khai phá dữ liệu(224.2)_LT_03_TH_03,"K61,K62,K63,K64,K65",K62,21,0,TH/TN,"23 -> 29, 31 -> 38",02/07/2025,05/23/2025,3,6,7,2,PM_02_CS2,Cơ sở 2,Phan Anh Phong,Kỹ thuật - Công nghệ
+1989,INF30051,3,Lập trình mạng(224.2)_LT_01_(TC),K62,K62,65,0,LT,"23 -> 29, 31 -> 38",02/04/2025,05/20/2025,2,3,6,2,C_101_cs2,Cơ sở 2,Lê Quốc Anh,Kỹ thuật - Công nghệ
+1990,INF30051,3,Lập trình mạng(224.2)_LT_01_(TC)_TH_01,K62,K62,22,0,TH/TN,"23 -> 29, 31 -> 38",02/03/2025,05/19/2025,3,2,4,2,PM_03_CS2,Cơ sở 2,Lê Quốc Anh,Kỹ thuật - Công nghệ
+1991,INF30051,3,Lập trình mạng(224.2)_LT_01_(TC)_TH_02,K62,K62,22,0,TH/TN,"23 -> 29, 31 -> 38",02/04/2025,05/20/2025,3,3,4,2,PM_03_CS2,Cơ sở 2,Lê Quốc Anh,Kỹ thuật - Công nghệ
+1992,INF30051,3,Lập trình mạng(224.2)_LT_01_(TC)_TH_03,K62,K62,21,0,TH/TN,"23 -> 29, 31 -> 38",02/05/2025,05/21/2025,3,4,4,2,PM_03_CS2,Cơ sở 2,Lê Quốc Anh,Kỹ thuật - Công nghệ
+1993,INF30051,3,Lập trình mạng(224.2)_LT_02_(TC),K62,K62,65,0,LT,"23 -> 29, 31 -> 38",02/05/2025,05/21/2025,2,4,6,2,C_101_cs2,Cơ sở 2,Lê Quốc Anh,Kỹ thuật - Công nghệ
+1994,INF30051,3,Lập trình mạng(224.2)_LT_02_(TC)_TH_01,K62,K62,22,0,TH/TN,"23 -> 29, 31 -> 38",02/03/2025,05/19/2025,3,2,6,2,PM_03_CS2,Cơ sở 2,Lê Quốc Anh,Kỹ thuật - Công nghệ
+1995,INF30051,3,Lập trình mạng(224.2)_LT_02_(TC)_TH_02,K62,K62,22,0,TH/TN,"23 -> 29, 31 -> 38",02/04/2025,05/20/2025,3,3,8,2,PM_03_CS2,Cơ sở 2,Lê Quốc Anh,Kỹ thuật - Công nghệ
+1996,INF30051,3,Lập trình mạng(224.2)_LT_02_(TC)_TH_03,K62,K62,21,0,TH/TN,"23 -> 29, 31 -> 38",02/05/2025,05/21/2025,3,4,8,2,PM_03_CS2,Cơ sở 2,Lê Quốc Anh,Kỹ thuật - Công nghệ
+1997,INF30051,3,Lập trình mạng(224.2)_LT_03_(TC),K62,K62,65,0,LT,"23 -> 29, 31 -> 38",02/06/2025,05/22/2025,2,5,6,2,C_102_cs2,Cơ sở 2,Lê Quốc Anh,Kỹ thuật - Công nghệ
+1998,INF30051,3,Lập trình mạng(224.2)_LT_03_(TC)_TH_01,K62,K62,22,0,TH/TN,"23 -> 29, 31 -> 38",02/06/2025,05/22/2025,3,5,8,2,PM_03_CS2,Cơ sở 2,Lê Quốc Anh,Kỹ thuật - Công nghệ
+1999,INF30051,3,Lập trình mạng(224.2)_LT_03_(TC)_TH_02,K62,K62,22,0,TH/TN,"23 -> 29, 31 -> 38",02/07/2025,05/23/2025,3,6,4,2,PM_03_CS2,Cơ sở 2,Lê Quốc Anh,Kỹ thuật - Công nghệ
+2000,INF30051,3,Lập trình mạng(224.2)_LT_03_(TC)_TH_03,K62,K62,21,0,TH/TN,"23 -> 29, 31 -> 38",02/07/2025,05/23/2025,3,6,6,2,PM_03_CS2,Cơ sở 2,Lê Quốc Anh,Kỹ thuật - Công nghệ
+2001,INF30057,3,Quản trị mạng(224.2)_LT_01_(TC),K63,K63,60,0,LT,"23 -> 29, 31 -> 38",02/05/2025,05/21/2025,2,4,1,2,A2 203,Cơ sở 1,Lê Văn Minh,Kỹ thuật - Công nghệ
+2002,INF30057,3,Quản trị mạng(224.2)_LT_01_(TC)_TH_01,K63,K63,20,0,TH/TN,"23 -> 29, 31 -> 38",02/05/2025,05/21/2025,3,4,4,2,TTKT. 606,Cơ sở 1,Lê Văn Minh,Kỹ thuật - Công nghệ
+2003,INF30057,3,Quản trị mạng(224.2)_LT_01_(TC)_TH_02,K63,K63,20,0,TH/TN,"23 -> 29, 31 -> 38",02/05/2025,05/21/2025,3,4,6,2,TTKT. 506,Cơ sở 1,Lê Văn Minh,Kỹ thuật - Công nghệ
+2004,INF30057,3,Quản trị mạng(224.2)_LT_01_(TC)_TH_03,K63,K63,20,0,TH/TN,"23 -> 29, 31 -> 38",02/05/2025,05/21/2025,3,4,9,2,TTKT. 507,Cơ sở 1,Lê Văn Minh,Kỹ thuật - Công nghệ
+2005,INF30057,3,Quản trị mạng(224.2)_LT_02_(TC),K63,K63,60,0,LT,"23 -> 29, 31 -> 38",02/06/2025,05/22/2025,2,5,9,2,A1 303,Cơ sở 1,Lê Văn Minh,Kỹ thuật - Công nghệ
+2006,INF30057,3,Quản trị mạng(224.2)_LT_02_(TC)_TH_01,K63,K63,20,0,TH/TN,"23 -> 29, 31 -> 38",02/06/2025,05/22/2025,3,5,7,2,TTKT. 606,Cơ sở 1,Lê Văn Minh,Kỹ thuật - Công nghệ
+2007,INF30057,3,Quản trị mạng(224.2)_LT_02_(TC)_TH_02,K63,K63,20,0,TH/TN,"23 -> 29, 31 -> 38",02/06/2025,05/22/2025,3,5,1,2,TTKT. 505,Cơ sở 1,Lê Văn Minh,Kỹ thuật - Công nghệ
+2008,INF30057,3,Quản trị mạng(224.2)_LT_02_(TC)_TH_03,K63,K63,20,0,TH/TN,"23 -> 29, 31 -> 38",02/06/2025,05/22/2025,3,5,4,2,TTKT. 606,Cơ sở 1,Lê Văn Minh,Kỹ thuật - Công nghệ
+2009,INF30060,3,Xử lý ngôn ngữ tự nhiên(224.2)_LT_01_(TC),K62,K62,65,0,LT,"23 -> 29, 31 -> 38",02/06/2025,05/22/2025,2,5,6,2,C_103_cs2,Cơ sở 2,Trần Xuân Sang,Kỹ thuật - Công nghệ
+2010,INF30060,3,Xử lý ngôn ngữ tự nhiên(224.2)_LT_01_(TC)_TH_01,K62,K62,22,0,TH/TN,"23 -> 29, 31 -> 38",02/05/2025,05/21/2025,3,4,2,2,PM04.A5,Cơ sở 2,Trần Xuân Sang,Kỹ thuật - Công nghệ
+2011,INF30060,3,Xử lý ngôn ngữ tự nhiên(224.2)_LT_01_(TC)_TH_02,K62,K62,22,0,TH/TN,"23 -> 29, 31 -> 38",02/05/2025,05/21/2025,3,4,4,2,PM04.A5,Cơ sở 2,Trần Xuân Sang,Kỹ thuật - Công nghệ
+2012,INF30060,3,Xử lý ngôn ngữ tự nhiên(224.2)_LT_01_(TC)_TH_03,K62,K62,21,0,TH/TN,"23 -> 29, 31 -> 38",02/06/2025,05/22/2025,3,5,8,2,PM04.A5,Cơ sở 2,Trần Xuân Sang,Kỹ thuật - Công nghệ
+2013,INF30060,3,Xử lý ngôn ngữ tự nhiên(224.2)_LT_02_(TC),K62,K62,65,0,LT,"23 -> 29, 31 -> 38",02/07/2025,05/23/2025,2,6,6,2,C_102_cs2,Cơ sở 2,Trần Xuân Sang,Kỹ thuật - Công nghệ
+2014,INF30060,3,Xử lý ngôn ngữ tự nhiên(224.2)_LT_02_(TC)_TH_01,K62,K62,22,0,TH/TN,"23 -> 29, 31 -> 38",02/06/2025,05/22/2025,3,5,2,2,PM04.A5,Cơ sở 2,Trần Xuân Sang,Kỹ thuật - Công nghệ
+2015,INF30060,3,Xử lý ngôn ngữ tự nhiên(224.2)_LT_02_(TC)_TH_02,K62,K62,22,0,TH/TN,"23 -> 29, 31 -> 38",02/06/2025,05/22/2025,3,5,4,2,PM04.A5,Cơ sở 2,Trần Xuân Sang,Kỹ thuật - Công nghệ
+2016,INF30060,3,Xử lý ngôn ngữ tự nhiên(224.2)_LT_02_(TC)_TH_03,K62,K62,21,0,TH/TN,"23 -> 29, 31 -> 38",02/07/2025,05/23/2025,3,6,8,2,PM04.A5,Cơ sở 2,Trần Xuân Sang,Kỹ thuật - Công nghệ
+2017,INF30060,3,Xử lý ngôn ngữ tự nhiên(224.2)_LT_03_(TC),K62,K62,65,0,LT,"23 -> 29, 31 -> 38",02/07/2025,05/23/2025,2,6,4,2,C_101_cs2,Cơ sở 2,Trần Xuân Sang,Kỹ thuật - Công nghệ
+2018,INF30060,3,Xử lý ngôn ngữ tự nhiên(224.2)_LT_03_(TC)_TH_04,K62,K62,22,0,TH/TN,"23 -> 29, 31 -> 38",02/05/2025,05/21/2025,3,4,6,2,PM04.A5,Cơ sở 2,Trần Xuân Sang,Kỹ thuật - Công nghệ
+2019,INF30060,3,Xử lý ngôn ngữ tự nhiên(224.2)_LT_03_(TC)_TH_05,,K62,22,0,TH/TN,"23 -> 29, 31 -> 38",02/05/2025,05/21/2025,3,4,8,2,PM04.A5,Cơ sở 2,Trần Xuân Sang,Kỹ thuật - Công nghệ
+2020,INF30060,3,Xử lý ngôn ngữ tự nhiên(224.2)_LT_03_(TC)_TH_06,,K62,21,0,TH/TN,"23 -> 29, 31 -> 38",02/07/2025,05/23/2025,3,6,2,2,PM04.A5,Cơ sở 2,Trần Xuân Sang,Kỹ thuật - Công nghệ
+2025,INF30064,4,Lập trình hướng đối tượng(224.2)_LT_01,K65,K65,70,0,LT,"23 -> 30, 32 -> 38",02/04/2025,05/20/2025,3,3,4,2,B3_103,Cơ sở 1,Trần Thị Kim Oanh,Kỹ thuật - Công nghệ
+2026,INF30064,4,Lập trình hướng đối tượng(224.2)_LT_01,K65,K65,70,0,LT,"23 -> 30, 32 -> 38",02/04/2025,05/20/2025,3,3,12,1,Phòng Đồ án 9,Cơ sở 1,Trần Thị Kim Oanh,Kỹ thuật - Công nghệ
+2027,INF30064,4,Lập trình hướng đối tượng(224.2)_LT_01_TH_03,K65,K65,18,0,TH/TN,"23 -> 30, 32 -> 38",02/04/2025,05/20/2025,3,3,7,2,TTKT. 507,Cơ sở 1,Trần Thị Kim Oanh,Kỹ thuật - Công nghệ
+2028,INF30064,4,Lập trình hướng đối tượng(224.2)_LT_01_TH_04,K65,K65,18,0,TH/TN,"23 -> 30, 32 -> 38",02/04/2025,05/20/2025,3,3,9,2,TTKT. 605,Cơ sở 1,Trần Thị Kim Oanh,Kỹ thuật - Công nghệ
+2039,INF30064,4,Lập trình hướng đối tượng(224.2)_LT_03_TH_11,K65,K65,18,0,TH/TN,"23 -> 30, 32 -> 38",02/04/2025,05/20/2025,3,3,9,2,TTKT. 507,Cơ sở 1,Đặng Hồng Lĩnh,Kỹ thuật - Công nghệ
+2042,INF30064,4,Lập trình hướng đối tượng(224.2)_LT_03_TH_14,K65,K65,18,0,TH/TN,"23 -> 30, 32 -> 38",02/04/2025,05/20/2025,3,3,7,2,TTKT. 506,Cơ sở 1,Đặng Hồng Lĩnh,Kỹ thuật - Công nghệ
+2043,INF30064,4,Lập trình hướng đối tượng(224.2)_LT_04,K65,K65,70,0,LT,"23 -> 30, 32 -> 38",02/04/2025,05/20/2025,3,3,6,2,B3_104,Cơ sở 1,Cao Thanh Sơn,Kỹ thuật - Công nghệ
+2044,INF30064,4,Lập trình hướng đối tượng(224.2)_LT_04,K65,K65,70,0,LT,"23 -> 30, 32 -> 38",02/04/2025,05/20/2025,3,3,15,1,P_DA_2,Cơ sở 1,Cao Thanh Sơn,Kỹ thuật - Công nghệ
+2047,INF30064,4,Lập trình hướng đối tượng(224.2)_LT_04_TH_17,K65,K65,18,0,TH/TN,"23 -> 30, 32 -> 38",02/04/2025,05/20/2025,3,3,2,2,TTKT. 602,Cơ sở 1,Đặng Hồng Lĩnh,Kỹ thuật - Công nghệ
+2048,INF30064,4,Lập trình hướng đối tượng(224.2)_LT_04_TH_18,K65,K65,18,0,TH/TN,"23 -> 30, 32 -> 38",02/04/2025,05/20/2025,3,3,4,2,TTKT. 602,Cơ sở 1,Đặng Hồng Lĩnh,Kỹ thuật - Công nghệ
+2169,INF31001,3,Kiến trúc và bảo trì máy tính(224.1)_LT_01,K65,K65,45,0,LT,23 -> 30,02/04/2025,03/25/2025,2,3,1,2,D3_301,Cơ sở 1,Nguyễn Quang Ninh,Kỹ thuật - Công nghệ
+2171,INF31001,3,Kiến trúc và bảo trì máy tính(224.1)_LT_01_TH_01,K65,K65,15,0,TH/TN,"28 -> 30, 32 -> 38",03/11/2025,05/20/2025,3,3,3,3,TTKT. 608,Cơ sở 1,Nguyễn Quang Ninh,Kỹ thuật - Công nghệ
+2023,INF30064,4,Lập trình hướng đối tượng(224.2)_DAMH_01_(SP Tin)_TH_01,K65,K65,21,0,TH/TN,"28 -> 30, 32 -> 38",03/12/2025,05/21/2025,3,4,3,3,TTKT. 502,Cơ sở 1,Trần Thị Kim Oanh,Kỹ thuật - Công nghệ
+2033,INF30064,4,Lập trình hướng đối tượng(224.2)_LT_02_TH_07,K65,K65,18,0,TH/TN,"23 -> 30, 32 -> 38",02/05/2025,05/21/2025,3,4,1,2,TTKT. 603,Cơ sở 1,Nguyễn Quang Ninh,Kỹ thuật - Công nghệ
+2037,INF30064,4,Lập trình hướng đối tượng(224.2)_LT_03,K65,K65,70,0,LT,"23 -> 30, 32 -> 38",02/05/2025,05/21/2025,3,4,12,1,Phòng Đồ án 9,Cơ sở 1,Trần Thị Kim Oanh,Kỹ thuật - Công nghệ
+2050,INF30064,4,Lập trình hướng đối tượng(224.2)_LT_05,K65,K65,70,0,LT,"23 -> 30, 32 -> 38",02/05/2025,05/21/2025,3,4,12,1,ÐA8,Cơ sở 1,Cao Thanh Sơn,Kỹ thuật - Công nghệ
+2051,INF30064,4,Lập trình hướng đối tượng(224.2)_LT_05_TH_19,K65,K65,18,0,TH/TN,"23 -> 30, 32 -> 38",02/05/2025,05/21/2025,3,4,2,2,TTKT. 602,Cơ sở 1,Đặng Hồng Lĩnh,Kỹ thuật - Công nghệ
+2052,INF30064,4,Lập trình hướng đối tượng(224.2)_LT_05_TH_20,K65,K65,18,0,TH/TN,"23 -> 30, 32 -> 38",02/05/2025,05/21/2025,3,4,4,2,TTKT. 602,Cơ sở 1,Đặng Hồng Lĩnh,Kỹ thuật - Công nghệ
+2053,INF30064,4,Lập trình hướng đối tượng(224.2)_LT_05_TH_21,K65,K65,18,0,TH/TN,"23 -> 30, 32 -> 38",02/05/2025,05/21/2025,3,4,7,2,TTKT. 502,Cơ sở 1,Đặng Hồng Lĩnh,Kỹ thuật - Công nghệ
+2054,INF30064,4,Lập trình hướng đối tượng(224.2)_LT_05_TH_22,K65,K65,18,0,TH/TN,"23 -> 30, 32 -> 38",02/05/2025,05/21/2025,3,4,9,2,TTKT. 502,Cơ sở 1,Đặng Hồng Lĩnh,Kỹ thuật - Công nghệ
+2057,INF30064,4,Lập trình hướng đối tượng(224.2)_LT_06_TH_23,K65,K65,18,0,TH/TN,"23 -> 30, 32 -> 38",02/05/2025,05/21/2025,2,4,9,2,TTKT. 605,Cơ sở 1,Trần Thị Kim Oanh,Kỹ thuật - Công nghệ
+2029,INF30064,4,Lập trình hướng đối tượng(224.2)_LT_01_TH_05,K65,K65,18,0,TH/TN,"23 -> 30, 32 -> 38",02/06/2025,05/22/2025,3,5,7,2,TTKT. 501,Cơ sở 1,Trần Thị Kim Oanh,Kỹ thuật - Công nghệ
+2030,INF30064,4,Lập trình hướng đối tượng(224.2)_LT_01_TH_06,K65,K65,18,0,TH/TN,"23 -> 30, 32 -> 38",02/06/2025,05/22/2025,3,5,9,2,TTKT. 501,Cơ sở 1,Trần Thị Kim Oanh,Kỹ thuật - Công nghệ
+2031,INF30064,4,Lập trình hướng đối tượng(224.2)_LT_02,K65,K65,70,0,LT,"23 -> 30, 32 -> 38",02/06/2025,05/22/2025,3,5,1,2,B3_102,Cơ sở 1,Trần Thị Kim Oanh,Kỹ thuật - Công nghệ
+2032,INF30064,4,Lập trình hướng đối tượng(224.2)_LT_02,K65,K65,70,0,LT,"23 -> 30, 32 -> 38",02/06/2025,05/22/2025,3,5,12,1,ÐA6,Cơ sở 1,Trần Thị Kim Oanh,Kỹ thuật - Công nghệ
+2170,INF31001,3,Kiến trúc và bảo trì máy tính(224.1)_LT_01,K65,K65,45,0,LT,23 -> 30,02/06/2025,03/27/2025,2,5,1,2,D3_301,Cơ sở 1,Nguyễn Quang Ninh,Kỹ thuật - Công nghệ
+2172,INF31001,3,Kiến trúc và bảo trì máy tính(224.1)_LT_01_TH_02,K65,K65,15,0,TH/TN,"28 -> 30, 32 -> 38",03/13/2025,05/22/2025,3,5,3,3,TTKT. 602,Cơ sở 1,Nguyễn Quang Ninh,Kỹ thuật - Công nghệ
+1919,INF30001,3,Kiến trúc máy tính(224.2)_LT_01_(CNTT_CLC),K65,K65,15,0,LT,"23 -> 30, 32 -> 38",02/07/2025,05/23/2025,3,6,8,3,A2 102,Cơ sở 1,Nguyễn Quang Ninh,Kỹ thuật - Công nghệ
+2021,INF30064,4,Lập trình hướng đối tượng(224.2)_DAMH_01_(SP Tin),K65,K65,41,0,DAMH,"23 -> 30, 32 -> 38",02/07/2025,05/23/2025,3,6,13,1,P_DA_2,Cơ sở 1,Trần Thị Kim Oanh,Kỹ thuật - Công nghệ
+2022,INF30064,4,Lập trình hướng đối tượng(224.2)_DAMH_01_(SP Tin),K65,K65,41,0,DAMH,"23 -> 30, 32 -> 38",02/07/2025,05/23/2025,3,6,1,2,D3_201,Cơ sở 1,Trần Thị Kim Oanh,Kỹ thuật - Công nghệ
+2038,INF30064,4,Lập trình hướng đối tượng(224.2)_LT_03,K65,K65,70,0,LT,"23 -> 30, 32 -> 38",02/07/2025,05/23/2025,3,6,4,2,B1_105,Cơ sở 1,Trần Thị Kim Oanh,Kỹ thuật - Công nghệ
+2055,INF30064,4,Lập trình hướng đối tượng(224.2)_LT_06,K65,K65,36,0,LT,"23 -> 30, 32 -> 38",02/07/2025,05/23/2025,3,6,11,1,ÐA7,Cơ sở 1,Trần Thị Kim Oanh,Kỹ thuật - Công nghệ
+2076,INF30093,4,Lập trình máy tính(224.2)_DAMH_01_(CNTT_CLC),K65,K65,15,0,DAMH,"23 -> 30, 32 -> 38",02/07/2025,05/23/2025,3,6,1,2,B1_102,Cơ sở 1,Hoàng Hữu Việt,Kỹ thuật - Công nghệ
+2058,INF30064,4,Lập trình hướng đối tượng(224.2)_LT_06_TH_24,,K65,18,0,TH/TN,"23 -> 30, 32 -> 38",02/05/2025,05/21/2025,2,4,7,2,TTKT. 608,Cơ sở 1,Trần Thị Kim Oanh,Kỹ thuật - Công nghệ
+2059,INF30068,4,Phân tích và thiết kế hướng đối tượng(224.2)_LT_01_(CNTT_CLC),K64,K64,32,0,LT,"23 -> 29, 31 -> 38",02/08/2025,05/24/2025,3,7,3,3,B2_302,Cơ sở 1,Võ Đức Quang,Kỹ thuật - Công nghệ
+2060,INF30068,4,Phân tích và thiết kế hướng đối tượng(224.2)_LT_01_(CNTT_CLC)_TH_01,K64,K64,16,0,TH/TN,"23 -> 29, 31 -> 38",02/07/2025,05/23/2025,3,6,4,2,TTKT. 508,Cơ sở 1,Võ Đức Quang,Kỹ thuật - Công nghệ
+2061,INF30068,4,Phân tích và thiết kế hướng đối tượng(224.2)_LT_01_(CNTT_CLC)_TH_02,K64,K64,16,0,TH/TN,"23 -> 29, 31 -> 38",02/07/2025,05/23/2025,3,6,6,2,TTKT. 505,Cơ sở 1,Võ Đức Quang,Kỹ thuật - Công nghệ
+2062,INF30073,5,Lập trình Web(224.2)_DAMH_01_(CNTT_CLC),K63,K63,35,0,DAMH,"23 -> 29, 31 -> 38",02/08/2025,05/24/2025,3,7,4,2,B2_301,Cơ sở 1,Cao Thanh Sơn,Kỹ thuật - Công nghệ
+2063,INF30073,5,Lập trình Web(224.2)_DAMH_01_(CNTT_CLC),K63,K63,35,0,DAMH,"23 -> 29, 31 -> 38",02/04/2025,05/20/2025,3,3,13,1,P_DA_1,Cơ sở 1,Cao Thanh Sơn,Kỹ thuật - Công nghệ
+2064,INF30073,5,Lập trình Web(224.2)_DAMH_01_(CNTT_CLC)_TH_01,K63,K63,18,0,TH/TN,"26 -> 29, 31 -> 38",02/26/2025,05/21/2025,5,4,1,5,TTKT. 607,Cơ sở 1,Cao Thanh Sơn,Kỹ thuật - Công nghệ
+2065,INF30073,5,Lập trình Web(224.2)_DAMH_01_(CNTT_CLC)_TH_02,K63,K63,18,0,TH/TN,"26 -> 29, 31 -> 38",02/26/2025,05/21/2025,5,4,6,5,TTKT. 508,Cơ sở 1,Cao Thanh Sơn,Kỹ thuật - Công nghệ
+2071,INF30088,4,Kiểm thử và đảm bảo chất lượng phần mềm(224.2)_LT_01,K62,K62,22,0,LT,"23 -> 29, 31 -> 38",02/04/2025,05/20/2025,3,3,1,2,C_102_cs2,Cơ sở 2,Cao Thanh Sơn,Kỹ thuật - Công nghệ
+2072,INF30088,4,Kiểm thử và đảm bảo chất lượng phần mềm(224.2)_LT_01,K62,K62,22,0,LT,"23 -> 29, 31 -> 38",02/04/2025,05/20/2025,3,3,11,1,ÐA1 - CS2,Cơ sở 2,Cao Thanh Sơn,Kỹ thuật - Công nghệ
+2073,INF30088,4,Kiểm thử và đảm bảo chất lượng phần mềm(224.2)_LT_01_TH_01,K62,K62,22,0,TH/TN,"28, 29, 31 -> 38",03/11/2025,05/20/2025,3,3,3,3,PM04.A5,Cơ sở 2,Cao Thanh Sơn,Kỹ thuật - Công nghệ
+2074,INF30089,4,Các hệ cơ sở dữ liệu tiên tiến(224.2)_LT_01_(TC_CNTTCLC),K62,K62,24,0,LT,"23 -> 29, 31 -> 38",02/08/2025,05/24/2025,3,7,3,3,B3_101,Cơ sở 1,Phan Anh Phong,Kỹ thuật - Công nghệ
+2075,INF30089,4,Các hệ cơ sở dữ liệu tiên tiến(224.2)_LT_01_(TC_CNTTCLC)_TH_01,K62,K62,24,0,TH/TN,"28, 29, 31 -> 38",03/15/2025,05/24/2025,3,7,7,3,TTKT. 603,Cơ sở 1,Phan Anh Phong,Kỹ thuật - Công nghệ
+2078,INF30093,4,Lập trình máy tính(224.2)_DAMH_01_(CNTT_CLC)_TH_01,K65,K65,15,0,TH/TN,"23 -> 30, 32 -> 38",02/07/2025,05/23/2025,3,6,4,2,TTKT. 607,Cơ sở 1,Nguyễn Quang Ninh,Kỹ thuật - Công nghệ
+2081,INF30102,3,Cấu trúc dữ liệu và giải thuật nâng cao(224.1)_LT_02_(TC),K62,K62,65,0,LT,"23 -> 29, 31 -> 38",02/03/2025,05/19/2025,3,2,3,3,C_102_cs2,Cơ sở 2,Nguyễn Thị Uyên,Kỹ thuật - Công nghệ
+2082,INF30102,3,Cấu trúc dữ liệu và giải thuật nâng cao(224.1)_LT_03_(TC),K62,K62,65,0,LT,"23 -> 29, 31 -> 38",02/04/2025,05/20/2025,3,3,3,3,C_102_cs2,Cơ sở 2,Nguyễn Thị Uyên,Kỹ thuật - Công nghệ
+2083,INF30102,3,Cấu trúc dữ liệu và giải thuật nâng cao(224.1)_LT_04_(TC),K62,K62,65,0,LT,"23 -> 29, 31 -> 38",02/05/2025,05/21/2025,3,4,3,3,C_303_cs2,Cơ sở 2,Nguyễn Thị Uyên,Kỹ thuật - Công nghệ
+2084,INF30102,3,Cấu trúc dữ liệu và giải thuật nâng cao(224.1)_LT_05_(TC),K62,K62,65,0,LT,"23 -> 29, 31 -> 38",02/06/2025,05/22/2025,3,5,3,3,C_301_cs2,Cơ sở 2,Nguyễn Thị Uyên,Kỹ thuật - Công nghệ
+2085,INF30103,3,Phân tích và thiết kế mạng máy tính(224.1)_LT_01_(TC),K62,K62,75,0,LT,"23 -> 29, 31 -> 38",02/08/2025,05/24/2025,2,7,2,2,C_101_cs2,Cơ sở 2,Vũ Chí Cường,Kỹ thuật - Công nghệ
+2086,INF30103,3,Phân tích và thiết kế mạng máy tính(224.1)_LT_01_(TC)_TH_01,K62,K62,25,0,TH/TN,"23 -> 29, 31 -> 38",02/08/2025,05/24/2025,3,7,8,2,PM_01_CS2,Cơ sở 2,Vũ Chí Cường,Kỹ thuật - Công nghệ
+2087,INF30103,3,Phân tích và thiết kế mạng máy tính(224.1)_LT_01_(TC)_TH_02,K62,K62,25,0,TH/TN,"23 -> 29, 31 -> 38",02/09/2025,05/25/2025,3,8,2,2,PM_01_CS2,Cơ sở 2,Vũ Chí Cường,Kỹ thuật - Công nghệ
+2088,INF30103,3,Phân tích và thiết kế mạng máy tính(224.1)_LT_01_(TC)_TH_03,K62,K62,25,0,TH/TN,"23 -> 29, 31 -> 38",02/09/2025,05/25/2025,3,8,4,2,PM_01_CS2,Cơ sở 2,Vũ Chí Cường,Kỹ thuật - Công nghệ
+2089,INF30103,3,Phân tích và thiết kế mạng máy tính(224.1)_LT_02_(TC),K62,K62,75,0,LT,"23 -> 29, 31 -> 38",02/08/2025,05/24/2025,2,7,4,2,C_101_cs2,Cơ sở 2,Vũ Chí Cường,Kỹ thuật - Công nghệ
+2090,INF30103,3,Phân tích và thiết kế mạng máy tính(224.1)_LT_02_(TC)_TH_01,K62,K62,25,0,TH/TN,"23 -> 29, 31 -> 38",02/09/2025,05/25/2025,3,8,6,2,PM_01_CS2,Cơ sở 2,Vũ Chí Cường,Kỹ thuật - Công nghệ
+2091,INF30103,3,Phân tích và thiết kế mạng máy tính(224.1)_LT_02_(TC)_TH_02,K62,K62,25,0,TH/TN,"23 -> 29, 31 -> 38",02/08/2025,05/24/2025,3,7,6,2,PM_01_CS2,Cơ sở 2,Vũ Chí Cường,Kỹ thuật - Công nghệ
+2092,INF30103,3,Phân tích và thiết kế mạng máy tính(224.1)_LT_02_(TC)_TH_03,K62,K62,25,0,TH/TN,"23 -> 29, 31 -> 38",02/09/2025,05/25/2025,3,8,8,2,PM_01_CS2,Cơ sở 2,Vũ Chí Cường,Kỹ thuật - Công nghệ
+2093,INF30300,4,Công nghệ.NET(224.2)_DAMH_01_(CNTT_CLC),K64,K64,35,0,DAMH,"23 -> 29, 31 -> 38",02/06/2025,05/22/2025,3,5,13,1,P_DA_3,Cơ sở 1,Hoàng Hữu Việt,Kỹ thuật - Công nghệ
+2094,INF30300,4,Công nghệ.NET(224.2)_DAMH_01_(CNTT_CLC),K64,K64,35,0,DAMH,"23 -> 29, 31 -> 38",02/05/2025,05/21/2025,3,4,4,2,D3_204,Cơ sở 1,Hoàng Hữu Việt,Kỹ thuật - Công nghệ
+2095,INF30300,4,Công nghệ.NET(224.2)_DAMH_01_(CNTT_CLC)_TH_01,K64,K64,18,0,TH/TN,"23 -> 29, 31 -> 38",02/07/2025,05/23/2025,3,6,7,2,TTKT. 508,Cơ sở 1,Hoàng Hữu Việt,Kỹ thuật - Công nghệ
+2096,INF30300,4,Công nghệ.NET(224.2)_DAMH_01_(CNTT_CLC)_TH_02,K64,K64,18,0,TH/TN,"23 -> 29, 31 -> 38",02/07/2025,05/23/2025,3,6,9,2,TTKT. 508,Cơ sở 1,Hoàng Hữu Việt,Kỹ thuật - Công nghệ
+2097,INF30300,4,Công nghệ.NET(224.2)_DAMH_02,K64,K64,50,0,DAMH,"23 -> 29, 31 -> 38",02/06/2025,05/22/2025,3,5,12,1,ÐA5,Cơ sở 1,Hoàng Hữu Việt,Kỹ thuật - Công nghệ
+2098,INF30300,4,Công nghệ.NET(224.2)_DAMH_02,K64,K64,50,0,DAMH,"23 -> 29, 31 -> 38",02/08/2025,05/24/2025,3,7,2,2,B1_102,Cơ sở 1,Hoàng Hữu Việt,Kỹ thuật - Công nghệ
+2099,INF30300,4,Công nghệ.NET(224.2)_DAMH_02_TH_03,K64,K64,25,0,TH/TN,"23 -> 29, 31 -> 38",02/05/2025,05/21/2025,20,4,7,2,TTKT. 501,Cơ sở 1,Hoàng Hữu Việt,Kỹ thuật - Công nghệ
+2100,INF30300,4,Công nghệ.NET(224.2)_DAMH_02_TH_04,K64,K64,25,0,TH/TN,"23 -> 29, 31 -> 38",02/05/2025,05/21/2025,20,4,9,2,TTKT. 501,Cơ sở 1,Hoàng Hữu Việt,Kỹ thuật - Công nghệ
+2101,INF30300,4,Công nghệ.NET(224.2)_DAMH_03,K64,K64,50,0,DAMH,"23 -> 29, 31 -> 38",02/06/2025,05/22/2025,3,5,4,2,D3.104,Cơ sở 1,Hoàng Hữu Việt,Kỹ thuật - Công nghệ
+2102,INF30300,4,Công nghệ.NET(224.2)_DAMH_03,K64,K64,50,0,DAMH,"23 -> 29, 31 -> 38",02/07/2025,05/23/2025,3,6,12,1,ÐA4,Cơ sở 1,Hoàng Hữu Việt,Kỹ thuật - Công nghệ
+2103,INF30300,4,Công nghệ.NET(224.2)_DAMH_03_TH_06,K64,K64,25,0,TH/TN,"23 -> 29, 31 -> 38",02/06/2025,05/22/2025,3,5,7,2,TTKT. 503,Cơ sở 1,Hoàng Hữu Việt,Kỹ thuật - Công nghệ
+2104,INF30300,4,Công nghệ.NET(224.2)_DAMH_03_TH_07,K64,K64,25,0,TH/TN,"23 -> 29, 31 -> 38",02/08/2025,05/24/2025,3,7,9,2,TTKT. 507,Cơ sở 1,Hoàng Hữu Việt,Kỹ thuật - Công nghệ
+2105,INF30300,4,Công nghệ.NET(224.2)_DAMH_04,K64,K64,50,0,DAMH,"23 -> 29, 31 -> 38",02/07/2025,05/23/2025,3,6,11,1,ÐA5,Cơ sở 1,Hoàng Hữu Việt,Kỹ thuật - Công nghệ
+2106,INF30300,4,Công nghệ.NET(224.2)_DAMH_04,K64,K64,50,0,DAMH,"23 -> 29, 31 -> 38",02/08/2025,05/24/2025,3,7,4,2,B1_102,Cơ sở 1,Hoàng Hữu Việt,Kỹ thuật - Công nghệ
+2107,INF30300,4,Công nghệ.NET(224.2)_DAMH_04_TH_09,K64,K64,25,0,TH/TN,"23 -> 29, 31 -> 38",02/08/2025,05/24/2025,20,7,7,2,TTKT. 505,Cơ sở 1,Hoàng Hữu Việt,Kỹ thuật - Công nghệ
+2108,INF30300,4,Công nghệ.NET(224.2)_DAMH_04_TH_10,K64,K64,25,0,TH/TN,"23 -> 29, 31 -> 38",02/06/2025,05/22/2025,20,5,9,2,TTKT. 606,Cơ sở 1,Hoàng Hữu Việt,Kỹ thuật - Công nghệ
+2109,INF30300,4,Công nghệ.NET(224.2)_DAMH_05,K64,K64,50,0,DAMH,"23 -> 29, 31 -> 38",02/03/2025,05/19/2025,3,2,4,2,D3_304,Cơ sở 1,Cao Thanh Sơn,Kỹ thuật - Công nghệ
+2110,INF30300,4,Công nghệ.NET(224.2)_DAMH_05,K64,K64,50,0,DAMH,"23 -> 29, 31 -> 38",02/03/2025,05/19/2025,3,2,12,1,ÐA8,Cơ sở 1,Cao Thanh Sơn,Kỹ thuật - Công nghệ
+2111,INF30300,4,Công nghệ.NET(224.2)_DAMH_05_TH_12,K64,K64,25,0,TH/TN,"23 -> 29, 31 -> 38",02/06/2025,05/22/2025,3,5,2,2,TTKT. 606,Cơ sở 1,Cao Thanh Sơn,Kỹ thuật - Công nghệ
+2112,INF30300,4,Công nghệ.NET(224.2)_DAMH_05_TH_13,K64,K64,25,0,TH/TN,"23 -> 29, 31 -> 38",02/06/2025,05/22/2025,3,5,4,2,TTKT. 601,Cơ sở 1,Cao Thanh Sơn,Kỹ thuật - Công nghệ
+2113,INF30300,4,Công nghệ.NET(224.2)_DAMH_06,K64,K64,50,0,DAMH,"23 -> 29, 31 -> 38",02/06/2025,05/22/2025,3,5,6,2,B2_501,Cơ sở 1,Cao Thanh Sơn,Kỹ thuật - Công nghệ
+2114,INF30300,4,Công nghệ.NET(224.2)_DAMH_06,K64,K64,50,0,DAMH,"23 -> 29, 31 -> 38",02/03/2025,05/19/2025,3,2,13,1,P_DA_3,Cơ sở 1,Cao Thanh Sơn,Kỹ thuật - Công nghệ
+2115,INF30300,4,Công nghệ.NET(224.2)_DAMH_06_TH_15,K64,K64,25,0,TH/TN,"23 -> 29, 31 -> 38",02/06/2025,05/22/2025,3,5,8,2,TTKT. 608,Cơ sở 1,Cao Thanh Sơn,Kỹ thuật - Công nghệ
+2116,INF30300,4,Công nghệ.NET(224.2)_DAMH_06_TH_16,K64,K64,25,0,TH/TN,"23 -> 29, 31 -> 38",02/03/2025,05/19/2025,3,2,2,2,TTKT. 608,Cơ sở 1,Cao Thanh Sơn,Kỹ thuật - Công nghệ
+2117,INF30305,3,Phát triển ứng dụng với mã nguồn mở(224.2)_LT_01_(TC_Sp Tin),K63,K63,45,0,LT,"23 -> 29, 31 -> 38",02/04/2025,05/20/2025,2,3,6,2,B3_505,Cơ sở 1,Trần Xuân Sang,Kỹ thuật - Công nghệ
+2118,INF30305,3,Phát triển ứng dụng với mã nguồn mở(224.2)_LT_01_(TC_Sp Tin)_TH_01,K63,K63,23,0,TH/TN,"23 -> 29, 31 -> 38",02/03/2025,05/19/2025,3,2,6,2,TTKT. 508,Cơ sở 1,Trần Xuân Sang,Kỹ thuật - Công nghệ
+2119,INF30305,3,Phát triển ứng dụng với mã nguồn mở(224.2)_LT_01_(TC_Sp Tin)_TH_02,K63,K63,22,0,TH/TN,"23 -> 29, 31 -> 38",02/04/2025,05/20/2025,3,3,8,2,TTKT. 501,Cơ sở 1,Trần Xuân Sang,Kỹ thuật - Công nghệ
+2120,INF30305,3,Phát triển ứng dụng với mã nguồn mở(224.2)_LT_02,K63,K63,63,0,LT,"23 -> 29, 31 -> 38",02/03/2025,05/19/2025,2,2,9,2,A1 304,Cơ sở 1,Võ Đức Quang,Kỹ thuật - Công nghệ
+2121,INF30305,3,Phát triển ứng dụng với mã nguồn mở(224.2)_LT_02_TH_01,K63,K63,20,0,TH/TN,"23 -> 29, 31 -> 38",02/03/2025,05/19/2025,3,2,7,2,TTKT. 606,Cơ sở 1,Võ Đức Quang,Kỹ thuật - Công nghệ
+2122,INF30305,3,Phát triển ứng dụng với mã nguồn mở(224.2)_LT_02_TH_02,K63,K63,20,0,TH/TN,"23 -> 29, 31 -> 38",02/04/2025,05/20/2025,3,3,2,2,TTKT. 606,Cơ sở 1,Võ Đức Quang,Kỹ thuật - Công nghệ
+2123,INF30305,3,Phát triển ứng dụng với mã nguồn mở(224.2)_LT_02_TH_03,K63,K63,20,0,TH/TN,"23 -> 29, 31 -> 38",02/04/2025,05/20/2025,3,3,8,2,TTKT. 606,Cơ sở 1,Võ Đức Quang,Kỹ thuật - Công nghệ
+2124,INF30305,3,Phát triển ứng dụng với mã nguồn mở(224.2)_LT_03,K63,K63,63,0,LT,"23 -> 29, 31 -> 38",02/04/2025,05/20/2025,2,3,4,2,A1 303,Cơ sở 1,Võ Đức Quang,Kỹ thuật - Công nghệ
+2125,INF30305,3,Phát triển ứng dụng với mã nguồn mở(224.2)_LT_03_TH_01,K63,K63,20,0,TH/TN,"23 -> 29, 31 -> 38",02/05/2025,05/21/2025,3,4,2,2,TTKT. 606,Cơ sở 1,Võ Đức Quang,Kỹ thuật - Công nghệ
+2126,INF30305,3,Phát triển ứng dụng với mã nguồn mở(224.2)_LT_03_TH_02,K63,K63,20,0,TH/TN,"23 -> 29, 31 -> 38",02/05/2025,05/21/2025,3,4,4,2,TTKT. 608,Cơ sở 1,Võ Đức Quang,Kỹ thuật - Công nghệ
+2127,INF30305,3,Phát triển ứng dụng với mã nguồn mở(224.2)_LT_03_TH_03,K63,K63,20,0,TH/TN,"23 -> 29, 31 -> 38",02/05/2025,05/21/2025,3,4,6,2,TTKT. 606,Cơ sở 1,Võ Đức Quang,Kỹ thuật - Công nghệ
+2128,INF30305,3,Phát triển ứng dụng với mã nguồn mở(224.2)_LT_04,K63,K63,63,0,LT,"23 -> 29, 31 -> 38",02/04/2025,05/20/2025,2,3,6,2,A2 304,Cơ sở 1,Võ Đức Quang,Kỹ thuật - Công nghệ
+2129,INF30305,3,Phát triển ứng dụng với mã nguồn mở(224.2)_LT_04_TH_01,K63,K63,20,0,TH/TN,"23 -> 29, 31 -> 38",02/05/2025,05/21/2025,3,4,8,2,TTKT. 606,Cơ sở 1,Võ Đức Quang,Kỹ thuật - Công nghệ
+2130,INF30305,3,Phát triển ứng dụng với mã nguồn mở(224.2)_LT_04_TH_02,K63,K63,20,0,TH/TN,"23 -> 29, 31 -> 38",02/06/2025,05/22/2025,3,5,6,2,TTKT. 507,Cơ sở 1,Võ Đức Quang,Kỹ thuật - Công nghệ
+2131,INF30305,3,Phát triển ứng dụng với mã nguồn mở(224.2)_LT_04_TH_03,K63,K63,20,0,TH/TN,"23 -> 29, 31 -> 38",02/06/2025,05/22/2025,3,5,8,2,TTKT. 607,Cơ sở 1,Võ Đức Quang,Kỹ thuật - Công nghệ
+2132,INF30305,3,Phát triển ứng dụng với mã nguồn mở(224.2)_LT_05,K63,K63,63,0,LT,"23 -> 29, 31 -> 38",02/03/2025,05/19/2025,2,2,1,2,B1 304,Cơ sở 1,Lê Văn Thành,Kỹ thuật - Công nghệ
+2133,INF30305,3,Phát triển ứng dụng với mã nguồn mở(224.2)_LT_05_TH_01,K63,K63,20,0,TH/TN,"23 -> 29, 31 -> 38",02/03/2025,05/19/2025,3,2,6,2,TTKT. 608,Cơ sở 1,Lê Văn Thành,Kỹ thuật - Công nghệ
+2134,INF30305,3,Phát triển ứng dụng với mã nguồn mở(224.2)_LT_05_TH_02,K63,K63,20,0,TH/TN,"23 -> 29, 31 -> 38",02/03/2025,05/19/2025,3,2,8,2,TTKT. 608,Cơ sở 1,Lê Văn Thành,Kỹ thuật - Công nghệ
+2135,INF30305,3,Phát triển ứng dụng với mã nguồn mở(224.2)_LT_05_TH_03,K63,K63,20,0,TH/TN,"23 -> 29, 31 -> 38",02/04/2025,05/20/2025,3,3,2,2,TTKT. 607,Cơ sở 1,Lê Văn Thành,Kỹ thuật - Công nghệ
+2136,INF30305,3,Phát triển ứng dụng với mã nguồn mở(224.2)_LT_06,K63,K63,63,0,LT,"23 -> 29, 31 -> 38",02/03/2025,05/19/2025,2,2,4,2,B3_203,Cơ sở 1,Lê Văn Thành,Kỹ thuật - Công nghệ
+2137,INF30305,3,Phát triển ứng dụng với mã nguồn mở(224.2)_LT_06_TH_01,K63,K63,20,0,TH/TN,"23 -> 29, 31 -> 38",02/04/2025,05/20/2025,3,3,4,2,TTKT. 606,Cơ sở 1,Lê Văn Thành,Kỹ thuật - Công nghệ
+2138,INF30305,3,Phát triển ứng dụng với mã nguồn mở(224.2)_LT_06_TH_02,K63,K63,20,0,TH/TN,"23 -> 29, 31 -> 38",02/05/2025,05/21/2025,3,4,6,2,TTKT. 507,Cơ sở 1,Lê Văn Thành,Kỹ thuật - Công nghệ
+2139,INF30305,3,Phát triển ứng dụng với mã nguồn mở(224.2)_LT_06_TH_03,K63,K63,20,0,TH/TN,"23 -> 29, 31 -> 38",02/05/2025,05/21/2025,3,4,8,2,TTKT. 607,Cơ sở 1,Lê Văn Thành,Kỹ thuật - Công nghệ
+2140,INF30310,4,Phát triển ứng dụng cho thiết bị di động(224.2)_LT_01,K62,K62,63,0,LT,"23 -> 29, 31 -> 38",02/03/2025,05/19/2025,3,2,6,2,C_102_cs2,Cơ sở 2,Trần Xuân Hào,Kỹ thuật - Công nghệ
+2141,INF30310,4,Phát triển ứng dụng cho thiết bị di động(224.2)_LT_01,K62,K62,63,0,LT,"23 -> 29, 31 -> 38",02/03/2025,05/19/2025,3,2,12,1,ÐA1 - CS2,Cơ sở 2,Trần Xuân Hào,Kỹ thuật - Công nghệ
+2142,INF30310,4,Phát triển ứng dụng cho thiết bị di động(224.2)_LT_01_TH_01,K62,K62,21,0,TH/TN,"23 -> 29, 31 -> 38",02/03/2025,05/19/2025,3,2,2,2,PM_03_CS2,Cơ sở 2,Trần Xuân Hào,Kỹ thuật - Công nghệ
+2143,INF30310,4,Phát triển ứng dụng cho thiết bị di động(224.2)_LT_01_TH_02,K62,K62,21,0,TH/TN,"23 -> 29, 31 -> 38",02/04/2025,05/20/2025,3,3,2,2,PM_03_CS2,Cơ sở 2,Trần Xuân Hào,Kỹ thuật - Công nghệ
+2144,INF30310,4,Phát triển ứng dụng cho thiết bị di động(224.2)_LT_01_TH_03,K62,K62,21,0,TH/TN,"23 -> 29, 31 -> 38",02/04/2025,05/20/2025,3,3,6,2,PM_03_CS2,Cơ sở 2,Trần Xuân Hào,Kỹ thuật - Công nghệ
+2145,INF30310,4,Phát triển ứng dụng cho thiết bị di động(224.2)_LT_02,K62,K62,63,0,LT,"23 -> 29, 31 -> 38",02/04/2025,05/20/2025,3,3,13,1,ÐA1 - CS2,Cơ sở 2,Trần Xuân Hào,Kỹ thuật - Công nghệ
+2146,INF30310,4,Phát triển ứng dụng cho thiết bị di động(224.2)_LT_02,K62,K62,63,0,LT,"23 -> 29, 31 -> 38",02/04/2025,05/20/2025,3,3,8,2,C_103_cs2,Cơ sở 2,Trần Xuân Hào,Kỹ thuật - Công nghệ
+2147,INF30310,4,Phát triển ứng dụng cho thiết bị di động(224.2)_LT_02_TH_04,K62,K62,21,0,TH/TN,"23 -> 29, 31 -> 38",02/03/2025,05/19/2025,3,2,8,2,PM04.A5,Cơ sở 2,Trần Xuân Hào,Kỹ thuật - Công nghệ
+2148,INF30310,4,Phát triển ứng dụng cho thiết bị di động(224.2)_LT_02_TH_05,K62,K62,21,0,TH/TN,"23 -> 29, 31 -> 38",02/03/2025,05/19/2025,3,2,4,2,PM04.A5,Cơ sở 2,Trần Xuân Hào,Kỹ thuật - Công nghệ
+2149,INF30310,4,Phát triển ứng dụng cho thiết bị di động(224.2)_LT_02_TH_06,K62,K62,21,0,TH/TN,"23 -> 29, 31 -> 38",02/04/2025,05/20/2025,3,3,4,2,PTHMT.05,Cơ sở 2,Trần Xuân Hào,Kỹ thuật - Công nghệ
+2150,INF30310,4,Phát triển ứng dụng cho thiết bị di động(224.2)_LT_03,K62,K62,63,0,LT,"23 -> 29, 31 -> 38",02/07/2025,05/23/2025,3,6,6,2,C_103_cs2,Cơ sở 2,Trần Xuân Hào,Kỹ thuật - Công nghệ
+2151,INF30310,4,Phát triển ứng dụng cho thiết bị di động(224.2)_LT_03,K62,K62,63,0,LT,"23 -> 29, 31 -> 38",02/07/2025,05/23/2025,3,6,11,1,ÐA1 - CS2,Cơ sở 2,Trần Xuân Hào,Kỹ thuật - Công nghệ
+2152,INF30310,4,Phát triển ứng dụng cho thiết bị di động(224.2)_LT_03_TH_07,K62,K62,21,0,TH/TN,"23 -> 29, 31 -> 38",02/08/2025,05/24/2025,3,7,2,2,PTHMT.05,Cơ sở 2,Trần Xuân Hào,Kỹ thuật - Công nghệ
+2153,INF30310,4,Phát triển ứng dụng cho thiết bị di động(224.2)_LT_03_TH_08,K62,K62,21,0,TH/TN,"23 -> 29, 31 -> 38",02/08/2025,05/24/2025,3,7,4,2,PTHMT.05,Cơ sở 2,Trần Xuân Hào,Kỹ thuật - Công nghệ
+2154,INF30310,4,Phát triển ứng dụng cho thiết bị di động(224.2)_LT_03_TH_09,K62,K62,21,0,TH/TN,"23 -> 29, 31 -> 38",02/08/2025,05/24/2025,3,7,6,2,PTHMT.05,Cơ sở 2,Trần Xuân Hào,Kỹ thuật - Công nghệ
+2155,INF30310,4,Phát triển ứng dụng cho thiết bị di động(224.2)_LT_04,K62,K62,63,0,LT,"23 -> 29, 31 -> 38",02/07/2025,05/23/2025,3,6,8,2,C_103_cs2,Cơ sở 2,Trần Xuân Hào,Kỹ thuật - Công nghệ
+2156,INF30310,4,Phát triển ứng dụng cho thiết bị di động(224.2)_LT_04_TH_10,K62,K62,21,0,TH/TN,"23 -> 29, 31 -> 38",02/08/2025,05/24/2025,3,7,8,2,PTHMT.05,Cơ sở 2,Trần Xuân Hào,Kỹ thuật - Công nghệ
+2157,INF30310,4,Phát triển ứng dụng cho thiết bị di động(224.2)_LT_04_TH_11,K62,K62,21,0,TH/TN,"23 -> 29, 31 -> 38",02/09/2025,05/25/2025,3,8,2,2,PTHMT.05,Cơ sở 2,Trần Xuân Hào,Kỹ thuật - Công nghệ
+2158,INF30310,4,Phát triển ứng dụng cho thiết bị di động(224.2)_LT_04_TH_12,K62,K62,21,0,TH/TN,"23 -> 29, 31 -> 38",02/09/2025,05/25/2025,3,8,4,2,PTHMT.05,Cơ sở 2,Trần Xuân Hào,Kỹ thuật - Công nghệ
+2159,INF30310,4,Phát triển ứng dụng cho thiết bị di động(224.2)_LT_05,K62,K62,63,0,LT,"23 -> 29, 31 -> 38",02/03/2025,05/19/2025,3,2,13,1,ÐA1 - CS2,Cơ sở 2,Lê Quốc Anh,Kỹ thuật - Công nghệ
+2160,INF30310,4,Phát triển ứng dụng cho thiết bị di động(224.2)_LT_05,K62,K62,63,0,LT,"23 -> 29, 31 -> 38",02/03/2025,05/19/2025,3,2,2,2,C_103_cs2,Cơ sở 2,Lê Quốc Anh,Kỹ thuật - Công nghệ
+2161,INF30310,4,Phát triển ứng dụng cho thiết bị di động(224.2)_LT_05_TH_13,K62,K62,21,0,TH/TN,"23 -> 29, 31 -> 38",02/03/2025,05/19/2025,3,2,8,2,PM_03_CS2,Cơ sở 2,Lê Quốc Anh,Kỹ thuật - Công nghệ
+2162,INF30310,4,Phát triển ứng dụng cho thiết bị di động(224.2)_LT_05_TH_14,K62,K62,21,0,TH/TN,"23 -> 29, 31 -> 38",02/05/2025,05/21/2025,3,4,2,2,PM_03_CS2,Cơ sở 2,Lê Quốc Anh,Kỹ thuật - Công nghệ
+2163,INF30310,4,Phát triển ứng dụng cho thiết bị di động(224.2)_LT_05_TH_15,K62,K62,21,0,TH/TN,"23 -> 29, 31 -> 38",02/07/2025,05/23/2025,3,6,2,2,PM_03_CS2,Cơ sở 2,Lê Quốc Anh,Kỹ thuật - Công nghệ
+2164,INF30310,4,Phát triển ứng dụng cho thiết bị di động(224.2)_LT_06,K62,K62,63,0,LT,"23 -> 29, 31 -> 38",02/04/2025,05/20/2025,3,3,12,1,ÐA1 - CS2,Cơ sở 2,Lê Quốc Anh,Kỹ thuật - Công nghệ
+2165,INF30310,4,Phát triển ứng dụng cho thiết bị di động(224.2)_LT_06,K62,K62,63,0,LT,"23 -> 29, 31 -> 38",02/04/2025,05/20/2025,3,3,2,2,C_302_cs2,Cơ sở 2,Lê Quốc Anh,Kỹ thuật - Công nghệ
+2166,INF30310,4,Phát triển ứng dụng cho thiết bị di động(224.2)_LT_06_TH_16,K62,K62,21,0,TH/TN,"23 -> 29, 31 -> 38",02/07/2025,05/23/2025,3,6,8,2,PM_03_CS2,Cơ sở 2,Lê Quốc Anh,Kỹ thuật - Công nghệ
+2167,INF30310,4,Phát triển ứng dụng cho thiết bị di động(224.2)_LT_06_TH_17,K62,K62,21,0,TH/TN,"23 -> 29, 31 -> 38",02/08/2025,05/24/2025,3,7,6,2,PM_03_CS2,Cơ sở 2,Lê Quốc Anh,Kỹ thuật - Công nghệ
+2168,INF30310,4,Phát triển ứng dụng cho thiết bị di động(224.2)_LT_06_TH_18,K62,K62,21,0,TH/TN,"23 -> 29, 31 -> 38",02/08/2025,05/24/2025,3,7,8,2,PM_03_CS2,Cơ sở 2,Lê Quốc Anh,Kỹ thuật - Công nghệ
+2034,INF30064,4,Lập trình hướng đối tượng(224.2)_LT_02_TH_08,K65,K65,18,0,TH/TN,"23 -> 30, 32 -> 38",02/08/2025,05/24/2025,3,7,1,2,TTKT. 508,Cơ sở 1,Nguyễn Quang Ninh,Kỹ thuật - Công nghệ
+2035,INF30064,4,Lập trình hướng đối tượng(224.2)_LT_02_TH_09,K65,K65,18,0,TH/TN,"23 -> 30, 32 -> 38",02/08/2025,05/24/2025,3,7,3,2,TTKT. 508,Cơ sở 1,Nguyễn Quang Ninh,Kỹ thuật - Công nghệ
+2049,INF30064,4,Lập trình hướng đối tượng(224.2)_LT_05,K65,K65,70,0,LT,"23 -> 30, 32 -> 38",02/08/2025,05/24/2025,3,7,2,2,B1 202,Cơ sở 1,Cao Thanh Sơn,Kỹ thuật - Công nghệ
+2174,INF31015,3,Mạng máy tính(224.1)_LT_01_(SP Tin),K64,K64,40,0,LT,"23 -> 29, 31 -> 38",02/03/2025,05/19/2025,3,2,3,3,D3_204,Cơ sở 1,Phạm Trà My,Kỹ thuật - Công nghệ
+2175,INF31015,3,Mạng máy tính(224.1)_LT_02,K63,K63,60,0,LT,"23 -> 29, 31 -> 38",02/03/2025,05/19/2025,3,2,6,3,D3_204,Cơ sở 1,Phạm Trà My,Kỹ thuật - Công nghệ
+2176,INF31015,3,Mạng máy tính(224.1)_LT_03,K63,K63,60,0,LT,"23 -> 29, 31 -> 38",02/04/2025,05/20/2025,3,3,3,3,D3_205,Cơ sở 1,Phạm Trà My,Kỹ thuật - Công nghệ
+2177,INF31015,3,Mạng máy tính(224.1)_LT_04,K63,K63,60,0,LT,"23 -> 29, 31 -> 38",02/05/2025,05/21/2025,3,4,6,3,PHLT_KTCN202,Cơ sở 1,Phạm Trà My,Kỹ thuật - Công nghệ
+2178,INF31015,3,Mạng máy tính(224.1)_LT_05,K63,K63,60,0,LT,"23 -> 29, 31 -> 38",02/05/2025,05/21/2025,3,4,3,3,D3.104,Cơ sở 1,Phạm Trà My,Kỹ thuật - Công nghệ
+2179,INF31015,3,Mạng máy tính(224.1)_LT_06,K63,K63,60,0,LT,"23 -> 29, 31 -> 38",02/04/2025,05/20/2025,3,3,6,3,D3.104,Cơ sở 1,Phạm Trà My,Kỹ thuật - Công nghệ
+2180,INF31015,3,Mạng máy tính(224.1)_LT_07,K63,K63,60,0,LT,"23 -> 29, 31 -> 38",02/06/2025,05/22/2025,3,5,3,3,D3_304,Cơ sở 1,Phạm Trà My,Kỹ thuật - Công nghệ
+2181,INF31059,4,Thương mại điện tử(224.1)_LT_01_(CNTT_CLC),K62,K62,24,0,LT,"23 -> 29, 31 -> 38",02/03/2025,05/19/2025,2,2,9,2,B2_501,Cơ sở 1,Trần Xuân Sang,Kỹ thuật - Công nghệ
+2182,INF31059,4,Thương mại điện tử(224.1)_LT_01_(CNTT_CLC)_TH_01,K62,K62,24,0,TH/TN,"26 -> 29, 31 -> 38",02/25/2025,05/20/2025,5,3,1,5,TTKT. 508,Cơ sở 1,Trần Xuân Sang,Kỹ thuật - Công nghệ
+2183,INF31088,4,Kiểm thử và đảm bảo chất lượng phần mềm(224.1)_LT_01_(TC_CNTT CLC),K62,K62,24,0,LT,"23 -> 29, 31 -> 38",02/07/2025,05/23/2025,3,6,3,3,PHLT_KTCN201,Cơ sở 1,Cao Thanh Sơn,Kỹ thuật - Công nghệ
+2184,INF31088,4,Kiểm thử và đảm bảo chất lượng phần mềm(224.1)_LT_01_(TC_CNTT CLC)_TH_01,K62,K62,12,0,TH/TN,"28, 29, 31 -> 38",03/14/2025,05/23/2025,3,6,6,3,TTKT. 506,Cơ sở 1,Cao Thanh Sơn,Kỹ thuật - Công nghệ
+2185,INF31104,3,Cơ sở dữ liệu tiên tiến(224.1)_LT_01_(TC),K63,K63,60,0,LT,"23 -> 29, 31 -> 38",02/05/2025,05/21/2025,3,4,1,3,B1_104,Cơ sở 1,Phan Anh Phong,Kỹ thuật - Công nghệ
+2186,INF31104,3,Cơ sở dữ liệu tiên tiến(224.1)_LT_02_(TC),K63,K63,60,0,LT,"23 -> 29, 31 -> 38",02/06/2025,05/22/2025,3,5,1,3,B1_104,Cơ sở 1,Phan Anh Phong,Kỹ thuật - Công nghệ
+2191,INF32034,4,Công nghệ phần mềm(224.1)_LT_01_(CNTT_CLC),K62,K62,23,0,LT,"23 -> 29, 31 -> 38",02/06/2025,05/22/2025,3,5,1,2,A2 402,Cơ sở 1,Lê Văn Thành,Kỹ thuật - Công nghệ
+2192,INF32034,4,Công nghệ phần mềm(224.1)_LT_01_(CNTT_CLC),K62,K62,23,0,LT,"23 -> 29, 31 -> 38",02/03/2025,05/19/2025,3,2,13,1,P_DA_2,Cơ sở 1,Lê Văn Thành,Kỹ thuật - Công nghệ
+2193,INF32034,4,Công nghệ phần mềm(224.1)_LT_01_(CNTT_CLC)_TH_01,K62,K62,23,0,TH/TN,"28, 29, 31 -> 38",03/13/2025,05/22/2025,3,5,3,3,TTKT. 607,Cơ sở 1,Lê Văn Thành,Kỹ thuật - Công nghệ
+2194,INF32079,3,Phân tích và thiết kế thuật toán(224.1)_LT_01_(TC),K63,K63,60,0,LT,"23 -> 29, 31 -> 38",02/07/2025,05/23/2025,3,6,3,3,A2 404,Cơ sở 1,Nguyễn Thị Uyên,Kỹ thuật - Công nghệ
+2195,INF32079,3,Phân tích và thiết kế thuật toán(224.1)_LT_02_(TC),K63,K63,60,0,LT,"23 -> 29, 31 -> 38",02/05/2025,05/21/2025,3,4,8,3,A3 404,Cơ sở 1,Nguyễn Thị Uyên,Kỹ thuật - Công nghệ
+2196,INF32079,3,Phân tích và thiết kế thuật toán(224.1)_LT_03_(TC_KHMT),K63,K63,40,0,LT,"23 -> 29, 31 -> 38",02/07/2025,05/23/2025,3,6,6,3,D3_305,Cơ sở 1,Nguyễn Thị Uyên,Kỹ thuật - Công nghệ
+2875,SWE30001,3,Lập trình .NET(224.2)_LT_01,K64,K64,40,0,LT,"23 -> 29, 31 -> 38",02/03/2025,05/19/2025,2,2,6,2,B3_404,Cơ sở 1,Cao Thanh Sơn,Kỹ thuật - Công nghệ
+2876,SWE30001,3,Lập trình .NET(224.2)_LT_01_TH_01,K64,K64,20,0,TH/TN,"23 -> 29, 31 -> 38",02/03/2025,05/19/2025,3,2,8,2,TTKT. 507,Cơ sở 1,Cao Thanh Sơn,Kỹ thuật - Công nghệ
+2877,SWE30001,3,Lập trình .NET(224.2)_LT_01_TH_02,K64,K64,20,0,TH/TN,"23 -> 29, 31 -> 38",02/04/2025,05/20/2025,3,3,8,2,TTKT. 508,Cơ sở 1,Cao Thanh Sơn,Kỹ thuật - Công nghệ
+2878,SWE30005,4,Phát triển ứng dụng Java Web(224.2)_LT_01,K63,K63,40,0,LT,"23 -> 29, 31 -> 38",02/07/2025,05/23/2025,3,6,4,2,B2_502,Cơ sở 1,Trần Xuân Hào,Kỹ thuật - Công nghệ
+2879,SWE30005,4,Phát triển ứng dụng Java Web(224.2)_LT_01,K63,K63,40,0,LT,"23 -> 29, 31 -> 38",02/07/2025,05/23/2025,3,6,13,1,P_DA_1,Cơ sở 1,Trần Xuân Hào,Kỹ thuật - Công nghệ
+2880,SWE30005,4,Phát triển ứng dụng Java Web(224.2)_LT_01_TH_01,K63,K63,20,0,TH/TN,"23 -> 29, 31 -> 38",02/09/2025,05/25/2025,3,8,7,2,TTKT. 506,Cơ sở 1,Trần Xuân Hào,Kỹ thuật - Công nghệ
+2881,SWE30005,4,Phát triển ứng dụng Java Web(224.2)_LT_01_TH_02,K63,K63,20,0,TH/TN,"23 -> 29, 31 -> 38",02/09/2025,05/25/2025,3,8,9,2,TTKT. 506,Cơ sở 1,Trần Xuân Hào,Kỹ thuật - Công nghệ
+2882,SWE30007,3,Phát triển ứng dụng trên thiết bị di động(224.2)_LT_01_(KTPM),K62,K62,22,0,LT,"23 -> 29, 31 -> 38",02/06/2025,05/22/2025,2,5,2,2,C_103_cs2,Cơ sở 2,Lê Quốc Anh,Kỹ thuật - Công nghệ
+2883,SWE30007,3,Phát triển ứng dụng trên thiết bị di động(224.2)_LT_01_(KTPM)_TH_01,K62,K62,22,0,TH/TN,"23 -> 29, 31 -> 38",02/06/2025,05/22/2025,3,5,4,2,PM_03_CS2,Cơ sở 2,Lê Quốc Anh,Kỹ thuật - Công nghệ
+2884,SWE30013,3,Nhập môn học máy(224.2)_LT_01_(TC_KTPM),K62,K62,22,0,LT,"23 -> 29, 31 -> 38",02/06/2025,05/22/2025,2,5,9,2,C_102_cs2,Cơ sở 2,Phan Anh Phong,Kỹ thuật - Công nghệ
+2885,SWE30013,3,Nhập môn học máy(224.2)_LT_01_(TC_KTPM)_TH_01,K62,K62,22,0,TH/TN,"28, 29, 31 -> 38",03/14/2025,05/23/2025,3,6,3,3,PM_02_CS2,Cơ sở 2,Phan Anh Phong,Kỹ thuật - Công nghệ
+2886,SWE30017,3,An toàn phần mềm(224.2)_LT_01_(TC_KTPM),K62,K62,24,0,LT,"23 -> 29, 31 -> 38",02/03/2025,05/19/2025,2,2,4,2,C_101_cs2,Cơ sở 2,Võ Đức Quang,Kỹ thuật - Công nghệ
+2887,SWE30017,3,An toàn phần mềm(224.2)_LT_01_(TC_KTPM)_TH_01,K62,K62,12,0,TH/TN,"28, 29, 31 -> 38",03/10/2025,05/19/2025,3,2,1,3,PM04.A5,Cơ sở 2,Võ Đức Quang,Kỹ thuật - Công nghệ
+2888,SWE30020,3,Các công nghệ mới trong phát triển phần mềm(224.2)_LT_01_(TC_KTPM),K62,K62,22,0,LT,"23 -> 29, 31 -> 38",02/04/2025,05/20/2025,2,3,6,2,C_102_cs2,Cơ sở 2,Lê Văn Thành,Kỹ thuật - Công nghệ
+2889,SWE30020,3,Các công nghệ mới trong phát triển phần mềm(224.2)_LT_01_(TC_KTPM)_TH_01,K62,K62,22,0,TH/TN,"28, 29, 31 -> 38",03/11/2025,05/20/2025,3,3,8,3,PM04.A5,Cơ sở 2,Lê Văn Thành,Kỹ thuật - Công nghệ
+2890,TEN30024,3,Lò công nghiệp(224.2)_LT_01,"K61,K62,K63,K64,K65",K62,5,0,LT,"23 -> 29, 31 -> 38",02/04/2025,05/20/2025,3,3,7,3,C_402_cs2,Cơ sở 2,Lưu văn Phúc,Kỹ thuật - Công nghệ
+2891,TEN30027,3,SCADA trong hệ thống nhiệt(224.2)_LT_01,"K61,K62,K63,K64,K65",K62,5,0,LT,"23 -> 29, 31 -> 33",02/05/2025,04/16/2025,3,4,3,3,C_103_cs2,Cơ sở 2,Đỗ Mai Trang,Kỹ thuật - Công nghệ
+2892,TEN30027,3,SCADA trong hệ thống nhiệt(224.2)_LT_01_TH_01,"K61,K62,K63,K64,K65",K62,5,0,TH/TN,"26 -> 29, 31, 32",02/28/2025,04/11/2025,5,6,1,5,PTH.TĐH CONG NGHIEP,Cơ sở 2,Đỗ Mai Trang,Kỹ thuật - Công nghệ
+2893,TEN30028,3,Mạng nhiệt(224.2)_LT_01,K62,K62,5,0,LT,"23 -> 29, 31 -> 38",02/07/2025,05/23/2025,3,6,7,3,C_303_cs2,Cơ sở 2,Nguyễn Tiến Dũng,Kỹ thuật - Công nghệ
+2894,TEN31018,4,Đồ án nhà máy nhiệt điện(224.1)_DAMH_01,K62,K62,10,0,DAMH,"23 -> 29, 31 -> 35",02/08/2025,05/03/2025,5,7,15,1,ÐA1 - CS2,Cơ sở 2,Lưu văn Phúc,Kỹ thuật - Công nghệ
+2895,TEN31020,3,Kỹ thuật sấy(224.1)_LT_01,"K61,K62,K63,K64,K65",K62,5,0,LT,"23 -> 29, 31 -> 38",02/04/2025,05/20/2025,3,3,3,3,C_303_cs2,Cơ sở 2,Lưu văn Phúc,Kỹ thuật - Công nghệ

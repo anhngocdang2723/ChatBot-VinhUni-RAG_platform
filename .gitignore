@@ -43,7 +43,7 @@ output.json
 node_modules/
 
 #data
-data/
+#data/
 report/
 
 #git
