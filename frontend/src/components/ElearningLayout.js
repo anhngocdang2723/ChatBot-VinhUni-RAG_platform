@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { FiBell, FiMessageCircle, FiSearch, FiLogOut } from 'react-icons/fi';
+import ApiSwitcher from './ApiSwitcher';
 import { DEMO_ACCOUNTS } from '../config/accounts';
 import { VINH_COLORS } from '../config/colors';
 import logoVinhuni from '../assets/logo-vinhuni.png';
@@ -338,6 +339,7 @@ export const TopBarComponent = ({ userRole = 'student' }) => {
     <TopBar>
       <div className="content">
         <div className="user-controls">
+          <ApiSwitcher />
           <div className="notifications">
             <FiBell size={18} />
             <span>Thông báo</span>

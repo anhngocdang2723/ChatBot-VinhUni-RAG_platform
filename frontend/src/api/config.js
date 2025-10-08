@@ -1,6 +1,14 @@
     // API Configuration
     export const API_CONFIG = {
-        BASE_URL: process.env.REACT_APP_API_URL || 'http://localhost:8000/api',
+        // Available API endpoints
+        ENDPOINTS: {
+            LOCAL: process.env.REACT_APP_LOCAL_API_URL || 'http://localhost:8000/api',
+            REMOTE: process.env.REACT_APP_REMOTE_API_URL || 'https://api.freehosting.id.vn/api',
+        },
+        // Default endpoint (auto-detect or use stored preference)
+        BASE_URL: process.env.REACT_APP_API_URL || 
+                  localStorage.getItem('apiUrl') || 
+                  (window.location.hostname === 'localhost' ? 'http://localhost:8000/api' : 'https://api.freehosting.id.vn/api'),
         TIMEOUT: 30000, // 30 seconds
         RETRY_ATTEMPTS: 5,
         RETRY_DELAY: 10000, // 10 seconds

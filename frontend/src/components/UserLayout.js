@@ -4,6 +4,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { FiHome, FiMessageSquare, FiHelpCircle, FiExternalLink, FiMenu, FiX, FiLogOut, 
   FiUser, FiBell, FiSettings, FiBook, FiCalendar, FiClipboard, FiFileText, FiSearch } from 'react-icons/fi';
 import { useApi } from '../context/ApiContext';
+import ApiSwitcher from './ApiSwitcher';
 import memeLogo from '../assets/meme-image.png';
 import logoVinhuni from '../assets/logo-vinhuni.png';
 import userAvatar from '../assets/user.png';
@@ -551,6 +552,7 @@ const UserLayout = ({ children }) => {
         </SearchContainer>
         
         <HeaderActions>
+          <ApiSwitcher />
           <IconButton>
             <FiBell />
           </IconButton>

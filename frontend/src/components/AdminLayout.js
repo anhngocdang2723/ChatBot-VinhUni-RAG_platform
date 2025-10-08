@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { FiHome, FiFolder, FiSettings, FiExternalLink, FiMenu, FiX, FiLogOut, 
   FiUser, FiBell, FiDatabase, FiSearch, FiServer, FiMessageSquare } from 'react-icons/fi';
 import { useApi } from '../context/ApiContext';
+import ApiSwitcher from './ApiSwitcher';
 import memeLogo from '../assets/meme-image.png';
 import logoVinhuni from '../assets/logo-vinhuni.png';
 import userAvatar from '../assets/meme-image2.png';
@@ -432,6 +433,7 @@ const AdminLayout = ({ children }) => {
         </SearchContainer>
         
         <HeaderActions>
+          <ApiSwitcher />
           <IconButton>
             <FiBell />
           </IconButton>
