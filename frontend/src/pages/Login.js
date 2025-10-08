@@ -268,15 +268,22 @@ const Login = () => {
         }
 
         // Use data from backend response (includes portal field)
-        const { user } = data;
+        const { user, access_token } = data;
         const userRole = user.role;
         const userPortal = user.portal; // Backend determines portal
         
         console.log('Login successful:', {
           username: user.username,
           role: userRole,
-          portal: userPortal
+          portal: userPortal,
+          hasToken: !!access_token
         });
+        
+        // Store JWT token for API requests (IMPORTANT!)
+        if (access_token) {
+          localStorage.setItem('apiKey', access_token);
+          console.log('✅ JWT token saved to localStorage');
+        }
         
         // Store user info in localStorage
         localStorage.setItem('userRole', userRole);

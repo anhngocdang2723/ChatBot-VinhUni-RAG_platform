@@ -1,3 +1,26 @@
+# Backend Setup Commands
+
+# 1. Start Docker (if using)
 cd docker; docker-compose up -d
-.\myenv\Scripts\activate; uvicorn main:app --host 0.0.0.0 --port 8000 --workers 2
-cloudflared tunnel run chatbot-tunnel
+
+# 2. Start Backend API
+.\venv\Scripts\activate; uvicorn main:app --host 0.0.0.0 --port 8000 --workers 2
+
+# 3. Start Cloudflare Tunnel
+cloudflared tunnel run chatbot-backend
+
+# 4. Start Frontend (in separate terminal)
+cd frontend; npm start
+
+# ================================
+# API Endpoints
+# ================================
+# Local:  http://localhost:8000/api
+# Remote: https://api.freehosting.id.vn/api
+#         ^^^ IMPORTANT: Must have "api." subdomain!
+#
+# Vercel Environment Variables:
+# REACT_APP_LOCAL_API_URL=http://localhost:8000/api
+# REACT_APP_REMOTE_API_URL=https://api.freehosting.id.vn/api
+#
+# Note: Tunnel name is "chatbot-backend" (not "chatbot-tunnel")

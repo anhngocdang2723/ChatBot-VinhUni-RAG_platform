@@ -6,9 +6,23 @@
             REMOTE: process.env.REACT_APP_REMOTE_API_URL || 'https://api.freehosting.id.vn/api',
         },
         // Default endpoint (auto-detect or use stored preference)
-        BASE_URL: process.env.REACT_APP_API_URL || 
-                  localStorage.getItem('apiUrl') || 
-                  (window.location.hostname === 'localhost' ? 'http://localhost:8000/api' : 'https://api.freehosting.id.vn/api'),
+        BASE_URL: (() => {
+            // Debug logging
+            console.log('🔍 API Config Debug:', {
+                'REACT_APP_API_URL': process.env.REACT_APP_API_URL,
+                'REACT_APP_REMOTE_API_URL': process.env.REACT_APP_REMOTE_API_URL,
+                'localStorage.apiUrl': localStorage.getItem('apiUrl'),
+                'window.location.hostname': window.location.hostname
+            });
+            
+            // Priority order: explicit env var > localStorage > auto-detect
+            const url = process.env.REACT_APP_API_URL || 
+                        localStorage.getItem('apiUrl') || 
+                        (window.location.hostname === 'localhost' ? 'http://localhost:8000/api' : 'https://api.freehosting.id.vn/api');
+            
+            console.log('✅ Selected API URL:', url);
+            return url;
+        })(),
         TIMEOUT: 30000, // 30 seconds
         RETRY_ATTEMPTS: 5,
         RETRY_DELAY: 10000, // 10 seconds
