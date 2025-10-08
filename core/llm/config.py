@@ -4,23 +4,16 @@ from functools import lru_cache
 from pydantic import Field
 
 class CollectionConfig:
-    """Configuration for the fixed collection used in the system"""
-    STORAGE_NAME: str = "truong_dai_hoc_vinh"  # Internal name for storage
+    """Configuration for the fixed index used in the system"""
+    STORAGE_NAME: str = "truong-dai-hoc-vinh"  # Pinecone index name (lowercase, no spaces)
     DISPLAY_NAME: str = "Dữ liệu Trường Đại học Vinh"  # Display name for UI
     DESCRIPTION: str = "Tập dữ liệu tổng hợp của Trường Đại học Vinh"
     
-    # Collection configuration
-    VECTOR_SIZE: int = 384  # Default for all-MiniLM-L6-v2
-    DISTANCE: str = "Cosine"
-    DEFAULT_SEGMENT_NUMBER: int = 2
-    MAX_OPTIMIZATION_THREADS: int = 4
-    MEMMAP_THRESHOLD: int = 1000
-    INDEXING_THRESHOLD: int = 50000
-    FLUSH_INTERVAL_SEC: int = 30
-    M: int = 16
-    EF_CONSTRUCT: int = 100
-    FULL_SCAN_THRESHOLD: int = 10000
-    MAX_INDEXING_THREADS: int = 4
+    # Pinecone configuration
+    DIMENSION: int = 1536  # OpenAI text-embedding-3-small dimension
+    METRIC: str = "cosine"  # Distance metric for Pinecone
+    CLOUD: str = "aws"  # Cloud provider
+    REGION: str = "us-east-1"  # Region
 
     @classmethod
     @lru_cache()
@@ -44,20 +37,13 @@ class Settings(BaseSettings):
     DISPLAY_NAME: str = Field(default=CollectionConfig.DISPLAY_NAME)
     DESCRIPTION: str = Field(default=CollectionConfig.DESCRIPTION)
     
-    # Collection configuration
-    collection_config: Dict[str, Any] = Field(
+    # Pinecone configuration
+    pinecone_config: Dict[str, Any] = Field(
         default_factory=lambda: {
-            "vector_size": CollectionConfig.VECTOR_SIZE,
-            "distance": CollectionConfig.DISTANCE,
-            "default_segment_number": CollectionConfig.DEFAULT_SEGMENT_NUMBER,
-            "max_optimization_threads": CollectionConfig.MAX_OPTIMIZATION_THREADS,
-            "memmap_threshold": CollectionConfig.MEMMAP_THRESHOLD,
-            "indexing_threshold": CollectionConfig.INDEXING_THRESHOLD,
-            "flush_interval_sec": CollectionConfig.FLUSH_INTERVAL_SEC,
-            "m": CollectionConfig.M,
-            "ef_construct": CollectionConfig.EF_CONSTRUCT,
-            "full_scan_threshold": CollectionConfig.FULL_SCAN_THRESHOLD,
-            "max_indexing_threads": CollectionConfig.MAX_INDEXING_THREADS
+            "dimension": CollectionConfig.DIMENSION,
+            "metric": CollectionConfig.METRIC,
+            "cloud": CollectionConfig.CLOUD,
+            "region": CollectionConfig.REGION
         }
     )
     
@@ -75,30 +61,30 @@ class Settings(BaseSettings):
     API_HOST: str = "localhost"
     API_PORT: int = 8000
     
-    # Qdrant settings
-    QDRANT_URL: str
-    QDRANT_API_KEY: str
-    DEFAULT_COLLECTION: str = CollectionConfig.STORAGE_NAME
+    # Pinecone settings
+    PINECONE_API_KEY: str = Field(default="")
+    PINECONE_ENVIRONMENT: str = "us-east-1"
+    DEFAULT_INDEX: str = CollectionConfig.STORAGE_NAME
+    PINECONE_DENSE_INDEX: str = f"{CollectionConfig.STORAGE_NAME}-dense"
+    PINECONE_SPARSE_INDEX: str = f"{CollectionConfig.STORAGE_NAME}-sparse"
     
     # File upload settings
-    UPLOAD_DIR: str = "uploads"
-    OUTPUT_DIR: str = "outputs"
+    UPLOAD_DIR: str = "data/uploads"
+    OUTPUT_DIR: str = "data/outputs"
     
-    # Database settings
-    POSTGRES_DB: str
-    POSTGRES_USER: str
-    POSTGRES_PASSWORD: str
-    DATABASE_URL: str
+    # Database settings (SQLite)
+    DATABASE_URL: str = "sqlite:///./data/chatbot_rag.db"
     
     # LLM settings
-    LLM_PROVIDER: str = "deepseek"
-    DEEPSEEK_API_KEY: str
-    GROK_API_KEY: str
+    DASHSCOPE_API_KEY: str = Field(default="")  # For Qwen3-Max LLM
+    EMBEDDING_MODEL: str = "llama-text-embed-v2"  # For Pinecone integrated inference
+    LLM_PROVIDER: str = "qwen"  # Default to Qwen3-Max
+    LLM_MODEL: str = "qwen3-max"
     
     # Application settings
     DEBUG: bool = False
     VERBOSE: bool = False
-    SECRET_KEY: str
+    SECRET_KEY: str = Field(default="")
     ALGORITHM: str = "HS256"
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 30
     

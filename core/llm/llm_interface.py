@@ -1,4 +1,4 @@
-from typing import Optional, Dict, List, Any
+from typing import Optional, Dict, List, Any, cast
 import logging
 import json
 import requests
@@ -30,18 +30,25 @@ class RAGPromptManager:
         self.provider = provider
         self.provider_name = provider["provider"].lower()
         
-        # Initialize based on provider
-        if self.provider_name == "openai":
+        # Initialize client based on provider
+        if self.provider_name == "qwen":
+            # Qwen3-Max via Alibaba Cloud DashScope
+            self.client = OpenAI(
+                api_key=provider["api_key"],
+                base_url="https://dashscope-intl.aliyuncs.com/compatible-mode/v1"
+            )
+            logger.info("Initialized Qwen3-Max client")
+        elif self.provider_name == "openai":
             self.client = OpenAI(api_key=provider["api_key"])
-            self.api_url = None
-        elif self.provider_name == "deepseek":
-            self.client = OpenAI(api_key=provider["api_key"], base_url="https://api.deepseek.com")
-            self.api_url = None
-        elif self.provider_name == "grok":
-            self.client = OpenAI(api_key=provider["api_key"], base_url="https://api.x.ai/v1")
-            self.api_url = None
+            logger.info("Initialized OpenAI client")
         else:
-            raise ValueError(f"Unsupported provider: {provider['provider']}")
+            # Default to Qwen
+            logger.warning(f"Unknown provider {self.provider_name}, defaulting to Qwen3-Max")
+            self.client = OpenAI(
+                api_key=provider["api_key"],
+                base_url="https://dashscope-intl.aliyuncs.com/compatible-mode/v1"
+            )
+            self.provider_name = "qwen"
 
     def _encode_image(self, image_data: str) -> str:
         """
@@ -295,154 +302,66 @@ class RAGPromptManager:
         documents: List[Dict[str, Any]],
         temperature: float = 0.1,
         max_tokens: int = 500,
-        model: str = None,
+        model: str = "qwen3-max",
         image_data: Optional[str] = None,
         context: Optional[Dict[str, Any]] = None
     ) -> Dict[str, Any]:
         """
-        Generate an answer using the LLM based on retrieved documents and/or image.
+        Generate an answer using Qwen3-Max LLM based on retrieved documents.
         
         Args:
             query: User's question
             documents: List of retrieved documents
             temperature: LLM temperature parameter
             max_tokens: Maximum tokens in response
-            model: Model to use (overrides provider's default model)
-            image_data: Optional base64 encoded image data
+            model: Model to use (default: qwen3-max)
+            image_data: Optional base64 encoded image data (not supported yet)
             context: Optional dictionary containing chat history and course info
             
         Returns:
             Dictionary containing the answer and source information
         """
         try:
-            # Use provided model or default based on provider
-            current_provider = model.lower() if model else self.provider_name
-            logger.info(f"Using provider: {current_provider} (requested model: {model}, default provider: {self.provider_name})")
-            
-            # Create a new client based on the current provider
-            if current_provider == "openai":
-                client = OpenAI(api_key=self.provider["api_key"])
-            elif current_provider == "deepseek":
-                client = OpenAI(api_key=self.provider["api_key"], base_url="https://api.deepseek.com")
-            else:  # grok
-                client = OpenAI(api_key=os.getenv("GROK_API_KEY"), base_url="https://api.x.ai/v1")
-            
-            # Handle image analysis if image_data is provided
-            if image_data:
-                logger.info("Image data detected, processing image analysis request")
-                if current_provider != "grok-2-vision-latest":
-                    logger.error("Image analysis requested but provider is not Grok")
-                    raise ValueError("Image analysis is only supported with Grok provider")
-                
-                messages = self._create_image_prompt(query, image_data)
-                logger.info(f"Sending image analysis request to Grok with model: grok-2-vision-latest")
-                response = client.chat.completions.create(
-                    model="grok-2-vision-latest",
-                    messages=messages,
-                    temperature=temperature,
-                    max_tokens=max_tokens
-                )
-                answer = response.choices[0].message.content
-                logger.info("Image analysis completed successfully")
-                return {
-                    "answer": answer,
-                    "sources": []
-                }
+            logger.info(f"Using Qwen3-Max model: {model}")
             
             # Handle text-based query
             logger.info("Processing text-based query")
             prompt = self._create_prompt(query, documents, context)
             logger.info(f"Created prompt with query: {query}")
             
-            # Call appropriate API based on provider
-            if current_provider == "openai":
-                logger.info("Using OpenAI API")
-                messages = [
-                    {
-                        "role": "system",
-                        "content": "Bạn là một trợ lý AI thông minh, nhiệm vụ của bạn là trả lời câu hỏi dựa trên các tài liệu được cung cấp một cách chính xác và đầy đủ."
-                    }
-                ]
-                
-                # Add chat history if available
-                if context and "chat_history" in context:
-                    for msg in context["chat_history"]:
-                        messages.append({
-                            "role": msg["role"],
-                            "content": msg["content"]
-                        })
-                
-                messages.append({
-                    "role": "user",
-                    "content": prompt
-                })
-                
-                response = client.chat.completions.create(
-                    model="gpt-3.5-turbo",
-                    messages=messages,
-                    temperature=temperature,
-                    max_tokens=max_tokens
-                )
-                answer = response.choices[0].message.content
-            elif current_provider == "deepseek":
-                logger.info("Using Deepseek API")
-                messages = [
-                    {
-                        "role": "system",
-                        "content": "Bạn là một trợ lý AI thông minh, nhiệm vụ của bạn là trả lời câu hỏi dựa trên các tài liệu được cung cấp một cách chính xác và đầy đủ. Luôn trả lời bằng tiếng Việt."
-                    }
-                ]
-                
-                # Add chat history if available
-                if context and "chat_history" in context:
-                    for msg in context["chat_history"]:
-                        messages.append({
-                            "role": msg["role"],
-                            "content": msg["content"]
-                        })
-                
-                messages.append({
-                    "role": "user",
-                    "content": prompt
-                })
-                
-                response = client.chat.completions.create(
-                    model="deepseek-chat",
-                    messages=messages,
-                    temperature=temperature,
-                    max_tokens=max_tokens,
-                    stream=False
-                )
-                answer = response.choices[0].message.content
-            else:  # grok
-                logger.info("Using Grok API")
-                messages = [
-                    {
-                        "role": "system",
-                        "content": "Bạn là một trợ lý AI thông minh, nhiệm vụ của bạn là trả lời câu hỏi dựa trên các tài liệu được cung cấp một cách chính xác và đầy đủ. Luôn trả lời bằng tiếng Việt."
-                    }
-                ]
-                
-                # Add chat history if available
-                if context and "chat_history" in context:
-                    for msg in context["chat_history"]:
-                        messages.append({
-                            "role": msg["role"],
-                            "content": msg["content"]
-                        })
-                
-                messages.append({
-                    "role": "user",
-                    "content": prompt
-                })
-                
-                response = client.chat.completions.create(
-                    model="grok-3-beta",
-                    messages=messages,
-                    temperature=temperature,
-                    max_tokens=max_tokens
-                )
-                answer = response.choices[0].message.content
+            # Prepare messages for Qwen3-Max
+            messages = [
+                {
+                    "role": "system",
+                    "content": "Bạn là một trợ lý AI thông minh, nhiệm vụ của bạn là trả lời câu hỏi dựa trên các tài liệu được cung cấp một cách chính xác và đầy đủ. Luôn trả lời bằng tiếng Việt."
+                }
+            ]
+            
+            # Add chat history if available
+            if context and "chat_history" in context:
+                for msg in context["chat_history"]:
+                    messages.append({
+                        "role": msg["role"],
+                        "content": msg["content"]
+                    })
+            
+            # Add current query
+            messages.append({
+                "role": "user",
+                "content": prompt
+            })
+            
+            # Call Qwen3-Max API via OpenAI SDK with timeout
+            logger.info(f"Calling Qwen3-Max API with model: {model}")
+            response = self.client.chat.completions.create(
+                model=model,
+                messages=cast(Any, messages),  # Type cast for OpenAI SDK compatibility
+                temperature=temperature,
+                max_tokens=max_tokens,
+                timeout=30  # 30 second timeout
+            )
+            answer = response.choices[0].message.content
+            logger.info("LLM response received successfully")
             
             # Format sources with enhanced metadata
             sources = []
@@ -457,20 +376,14 @@ class RAGPromptManager:
                 }
                 sources.append(source)
             
-            logger.info("Text-based query processing completed successfully")
+            logger.info("Query processing completed successfully")
             return {
                 "answer": answer,
                 "sources": sources
             }
             
-        except RequestException as e:
-            logger.error(f"API request error: {str(e)}")
-            return {
-                "answer": "Xin lỗi, không thể kết nối với dịch vụ AI lúc này. Vui lòng thử lại sau.",
-                "sources": []
-            }
         except Exception as e:
-            logger.error(f"Error generating answer: {str(e)}")
+            logger.error(f"Error generating answer with Qwen3-Max: {str(e)}")
             return {
                 "answer": "Xin lỗi, tôi không thể tạo câu trả lời lúc này. Vui lòng thử lại sau.",
                 "sources": []

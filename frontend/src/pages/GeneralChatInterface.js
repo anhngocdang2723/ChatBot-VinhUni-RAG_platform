@@ -688,11 +688,11 @@ const GeneralChatInterface = () => {
   const [selectedCollections, setSelectedCollections] = useState([]);
   const [showAdvanced, setShowAdvanced] = useState(false);
   const [querySettings, setQuerySettings] = useState({
-    topK: 15,
-    topN: 5,
-    temperature: 0.1,
-    maxTokens: 1000,
-    model: 'grok',
+    topK: 12,
+    topN: 4,
+    temperature: 0.2,
+    maxTokens: 600,
+    model: 'qwen3-max',
   });
   const [isSettingsExpanded, setIsSettingsExpanded] = useState(false);
   const [expandedSources, setExpandedSources] = useState({});
@@ -996,8 +996,9 @@ const GeneralChatInterface = () => {
                       value={querySettings.model}
                       onChange={handleSettingChange}
                     >
-                      <option value="grok">Grok</option>
-                      <option value="deepseek">Deepseek</option>
+                      <option value="qwen3-max">Qwen3-Max (Recommended)</option>
+                      <option value="qwen-turbo">Qwen-Turbo (Faster)</option>
+                      <option value="qwen-plus">Qwen-Plus</option>
                     </select>
                   </SettingsFormItem>
                   

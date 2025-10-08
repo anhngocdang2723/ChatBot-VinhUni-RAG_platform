@@ -251,62 +251,80 @@ const Login = () => {
       const response = await fetch(`${apiUrl}/auth/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
+        credentials: 'include', // Important: Include cookies for session
         body: JSON.stringify({
           username: credentials.username,
-          password: credentials.password
+          password: credentials.password,
+          portal: credentials.portal  // Send user's selected portal
         })
       });
 
       if (response.ok) {
         const data = await response.json();
         
-        // Find the user in DEMO_ACCOUNTS to get their role
-        let userRole = 'user'; // default role
-        for (const [_, account] of Object.entries(DEMO_ACCOUNTS)) {
-          if (account.username === credentials.username) {
-            userRole = account.role;
-            break;
-          }
+        if (!data.success || !data.user) {
+          setError('Đăng nhập thất bại. Vui lòng thử lại.');
+          return;
         }
+
+        // Use data from backend response (includes portal field)
+        const { user } = data;
+        const userRole = user.role;
+        const userPortal = user.portal; // Backend determines portal
+        
+        console.log('Login successful:', {
+          username: user.username,
+          role: userRole,
+          portal: userPortal
+        });
         
         // Store user info in localStorage
         localStorage.setItem('userRole', userRole);
-        localStorage.setItem('portal', credentials.portal);
-        localStorage.setItem('user', credentials.username);
+        localStorage.setItem('portal', userPortal); // Use backend portal value
+        localStorage.setItem('user', user.username);
+        localStorage.setItem('userData', JSON.stringify(user)); // Store full user data
 
-        // Redirect based on role and portal
-        if (credentials.portal === 'portal') {
+        // Redirect based on role and portal FROM BACKEND
+        if (userPortal === 'portal') {
           // Portal routes
           switch(userRole) {
             case 'admin':
+              console.log('Redirecting to /admin');
               navigate('/admin');
               break;
-            case 'user':
+            case 'student':
+              console.log('Redirecting to /user (student in portal)');
               navigate('/user');
               break;
             default:
+              console.log('Redirecting to /user (default portal)');
               navigate('/user');
               break;
           }
-        } else if (credentials.portal === 'elearning') {
+        } else if (userPortal === 'elearning') {
           // E-learning routes
           switch(userRole) {
             case 'student':
+              console.log('Redirecting to /elearning/student');
               navigate('/elearning/student');
               break;
             case 'lecturer':
+              console.log('Redirecting to /elearning/lecturer');
               navigate('/elearning/lecturer');
               break;
             default:
               setError('Bạn không có quyền truy cập vào hệ thống E-learning');
               break;
           }
+        } else {
+          setError(`Portal không hợp lệ: ${userPortal}`);
         }
       } else {
         const data = await response.json();
-        setError(data.detail || 'Tên đăng nhập hoặc mật khẩu không đúng');
+        setError(data.message || data.detail || 'Tên đăng nhập hoặc mật khẩu không đúng');
       }
     } catch (err) {
+      console.error('Login error:', err);
       setError('Lỗi kết nối server!');
     }
   };

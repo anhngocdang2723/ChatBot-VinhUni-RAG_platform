@@ -687,11 +687,11 @@ Bạn có thể hỏi bất cứ điều gì về môn học này!`,
         image_data: processedImage,
         has_image: !!processedImage,
         fallback_to_llm: true,
-        top_k: 5,
-        top_n: 2,
-        temperature: 0.5,
-        model: processedImage ? 'grok-2-vision-latest' : 'grok',
-        max_tokens: 2000
+        top_k: 12,
+        top_n: 4,
+        temperature: 0.2,
+        model: 'qwen3-max',
+        max_tokens: 600
       };
 
       // Only include vision prompt when image is present

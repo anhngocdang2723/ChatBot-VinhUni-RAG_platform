@@ -6,11 +6,11 @@ import os
 import uvicorn
 from typing import List, Dict, Any
 from core.llm.config import Settings, get_settings
-from core.auth import auth_router
-from core.document_processing.model_singleton import model_singleton
 
 # Import routers
-from routers import document_router, query_router, document_manager
+from routers import document_router, query_router, session_router
+from core.auth import simple_auth_router
+# from routers import document_manager  # TODO: Update for Pinecone namespaces
 
 # Load environment variables
 load_dotenv()
@@ -21,12 +21,6 @@ settings = get_settings()
 # Configure logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
-
-# Initialize models at startup
-logger.info("Initializing models...")
-_ = model_singleton.embedding_model  # Initialize embedding model
-_ = model_singleton.reranking_model  # Initialize reranking model
-logger.info("Models initialization complete")
 
 # Initialize FastAPI app
 app = FastAPI(
@@ -49,10 +43,11 @@ os.makedirs(settings.UPLOAD_DIR, exist_ok=True)
 os.makedirs(settings.OUTPUT_DIR, exist_ok=True)
 
 # Include routers
+app.include_router(simple_auth_router.router, prefix="/api/auth", tags=["auth"])
+app.include_router(session_router.router, prefix="/api/sessions", tags=["sessions"])
 app.include_router(document_router.router, prefix="/api/documents", tags=["documents"])
 app.include_router(query_router.router, prefix="/api/query", tags=["query"])
-app.include_router(document_manager.router, prefix="/api/manage", tags=["management"])
-app.include_router(auth_router.router, prefix="/api/auth", tags=["auth"])
+# app.include_router(document_manager.router, prefix="/api/manage", tags=["management"])  # TODO: Update for Pinecone
 
 # Add health check endpoint
 @app.get("/api/health")
@@ -67,7 +62,7 @@ async def health_check():
     }
 
 @app.get("/api")
-async def root():
+async def api_root():
     return {"message": "API ready now"}
 
 @app.get("/")

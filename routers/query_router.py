@@ -1,83 +1,58 @@
-from fastapi import APIRouter, HTTPException, Depends, Query as QueryParam
-from typing import List, Dict, Any, Optional, Union
+from fastapi import APIRouter, HTTPException, Depends
+from typing import List, Dict, Any, Optional
 from pydantic import BaseModel
-from core.document_processing.retriever import Retriever
-from core.llm.llm_interface import RAGPromptManager, create_llm_provider
-from core.utils.dependencies import get_retriever, get_prompt_manager, get_vector_store
-from core.document_processing.vector_store import VectorStore
-from core.document_processing.query_processor import QueryProcessor
-from core.llm.config import get_settings
+from core.query.query_service import QueryService
+from core.llm.llm_interface import RAGPromptManager
+from core.utils.dependencies import get_query_service, get_prompt_manager
+from core.llm.config import get_settings, CollectionConfig
+from core.session_manager import ChatSessionManager
+from core.auth.simple_auth_router import get_current_user_from_session
 import logging
 
 router = APIRouter()
 settings = get_settings()
+logger = logging.getLogger(__name__)
+
+# Initialize session manager
+session_manager = ChatSessionManager()
 
 class QueryInput(BaseModel):
     query: str
-    top_k: int = 15
-    top_n: int = 5
-    temperature: float = 0.1
-    max_tokens: int = 500
-    collection_names: Optional[List[str]] = None
+    top_k: int = 12  # Optimized: Reduced from 15 for faster search
+    top_n: int = 4   # Optimized: Reduced from 5 for faster reranking
+    temperature: float = 0.2  # Optimized: Increased for faster generation
+    max_tokens: int = 600  # Optimized: Increased for more complete answers
     model: Optional[str] = None
-    image_data: Optional[str] = None  # Add this field for image data
-    context: Optional[Dict[str, Any]] = None  # Add context field for chat history and course info
+    image_data: Optional[str] = None
+    context: Optional[Dict[str, Any]] = None
 
-class CollectionQueryInput(BaseModel):
-    query: str
-    collection_name: str
-    top_k: int = 15
-    top_n: int = 5
-    
-class MultiCollectionQueryInput(BaseModel):
-    query: str
-    collection_names: List[str]
-    top_k: int = 15 
-    top_n: int = 5
-    merge_strategy: str = "score"  # Options: "score", "round_robin"
-    
-class SourceMetadata(BaseModel):
-    filename: str
-    chunk_id: Optional[int] = None
-    collection: str
-    score: float
-    document_type: Optional[str] = None
-    
 class QueryResponse(BaseModel):
     answer: str
     sources: List[Dict[str, Any]]
-    
-class CollectionSummary(BaseModel):
-    name: str
-    document_count: int
-    document_types: Dict[str, int]
 
-@router.post("/rag")
+@router.post("/rag", response_model=QueryResponse)
 async def query_rag(
     query_input: QueryInput,
-    retriever: Retriever = Depends(get_retriever),
-    prompt_manager: RAGPromptManager = Depends(get_prompt_manager)
+    query_service: QueryService = Depends(get_query_service),
+    prompt_manager: RAGPromptManager = Depends(get_prompt_manager),
+    current_user: dict = Depends(get_current_user_from_session)
 ) -> QueryResponse:
     """
-    Process a RAG query:
-    1. Preprocess the query
-    2. Retrieve relevant documents
+    Process a RAG query with session management:
+    1. Preprocess the query (handled by QueryService)
+    2. Hybrid search (dense + sparse)
     3. Rerank documents
     4. Generate answer using LLM
+    5. Save query and answer to session (if session_id provided)
     """
-    # Preprocess the query
-    processed_query = QueryProcessor.clean_query(query_input.query)
-    logger = logging.getLogger(__name__)
-    logger.info(f"Original query: {query_input.query}")
-    logger.info(f"Processed query: {processed_query}")
+    logger.info(f"Query from user {current_user['username']}: {query_input.query}")
     
-    # Get relevant documents (optionally from multiple collections)
-    documents = retriever.query(
-        query=processed_query,
+    # Query service handles: preprocessing → hybrid search → reranking → formatting
+    documents = query_service.query(
+        query=query_input.query,
         top_k=query_input.top_k,
         top_n=query_input.top_n,
-        collection_name=settings.STORAGE_NAME if not query_input.collection_names else None,
-        collection_names=query_input.collection_names
+        namespace=CollectionConfig.STORAGE_NAME
     )
     
     if not documents:
@@ -86,20 +61,21 @@ async def query_rag(
             sources=[]
         )
     
-    # Log the model parameter and image data
+    # Log additional parameters
     logger.info(f"Received model parameter: {query_input.model}")
     if query_input.image_data:
         logger.info(f"Received image data with length: {len(query_input.image_data)}")
     if query_input.context:
         logger.info(f"Received context with chat history length: {len(query_input.context.get('chat_history', []))}")
     
-    # Generate answer using LLM
+    # Generate answer using LLM (default to qwen3-max for better quality)
+    model_name = query_input.model if query_input.model else "qwen3-max"
     result = prompt_manager.generate_answer(
-        query=processed_query,
+        query=query_input.query,
         documents=documents,
         temperature=query_input.temperature,
         max_tokens=query_input.max_tokens,
-        model=query_input.model,
+        model=model_name,
         image_data=query_input.image_data,
         context=query_input.context
     )
@@ -109,219 +85,68 @@ async def query_rag(
     for source in sources:
         if "metadata" in source:
             metadata = source["metadata"]
-            # Add the collection name to the source for clarity
-            source["collection"] = metadata.get("source_collection", metadata.get("collection_name", "unknown"))
+            # Add the namespace to the source for clarity
+            source["namespace"] = metadata.get("namespace", CollectionConfig.STORAGE_NAME)
+    
+    # Save to session if session_id is provided in context
+    session_id = None
+    if query_input.context and isinstance(query_input.context, dict):
+        session_id = query_input.context.get("session_id")
+    
+    if session_id:
+        user_id = current_user["id"]
+        try:
+            # Ensure session exists
+            session = session_manager.get_session(user_id, session_id)
+            if not session:
+                session = session_manager.create_session(user_id, session_id)
+                logger.info(f"Created new session {session_id} for user {user_id}")
+            
+            # Save user query
+            session_manager.add_message(
+                user_id=user_id,
+                session_id=session_id,
+                role="user",
+                content=query_input.query,
+                metadata={
+                    "top_k": query_input.top_k,
+                    "top_n": query_input.top_n,
+                    "model": model_name,
+                    "temperature": query_input.temperature
+                }
+            )
+            
+            # Save assistant answer
+            session_manager.add_message(
+                user_id=user_id,
+                session_id=session_id,
+                role="assistant",
+                content=result["answer"],
+                metadata={
+                    "sources_count": len(sources),
+                    "model": model_name
+                }
+            )
+            
+            logger.info(f"Saved query and answer to session {session_id}")
+        except Exception as e:
+            logger.error(f"Failed to save to session: {e}")
+            # Don't fail the request if session save fails
     
     return QueryResponse(**result)
 
 @router.post("/retrieve")
 async def retrieve_documents(
     query_input: QueryInput,
-    retriever: Retriever = Depends(get_retriever)
+    query_service: QueryService = Depends(get_query_service)
 ) -> Dict[str, Any]:
     """Retrieve and rerank documents without LLM generation."""
-    documents = retriever.query(
+    # retrieve_only already formats and returns a dict with query and documents
+    result = query_service.retrieve_only(
         query=query_input.query,
         top_k=query_input.top_k,
         top_n=query_input.top_n,
-        collection_names=query_input.collection_names
+        namespace=CollectionConfig.STORAGE_NAME
     )
     
-    # Format the response
-    formatted_docs = []
-    for doc in documents:
-        # Extract key metadata for display
-        metadata = doc.get("metadata", {})
-        source = {
-            "text": doc.get("text", ""),
-            "score": doc.get("score", 0.0),
-            "collection": metadata.get("source_collection", metadata.get("collection_name", "unknown")),
-            "filename": metadata.get("original_filename", "unknown"),
-            "chunk_id": metadata.get("chunk_id", 0),
-            "document_type": metadata.get("document_type", "unknown"),
-        }
-        formatted_docs.append(source)
-    
-    return {
-        "query": query_input.query,
-        "collections_searched": query_input.collection_names,
-        "documents": formatted_docs
-    }
-
-@router.get("/collections/available")
-async def list_available_collections(
-    vector_store: VectorStore = Depends(get_vector_store)
-) -> List[CollectionSummary]:
-    """List all available collections for querying with document counts."""
-    logger = logging.getLogger(__name__)
-    
-    try:
-        # Get collections directly from vector store
-        logger.info("Retrieving collections list from vector store")
-        collections = vector_store.list_collections()
-        logger.info(f"Found {len(collections)} collections in vector store")
-        
-        # If no collections found, return empty list with debug info
-        if not collections:
-            logger.warning("No collections found in the vector store")
-            return []
-            
-        # Get document counts for each collection
-        original_collection = vector_store.collection_name
-        collection_summaries = []
-        
-        for collection in collections:
-            collection_name = collection["name"]
-            logger.info(f"Processing collection: {collection_name}")
-            
-            try:
-                # Switch to collection to get documents
-                success = vector_store.switch_collection(collection_name)
-                if not success:
-                    logger.warning(f"Failed to switch to collection {collection_name}, skipping")
-                    continue
-                
-                try:
-                    # Get document counts by type - use direct count if possible
-                    if "points_count" in collection:
-                        points_count = collection["points_count"]
-                        logger.info(f"Collection {collection_name} has {points_count} points (from metadata)")
-                        collection_summaries.append(
-                            CollectionSummary(
-                                name=collection_name,
-                                document_count=points_count,
-                                document_types={"unknown": points_count}
-                            )
-                        )
-                    else:
-                        # Fall back to searching for documents
-                        docs = []
-                        try:
-                            docs = vector_store.search_by_metadata({}, limit=1000)
-                            logger.info(f"Retrieved {len(docs)} documents from collection {collection_name}")
-                        except Exception as search_e:
-                            logger.error(f"Error getting documents from {collection_name}: {str(search_e)}")
-                            docs = []
-                        
-                        # Count document types
-                        doc_ids = set()
-                        doc_types = {}
-                        
-                        for doc in docs:
-                            metadata = doc.get("metadata", {})
-                            doc_id = metadata.get("file_id")
-                            if doc_id:
-                                doc_ids.add(doc_id)
-                            
-                            doc_type = metadata.get("document_type", "unknown")
-                            doc_types[doc_type] = doc_types.get(doc_type, 0) + 1
-                        
-                        collection_summaries.append(
-                            CollectionSummary(
-                                name=collection_name,
-                                document_count=len(doc_ids) if doc_ids else len(docs),
-                                document_types=doc_types if doc_types else {"unknown": len(docs)}
-                            )
-                        )
-                except Exception as count_e:
-                    logger.error(f"Error getting document counts for {collection_name}: {str(count_e)}")
-                    # Still include the collection with zero counts
-                    collection_summaries.append(
-                        CollectionSummary(
-                            name=collection_name,
-                            document_count=0,
-                            document_types={}
-                        )
-                    )
-            except Exception as e:
-                logger.error(f"Error processing collection {collection_name}: {str(e)}")
-                # Include the collection with error status
-                collection_summaries.append(
-                    CollectionSummary(
-                        name=collection_name,
-                        document_count=-1,  # Indicate error
-                        document_types={"error": 1}
-                    )
-                )
-        
-        # Switch back to original collection
-        vector_store.switch_collection(original_collection)
-        logger.info(f"Returning {len(collection_summaries)} collection summaries")
-        
-        return collection_summaries
-    except Exception as e:
-        logger.error(f"Error listing available collections: {str(e)}")
-        return []
-
-@router.post("/multi-collection")
-async def query_multiple_collections(
-    query_input: MultiCollectionQueryInput,
-    retriever: Retriever = Depends(get_retriever)
-) -> Dict[str, Any]:
-    """
-    Query multiple collections and return combined results.
-    This endpoint allows specifying how results should be merged from different collections.
-    """
-    # Validate that collections exist
-    vector_store = retriever.vector_store
-    available_collections = [c["name"] for c in vector_store.list_collections()]
-    
-    # Filter out collections that don't exist
-    valid_collections = [c for c in query_input.collection_names if c in available_collections]
-    
-    if not valid_collections:
-        return {
-            "query": query_input.query,
-            "error": "None of the specified collections exist",
-            "documents": []
-        }
-    
-    # Get search results from each collection
-    documents = retriever.query(
-        query=query_input.query,
-        top_k=query_input.top_k,
-        top_n=query_input.top_n,
-        collection_names=valid_collections
-    )
-    
-    # Format the response with collection information
-    formatted_docs = []
-    for doc in documents:
-        metadata = doc.get("metadata", {})
-        source = {
-            "text": doc.get("text", ""),
-            "score": doc.get("score", 0.0),
-            "collection": metadata.get("source_collection", metadata.get("collection_name", "unknown")),
-            "filename": metadata.get("original_filename", "unknown"),
-            "chunk_id": metadata.get("chunk_id", 0),
-            "document_type": metadata.get("document_type", "unknown"),
-        }
-        formatted_docs.append(source)
-    
-    return {
-        "query": query_input.query,
-        "collections_searched": valid_collections,
-        "merge_strategy": query_input.merge_strategy,
-        "documents": formatted_docs
-    }
-
-@router.get("/collections/raw")
-async def list_raw_collections(
-    vector_store: VectorStore = Depends(get_vector_store)
-) -> List[Dict[str, Any]]:
-    """
-    Get raw list of collections without additional processing or metadata.
-    This is a simpler endpoint that just returns what Qdrant reports.
-    """
-    logger = logging.getLogger(__name__)
-    
-    try:
-        # Directly get collections from vector store
-        collections = vector_store.list_collections()
-        logger.info(f"Found {len(collections)} raw collections")
-        
-        # Return the raw collection data
-        return collections
-    except Exception as e:
-        logger.error(f"Error listing raw collections: {str(e)}")
-        return [] 
+    return result

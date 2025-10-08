@@ -58,11 +58,11 @@ root.render(
             }
           />
           
-          {/* User routes */}
+          {/* User routes (Portal) - For admin and students accessing portal */}
           <Route
             path="/user"
             element={
-              <ProtectedRoute allowedRoles={['user', 'admin']} allowedPortal="portal">
+              <ProtectedRoute allowedRoles={['user', 'admin', 'student']} allowedPortal="portal">
                 <UserDashboard />
               </ProtectedRoute>
             }
@@ -70,7 +70,7 @@ root.render(
           <Route
             path="/user/chat"
             element={
-              <ProtectedRoute allowedRoles={['user', 'admin']} allowedPortal="portal">
+              <ProtectedRoute allowedRoles={['user', 'admin', 'student']} allowedPortal="portal">
                 <GeneralChatInterface />
               </ProtectedRoute>
             }
@@ -78,7 +78,7 @@ root.render(
           <Route
             path="/user/help"
             element={
-              <ProtectedRoute allowedRoles={['user', 'admin']} allowedPortal="portal">
+              <ProtectedRoute allowedRoles={['user', 'admin', 'student']} allowedPortal="portal">
                 <Help />
               </ProtectedRoute>
             }

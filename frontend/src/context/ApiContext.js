@@ -21,7 +21,7 @@ export const ApiProvider = ({ children }) => {
     baseURL: apiUrl,
     timeout: API_CONFIG.TIMEOUT,
     headers: getHeaders(apiKey),
-    withCredentials: false // Disable credentials for CORS
+    withCredentials: true // Enable credentials to send session cookies
   });
 
   // Check if API is connected using health endpoint
