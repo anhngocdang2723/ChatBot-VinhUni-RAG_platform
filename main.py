@@ -29,11 +29,27 @@ app = FastAPI(
 )
 
 # Add CORS middleware
+# Support localhost, production Vercel, and preview deployments
+allowed_origins = [
+    "http://localhost:3000",
+    "http://localhost:3001",
+    "https://chatbot-vinhuni.vercel.app",
+    "https://*.vercel.app",  # All Vercel preview deployments
+]
+
+# Add origin validation for wildcard patterns
+def is_allowed_origin(origin: str) -> bool:
+    if origin in ["http://localhost:3000", "http://localhost:3001", "https://chatbot-vinhuni.vercel.app"]:
+        return True
+    if origin and origin.endswith(".vercel.app"):
+        return True
+    return False
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000", "https://chatbot-vinhuni.vercel.app"],
+    allow_origin_regex=r"^https://.*\.vercel\.app$|^http://localhost:[0-9]+$|^https://chatbot-vinhuni\.vercel\.app$",
     allow_credentials=True,
-    allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"],
     allow_headers=["*"],
     expose_headers=["*"]
 )
