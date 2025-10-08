@@ -5,9 +5,9 @@ import { FiHome, FiFolder, FiSettings, FiExternalLink, FiMenu, FiX, FiLogOut,
   FiUser, FiBell, FiDatabase, FiSearch, FiServer, FiMessageSquare } from 'react-icons/fi';
 import { useApi } from '../context/ApiContext';
 import ApiSwitcher from './ApiSwitcher';
-import memeLogo from '../assets/meme-image.png';
+import memeLogo from '../assets/chatbot-vinhuni-logo2.png';
 import logoVinhuni from '../assets/logo-vinhuni.png';
-import userAvatar from '../assets/meme-image2.png';
+import userAvatar from '../assets/user.png';
 import { VINH_COLORS } from '../config/colors';
 import UnderDevelopment from '../pages/UnderDevelopment';
 import { DEMO_ACCOUNTS } from '../config/accounts';

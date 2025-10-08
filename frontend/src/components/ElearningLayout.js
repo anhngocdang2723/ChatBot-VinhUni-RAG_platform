@@ -7,7 +7,7 @@ import { VINH_COLORS } from '../config/colors';
 import logoVinhuni from '../assets/logo-vinhuni.png';
 import maleAvatar from '../assets/male-avatar-placeholder.png';
 import femaleAvatar from '../assets/female-avatar-placeholder.png';
-import userAvatar from '../assets/meme-image2.png';
+import userAvatar from '../assets/user.png';
 import bgLogin from '../assets/bg-login.jpg';
 
 const HeaderWrapper = styled.div`
