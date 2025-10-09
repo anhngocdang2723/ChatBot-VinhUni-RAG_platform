@@ -5,7 +5,7 @@ from pydantic import Field
 
 class CollectionConfig:
     """Configuration for the fixed index used in the system"""
-    STORAGE_NAME: str = "truong-dai-hoc-vinh"  # Pinecone index name (lowercase, no spaces)
+    STORAGE_NAME: str = "vinhuni_documents"  # Namespace used in Pinecone (matches upload script)
     DISPLAY_NAME: str = "Dữ liệu Trường Đại học Vinh"  # Display name for UI
     DESCRIPTION: str = "Tập dữ liệu tổng hợp của Trường Đại học Vinh"
     

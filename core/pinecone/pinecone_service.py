@@ -56,19 +56,9 @@ class PineconeService:
         try:
             # Try to get existing index
             self.dense_index = self.pc.Index(self.dense_index_name)
-            
-            # Check if index supports inference (has .search() method)
-            if not hasattr(self.dense_index, 'search'):
-                logger.warning(f"Dense index {self.dense_index_name} exists but doesn't support inference. Recreating...")
-                # Delete old index
-                self.pc.delete_index(self.dense_index_name)
-                logger.info(f"Deleted old dense index: {self.dense_index_name}")
-                # Create new one with inference
-                raise Exception("Recreate index")
-            
             logger.info(f"Dense index already exists: {self.dense_index_name}")
         except Exception:
-            # Index doesn't exist or needs recreation, create it
+            # Index doesn't exist, create it
             logger.info(f"Creating dense index: {self.dense_index_name}")
             
             self.pc.create_index_for_model(
@@ -92,19 +82,9 @@ class PineconeService:
         try:
             # Try to get existing index
             self.sparse_index = self.pc.Index(self.sparse_index_name)
-            
-            # Check if index supports inference (has .search() method)
-            if not hasattr(self.sparse_index, 'search'):
-                logger.warning(f"Sparse index {self.sparse_index_name} exists but doesn't support inference. Recreating...")
-                # Delete old index
-                self.pc.delete_index(self.sparse_index_name)
-                logger.info(f"Deleted old sparse index: {self.sparse_index_name}")
-                # Create new one with inference
-                raise Exception("Recreate index")
-            
             logger.info(f"Sparse index already exists: {self.sparse_index_name}")
         except Exception:
-            # Index doesn't exist or needs recreation, create it
+            # Index doesn't exist, create it
             logger.info(f"Creating sparse index: {self.sparse_index_name}")
             
             self.pc.create_index_for_model(
@@ -226,29 +206,22 @@ class PineconeService:
         Returns:
             List of search results with scores
         """
-        # Check if index supports inference-based search
-        if hasattr(index, 'search'):
-            # Use new inference API (Pinecone v7+ with inference plugin)
-            search_params = {
-                "namespace": namespace,
-                "query": {
-                    "top_k": top_k,
-                    "inputs": {"text": query}
-                }
+        search_params = {
+            "namespace": namespace,
+            "query": {
+                "top_k": top_k,
+                "inputs": {"text": query}
             }
-            
-            if filter_dict:
-                search_params["query"]["filter"] = filter_dict
-            
-            results = index.search(**search_params)
-            hits = results["result"]["hits"]
-            
-            # Convert Hit objects to dictionaries for easier handling
-            return [self._hit_to_dict(hit) for hit in hits]
-        else:
-            # Fallback to legacy query method
-            logger.warning(f"Index does not support .search() method, this suggests the index was created without inference support. Please recreate the index using create_index_for_model()")
-            return []
+        }
+        
+        if filter_dict:
+            search_params["query"]["filter"] = filter_dict
+        
+        results = index.search(**search_params)
+        hits = results["result"]["hits"]
+        
+        # Convert Hit objects to dictionaries for easier handling
+        return [self._hit_to_dict(hit) for hit in hits]
     
     def hybrid_search(
         self,
